@@ -1,0 +1,66 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Video Add</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item class="albumUser">
+      <ion-avatar item-left>
+        <img *ngIf="userimage!='null' && userimage!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{userimage}}" alt="avatar">
+        <img *ngIf="userimage=='null' || userimage==''" src="/assets/img/management.png" alt="avatar">
+      </ion-avatar>
+      <p class="EventUser">{{userFullname}}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="default" floating>Enter Video Title</ion-label>
+      <ion-input [(ngModel)]="videotitle"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="default" floating>Enter Video Description</ion-label>
+      <ion-textarea rows="4" [(ngModel)]="videodesc"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Set Privacy</ion-label>
+      <ion-select [(ngModel)]="videoprvcy">
+        <ion-option value="1">Public</ion-option>
+        <ion-option value="2">Connection Only</ion-option>
+        <ion-option value="3">Connection and followers</ion-option>
+        <ion-option value="4">Only me</ion-option>
+      </ion-select>
+    </ion-item>
+    <!--  <ion-item>
+      <ion-label mode="md">Upload From Youtube</ion-label>
+      <ion-checkbox #small (change)="0" [(ngModel)]="checked"></ion-checkbox>
+
+    </ion-item> -->
+
+    <!--  <ion-item *ngIf="small.checked">
+      <ion-label color="default" floating>Enter Youtube Link</ion-label>
+      <ion-textarea rows="4" [(ngModel)]="youtubelink"></ion-textarea>
+    </ion-item> -->
+    <button class="uploadImage" (click)="chooseVideo()" *ngIf="mediaupd">
+      Upload Video
+      <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+
+    <p class="video_name">
+      {{currentName}}
+    </p>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="button_bottom_top">
+    <button class="sign-up button button-block button-stable" (click)="uploadVideo()" [disabled]="videotitle==''">Save</button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,54 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Personal Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid>
+    <ion-list>
+
+      <br/>
+      <ion-item>
+        <ion-buttons>
+          <ion-icon name="contact"></ion-icon>{{parsonaldata?.username}}</ion-buttons>
+        <ion-icon item-right name="create" (click)="editDatauser('name',parsonaldata);"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-buttons>
+          <ion-icon name="mail"></ion-icon>{{parsonaldata?.email}}</ion-buttons>
+        <ion-icon item-right name="create" (click)="editDatauser('email',parsonaldata);"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-buttons>
+          <ion-icon name="call"></ion-icon>{{parsonaldata?.mobile_no}}</ion-buttons>
+        <ion-icon item-right name="create" (click)="editDatauser('mobile',parsonaldata);"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-buttons>
+          <ion-icon name="eye"></ion-icon> Change Password</ion-buttons>
+        <ion-icon item-right name="create" (click)="editDatauser('changepass',parsonaldata);"></ion-icon>
+      </ion-item>
+
+      <br/>
+
+      <ion-item (click)="launch('http://mojolynclife.info/terms-of-use')">
+        <ion-buttons>
+          <ion-icon name="help-circle"></ion-icon> Terms and Condition</ion-buttons>
+      </ion-item>
+      <ion-item (click)="launch('http://mojolynclife.info/privacy-policy')">
+        <ion-buttons>
+          <ion-icon name="lock"></ion-icon> Privacy Policy</ion-buttons>
+      </ion-item>
+      <ion-item (click)="launch('http://mojolynclife.info/contact-us')">
+        <ion-buttons>
+          <ion-icon name="list-box"></ion-icon> Contact Us</ion-buttons>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+
+</ion-content>

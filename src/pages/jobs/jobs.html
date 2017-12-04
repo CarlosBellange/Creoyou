@@ -1,0 +1,64 @@
+<ion-header class="creoyou-header">
+
+    <ion-navbar>
+        <ion-title>All Jobs</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-list class="individual">
+
+        <ion-item *ngFor="let job of jobsData" padding-horizontal class="search_user search_user_individual" (click)="jobdetails(job)">
+            <ion-avatar item-left>
+                <img *ngIf="job.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{job.image}}">
+                <img *ngIf="job.image==''" src="assets/img/company.png">
+            </ion-avatar>
+            <ion-item class="searcsh_right">
+                <p>
+                    <ion-icon name="briefcase"></ion-icon> {{job.job_title}} </p>
+                <p class="Company_name">{{job.posted_by}}</p>
+                <p class="user_deg">Required Experience : {{job.required_experience}} </p>
+                <p class="user_deg">{{job.city}}, {{job.state}} and {{job.country}}</p>
+                <p class="user_deg" *ngIf="job.time>24">{{job.updation_date | date:'fullDate'}} | {{job.updation_date | date:'shortTime'}} | {{job.name}}</p>
+                <p class="user_deg" *ngIf="job.time<24">{{job.time }} hours ago | {{job.name}}</p>
+            </ion-item>
+        </ion-item>
+
+        <ion-item *ngFor="let additem of addsData" padding-horizontal class="search_user search_user_individual job_add">
+            <ion-avatar item-left>
+                <img *ngIf="additem.image!=''" src="http://creoyou.net/uploads/profileImages/{{additem.image}}">
+                <img *ngIf="additem.image==''" src="assets/img/ad.png">
+            </ion-avatar>
+            <ion-item class="searcsh_right">
+                <p>
+                    <ion-icon name="briefcase"></ion-icon> {{additem.job_title}} </p>
+                <p class="Company_name"> {{additem.posted_by}} </p>
+                <p class="user_deg">Required Experience : {{additem.required_experience}}</p>
+                <p class="user_deg">, Jammu and Kashmir</p>
+                <p class="user_deg">6 hours ago | {{additem.name}}</p>
+
+                <div class="user_action" item-right>
+                    <img src="assets/img/add.png" alt="Image" />
+                </div>
+            </ion-item>
+        </ion-item>
+
+
+    </ion-list>
+
+
+    <!-- <ion-list>
+            <ion-item class="no_result">
+                 <h3> Sorry No Job Found... </h3> 
+            </ion-item>
+          </ion-list> -->
+    <ion-infinite-scroll (ionInfinite)="fetchjobsData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+</ion-content>

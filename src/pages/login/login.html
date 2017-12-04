@@ -1,0 +1,70 @@
+<ion-content class="ion-login-content-background" >
+    <ion-row class="logo-row">
+
+        <ion-col text-center>
+            <img src="assets/img/logo.png" class="app_logo"> 
+        </ion-col>
+
+    </ion-row>
+
+    <form [formGroup]="loginForm" (ngSubmit)="checkLogin()">
+        <ion-row class="login-box">
+            <ion-col col-12 class="fld"> 
+                <ion-input class="login-fld" type="text" name="username" placeholder="Username" formControlName="username"  required></ion-input>
+                <span class="error" *ngIf="loginForm.get('username').hasError('pattern') && (loginForm.get('username').touched || submitAttempt)">
+                      Only characters and numbers allowed
+            </span>
+            <span class="error" *ngIf="loginForm.get('username').hasError('required') && (loginForm.get('username').touched || submitAttempt)">
+                  Username is required
+        </span>
+
+    </ion-col>
+    <ion-col col-12 class="fld">  
+        <ion-input class="login-fld" type="password" placeholder="Password" formControlName="password"  required></ion-input>
+     
+        <span class="error" *ngIf="loginForm.get('password').hasError('required') && (loginForm.get('password').touched || submitAttempt)">
+              Password is required
+        </span>
+</ion-col>
+<ion-col col-12>
+    <button ion-button class="sign-in" full type="submit" [disabled]="!loginForm.valid">Login</button>
+
+</ion-col>
+<ion-col col-12 text-center >
+    <a class="tab-item tab-item-active " (click)="getLoginHelpPage()" class="login-help" >Login Help?</a> 
+</ion-col> 
+</ion-row>
+
+</form>
+
+<hr class="hr-text" data-content="OR">
+
+<ion-row class="social-login-btn-group">
+    <ion-col text-center col-6>
+        <a class="face_sign" (click)="faceBooklogin()">
+            <span><img src="assets/img/facebook_icon.png"></span>
+            Facebook
+        </a>
+    </ion-col>    
+    <ion-col text-center col-6>
+        <a class="goog_sign" (click)="googleLogIn()">
+            <span><img src="assets/img/goog.png"></span>
+            Google
+        </a>
+    </ion-col> 
+</ion-row>
+
+
+
+</ion-content>
+
+
+<ion-footer>
+
+    <ion-toolbar class="bar-positive already_sign">
+        <a class="tab-item tab-item-active" [navPush]="registrationPage" >New to Creoyou?<span>Sign Up</span></a>
+    </ion-toolbar>
+</ion-footer>  
+
+
+

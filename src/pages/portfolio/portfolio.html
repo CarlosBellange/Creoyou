@@ -1,0 +1,40 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>portfolio</ion-title>
+  </ion-navbar>
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="Otherprofileview">
+    <ion-segment-button value="album">
+      Album
+    </ion-segment-button>
+    <ion-segment-button value="video">
+      Video
+    </ion-segment-button>
+    <ion-segment-button value="audio">
+      Audio
+
+
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+
+<ion-content padding>
+  <div [ngSwitch]="Otherprofileview">
+
+    <ion-list *ngSwitchCase="'album'" class="individual">
+
+      album
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'video'" class="individual">
+
+      video
+    </ion-list>
+    <ion-list *ngSwitchCase="'audio'" class="individual">
+
+      audio
+    </ion-list>
+  </div>
+
+</ion-content>

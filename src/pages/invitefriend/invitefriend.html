@@ -1,0 +1,49 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Invite Friend</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-row>
+
+
+      <ion-col *ngIf="tags.length<10" col-10 class="fld"> 
+
+          <ion-input  class="input-fld extra-pad" type="text" (keyup.enter)="addInvitemail()" [(ngModel)]="inviteemail"  placeholder="Enter Email Address"   required></ion-input>
+          
+      </ion-col>
+      <ion-col class="addButton" *ngIf="tags.length<10" col-2 > 
+          <ion-icon (click)="addInvitemail()" name="add-circle"></ion-icon>
+      </ion-col>
+
+    <ion-col *ngIf="tags.length>9" col-12 class="tagError"> 
+        <span >Maximum 10 emails are allowed. </span>
+    </ion-col>
+
+    <ion-col col-12 *ngIf="!isvalidemail"  class="tagError">
+        <span >Enter a valid email address</span>
+    </ion-col>
+
+    <ion-col col-12 class="tag-container">
+     
+            <p *ngFor="let tag of tags;let tgindex=index;" class="tagitem">{{tag.text}}
+               <span (click)="removeTag(tgindex)"><ion-icon name="close-circle"></ion-icon></span> </p>
+    
+    </ion-col>
+
+  </ion-row>
+ 
+  
+</ion-content>
+<ion-footer>
+
+    <button (click)="sendInvitations()" [disabled]="tags.length>10 || tags[0]?.text==''" text-center class="next_stape">
+      <ion-icon name="checkmark"></ion-icon> SEND INVITATION
+    </button>
+   
+  </ion-footer>

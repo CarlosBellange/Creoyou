@@ -1,0 +1,81 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "151118695480780",
+      "APP_NAME": "creoyou",
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-googleplus": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-crop": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-image-picker": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "com-badrit-base64": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-filechooser": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-filepath": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    }
+  },
+  "dependent_plugins": {
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.wgt.creoyou"
+    }
+  }
+}

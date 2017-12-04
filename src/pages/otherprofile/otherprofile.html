@@ -1,0 +1,176 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>{{profileinfo.fname}} {{profileinfo.lname}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-row class="User_profile_wrap" [style.backgroundImage]="'url('+base_url+'uploads/backgroundImages/'+profileinfo.background_image+')'">
+    <ion-col col-5>
+      <div class="prifile_image_box ">
+        <div class="prifile_image">
+          <img *ngIf="profileinfo.image!=null && profileinfo.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{profileinfo.image}}"
+            alt="avatar">
+          <img *ngIf="profileinfo.image==null || profileinfo.image==''" src="/assets/img/management.png" alt="avatar">
+        </div>
+        <div *ngIf="profileinfo.premium_user==1" class="premimum_badge"></div>
+      </div>
+    </ion-col>
+    <ion-col col-7 class="user_title">
+      <h2>{{profileinfo.fname}} {{profileinfo.lname}}</h2>
+      <h2 *ngIf="profileinfo.buisness_name">{{profileinfo.buisness_name}}</h2>
+      <p *ngIf="profileinfo.cat_name !== ''">{{profileinfo.cat_name}}</p>
+      <p *ngIf="profileinfo.country !== '' && profileinfo.country !== null ">
+        {{profileinfo.country}}, {{profileinfo.state}}
+      </p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="otherActivity">
+    <ion-col col-12>
+      <button icon-left ion-button center round *ngIf="tabtype=='suggestions' || friendcheck==0">
+        <ion-icon name="person-add"></ion-icon> Connect
+      </button>
+
+
+      <button icon-left ion-button center round *ngIf="tabtype=='connections' || friendcheck==2">
+        <ion-icon name="mail"></ion-icon> Message
+      </button>
+      <button icon-left ion-button center round *ngIf="tabtype=='suggestions' || friendcheck==0">
+        <i class="material-icons">forward</i> Follow
+      </button>
+    </ion-col>
+
+    <ion-col col-12 class="otherUserDetails">
+      <span class="active" (click)="otheruserAbout(profileinfo)">About</span>
+      <span (click)="otheruserPortfolio(profileinfo)">Portfolio</span>
+      <span>Connections</span>
+      <span>Events</span>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row *ngFor="let item of homeData">
+    <ion-col>
+      <div class="post_wrap">
+        <ion-list class="post_header">
+          <ion-item class="" padding-horizontal>
+            <ion-avatar class="person-pic" item-left>
+              <img src="{{base_url}}uploads/profileImages/resizedImages/{{item.image}}" alt="avatar">
+            </ion-avatar>
+
+            <ion-item class="status-check2">
+              <p class="Completed" text-center>
+                <span>{{item.users_full_name}}</span>
+                {{item.incident_name}}</p>
+              <span>06 October 2017 at 5:53pm</span>
+            </ion-item>
+            <div class="post_action">
+              <ion-icon (click)="presentActionSheet(item)" ios="ios-more" md="md-more"></ion-icon>
+            </div>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="post_body">
+          <ion-item *ngIf="item.incident_type==='Status'">
+            <p>{{item.user_status}}</p>
+
+            <img *ngIf="item.media_name!=''" src="{{base_url}}uploads/statusMedia/{{item.media_name}}?t={{milliseconds}}" alt="Post Img"
+            />
+
+          </ion-item>
+          <ion-item *ngIf="item.incident_type==='Event'">
+            <p>{{item.user_status}}</p>
+
+            <img *ngIf="item.event_image!=''" src="{{base_url}}uploads/eventsImages/{{item.event_image}}" alt="Post Img" />
+
+          </ion-item>
+
+          <ion-item *ngIf="item.incident_type==='Profile'">
+            <img src="{{base_url}}uploads/profileImages/{{item.incident_details}}" alt="Post Img" />
+
+          </ion-item>
+          <ion-item *ngIf="item.incident_type==='Image'">
+
+            <span *ngFor="let albumimage of item.image_details">
+              <img src="{{base_url}}uploads/portfolioImages/{{albumimage.image_name}}" alt="Post Img" />
+            </span>
+
+          </ion-item>
+          <ion-item *ngIf="item.incident_type==='Audio';">
+
+            <audio-track #audio *ngFor="let track of item.myTracks" [track]="track" (onFinish)="onTrackFinished($event)">
+              <ion-item>
+                <ion-thumbnail item-left>
+                  <img src="assets/img/audio_new.png">
+                  <audio-track-play dark [audioTrack]="audio">
+                    <ion-spinner></ion-spinner>
+                  </audio-track-play>
+                </ion-thumbnail>
+                <div item-content style="width:100%">
+                  <p>
+                    <strong>{{audio.title}}</strong> ⚬
+                    <em>{{audio.artist}}</em>
+                  </p>
+                  <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'hidden'}"></audio-track-progress-bar>
+                </div>
+              </ion-item>
+            </audio-track>
+            <!-- {{item.test}}        -->
+          </ion-item>
+
+          <ion-item *ngIf="item.incident_type==='You Tube';">
+
+            <iframe width="100%" src="{{item.video_name}}" frameborder="0 " allowfullscreen></iframe>
+
+          </ion-item>
+
+          <ion-item *ngIf="item.incident_type==='Video'">
+
+            <video poster="{{base_url}}uploads/portfolioVideoSnapshots/{{item.snapshot_name}}" controls="controls" preload="metadata"
+              webkit-playsinline="webkit-playsinline" class="videoPlayer">
+              <source src="{{base_url}}uploads/portfolioVideos/{{item.video_name}}" type="video/mp4" />
+            </video>
+
+          </ion-item>
+          <ion-item *ngIf="item.tagged_to?.length > 0">
+            <p class="Post_tag">
+              With
+              <span *ngFor="let tagitem of item.tagged_to;let idx = index">
+                <span *ngIf="idx<2">{{tagitem.name}}
+                  <span *ngIf="idx<(item.tagged_to?.length-1)">,</span>
+                </span>
+              </span>
+              <span (click)="showextrataggedusers(item)" *ngIf="item.tagged_to?.length > 2">
+                <span class="andText"> and </span>
+                <span>{{item.tagged_to?.length-2}} other</span>
+              </span>
+
+            </p>
+          </ion-item>
+        </ion-list>
+        <ion-row class="post_activity">
+          <ion-col col-4 [class.active]="item.likeCheck!=''">
+            <ion-icon (click)="likeThisitem(item)" ios="ios-heart" md="md-heart"></ion-icon>
+            <span (click)="getWholiked(item);">{{item.likes}}</span>
+          </ion-col>
+          <ion-col (click)="showComments(item)" col-4>
+            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+            <span>{{item.comments}}</span>
+          </ion-col>
+          <ion-col (click)="shareThisPost(item);" col-4>
+            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="fetchHomeData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

@@ -1,0 +1,54 @@
+page-parsonaledit {
+    .content-background {
+        background: url("../assets/img/background.jpg") no-repeat center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+    .button_bottom_top button {
+        background: #1571a5;
+        background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
+        color: #ffffff !important;
+        padding: 16px 0px;
+        height: 55px;
+        font-size: 1.2em;
+    }
+    ion-toolbar {
+        padding: 0px !important;
+    }
+    .item-inner {
+        border-bottom: 2px solid #0b60b4 !important;
+        box-shadow: none !important;
+    }
+    .item-md {
+        padding-left: 0;
+    }
+    ion-item.edit_item {
+        margin-top: 75px;
+        background: #fff;
+        padding: 10px 10px 50px 10px;
+        border-radius: 5px;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .Change_password {
+        background: #fff;
+        padding: 0px 15px 34px 15px;
+        border-radius: 3px;
+        margin-top: 50px;
+        ion-item.edit_item {
+            margin-top: 0;
+            background: #fff;
+            padding: 0;
+            border-radius: 0;
+        }
+    }
+    .item-input-has-focus .label-md[stacked],
+    .input-has-focus .label-md[stacked],
+    .item-input-has-focus .label-md[floating],
+    .input-has-focus .label-md[floating] {
+        color: #000;
+    }
+}

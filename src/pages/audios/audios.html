@@ -1,0 +1,75 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Audio</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar text-center>
+    <button color="light" icon-start ion-button round (click)="uploadyouraudio()">
+      <ion-icon name="cloud-upload"></ion-icon> Upload Your Audio </button>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid>
+
+
+
+    <ion-row *ngFor="let track of allmyaudios">
+      <ion-col>
+        <div class="post_wrap">
+          <ion-list class="post_header">
+            <ion-item class="" padding-horizontal>
+              <ion-item>
+                <p text-center>{{track.audio_title}}</p>
+                <span>{{track.audio_description}} / {{track.creation_date | date:'fullDate'}} {{track.creation_date | date:'shortTime'}}</span>
+              </ion-item>
+              <div class="post_action">
+                <ion-icon (click)="presentActionSheetforaudio(track , $event)" ios="ios-more" md="md-more"></ion-icon>
+              </div>
+            </ion-item>
+          </ion-list>
+
+          <ion-list class="post_body audio_wrap">
+            <audio-track #audio *ngFor="let track of track.myTracks" [track]="track" (onFinish)="onTrackFinished($event)">
+              <ion-item>
+                <ion-thumbnail item-left>
+                  <img src="assets/img/audio_new.png">
+                  <audio-track-play dark [audioTrack]="audio">
+                    <ion-spinner></ion-spinner>
+                  </audio-track-play>
+                </ion-thumbnail>
+                <div item-content style="width:100%">
+                  <p>
+                    <strong>{{audio.title}}</strong>
+                    <em>{{audio.artist}}</em>
+                  </p>
+                  <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'hidden'}"></audio-track-progress-bar>
+                </div>
+              </ion-item>
+            </audio-track>
+          </ion-list>
+
+          <ion-row class="post_activity">
+            <ion-col (click)="likeThisaudio(track)" col-4 [class.active]="track.likeActive>0">
+              <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
+              <span>{{track.likes}}</span>
+            </ion-col>
+            <ion-col col-4 (click)="showComments(track)">
+              <ion-icon ios="ios-text" md="md-text"></ion-icon>
+              <span>{{track.comment}}</span>
+            </ion-col>
+            <ion-col col-4 (click)="shareThisPost(track)">
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

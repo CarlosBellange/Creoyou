@@ -1,0 +1,23 @@
+<ion-header class="creoyou-header">
+  
+    <ion-navbar>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons end>
+            <button class="dismiss" (click)="dismissModal()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+   
+  <ion-content class="content-background">
+    
+       <ion-list>
+           <ion-item   *ngFor="let item of items">
+               {{item.name}}
+           </ion-item>
+       </ion-list>
+    
+   </ion-content>

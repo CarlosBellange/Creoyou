@@ -1,0 +1,71 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Video</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar text-center>
+    <button color="light" icon-start ion-button round (click)="uploadyourvideo();">
+      <ion-icon name="cloud-upload"></ion-icon> Upload Your Video </button>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content class="has-header">
+
+  <ion-grid>
+    <!-- Home post by Video -->
+    <ion-row *ngFor="let vdo of videos;">
+      <ion-col>
+        <div class="post_wrap">
+          <ion-list class="post_header">
+            <ion-item class="" padding-horizontal>
+              <ion-item>
+                <p>{{vdo.video_title}}</p>
+                <span>{{vdo.video_description}}</span>
+              </ion-item>
+              <div class="post_action">
+                <ion-icon (click)="presentActionSheetforvideo(vdo, $event)" ios="ios-more" md="md-more"></ion-icon>
+              </div>
+            </ion-item>
+          </ion-list>
+
+          <ion-list class="post_body">
+            <ion-item (click)="retrieveImage(vdo.video_name)">
+
+              <!-- <video #videoPlayer class="video-player" controls ></video> -->
+              <!-- <iframe width="100%" height="200" [src]="_DomSanitizer.bypassSecurityTrustUrl(base_url+'/uploads/portfolioVideos/'+ vdo.video_name)"
+                frameborder="0" allowfullscreen></iframe> -->
+              <img [src]="base_url+'/uploads/portfolioVideoSnapshots/' +vdo.snapshot_name" />
+
+
+              <ion-icon name="play"></ion-icon>
+            </ion-item>
+
+
+
+          </ion-list>
+
+          <ion-row class="post_activity">
+            <ion-col (click)="likeThisvideo(vdo)" col-4 [class.active]="vdo.likeActive>0">
+              <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
+              <span>{{vdo.video_like}}</span>
+            </ion-col>
+            <ion-col col-4 (click)="showComments(vdo)">
+              <ion-icon ios="ios-text" md="md-text"></ion-icon>
+              <span>{{vdo.comment}}</span>
+            </ion-col>
+            <ion-col col-4 (click)="shareThisPost(vdo)">
+              <ion-icon ios="ios-share" md="md-share"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-col>
+    </ion-row>
+
+
+
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,73 @@
+page-jobdetails {
+    .content-background {
+        background: url("../assets/img/background.jpg") no-repeat center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+    ion-col.job_content.col {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 3px;
+        margin-bottom: 5px;
+        padding: 10px !important;
+        h3 {
+            font-size: 1.1em;
+            margin: 0px 0px 5px 0px;
+            border-bottom: 1px solid #bebebe;
+            padding: 0px 0px 7px 0px;
+        }
+        p {
+            margin: 3px 0px;
+            font-size: 1em;
+            b {
+                font-size: 0.99em;
+            }
+        }
+    }
+    .job_comapny_details {
+        background: rgba(21, 113, 165, 0.8);
+        border-radius: 3px;
+        margin-bottom: 5px;
+        text-align: center;
+        padding: 10px;
+        img {
+            margin: 0 auto;
+            display: block;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+        }
+        h2 {
+            color: #fff;
+            font-size: 16px;
+            margin: 0px;
+        }
+        h3 {
+            color: #000;
+            margin: 0px;
+            font-size: 15px;
+        }
+        ion-icon {
+            vertical-align: middle;
+        }
+        p {
+            color: #fff;
+            vertical-align: middle;
+            margin: 0px;
+        }
+    }
+    .button_bottom_top button {
+        background: #1571a5;
+        background: -moz-linear-gradient(left, #1573a5 0%, #334c80 100%) !important;
+        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
+        color: #ffffff !important;
+        padding: 16px 0px;
+        height: 55px;
+        font-size: 1.2em;
+    }
+    ion-toolbar {
+        padding: 0px !important;
+    }
+}

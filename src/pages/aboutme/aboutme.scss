@@ -1,0 +1,83 @@
+page-aboutme {
+
+
+    .content-background{
+        background:url("../assets/img/background.jpg") no-repeat center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+    .about_button{
+        button{
+                color: #539eff;
+                box-shadow: 0px 0px 5px #cacaca;
+                padding: 22px 0px;
+            ion-icon{
+                margin-right: 5px;
+            }
+        }
+    }
+    ion-col.aobut_content.col {
+        background: rgba(255,255,255,0.8);
+        border-radius: 3px;
+        margin-bottom: 5px;
+        padding: 10px !important;
+        h3 {
+            font-size: 1.3em;
+            margin: 0px 0px 5px 0px;
+            border-bottom: 1px solid #bebebe;
+            padding: 0px 0px 10px 0px;
+            color: #1a3262;
+            font-weight: 600;
+        }
+        p {
+            margin: 3px 0px;
+            font-size: 1.6rem;
+            color: #191919;
+            b {
+                font-size: 0.99em;
+            }
+        }
+    }
+
+    .iconwrap{
+        float: right;
+        font-size: 13px;
+        background: #1a3262;
+        width: 26px;
+        height: 26px;
+        text-align: center;
+        line-height: 29px;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-block;
+    }
+    .crbody {
+        border-bottom: 1px solid #bebebe;
+        border-radius: 0px;
+        padding-bottom: 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .toolbaricons{
+        float: right;
+    }
+    span.addIconWrap {
+        float: right;
+        font-size: 2rem;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0px 0px 0px 8px;
+    }
+    span.toolbaricons {
+        font-size: 25px;
+        text-align: center;
+        border-radius: 50%;
+        color: #1a3262;
+        margin: 0px 0px 0px 5px;
+    }
+    p.crHeading {
+        font-weight: 600;
+        font-size: 1.7rem !important;
+    }
+
+}

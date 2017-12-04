@@ -1,0 +1,60 @@
+page-welcome {
+
+    .homeslides{
+        height: 92%;
+     }
+    .ion-starter-content-background {
+        background: url("../assets/img/background.jpg") no-repeat center center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+
+    .swiper-pagination-bullet{
+        background: white;
+    }
+
+
+    .sign-up {
+
+        border-radius: 0;
+        margin-bottom: 10px;
+        font-family: 'RobotoCondensed-Regular';
+        font-size: 22px;
+        line-height: 49px;
+        min-height: 49px;
+        background: white;
+    }
+
+    .bar-positive a{
+        background: #1571a5;
+        background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1 ) !important;
+        border: none;
+        padding: 0;
+        text-align: center;
+    }
+    .bar-positive a {
+        width: 100%;
+        color: #fff;
+        font-size: 22px;
+        display: block;
+        max-width: 100%;
+        font-family: 'RobotoCondensed-Regular';
+        line-height: 49px;
+    }
+    
+    .toolbar{
+        padding: 0px;
+    }
+    
+    .toolbar-md{
+        min-height: 0px;
+    }
+    .swiper-slide img {
+        width: auto;
+        max-width: 75%;
+    }
+
+}

@@ -1,0 +1,35 @@
+
+<ion-header class="creoyou-header">
+  
+    <ion-navbar>
+      <ion-title>Notification</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content>
+  
+    <ion-list>
+  
+      <ion-item *ngFor="let notifications of notiData;" class="unread">
+          <ion-avatar class="person-pic" item-left>
+              <img *ngIf="notifications.image!=''" src="{{base_url}}uploads/profileImages/{{notifications.image}}">
+              <img *ngIf="notifications.image==''" src="assets/img/company.png">
+          </ion-avatar>
+          <ion-item class="notification_details">
+            <span>{{notifications.text}}</span>
+            <p><ion-icon ios="ios-time" md="md-time"> {{notifications.updation_date| amTimeAgo}}</ion-icon></p>
+          </ion-item>
+      </ion-item>
+  
+  
+    </ion-list>
+  
+    
+     <ion-infinite-scroll  (ionInfinite)="fetchNotificationdata($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  </ion-content>
+  

@@ -1,0 +1,106 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>People filter</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content class="has-header" padding>
+  <!--People -->
+  <ion-list *ngIf="people">
+    <ion-item>
+      <ion-label color="default" floating>Full Name</ion-label>
+      <ion-input [(ngModel)]="adname"></ion-input>
+    </ion-item>
+    <form [formGroup]="FormadvanceStepOne">
+      <ion-item>
+        <ion-label color="default" floating>Creative Field</ion-label>
+        <ion-input class="input-fld" (click)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
+      </ion-item>
+    </form>
+    <ion-item>
+      <ion-label color="default" floating>Company Name</ion-label>
+      <ion-input [(ngModel)]="company"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Specializations</ion-label>
+      <ion-input [(ngModel)]="specializations"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Country</ion-label>
+      <ion-select #country (ngModelChange)='initStates(country.value)' [(ngModel)]="locncountry">
+        <ion-option *ngFor="let cntry of countries" value="{{cntry.id}}">{{cntry.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>State</ion-label>
+      <ion-select [(ngModel)]="locnstates">
+        <ion-option *ngFor="let state of states" value="{{state.id}}">{{state.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <!--Business-->
+  <ion-list *ngIf="business">
+    <ion-item>
+      <ion-label color="default" floating>Business Name</ion-label>
+      <ion-input [(ngModel)]="businessname"></ion-input>
+    </ion-item>
+    <form [formGroup]="FormadvanceStepOne">
+      <ion-item>
+        <ion-label color="default" floating>Creative Field</ion-label>
+        <ion-input class="input-fld" (click)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
+      </ion-item>
+    </form>
+    <ion-item>
+      <ion-label color="default" floating>Country</ion-label>
+      <ion-select #country (ngModelChange)='initStates(country.value)' [(ngModel)]="locncountry">
+        <ion-option *ngFor="let cntry of countries" value="{{cntry.id}}">{{cntry.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>State</ion-label>
+      <ion-select [(ngModel)]="locnstates">
+        <ion-option *ngFor="let state of states" value="{{state.id}}">{{state.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <!--Jobs-->
+  <ion-list *ngIf="jobs">
+    <ion-item>
+      <ion-label color="default" floating>Job Name</ion-label>
+      <ion-input [(ngModel)]="jobname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Company Name</ion-label>
+      <ion-input [(ngModel)]="company"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Job Keywords</ion-label>
+      <ion-input [(ngModel)]="jobkeyword"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Country</ion-label>
+      <ion-select #country (ngModelChange)='initStates(country.value)' [(ngModel)]="locncountry">
+        <ion-option *ngFor="let cntry of countries" value="{{cntry.id}}">{{cntry.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>State</ion-label>
+      <ion-select [(ngModel)]="locnstates">
+        <ion-option *ngFor="let state of states" value="{{state.id}}">{{state.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="button_bottom_top">
+    <button class="sign-up button button-block button-stable" (click)="advanceSearch()">Apply</button>
+    <!--  <button class="sign-up button button-block button-stable" (click)="advanceSearch()" >Apply</button> -->
+  </ion-toolbar>
+</ion-footer>

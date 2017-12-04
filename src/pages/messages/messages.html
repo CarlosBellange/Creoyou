@@ -1,0 +1,64 @@
+<ion-header class="creoyou-header">
+
+    <ion-navbar>
+        <ion-title>inbox</ion-title>
+        <ion-buttons end>
+            <button (tap)="unreadArchriveMsg($event)" class="ChatMore" ion-button clear>
+                <ion-icon ios="ios-more" md="md-more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <ion-toolbar class="chatSearch">
+        <ion-searchbar placeholder="Search chat..."></ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+
+
+
+<ion-content>
+
+    <ion-list class="Chat_list unRead" *ngIf="archive">
+
+        <ion-item *ngFor="let arcmsg of archivemessage" (click)="messageDetailsArchive(arcmsg);" padding-horizontal class="Chat_list_user">
+            <ion-avatar item-left>
+                <img src="{{base_url}}uploads/profileImages/resizedImages/{{arcmsg.image}}" alt="Image" />
+            </ion-avatar>
+            <ion-item class="Chat_list_right">
+                <h3>{{arcmsg.fname}} {{arcmsg.lname}}</h3>
+                <p class="Chat_text">{{arcmsg.content}}</p>
+                <p class="Chat_time">
+                    <ion-icon name="time"></ion-icon> {{arcmsg.creation_date | date:'fullDate'}} {{arcmsg.creation_date | date:'shortTime'}}</p>
+            </ion-item>
+        </ion-item>
+    </ion-list>
+
+    <ion-list class="Chat_list unRead" *ngIf="inbox">
+        <ion-item *ngFor="let usermsg of usermessage" (click)="messageDetails(usermsg);" padding-horizontal class="Chat_list_user">
+            <ion-avatar item-left>
+                <img src="{{base_url}}uploads/profileImages/resizedImages/{{usermsg.image}}" alt="Image" />
+            </ion-avatar>
+            <ion-item class="Chat_list_right">
+                <h3>{{usermsg.fname}} {{usermsg.lname}}</h3>
+                <p class="Chat_text">{{usermsg.content}}</p>
+                <p class="Chat_time">
+                    <ion-icon name="time"></ion-icon> {{usermsg.creation_date | date:'fullDate'}} {{usermsg.creation_date | date:'shortTime'}}</p>
+            </ion-item>
+            <span class="coun" *ngIf="usermsg.count>0">{{usermsg.count}}</span>
+        </ion-item>
+    </ion-list>
+
+
+    <ion-fab bottom right>
+        <button (click)="openNewMessage();" ion-fab color="primary">
+            <ion-icon name="create"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-infinite-scroll (ionInfinite)="fetchHomeData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

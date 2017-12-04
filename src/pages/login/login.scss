@@ -1,0 +1,171 @@
+page-login {
+    .ion-login-content-background {
+        background: url("../assets/img/background.jpg") no-repeat center center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+    .app_logo {
+        max-width: 59.7%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+        width: 100%;
+    }
+    .logo-row {
+        padding: 2rem 0px;
+        margin-top: 4em;
+    }
+    .login-box {
+        padding: .5rem;
+    }
+    .bar-positive a {
+        background: #1571a5;
+        background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
+        border: none;
+        padding: 0;
+        text-align: center;
+        line-height: 21px;
+        text-decoration: none;
+    }
+    .bar-positive a {
+        width: 100%;
+        color: #fff;
+        display: block;
+        max-width: 100%;
+        font-family: 'RobotoCondensed-Regular';
+        line-height: 46px;
+    }
+    .login-help {
+        padding-bottom: 2.5rem;
+        padding-top: 2.9rem;
+        display: inline-block;
+        color: white;
+    }
+    .toolbar {
+        padding: 0px;
+    }
+    .toolbar-md {
+        min-height: 0px;
+    }
+    .hr-text {
+            background-color: transparent;
+            position: relative;
+            outline: 0;
+            border: 0;
+            color: white;
+            text-align: center;
+            height: 2.6em;
+            opacity: 1;
+        &:before {
+            content: '';
+            background: #fff;
+            background: #fff;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+        }
+        &:after {
+            content: attr(data-content);
+            position: relative;
+            display: inline-block;
+            color: black;
+            padding: 0 1rem;
+            line-height: 3.6rem;
+            border-radius: 50%;
+            color: #818078;
+            background-color: #fff;
+        }
+    }
+    .sign-in {
+        color: #1a2c5d !important;
+        font-family: 'RobotoCondensed-Regular';
+        text-transform: uppercase;
+        float: left;
+        top: 5px;
+    }
+    .login-box .sign-in {
+        background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0 !important;
+        border-radius: 2px;
+        color: #fff;
+        box-shadow: none;
+    }
+    .face_sign {
+        background: #3c579d;
+        border-radius: 20px;
+        display: block;
+        coolr: #fff;
+        padding: 2px 0;
+        line-height: 32px;
+        color: #fff;
+        font-family: 'RobotoCondensed-Regular';
+        /*font-size: 2vmax;*/
+    }
+    .face_sign span {
+        background: #24345d;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        border-radius: 50px;
+        line-height: 43px;
+        vertical-align: middle;
+    }
+    .goog_sign {
+        background: #f1604d;
+        border-radius: 20px;
+        display: block;
+        coolr: #fff;
+        padding: 2px 0;
+        line-height: 32px;
+        color: #fff;
+        font-family: 'RobotoCondensed-Regular';
+        /*font-size: 2vmax*/
+    }
+    .goog_sign span {
+        background: #823126;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        border-radius: 50px;
+        line-height: 43px;
+        vertical-align: middle;
+    }
+    .social-login-btn-group {
+        margin-top: 3rem;
+    }
+    .login-fld {
+        background: rgba(22, 31, 80, 0.74) none repeat scroll 0 0;
+        border: medium none !important;
+        border-radius: 3px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+        display: block;
+        margin-bottom: 5px;
+        padding: 0 0.6em;
+    }
+    .bar-positive.already_sign a {
+        font-size: 18px;
+    }
+    .bar-positive.already_sign a span {
+        color: #7dcbfd;
+        margin-left: 5px;
+    }
+    .text-input::-moz-placeholder {
+        color: white;
+    }
+    .text-input:-ms-input-placeholder {
+        color: white;
+    }
+    .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        color: white;
+    }
+    .text-input-md{
+        color: #fff;
+    }
+
+   
+}

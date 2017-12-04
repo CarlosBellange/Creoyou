@@ -1,0 +1,78 @@
+page-messages {
+    .ChatMore {
+        color: #ccc;
+        font-size: 2.5rem;
+    }
+    .chatSearch {
+        input.searchbar-input {
+            border: 2px solid #ccc;
+            border-radius: 36px !important;
+            box-shadow: none !important;
+            padding: 6px 45px;
+        }
+        .searchbar-search-icon {
+            background-size: 26px;
+            color: #ccc;
+        }
+    }
+    ion-item.Chat_list_user {
+        border-bottom: 1px solid #ccc;
+        ion-item {
+            padding-left: 0px !important;
+        }
+        .label-md {
+            margin: 5px 0px 5px 0;
+        }
+    }
+    .Chat_list_right {
+        h3 {
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+        p.Chat_text {
+            color: #074c8a;
+            font-size: 1.4rem;
+        }
+        p.Chat_time {
+            font-size: 1.2rem;
+            ion-icon {
+                color: #074c8a;
+                font-size: 1.4rem;
+            }
+        }
+    }
+    .list-md .item-block .item-inner {
+        border-bottom: none;
+        padding-right: 0px;
+    }
+    .unRead {
+        ion-item.Chat_list_user {
+            border-bottom: 1px solid #ccc;
+            background: #d8e5ff;
+        }
+        .item-inner {
+            background: #d8e5ff;
+        }
+        p.Chat_text {
+            color: #074c8a;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        span.coun {
+            position: absolute;
+            right: 7px;
+            background: #1a3262;
+            color: #fff;
+            width: 26px;
+            height: 26px;
+            bottom: 7px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            font-size: 1.3rem;
+        }
+    }
+    .list-md {
+        margin: 0;
+    }
+}

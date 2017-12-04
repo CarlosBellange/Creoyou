@@ -1,0 +1,52 @@
+<ion-header class="creoyou-header">
+
+    <ion-navbar>
+        <ion-title>{{currentslideindex+1}}/{{albumphotos?.length}} </ion-title>
+
+        <ion-buttons end>
+            <button (tap)="editImg()" class="edit" ion-button clear>
+                <ion-icon name="settings"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+
+
+</ion-header>
+
+
+<ion-content>
+
+
+    <ion-slides (ionSlideDidChange)="slideChanged();">
+
+        <ion-slide *ngFor="let phto of albumphotos;">
+            <span class="ImgTitle">
+                <b>Title : {{phto.image_title!=null?phto.image_title:"No Title Found"}}</b>
+            </span>
+            <img src="{{base_url}}uploads/portfolioImages/resizedimages/{{phto.image_name}}" alt="Post Img" />
+            <!-- <span class="ImgDes"><b>Description : </b> Hello all (No description found)</span> -->
+        </ion-slide>
+
+
+    </ion-slides>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-row class="post_activity">
+        <ion-col (click)="likeThisimage();" col-4 [class.active]="currentimage.likeActive>0">
+            <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
+            <span>{{currentimage.image_like}}</span>
+        </ion-col>
+        <ion-col col-4 (click)="showComments(phto)">
+            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+            <span>{{currentimage.count}}</span>
+        </ion-col>
+        <ion-col (click)="shareThisPost();" col-4>
+            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+            <span>{{currentimage.image_viewed}}</span>
+        </ion-col>
+    </ion-row>
+</ion-footer>

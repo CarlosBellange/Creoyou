@@ -1,0 +1,475 @@
+
+<ion-header class="creoyou-header">
+        
+          <ion-navbar>
+            <ion-title>About Edit Form</ion-title>
+        
+           <!-- <ion-buttons end>
+            <button class="about_privacy" ion-button clear  (click)="doRadio()" >
+              <ion-icon  item-right name="lock"></ion-icon>
+            </button>
+          </ion-buttons>     -->
+          </ion-navbar>
+        
+        </ion-header>
+        
+        
+        <ion-content padding>
+        
+        
+        
+          <!-- Location form -->
+        
+          <ion-list *ngIf="editsection=='location'">
+        
+              <ion-item>
+                  <ion-label color="default" floating>Country</ion-label>
+                  <ion-select #country (ngModelChange)='initStates(country.value)' [(ngModel)]="locncountry">
+                  
+                    <ion-option *ngFor="let cntry of countries" value="{{cntry.id}}" >{{cntry.name}}</ion-option>
+                   
+                  </ion-select>
+              </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>State</ion-label>
+                  <ion-select [(ngModel)]="locnstates">
+                    <ion-option *ngFor="let state of states" value="{{state.id}}" >{{state.name}}</ion-option>
+                  </ion-select>
+              </ion-item>
+        
+              <ion-item>
+               <ion-label color="default" floating>City</ion-label>
+               <ion-input [(ngModel)]="locncity"></ion-input>
+              </ion-item>
+        
+              <ion-item>
+                  <ion-label color="default" floating>Zipcode</ion-label>
+                  <ion-input [(ngModel)]="locnzipcode"></ion-input>
+              </ion-item>
+        
+        </ion-list>
+        
+        
+              
+         
+        
+        
+        
+          <!-- Website Url form -->
+        
+        <ion-list *ngIf="editsection=='weburl'">
+          <ion-item>
+            <ion-label color="default" floating>Website Url</ion-label>
+            <ion-input [(ngModel)]="websiteurl"></ion-input>
+         </ion-item>
+        </ion-list>
+        
+        
+         <!-- Occupation form -->
+        
+           <ion-list *ngIf="editsection=='exhibition'">
+                
+                <ion-item>
+                  <ion-label color="default" floating>Event Name</ion-label>
+                  <ion-input [(ngModel)]="exhbname"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="default" floating>Event Location</ion-label>
+                    <ion-input [(ngModel)]="exhblocsn"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="default" floating>Events Type</ion-label>
+                    <ion-input [(ngModel)]="exhbtype"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="default" floating> Month</ion-label>
+                    <ion-select [(ngModel)]="exhbmonth">
+    
+                        <ion-option *ngFor="let mnth of monthNames" value="{{mnth}}" selected >{{mnth}}</ion-option>
+                        
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="default" floating>Year</ion-label>
+                    <ion-select [(ngModel)]="exhbyear">
+    
+                        <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                        
+                    </ion-select>
+                </ion-item>
+              
+           </ion-list>
+        
+        
+        <!-- Occupation form -->
+        
+        <ion-list *ngIf="editsection=='occupation'">
+          
+          <ion-item>
+            <ion-label color="default" floating>Occupation</ion-label>
+            <ion-input [(ngModel)]="occupation"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label color="default" floating>Designation</ion-label>
+              <ion-input [(ngModel)]="occdsgntn"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label color="default" floating>Company Name</ion-label>
+              <ion-input [(ngModel)]="occcmpname"></ion-input>
+          </ion-item>
+        
+        </ion-list>
+
+        <!-- Skill form -->
+        
+        <ion-list *ngIf="editsection=='skill'">
+            
+            <ion-item>
+              <ion-label color="default" floating>Update Your Skills</ion-label>
+              <ion-textarea [(ngModel)]="skills" rows="3"></ion-textarea>
+            </ion-item>
+            
+          
+        </ion-list>
+
+        <ion-list *ngIf="editsection=='interest'">
+            
+            <ion-item>
+              <ion-label color="default" floating>Update Your Interests</ion-label>
+              <ion-textarea [(ngModel)]="interest" rows="3"></ion-textarea>
+            </ion-item>
+            
+          
+        </ion-list>
+        
+        
+        
+        
+        <!-- Experience work form -->
+        
+        <ion-list *ngIf="editsection=='work'">
+            
+            <ion-item>
+              <ion-label color="default" floating>Company Name</ion-label>
+              <ion-input [(ngModel)]="wrkcompny"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="default" floating>Position</ion-label>
+                <ion-input [(ngModel)]="wrkpositn"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="default" floating>Website</ion-label>
+                <ion-input [(ngModel)]="wrkwebsite" ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="default" floating>Country</ion-label>
+                <ion-select #country  [(ngModel)]="locncountry">
+                    
+                      <ion-option *ngFor="let cntry of countries" value="{{cntry.id}}" >{{cntry.name}}</ion-option>
+                     
+                </ion-select>
+            </ion-item>
+            <ion-item>
+             <ion-label color="default" floating>City</ion-label>
+             <ion-input [(ngModel)]="locncity"></ion-input>
+            </ion-item>
+          
+            <ion-item>
+                <ion-label color="default" floating>Starting  Month</ion-label>
+                <ion-select [(ngModel)]="wrkstrtmonth">
+
+                  <ion-option *ngFor="let mnth of monthNames" value="{{mnth}}" selected >{{mnth}}</ion-option>
+                 
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label color="default" floating>Starting  Year</ion-label>
+                <ion-select [(ngModel)]="wrkstrtyear">
+
+                    <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                    
+                </ion-select>
+            </ion-item>
+        
+            <ion-item>
+                <ion-label color="default" floating>Ending  Month</ion-label>
+                <ion-select [(ngModel)]="wrkendmonth">
+                    <ion-option *ngFor="let mnth of monthNames" value="{{mnth}}" selected >{{mnth}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item >
+                <ion-label color="default" floating>Ending  Year</ion-label>
+                <ion-select [(ngModel)]="wrkendyear">
+
+                    <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label color="default" floating>Details</ion-label>
+                <ion-textarea [(ngModel)]="wrkdetail" rows="3"></ion-textarea>
+            </ion-item>
+          
+          </ion-list>
+          
+        
+        
+        
+        
+        
+        
+        
+        
+          <!-- Education form -->
+        
+        
+        
+        
+          <ion-list *ngIf="editsection=='education'">
+              
+              <ion-item>
+                <ion-label color="default" floating>School/University</ion-label>
+                <ion-input [(ngModel)]="eduunivercity"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>Website</ion-label>
+                  <ion-input [(ngModel)]="eduwebsite"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>Location</ion-label>
+                  <ion-select [(ngModel)]="locncountry">
+                      
+                        <ion-option *ngFor="let cntry of countries" value="{{cntry.id}}" >{{cntry.name}}</ion-option>
+                       
+                 </ion-select>
+              </ion-item>
+              <ion-item>
+               <ion-label color="default" floating>City</ion-label>
+               <ion-input [(ngModel)]="locncity"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>Degree</ion-label>
+                  <ion-input [(ngModel)]="edudegree"></ion-input>
+                 </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>Starting  Month</ion-label>
+                  <ion-select [(ngModel)]="edustrtmonth">
+
+                    <ion-option *ngFor="let mnth of monthNames" value="{{mnth}}" selected >{{mnth}}</ion-option>
+                   
+                  </ion-select>
+              </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>Starting  Year</ion-label>
+                  <ion-select [(ngModel)]="edustrtyear">
+
+                      <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                      
+                  </ion-select>
+              </ion-item>
+          
+              <ion-item>
+                  <ion-label color="default" floating>Ending  Month</ion-label>
+                  <ion-select [(ngModel)]="eduendmonth">
+                      <ion-option *ngFor="let mnth of monthNames" value="{{mnth}}" selected >{{mnth}}</ion-option>
+                  </ion-select>
+              </ion-item>
+              <ion-item >
+                  <ion-label color="default" floating>Ending  Year</ion-label>
+                  <ion-select [(ngModel)]="eduendyear">
+
+                      <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                  
+                  </ion-select>
+              </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>Details</ion-label>
+                  <ion-textarea [(ngModel)]="edudetail" rows="3"></ion-textarea>
+              </ion-item>
+            
+            </ion-list>
+        
+        
+        
+        
+        
+        
+            
+            
+            
+            
+            <!-- Courses form -->
+        
+        
+        
+        
+          <ion-list *ngIf="editsection=='course'">
+              
+              <ion-item>
+                <ion-label color="default" floating>Course Name</ion-label>
+                <ion-input [(ngModel)]="crsename"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label color="default" floating>Year</ion-label>
+                  <ion-select [(ngModel)]="crseyear">
+                      
+                        <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                                        
+                  </ion-select>
+              </ion-item>
+              <ion-item>
+               <ion-label color="default" floating>Course Organization</ion-label>
+               <ion-input [(ngModel)]="crsedorg"></ion-input>
+              </ion-item>
+            
+            </ion-list>
+        
+        
+        
+        
+        
+        
+        <!-- Personal Statetments  form -->
+        
+        <ion-list *ngIf="editsection=='statement'">
+          <ion-item>
+              <ion-label color="default" floating>Personal Statements</ion-label>
+              <ion-textarea [(ngModel)]="statement" rows="5"></ion-textarea>
+          </ion-item>
+        </ion-list>
+        
+        <!-- Certificate  form -->
+        
+        
+        
+        <ion-list *ngIf="editsection=='certificate'">
+            
+            <ion-item>
+              <ion-label color="default" floating>Certificate Name</ion-label>
+              <ion-input [(ngModel)]="certname"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="default" floating>Certificate Organization</ion-label>
+                <ion-input [(ngModel)]="certorg"></ion-input>
+            </ion-item>
+           
+            <ion-item>
+                <ion-label color="default" floating>Certificate  Year</ion-label>
+                <ion-select [(ngModel)]="certyear">
+                    
+                      <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                                      
+                </ion-select>
+            </ion-item>
+        
+          </ion-list>
+        
+        
+          
+        
+          <!-- Custom One form -->
+        
+        
+        
+        <ion-list *ngIf="editsection=='customone'">
+                
+                <ion-item>
+                  <ion-label color="default" floating>Title</ion-label>
+                  <ion-input [(ngModel)]="cstmonettl"></ion-input>
+                </ion-item>
+            
+                <ion-item>
+                    <ion-label color="default" floating>Details</ion-label>
+                    <ion-textarea [(ngModel)]="cstmonedtl" rows="5"></ion-textarea>
+                </ion-item>
+            
+        </ion-list>
+        
+          <!-- Language form -->
+        
+        
+        
+        <ion-list *ngIf="editsection=='language'">
+            
+            <ion-item>
+              <ion-label color="default" floating>Language Name</ion-label>
+              <ion-input [(ngModel)]="lngname"></ion-input>
+            </ion-item>
+        
+            <ion-item>
+                <ion-label color="default" floating>Profiency Level</ion-label>
+                <ion-select [(ngModel)]="lnglvl">
+                  <ion-option value="Beginner"  >Beginner</ion-option>
+                  <ion-option value="Medium" >Medium</ion-option>
+                  <ion-option value="Efficient">Efficient </ion-option>
+                </ion-select>
+            </ion-item>
+        
+          </ion-list>
+        
+        
+        
+        
+        
+        
+          <!-- Achievement/Awards form -->
+        
+        
+        
+        <ion-list *ngIf="editsection=='award'">
+            
+            <ion-item>
+              <ion-label color="default" floating>Awards Organization Name</ion-label>
+              <ion-input [(ngModel)]="awardorg"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="default" floating>Awards Name</ion-label>
+              <ion-input [(ngModel)]="awardname"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label color="default" floating>Website</ion-label>
+              <ion-input [(ngModel)]="awardweb"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="default" floating>Awards  Year</ion-label>
+                <ion-select [(ngModel)]="awardyear">
+
+                  <ion-option *ngFor="let yr of yearrages;" value="{{yr}}"  >{{yr}}</ion-option>
+                  
+                </ion-select>
+            </ion-item>
+        
+        
+          </ion-list>
+        
+        
+        
+        
+        
+        
+        
+        </ion-content>
+        
+        
+        
+        
+        <ion-footer>
+            <ion-toolbar class="button_bottom_top">
+                <a *ngIf="editsection=='location'" (click)="saveLocation();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='weburl'" (click)="saveWebUrl();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='education'" (click)="saveEducation();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='work'" (click)="saveWork();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='skill'" (click)="saveSkills();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='interest'" (click)="saveInterest();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='award'" (click)="saveAward();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='course'" (click)="saveCourse();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='certificate'" (click)="saveCertification();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='occupation'" (click)="saveOccupation();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='exhibition'" (click)="saveExhibition();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='statement'" (click)="saveStatement();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='customone'" (click)="saveCustomone();" class="sign-up button button-block button-stable" >Save</a>
+                <a *ngIf="editsection=='language'" (click)="saveLanguage();" class="sign-up button button-block button-stable" >Save</a>
+                
+            </ion-toolbar>
+        </ion-footer>
+        
