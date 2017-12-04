@@ -1,0 +1,51 @@
+page-eventscalender {
+    h1 {
+        text-align: center;
+        margin: 16px 0px;
+        font-size: 18px;
+        color: #808080;
+    }
+    table,
+    tr,
+    th,
+    td {
+        border: none !important;
+    }
+    .event-detail-container[_ngcontent-c1] {
+        border-top: 1px #1a3262 solid;
+        margin-top: 19px;
+    }
+    .table[_ngcontent-c2]>thead[_ngcontent-c2]>tr[_ngcontent-c2]>th[_ngcontent-c2],
+    .table[_ngcontent-c2]>tbody[_ngcontent-c2]>tr[_ngcontent-c2]>th[_ngcontent-c2],
+    .table[_ngcontent-c2]>tfoot[_ngcontent-c2]>tr[_ngcontent-c2]>th[_ngcontent-c2],
+    .table[_ngcontent-c2]>thead[_ngcontent-c2]>tr[_ngcontent-c2]>td[_ngcontent-c2],
+    .table[_ngcontent-c2]>tbody[_ngcontent-c2]>tr[_ngcontent-c2]>td[_ngcontent-c2],
+    .table[_ngcontent-c2]>tfoot[_ngcontent-c2]>tr[_ngcontent-c2]>td[_ngcontent-c2] {
+        padding: 0px;
+        line-height: 41px;
+        vertical-align: top;
+        border-radius: 6px;
+        margin: 2px !important;
+    }
+    .monthview-primary-with-event[_ngcontent-c2] {
+        background-color: #4372d0 !important;
+        color: white;
+    }
+    .monthview-selected[_ngcontent-c2] {
+        background-color: #1a3262 !important;
+        color: white;
+    }
+    .text-muted[_ngcontent-c2] {
+        color: #fff;
+    }
+    .item-md {
+        padding-left: 0;
+        padding-right: 0;
+        color: #1a3262 !important;
+    }
+    thead {
+        color: #1a3262;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}

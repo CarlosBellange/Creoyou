@@ -1,0 +1,19 @@
+page-personal {
+    ion-item.item.item-block.item-md {
+        background: #e8e8e8;
+        border-radius: 3px;
+        margin-bottom: 3px;
+    }
+    .list-md .item-block .item-inner {
+        border-bottom: none;
+    }
+    ion-icon {
+        font-size: 2.2rem;
+        margin-right: 4px;
+        vertical-align: middle;
+        color: #545454;
+    }
+    .grid {
+        padding: 10px;
+    }
+}

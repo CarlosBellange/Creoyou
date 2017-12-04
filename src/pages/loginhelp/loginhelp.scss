@@ -1,0 +1,154 @@
+page-loginhelp {
+
+    .content-background{
+        //   background:url("../assets/img/background.jpg") no-repeat center fixed;
+        background: #186B9F;
+        background: -moz-linear-gradient(left, #334d80 0%, #156fa3 100%);
+        background: -webkit-linear-gradient(left, #334d80 0%, #156fa3 100%);
+        background: linear-gradient(to right, #334d80 0%, #156fa3 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#334d80', endColorstr='#156fa3', GradientType=1 ); 
+        background-size: cover;
+        height: 100%;
+    }
+    .next_stape {
+        background: #1571a5;
+        background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1 ) !important;
+        color: #ffffff !important;
+        padding: 16px 0px;
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    .loginhelp_stepone{
+
+        h1{
+            color: #fff;
+            font-size:2rem;
+            margin-bottom: 20%;
+            margin-top: 30% !important;
+            text-align: center;
+        }
+        ion-item{
+            border-radius: 37px;
+            background: transparent !important;
+            color: #fff !important;
+        }
+        ion-list.list.list-md {
+            border: 2px solid #10619a;
+            border-radius: 21px;
+            text-align: center;
+        }
+        .item-inner{
+            border-bottom:none !important;
+        }
+        .checkbox-md {
+            margin: 9px 15px 9px 4px !important;
+        }
+        
+    }
+
+   
+
+    .loginhelp_steptwo{ 
+
+        h1{
+            color: #fff;
+            font-size:2rem;
+            margin-bottom: 20%;
+            margin-top: 30% !important;
+            text-align: center;
+        }
+        ion-segment{
+            background: rgba(255,255,255,0.7);
+        }
+        ion-segment-button.segment-button{
+            color:#000 !important;
+            font-size: 1.5rem;
+        }
+        ion-segment-button.segment-button.segment-activated {
+            background: #023261;
+            border: none;
+            color: white !important;
+        }
+    
+       
+        ion-item.item.item-block.item-md.item-input {
+            border: none;
+            box-shadow: none;
+            background: rgba(255,255,255,0.5);
+            border-radius: 2px;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+    
+        .extra-pad{
+            margin-bottom: 1rem;
+        }
+
+        .mobile-code{
+            max-width: 100%;
+            background: rgba(22, 31, 80, 0.74) none repeat scroll 0 0;
+            border: medium none !important;
+            border-radius: 3px !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+            display: block;
+            margin-bottom: 0px;
+            padding: 1.2rem;
+            margin-top: 4rem;
+        }
+    
+        .mobile-code>.select-text{
+            float: right;
+            color: white;
+        }
+
+    }
+
+    .text-input::-moz-placeholder {
+        color: white;
+    }
+    .text-input:-ms-input-placeholder {
+        color: white;
+    }
+    .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        color: white;
+    }
+    .text-input-md{
+        color: #fff;
+    }
+
+    .login-box .sign-in {
+        background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0 !important;
+        border-radius: 2px;
+        color: #fff;
+        box-shadow: none;
+    }
+    .input-fld {
+        background: rgba(22, 31, 80, 0.74) none repeat scroll 0 0;
+        border: medium none !important;
+        border-radius: 3px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+        display: block;
+        margin-bottom: 5px;
+        padding: 0 0.6em;
+        margin-top: 4rem;
+    }
+
+    .login-help{
+        padding-bottom: 4rem;
+        padding-top: 2rem;
+        display: inline-block;
+        color: white;
+      
+    }
+    .loginhelp_stepthree{
+        margin-top: 30% !important;
+    }
+    
+
+}

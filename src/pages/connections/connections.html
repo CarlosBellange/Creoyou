@@ -1,0 +1,144 @@
+<ion-header class="creoyou-header">
+
+    <ion-navbar>
+        <ion-title>Connection</ion-title>
+
+        <ion-buttons end>
+            <button (click)="inviteFriend();" class="add_connection" ion-button clear>
+                <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="connectiontab">
+        <ion-segment-button value="connections">
+            Connections
+        </ion-segment-button>
+        <ion-segment-button value="suggestions">
+            Suggestions
+        </ion-segment-button>
+        <ion-segment-button value="pendingrequest">
+            Pending 
+            <span class="counter">{{pendingusers?.length}}</span>
+        </ion-segment-button>
+    </ion-segment>
+
+</ion-header>
+
+
+<ion-content>
+
+    <div [ngSwitch]="connectiontab">
+
+
+        <ion-list *ngSwitchCase="'connections'" class="individual">
+
+            <ion-item *ngFor="let connection of connections;let idx=index;" padding-horizontal class="search_user search_user_individual">
+                <ion-avatar item-left>
+
+                    <img *ngIf="connection.image!=null && connection.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{connection.image}}"
+                        alt="avatar">
+                    <img *ngIf="connection.image==null || connection.image==''" src="/assets/img/management.png" alt="avatar">
+
+                </ion-avatar>
+                <ion-item class="searcsh_right">
+                    <p>{{connection.users_full_name}}</p>
+                    <p class="user_deg">
+                        <ion-icon name="briefcase"></ion-icon> {{connection.creativeField}}</p>
+                    <p class="user_deg">
+                        <ion-icon name="home"></ion-icon> {{connection.address}}</p>
+
+                    <div class="user_action" item-right>
+                        <ion-icon (click)="presentActionSheet(connection,idx)" item-right ios="ios-settings" md="md-settings"></ion-icon>
+                        <button (click)="startMessage(connection,idx)" ion-button block icon-right>
+                            <ion-icon name="mail"></ion-icon>Message 
+                        </button>
+                    </div>
+                </ion-item>
+            </ion-item>
+
+            <ion-item *ngIf="connections?.length<=0" class="no_result">
+                <h3> Sorry No Connection Found... </h3> 
+            </ion-item>
+
+
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'suggestions'" class="suggestions">
+          
+
+            <ion-item *ngFor="let connection of suggestions;let idx=index;" padding-horizontal class="search_user search_user_individual">
+                <ion-avatar item-left>
+
+                    <img *ngIf="connection.image!=null && connection.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{connection.image}}"
+                        alt="avatar">
+                    <img *ngIf="connection.image==null || connection.image==''" src="/assets/img/management.png" alt="avatar">
+
+                </ion-avatar>
+                <ion-item class="searcsh_right">
+                    <p>{{connection.users_full_name}}</p>
+                    <p class="user_deg">
+                        <ion-icon name="briefcase"></ion-icon> {{connection.creativeField}}</p>
+                    <p class="user_deg">
+                        <ion-icon name="home"></ion-icon> {{connection.address}}</p>
+
+                    <div class="user_action" item-right>
+                            <button *ngIf="connection?.sent!=1" (click)="sendRequest(connection)" ion-button block icon-right>
+                                    <ion-icon name="person-add"></ion-icon> ADD 
+                             </button>
+                             <ion-icon class="done" *ngIf="connection?.sent==1" name="checkmark-circle"></ion-icon>
+                              
+                    </div>
+                </ion-item>
+            </ion-item>
+
+            <ion-item *ngIf="suggestions?.length<=0" class="no_result">
+                <h3> Sorry No Suggestions Found... </h3> 
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'pendingrequest'" class="suggestions">
+           
+                <ion-item *ngFor="let connection of pendingusers;let idx=index;" padding-horizontal class="search_user search_user_individual">
+                        <ion-avatar item-left>
+        
+                            <img *ngIf="connection.image!=null && connection.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{connection.image}}"
+                                alt="avatar">
+                            <img *ngIf="connection.image==null || connection.image==''" src="/assets/img/management.png" alt="avatar">
+        
+                        </ion-avatar>
+                        <ion-item class="searcsh_right">
+                            <p>{{connection.users_full_name}}</p>
+                            <p class="user_deg">
+                                <ion-icon name="briefcase"></ion-icon> {{connection.creativeField}}</p>
+                            <p class="user_deg">
+                                <ion-icon name="home"></ion-icon> {{connection.address}}</p>
+        
+                            <div class="user_action" item-right>
+                                <button (click)="acceptRequest(connection,idx);"  ion-button block icon-right>
+                                    <ion-icon name="person-add" ></ion-icon>  Accept
+                                </button> 
+                                <button (click)="rejectRequest(connection,idx);"  ion-button block icon-right>   
+                                    <ion-icon name="close" ></ion-icon> Reject
+                                </button>    
+                                      
+                            </div>
+                        </ion-item>
+                    </ion-item>
+                
+                    <ion-item *ngIf="pendingusers?.length<=0" class="no_result">
+                          <h3> Sorry No Pending Request Found... </h3> 
+                    </ion-item>
+            
+                
+        </ion-list>
+
+    </div>
+
+
+        
+    
+         
+
+</ion-content>

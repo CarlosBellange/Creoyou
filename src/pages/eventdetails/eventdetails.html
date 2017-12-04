@@ -1,0 +1,55 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Event Details</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="EventContainer">
+        <ion-list class="eventHeader">
+          <ion-item>
+            <ion-avatar item-left>
+              <img *ngIf="eventdetails.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{eventdetails.image}}" alt="avatar">
+              <img *ngIf="eventdetails.image==''" src="assets/img/management.png" alt="avatar">
+            </ion-avatar>
+            <p class="EventTitle">{{eventdetails.name}} by {{eventdetails.fname}} {{eventdetails.lname}}</p>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="EventBody">
+          <ion-item>
+            <img src="{{base_url}}uploads/eventsImages/{{eventdetails.media_name}}" alt="Post Img" />
+            <div class="EventDetails">
+              <b>Event Date : </b>{{eventdetails.start_date_time | date:'mediumDate'}} | {{eventdetails.start_date_time | date:'shortTime'}}
+              - {{eventdetails.end_date_time | date:'mediumDate'}} | {{eventdetails.end_date_time | date:'shortTime'}}
+            </div>
+            <div class="EventDetails">
+              <b>Event Title : </b> {{eventdetails.name}}
+            </div>
+            <div class="EventDetails">
+              <b>Event Location : </b> {{eventdetails.location}}
+            </div>
+            <div class="EventDetails">
+              <b>Description : </b> {{eventdetails.description}}
+            </div>
+
+            <div class="EventDate">
+              <span>{{eventdetails.start_date_time | date:'dd'}}</span>
+              {{eventdetails.start_date_time | date:'MMMM'}}
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

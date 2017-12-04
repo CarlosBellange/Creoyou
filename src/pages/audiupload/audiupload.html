@@ -1,0 +1,56 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Audio Add</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item class="albumUser">
+      <ion-avatar item-left>
+        <img *ngIf="userimage!='null' && userimage!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{userimage}}" alt="avatar">
+        <img *ngIf="userimage=='null' || userimage==''" src="/assets/img/management.png" alt="avatar">
+      </ion-avatar>
+      <p class="EventUser">{{userFullname}}</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="default" floating>Enter Audio Title</ion-label>
+      <ion-input [(ngModel)]="audiotitle"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="default" floating>Enter Audio Description</ion-label>
+      <ion-textarea rows="4" [(ngModel)]="audiodesc"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Set Privacy</ion-label>
+      <ion-select [(ngModel)]="audioprvcy">
+        <ion-option value="1">Public</ion-option>
+        <ion-option value="2">Connection Only</ion-option>
+        <ion-option value="3">Connection and followers</ion-option>
+        <ion-option value="4">Only me</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <button class="uploadImage" (click)="chooseAudio()" *ngIf="mediaupd">
+      Upload Audio
+      <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+    <p class="audio_name">
+      {{currentName}}
+    </p>
+
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="button_bottom_top">
+    <button class="sign-up button button-block button-stable" (click)="uploadAudio()" [disabled]="audiotitle==''">Save</button>
+  </ion-toolbar>
+</ion-footer>

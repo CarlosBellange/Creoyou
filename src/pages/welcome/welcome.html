@@ -1,0 +1,53 @@
+<ion-content class="ion-starter-content-background">
+
+    <ion-row class="homeslides">
+        <ion-slides pager autoplay="3000" centeredSlides="true">
+            <ion-slide>
+                <div class="col col-center slider-col">
+                    <img src="assets/img/logo.png" class="app_logo">
+                    <h3 class="pl_for">A Creative Platform for<br>Creative People</h3>
+                </div>    
+            </ion-slide>
+
+            <ion-slide>
+                <div class="col col-center slider-col">      	
+                    <h3 class="pl_for">Video page including the website.</h3>
+                    <img src="assets/img/slider-2.png" class="slider_fraim">
+                </div>
+            </ion-slide>
+
+            <ion-slide>
+                <div class="col col-center slider-col">      	
+                    <h3 class="pl_for">Create Your Profile</h3>
+                    <img src="assets/img/slider-3.png" class="slider_fraim">
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="col col-center slider-col">      	
+                    <h3 class="pl_for">Find Opportunities</h3>
+                    <img src="assets/img/slider-4.png" class="slider_fraim">
+                </div>
+            </ion-slide>    
+            <ion-slide>
+                <div class="col col-center slider-col">      	
+                    <h3 class="pl_for">Keep in touch with Your Connections</h3>
+                    <img src="assets/img/slider-5.png" class="slider_fraim">
+                </div>
+            </ion-slide>       
+        </ion-slides>
+    </ion-row>
+    <ion-row text-center>
+
+            <a class="sign-up button button-block button-stable" (click)="signup()">JOIN NOW</a>
+    
+    </ion-row>
+
+</ion-content>
+
+<ion-footer>
+
+    <ion-toolbar class="bar-positive">
+        <a class="tab-item tab-item-active" (click)="login()">SIGN IN</a>
+    </ion-toolbar>
+</ion-footer>
+

@@ -1,0 +1,129 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>{{pagename}} Events</ion-title>
+
+    <ion-buttons end (click)="eventcalender()">
+      <button class="add_connection" ion-button clear>
+        <i class="material-icons">perm_contact_calendar</i>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-grid>
+
+    <h2 *ngIf="eventlist==''">You have no {{pagename}} event</h2>
+
+    <ion-row *ngFor="let event of eventlist">
+      <ion-col class="EventContainer">
+        <ion-list class="eventHeader" (click)="eventDetails(event)">
+          <ion-item>
+            <p class="EventTitle">{{event.name}} by {{event.fname}} {{event.lname}}</p>
+            <p class="EventUser"></p>
+            <p>{{event.start_date_time | date:'mediumDate'}} | {{event.start_date_time | date:'shortTime'}} - {{event.end_date_time
+              | date:'mediumDate'}} | {{event.end_date_time | date:'shortTime'}}</p>
+            <p>{{event.location}}</p>
+
+            <div class="post_action" (tap)="editevent(event)">
+              <ion-icon name="settings"></ion-icon>
+            </div>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="EventBody">
+          <ion-item>
+            <img src="{{base_url}}uploads/eventsImages/{{event.media_name}}" alt="Post Img" />
+            <div class="EventDetails">
+              {{event.description}}
+            </div>
+
+            <div class="EventDate">
+              <span>{{event.start_date_time | date:'dd'}}</span>
+              {{event.start_date_time | date:'MMMM'}}
+            </div>
+          </ion-item>
+        </ion-list>
+
+        <ion-row class="post_activity">
+          <ion-col col-4 [class.active]="event.likeActive>0">
+            <ion-icon ios="ios-heart" md="md-heart" (click)="likeThisitem(event)"></ion-icon>
+            <span>{{event.likes}}</span>
+          </ion-col>
+          <ion-col col-4>
+            <ion-icon ios="ios-text" md="md-text" (click)="showComments(event)"></ion-icon>
+            <span *ngIf="event.count">{{event.count}}</span>
+          </ion-col>
+          <ion-col col-4>
+            <ion-icon ios="ios-share" md="md-share" (click)="shareThisPost(event);"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+
+
+
+
+    <!-- <ion-row>
+      <ion-col class="EventContainer">
+        <ion-list class="eventHeader" (click)="eventDetails()">
+          <ion-item>
+            <p class="EventTitle">Event Title Event Title Event Title Event Title</p>
+            <p class="EventUser">Mrinmay Biswas Mrinmay Biswas Mrinmay Biswas </p>
+            <p>11 Nov at 6:30am - 11 Nov at 6:30am</p>
+            <p>Kolkata</p>
+
+            <div class="post_action" (tap)="editevent()">
+              <ion-icon name="settings"></ion-icon>
+            </div>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="EventBody">
+          <ion-item>
+            <img src="http://www.creoyou.com/uploads/profileImages/img_0234.jpg-1510033042.jpg" alt="Post Img" />
+            <div class="EventDetails">
+              Hello everyone. what's going on Hello everyone. what's going on Hello everyone. what's going on
+            </div>
+
+            <div class="EventDate">
+              <span>19</span>
+              November
+            </div>
+          </ion-item>
+        </ion-list>
+
+        <ion-row class="post_activity">
+          <ion-col col-4 class="active">
+            <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
+            <span>10</span>
+          </ion-col>
+          <ion-col col-4>
+            <ion-icon ios="ios-text" md="md-text"></ion-icon>
+            <span>5</span>
+          </ion-col>
+          <ion-col col-4>
+            <ion-icon ios="ios-share" md="md-share"></ion-icon>
+            <span>8</span>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row> -->
+
+
+  </ion-grid>
+
+
+
+  <ion-fab bottom right>
+    <button (click)="createEvent()" ion-fab color="primary">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>

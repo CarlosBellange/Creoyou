@@ -1,0 +1,31 @@
+page-taguser {
+    .tag_item { 
+        border-bottom: 1px solid #ccc;
+        img{
+            border-radius: 50%;
+            vertical-align: middle;
+            height: 50px;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        p{
+            margin: 10px 0px 2px;
+            font-size: 15px;
+            color: rgb(31, 29, 182);
+        }
+        ion-checkbox{
+            vertical-align: middle;
+            margin: 0px 15px;
+        }
+        
+    }
+    button.dismiss {
+        background: no-repeat;
+        color: #fff;
+        font-size: 16px;
+    }
+    .scroll-content{
+        margin-top: 116px;
+    }
+    
+}

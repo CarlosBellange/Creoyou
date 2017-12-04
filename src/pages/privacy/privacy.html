@@ -1,0 +1,87 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Privacy</ion-title>
+  </ion-navbar>
+
+  <ion-segment [(ngModel)]="privacy">
+    <ion-segment-button value="blocked">
+      Blocked
+    </ion-segment-button>
+    <ion-segment-button value="hiddenposts">
+      Hidden Posts
+    </ion-segment-button>
+
+  </ion-segment>
+
+</ion-header>
+
+
+<ion-content>
+
+
+  <div [ngSwitch]="privacy">
+
+    <ion-list *ngSwitchCase="'blocked'">
+
+      <ion-list *ngIf="blockuser==''">
+        <ion-item class="no_result">
+          <h3> You have No blocked user Found... </h3>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="individual" *ngFor="let bluser of blockuser">
+
+
+        <ion-item padding-horizontal class="search_user search_user_individual">
+          <ion-avatar item-left>
+            <img src="{{base_url}}uploads/profileImages/resizedImages/{{bluser.image}}" alt="Image" />
+          </ion-avatar>
+          <ion-item class="searcsh_right">
+            <p>{{bluser.fname}} {{bluser.lname}}</p>
+            <p class="user_deg">
+              <ion-icon name="briefcase"></ion-icon>{{bluser.creativeField}}</p>
+            <div class="user_action" item-right>
+              <button ion-button block icon-right (click)="unblockUser(bluser)">Unblock</button>
+            </div>
+          </ion-item>
+        </ion-item>
+
+
+      </ion-list>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'hiddenposts'">
+
+      <ion-list *ngIf="unflowmsg">
+        <ion-item class="no_result">
+          <h3> You have No Hidden Posts Found... </h3>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="individual" *ngFor="let unuser of unflowuser">
+        <ion-item padding-horizontal class="search_user search_user_individual">
+          <ion-avatar item-left>
+            <img src="{{base_url}}uploads/profileImages/resizedImages/{{unuser.image}}" alt="Image" />
+          </ion-avatar>
+          <ion-item class="searcsh_right">
+            <p>{{unuser.fname}} {{unuser.lname}}</p>
+            <p class="user_deg">
+              <ion-icon name="briefcase"></ion-icon>{{unuser.creativeField}}</p>
+            <div class="user_action" item-right>
+              <button ion-button block icon-right (click)="unblockUser(bluser)">Unblock</button>
+            </div>
+          </ion-item>
+        </ion-item>
+
+
+      </ion-list>
+
+    </ion-list>
+
+  </div>
+
+
+
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header class="creoyou-header">
+
+    <ion-navbar>
+        <ion-title>Create Album</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-list>
+
+        <ion-item class="albumUser">
+            <ion-avatar item-left>
+                <img *ngIf="userimage!='null' && userimage!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{userimage}}" alt="avatar">
+                <img *ngIf="userimage=='null' || userimage==''" src="/assets/img/management.png" alt="avatar">
+            </ion-avatar>
+            <p class="EventUser"> {{userFullname}} </p>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="default" floating>Enter Album Name</ion-label>
+            <ion-input [(ngModel)]="albumname"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="default" floating>Enter Album Description</ion-label>
+            <ion-textarea [(ngModel)]="albumdesc" rows="4"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label color="default" floating>Set Privacy</ion-label>
+            <ion-select [(ngModel)]="albumprvcy">
+                <ion-option value="1">Public</ion-option>
+                <ion-option value="2">Connection Only</ion-option>
+                <ion-option value="3">Connection and followers</ion-option>
+                <ion-option value="4">Only me</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-row>
+
+            <ion-col col-4 *ngFor="let photo of existingphotos;let idx=index;">
+
+                <div class="eventImage">
+                    <img [src]="_DomSanitizer.bypassSecurityTrustUrl(photo.realpath)" alt="image" />
+                    <ion-icon name="close" (click)="removeImage(idx,photo);"></ion-icon>
+                </div>
+
+            </ion-col>
+            <ion-col col-4 *ngFor="let photo of photos;let idx=index;">
+
+                <div class="eventImage">
+                    <img [src]="_DomSanitizer.bypassSecurityTrustUrl(photo.realpath)" alt="image" />
+                    <ion-icon name="close" (click)="removeImage(idx,{});"></ion-icon>
+                </div>
+
+            </ion-col>
+
+        </ion-row>
+
+
+
+
+        <button class="uploadImage" (click)="addImage()">
+            Add Photo
+            <i class="material-icons">add_a_photo</i>
+        </button>
+
+
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar class="button_bottom_top">
+        <button ion-button class="sign-up button button-block button-stable" (click)="saveAlbum();" [disabled]="albumname==''">Save Album</button>
+    </ion-toolbar>
+</ion-footer>

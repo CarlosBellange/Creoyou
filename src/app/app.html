@@ -1,0 +1,63 @@
+<ion-menu [content]="content">
+
+
+
+    <ion-header class="sidebar">
+        <div text-center class="profile-wrap">
+            <ion-avatar class="person-pic">
+                <img *ngIf="userimage!='null' && userimage!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{userimage}}" alt="avatar">
+                <img *ngIf="userimage=='null' || userimage==''" src="/assets/img/management.png" alt="avatar">
+            </ion-avatar>
+            <h4 text-center>{{userFullname}}</h4>
+        </div>
+    </ion-header>
+
+
+    <ion-content no-bounce class="menu-wrap">
+
+        <ion-list margin-vertical class="menus" *ngFor="let menuitem of navsegments">
+
+            <P *ngIf="menuitem.name!=''" class="seperator">{{menuitem.name}}</P>
+            <button (click)="gotoPage(item)" menuClose ion-item *ngFor="let item of menuitem.items">
+                <img src="assets/img/menuicons/{{item.name|lowercase}}.png" alt="avatar">
+                <span class="menu-name">{{item.name}}</span>
+
+            </button>
+
+            <button (click)="logOutUser()" menuClose ion-item *ngIf="menuitem.name=='Settings'">
+                <img src="assets/img/menuicons/logout.png" alt="avatar">
+                <span class="menu-name">Logout</span>
+            </button>
+
+        </ion-list>
+
+    </ion-content>
+
+</ion-menu>
+
+<ion-header class="creoyou-header" *ngIf="showmenu">
+    <ion-navbar>
+
+        <ion-row>
+            <ion-col col-4>
+                <button ion-button menuToggle>
+                    <ion-icon name="menu"></ion-icon>
+                </button>
+            </ion-col>
+
+            <ion-col col-8 text-right class="top-bar">
+                <span (click)="gotoPage(topitem)" *ngFor="let topitem of topMenuItems;let idx = index;">
+                    <ion-icon *ngIf="topitem.icon!=''" name="{{topitem.icon}}"></ion-icon>
+                    <img *ngIf="topitem.icon==''" src="assets/img/creoyou_loop.png">
+                    <span class="counter" *ngIf="idx==2 && pendingfriendrequestcount>0">{{pendingfriendrequestcount}}</span>
+                    <span class="counter" *ngIf="idx==3 && notificationcount>0">{{notificationcount}}</span>
+                    <span class="counter" *ngIf="idx==4 && pendingmessagecount>0">{{pendingmessagecount}}</span>
+                </span>
+            </ion-col>
+
+        </ion-row>
+    </ion-navbar>
+</ion-header>
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" class="nav-content" #content swipeBackEnabled="false">
+</ion-nav>

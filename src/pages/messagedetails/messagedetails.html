@@ -1,0 +1,115 @@
+<ion-header class="creoyou-header">
+  <ion-navbar>
+    <!--  <button ion-button menuToggle>
+         <ion-icon name="menu"></ion-icon>
+       </button> -->
+    <div class="user fixed-content">
+      <ion-row>
+        <ion-col col-8 class="user_left" (click)="jobdetails()">
+          <ion-item>
+            <ion-avatar item-left>
+              <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}" alt="avatar">
+              <img *ngIf="user.image==null || user.image==''" src="/assets/img/management.png" alt="avatar">
+
+            </ion-avatar>
+            <p class="grn-text">{{user.users_full_name}}</p>
+          </ion-item>
+        </ion-col>
+        <ion-col col-4 class="user_right">
+          <ion-buttons end>
+            <button (tap)="ClearallArchive($event)" class="ChatMore" ion-button clear>
+              <ion-icon ios="ios-more" md="md-more"></ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="chat" no-bounce>
+
+  <ion-list class="messages">
+
+    <div *ngFor="let msg of messages;let msgindex = index;" [class.message-left]="msg.userId!=currentuserid" [class.message-right]="msg.userId==currentuserid">
+      <p>{{msg.content}}</p>
+      <p class="date" item-right>
+        <span>{{msg.creation_date|amDateFormat:'h:mm a'}}</span>
+        <span>{{msg.creation_date|amDateFormat:'MM.DD.YYYY'}}</span>
+      </p>
+    </div>
+
+    <!-- <div class="message-right">
+        <p>Yes I booked you for today</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
+      </div>
+  
+      <div class="message-left">
+        <p>Hi,I am your worker.</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
+      </div>
+  
+      <div class="message-right">
+        <p>Yes I booked you for today</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
+      </div>
+  
+  
+      <div class="message-left">
+        <p>Hi,I am your worker.</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
+      </div>
+  
+      <div class="message-right">
+        <p>Yes I booked you for today</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
+      </div>
+  
+      <div class="message-left">
+        <p>Hi,I am your worker.</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
+      </div>
+  
+      <div class="message-right">
+        <p>Yes I booked you for today</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
+      </div>
+  
+  
+      <div class="message-left">
+        <p>Hi,I am your worker.</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
+      </div>
+  
+      <div class="message-right">
+        <p>Yes I booked you for today</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
+      </div>
+  
+      <div class="message-left">
+        <p>Hi,I am your worker.</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
+      </div>
+  
+      <div class="message-right">
+        <p>Yes I booked you for today</p>
+        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
+      </div> -->
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar class="msg" color="footer-white">
+    <div class="in">
+      <div class="text-box">
+        <ion-textarea [(ngModel)]="messageText" rows="1" autoresize placeholder="Type Message Here..."></ion-textarea>
+      </div>
+    </div>
+    <!-- on keyboard open send button -->
+    <button ion-button end small (click)="sendMessage()" [disabled]="messageText === ''">
+      <i class="material-icons">send</i>
+    </button>
+  </ion-toolbar>
+</ion-footer>

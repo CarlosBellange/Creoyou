@@ -1,0 +1,80 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Create New Event </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="default" floating>Event Title</ion-label>
+      <ion-input [(ngModel)]="eventtitle"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Location</ion-label>
+      <ion-input [(ngModel)]="eventlocation"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Event Start Date</ion-label>
+      <!-- <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="eventstartdate"></ion-datetime> -->
+      <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="eventstartdate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Event Start Time</ion-label>
+      <ion-datetime displayFormat="h:mm a" [(ngModel)]="eventstarttime"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Event End Date</ion-label>
+      <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="eventenddate"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Event End Time</ion-label>
+      <ion-datetime displayFormat="h:mm a" [(ngModel)]="eventendtime"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Enter Description</ion-label>
+      <ion-textarea rows="4" [(ngModel)]="eventdesc"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label color="default" floating>Set Privacy</ion-label>
+      <ion-select [(ngModel)]="eventprivacy">
+        <ion-option value="1">Public</ion-option>
+        <ion-option value="2">Connection Only</ion-option>
+        <ion-option value="3">Connection and followers</ion-option>
+        <ion-option value="4">Only me</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <a (click)="inviteConnection()">Invite Your Connections</a>
+
+    <div class="eventImage" *ngIf="eventimgshow">
+      <img src="{{base_url}}uploads/eventsImages/{{eventimg}}" alt="image" />
+      <ion-icon name="close" (click)="removeImage();"></ion-icon>
+    </div>
+    <div class="eventImage" *ngIf="!eventimgshow">
+      <img [src]="_DomSanitizer.bypassSecurityTrustUrl(eventimg)" alt="image" />
+      <ion-icon name="close" (click)="removeImage();"></ion-icon>
+    </div>
+
+
+    <button class="uploadImage" (click)="upLoadImages()">
+      Add Photo
+      <i class="material-icons">add_a_photo</i>
+    </button>
+
+
+  </ion-list>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="button_bottom_top">
+    <button class="sign-up button button-block button-stable" (click)="CreateEvent()">Share Your Event</button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,96 @@
+page-comment {
+
+    .dismiss{
+        font-size: 25px !important;
+        color: white;
+        background: transparent !important;
+    }
+    .comment_wrap {
+        margin-bottom: 0;
+        ion-item{
+            padding-left: 10px !important;
+            padding-right: 0px !important;
+        }
+        ion-avatar{
+            margin: 8px 0px 8px 0 !important;
+        }
+        img {
+            border: 2px solid #ccc;
+        }
+        ion-label{
+            white-space: normal !important;
+            margin: 5px 5px 5px 0 !important;
+            p{
+                text-align: left !important;
+                color: #2a94ce;
+                font-size: 4.5vw;
+                
+                span{
+                    color: #5c5c5c;
+                }
+            }
+            .user_deg {
+                font-size: 13px;
+                color: #959595;
+            }
+        }
+        .item {
+            border-radius: 10px 10px 10px 10px !important;
+        }
+    }
+
+    .comment_action {
+        position: absolute;
+        right: 5px;
+        top: 8px;
+        font-size: 30px;
+        color: #adadad;
+    }
+    ion-item.comment_wrap {
+        border-bottom: 1px solid #ccc;
+    }
+    ion-list{
+        margin: -1px 0 2px !important;
+    }
+
+    .msg {
+        min-height: 50px;
+        overflow: visible;
+        text-overflow: normal;
+        width: 100%;
+    .toolbar-background {
+        background-color: transparent;
+    }
+    .toolbar-content {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        overflow: visible;
+        text-overflow: normal;
+      }
+        ion-textarea {
+          border: none;
+          display: block; 
+          float: left;
+          width: 100%;
+          height: auto;
+          outline: none;
+          padding:0px 0px 0px;
+          margin: 0px;
+          background: transparent;
+          border: none;
+          .text-input {
+            margin:15px 5px;
+            font-size: 17px;
+          }
+        }
+      }
+      button {
+        background: #1559c0 !important;
+        height: 40px !important;
+        width: 40px;
+        border-radius: 50% !important;
+        font-size: 1.5rem !important;
+    }
+
+}

@@ -1,0 +1,85 @@
+page-audiupload {
+    .item-inner {
+        border-bottom: 2px solid #0b60b4 !important;
+        box-shadow: none !important;
+    }
+    ion-label {
+        color: rgb(141, 141, 141) !important;
+        margin: 10px 0px 0px 0px !important;
+    }
+    ion-toolbar {
+        padding: 0px !important;
+    }
+    .item-md {
+        padding-left: 0;
+    }
+    .item-inner {
+        box-shadow: none !important;
+    }
+    .button_bottom_top button {
+        background: #1571a5;
+        background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
+        color: #ffffff !important;
+        padding: 16px 0px;
+        height: 55px;
+        font-size: 1.2em;
+    }
+    .eventImage {
+        position: relative;
+        margin: 15px auto;
+        ion-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            height: 30px;
+            width: 30px;
+            -webkit-box-shadow: 0px 0px 10px #ccc;
+            box-shadow: 0px 0px 10px #151515;
+            text-align: center;
+            color: red;
+            border-radius: 50%;
+            line-height: 30px;
+            font-size: 2.5rem;
+        }
+        img {
+            border-radius: 3px;
+        }
+    }
+    button.uploadImage {
+        text-align: center;
+        display: block;
+        width: 100%;
+        font-size: 20px;
+        background: transparent;
+        color: #ccc;
+        text-transform: uppercase;
+        vertical-align: middle;
+        border-radius: 4px;
+        border: 1px solid #e0e0e0;
+        padding: 30px 0px;
+        font-weight: 600;
+        margin-top: 15px;
+        ion-icon {
+            vertical-align: middle;
+            font-size: 5rem;
+            margin-top: -13px;
+        }
+    }
+    .albumUser {
+        p {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #000;
+        }
+        .item-inner {
+            border-bottom: 2px solid transparent !important;
+        }
+        ion-avatar {
+            margin: 0px 16px 0px 0 !important;
+        }
+    }
+}

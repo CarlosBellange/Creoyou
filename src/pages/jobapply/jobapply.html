@@ -1,0 +1,38 @@
+<!--
+  Generated template for the JobapplyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Apply Job</ion-title>
+    <ion-buttons end>
+      <button class="dismiss" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+
+  <div class="Cv_title">
+    <h2>Upload your Resume</h2>
+    <p>Uploading a resume while applying for a job usually have an edeg over the other applicants </p>
+  </div>
+  <button class="uploadImage" (click)="chooseCV()">
+    Upload CV
+    <ion-icon name="cloud-upload"></ion-icon>
+  </button>
+  <p class="video_name">
+    {{currentName}}
+  </p>
+</ion-content>
+<ion-footer>
+  <ion-toolbar class="button_bottom_top">
+    <a class="sign-up button button-block button-stable" (click)="applypremiumjob()">Apply</a>
+  </ion-toolbar>
+</ion-footer>

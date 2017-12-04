@@ -1,0 +1,41 @@
+page-newmessage {
+
+
+    .chatSearch{
+        padding: 0px 5px;
+        input.searchbar-input {
+            border: 2px solid #ccc;
+            border-radius: 36px !important;
+            box-shadow: none !important;
+            padding: 6px 45px;
+        }
+        .searchbar-search-icon{
+            background-size: 26px;
+            color: #ccc;
+        }
+    }
+    .button_bottom_top a {
+        background: #1571a5;
+        background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
+        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1 ) !important;
+        color: #ffffff !important;
+        padding: 16px 0px;
+        height: 55px;
+        font-size: 1.2em;
+    }
+    ion-toolbar{
+        padding: 0px !important;
+    }
+    .item-md {
+        padding-left: 0;
+    }
+
+    .item-md.item-input.item-input-has-focus .item-inner, 
+    .item-md.item-input.input-has-focus .item-inner{
+        border-bottom-color:#334c80 !important;
+        box-shadow: inset 0 -1px 0 0 #334c80 !important;
+    }
+
+}

@@ -1,0 +1,38 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Photo Album</ion-title>
+  </ion-navbar>
+  <ion-toolbar text-center>
+    <button color="light" (click)="sendTonewalbum();" icon-start ion-button round>
+      <ion-icon name="add-circle"></ion-icon> Create New Album</button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+      <ion-col col-6 (click)="gotoPhotoView(albm);" *ngFor="let albm of albums;">
+        <div class="album_wrap">
+          <img src="{{base_url}}uploads/portfolioImages/resizedimages/{{albm.image_name}}" alt="Post Img" />
+          <div class="album_list">
+            <p>
+              <ion-icon name="albums"></ion-icon> &nbsp; {{albm.name}}
+              <span>({{albm.imgCount}})</span>
+            </p>
+          </div>
+          <!--  <div (click)="editAlbum(albm,$event);" class="albumSettings">
+                <ion-icon  name="more"></ion-icon>
+            </div> -->
+        </div>
+      </ion-col>
+
+
+
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
