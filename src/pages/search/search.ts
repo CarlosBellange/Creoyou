@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Navbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Navbar, App } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { SearchfilterPage } from '../../pages/searchfilter/searchfilter';
 import { JobdetailsPage } from '../../pages/jobdetails/jobdetails';
@@ -41,12 +41,13 @@ export class SearchPage {
   jobKeywoard = '';
   specializations = '';
   advsearch: boolean = false;
+  searchbycatagory: string;
 
-  constructor(public remotService: RemoteServiceProvider, public events: Events, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private app: App, public remotService: RemoteServiceProvider, public events: Events, public navCtrl: NavController, public navParams: NavParams) {
     this.base_url = this.remotService.site_url;
     this.user_id = window.localStorage['userid'];
     this.token = window.localStorage['token'];
-
+    this.searchbycatagory = 'all';
     this.adsearchparam = navParams.get('adsearch');
     if (this.adsearchparam && this.adsearchparam.hasOwnProperty('id')) {
       this.cat_name = this.adsearchparam.id;
@@ -86,14 +87,15 @@ export class SearchPage {
     this.business = false;
     this.jobs = true;
   }
-  searchfilter(people, business, jobs) {
-    var adsdata = {
-      people: people,
-      business: business,
-      jobs: jobs
-    }
-    //console.log(people, business, jobs);
-    this.navCtrl.push(SearchfilterPage, { adsdata: adsdata });
+  searchfilter() {
+    /*  var adsdata = {
+       people: people,
+       business: business,
+       jobs: jobs
+     } */
+    // console.log(this.searchbycatagory);
+    this.app.getRootNav().push(SearchfilterPage, { adsdata: this.searchbycatagory });
+    //this.navCtrl.push(SearchfilterPage, { /* adsdata: adsdata */ });
   }
 
   search() {
@@ -225,7 +227,8 @@ export class SearchPage {
       user_id: connection.id
     }
     console.log(connection.is_friend);
-    this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data, 'friendcheck': connection.is_friend });
+    this.app.getRootNav().push(OtherprofilePage, { 'otheruserfrofiledata': data, 'friendcheck': connection.is_friend });
+    //this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data, 'friendcheck': connection.is_friend });
   }
   ionViewDidLoad() {
     this.events.publish('creoyou:hidemenu');
@@ -237,5 +240,15 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
     this.initsearch();
   }
+  segmentChanged(event) {
 
+    if (this.searchbycatagory == 'all')
+      this.initsearch();
+    else if (this.searchbycatagory == 'people')
+      this.initsearch();
+    else if (this.searchbycatagory == 'business')
+      this.initsearch();
+    else if (this.searchbycatagory == 'jobs')
+      this.initsearch();
+  }
 }

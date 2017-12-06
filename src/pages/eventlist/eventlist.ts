@@ -37,7 +37,7 @@ export class EventlistPage {
       token: window.localStorage['token']
     }
     this.remotService.presentLoading('wait ...');
-    this.remotService.postData(DataToSend, 'fullEventsOne').subscribe((response) => {
+    this.remotService.postData(DataToSend, 'fullEvents').subscribe((response) => {
       this.remotService.dismissLoader();
       if (this.pagename == 'Past') {
         this.eventlist = response.data.past;

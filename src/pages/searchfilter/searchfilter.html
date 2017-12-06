@@ -10,7 +10,7 @@
 
 <ion-content class="has-header" padding>
   <!--People -->
-  <ion-list *ngIf="people">
+  <ion-list *ngIf="advsearch=='people'">
     <ion-item>
       <ion-label color="default" floating>Full Name</ion-label>
       <ion-input [(ngModel)]="adname"></ion-input>
@@ -44,7 +44,7 @@
   </ion-list>
 
   <!--Business-->
-  <ion-list *ngIf="business">
+  <ion-list *ngIf="advsearch=='business'">
     <ion-item>
       <ion-label color="default" floating>Business Name</ion-label>
       <ion-input [(ngModel)]="businessname"></ion-input>
@@ -69,7 +69,7 @@
     </ion-item>
   </ion-list>
   <!--Jobs-->
-  <ion-list *ngIf="jobs">
+  <ion-list *ngIf="advsearch=='jobs'">
     <ion-item>
       <ion-label color="default" floating>Job Name</ion-label>
       <ion-input [(ngModel)]="jobname"></ion-input>

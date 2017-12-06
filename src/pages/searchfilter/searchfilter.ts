@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, App } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { SearchPage } from '../search/search';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -36,16 +36,14 @@ export class SearchfilterPage {
   business: boolean;
   advsdata: any;
 
-  constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private app: App, public modalCtrl: ModalController, public formBuilder: FormBuilder, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.FormadvanceStepOne = formBuilder.group({
       cfield: ['', Validators.compose([Validators.required])]
 
     });
     this.initLocationForm();
     this.advsearch = navParams.get('adsdata');
-    this.jobs = this.advsearch.jobs;
-    this.people = this.advsearch.people;
-    this.business = this.advsearch.business;
+    console.log(this.advsearch);
 
   }
 
@@ -130,7 +128,7 @@ export class SearchfilterPage {
       }
     }
     console.log(this.advsdata);
-    this.navCtrl.push(SearchPage, { adsearch: this.advsdata });
+    this.app.getRootNav().push(SearchPage, { adsearch: this.advsdata });
   }
   showCategoryModal() {
     let categoryModal = this.modalCtrl.create(CategoriesPage);

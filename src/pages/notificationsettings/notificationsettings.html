@@ -1,0 +1,71 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Notification Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list radio-group [(ngModel)]="autoManufacturers">
+
+    <ion-list-header>
+      <ion-icon name="contacts"></ion-icon> Who can send me friend request
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Any One</ion-label>
+      <ion-radio value="1" (ionSelect)="select(item)"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Who know my mobile no</ion-label>
+      <ion-radio value="2" (ionSelect)="select2(item)"></ion-radio>
+    </ion-item>
+
+
+  </ion-list>
+
+
+  <ion-list>
+
+    <ion-list-header>
+      <ion-icon name="notifications-outline"></ion-icon> My Notification
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Friend request </ion-label>
+      <!--  <ion-toggle [(ngModel)]="onoff" (ionChange)="Change_Toggle(onoff);" [checked]="isToggled"></ion-toggle> -->
+      <ion-toggle color="secondary" [(ngModel)]="request" (ionChange)="Change_Togglerequest(request,comment,like,message,invite);"
+        [checked]="request"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Comment</ion-label>
+      <ion-toggle color="secondary" [(ngModel)]="comment" (ionChange)="Change_Togglerequest(request,comment,like,message,invite);"
+        [checked]="comment"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Like</ion-label>
+      <ion-toggle color="secondary" [(ngModel)]="like" (ionChange)="Change_Togglerequest(request,comment,like,message,invite);"
+        [checked]="like"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Message</ion-label>
+      <ion-toggle color="secondary" [(ngModel)]="message" (ionChange)="Change_Togglerequest(request,comment,like,message,invite);"
+        [checked]="message"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Event invite</ion-label>
+      <ion-toggle color="secondary" [(ngModel)]="invite" (ionChange)="Change_Togglerequest(request,comment,like,message,invite);"
+        [checked]="invite"></ion-toggle>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

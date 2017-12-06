@@ -259,7 +259,7 @@ export class OtherprofilePage {
     //over ridding back button
     this.navBar.backButtonClick = () => {
 
-      this.events.publish('creoyou:showmenu');
+      this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
     console.log('ionViewDidLoad OtherprofilePage');

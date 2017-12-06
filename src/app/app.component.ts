@@ -31,6 +31,7 @@ import { AlbumviewPage } from '../pages/albumview/albumview';
 import { EventlistPage } from '../pages/eventlist/eventlist';
 import { PersonalPage } from '../pages/personal/personal';
 import { PrivacyPage } from '../pages/privacy/privacy';
+import { NotificationsettingsPage } from '../pages/notificationsettings/notificationsettings';
 
 import {
   RemoteServiceProvider
@@ -53,7 +54,7 @@ export class CreoYouApp {
   frthNavItems = [{ name: 'Upcoming', link: EventlistPage }, { name: 'Past', link: EventlistPage }];
   thirdNavItems = [{ name: 'Connections', link: ConnectionsPage }, { name: 'Following', link: FollowPage }];
   fifthNavItems = [{ name: 'Personal', link: PersonalPage }, { name: 'Privacy', link: PrivacyPage },
-  { name: 'Notification', link: NotificationsPage }];
+  { name: 'Notification', link: NotificationsettingsPage }];
   navsegments: any;
 
   topMenuItems: any;

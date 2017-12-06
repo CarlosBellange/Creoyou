@@ -19,7 +19,7 @@ export class PortfolioPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.Otherprofileview = 'album';
   }
-  segmentChanged(event) {
+  /* segmentChanged(event) {
 
     if (this.Otherprofileview == 'album')
      
@@ -27,7 +27,7 @@ export class PortfolioPage {
       
     else if (this.Otherprofileview == 'audio')
      
-  }
+  } */
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PortfolioPage');

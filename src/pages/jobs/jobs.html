@@ -11,19 +11,22 @@
 
     <ion-list class="individual">
 
-        <ion-item *ngFor="let job of jobsData" padding-horizontal class="search_user search_user_individual" (click)="jobdetails(job)">
-            <ion-avatar item-left>
+        <ion-item *ngFor="let job of jobsData" padding-horizontal class="search_user search_user_individual">
+            <ion-avatar item-left (click)="jobdetails(job)">
                 <img *ngIf="job.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{job.image}}">
                 <img *ngIf="job.image==''" src="assets/img/company.png">
             </ion-avatar>
             <ion-item class="searcsh_right">
-                <p>
-                    <ion-icon name="briefcase"></ion-icon> {{job.job_title}} </p>
-                <p class="Company_name">{{job.posted_by}}</p>
-                <p class="user_deg">Required Experience : {{job.required_experience}} </p>
-                <p class="user_deg">{{job.city}}, {{job.state}} and {{job.country}}</p>
-                <p class="user_deg" *ngIf="job.time>24">{{job.updation_date | date:'fullDate'}} | {{job.updation_date | date:'shortTime'}} | {{job.name}}</p>
-                <p class="user_deg" *ngIf="job.time<24">{{job.time }} hours ago | {{job.name}}</p>
+                <p class="Company_name" (click)="OtherProfile(job)">{{job.posted_by}}</p>
+                <div (click)="jobdetails(job)">
+                    <p>
+                        <ion-icon name="briefcase"></ion-icon> {{job.job_title}} </p>
+                    <p class="user_deg">Required Experience : {{job.required_experience}} </p>
+                    <p class="user_deg">{{job.city}}, {{job.state}}, {{job.country}}</p>
+                    <p class="user_deg" *ngIf="job.minute<60">{{job.minute }} Minute ago | {{job.name}}</p>
+                    <p class="user_deg" *ngIf="job.hour<24">{{job.hour}} hours ago | {{job.name}}</p>
+                    <p class="user_deg" *ngIf="job.hour>24">{{job.days}} Days ago | {{job.name}}</p>
+                </div>
             </ion-item>
         </ion-item>
 
@@ -37,8 +40,10 @@
                     <ion-icon name="briefcase"></ion-icon> {{additem.job_title}} </p>
                 <p class="Company_name"> {{additem.posted_by}} </p>
                 <p class="user_deg">Required Experience : {{additem.required_experience}}</p>
-                <p class="user_deg">, Jammu and Kashmir</p>
-                <p class="user_deg">6 hours ago | {{additem.name}}</p>
+                <p class="user_deg">{{additem.city}}, {{additem.state}}, {{additem.country}}</p>
+                <p class="user_deg" *ngIf="additem.minute<60">{{additem.minute }} Minute ago | {{additem.name}}</p>
+                <p class="user_deg" *ngIf="additem.hour<24">{{additem.hour}} hours ago | {{additem.name}}</p>
+                <p class="user_deg" *ngIf="additem.hour>24">{{additem.days}} Days ago | {{additem.name}}</p>
 
                 <div class="user_action" item-right>
                     <img src="assets/img/add.png" alt="Image" />

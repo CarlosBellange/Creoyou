@@ -7,13 +7,13 @@ page-personal {
     .list-md .item-block .item-inner {
         border-bottom: none;
     }
-    ion-icon {
-        font-size: 2.2rem;
-        margin-right: 4px;
-        vertical-align: middle;
-        color: #545454;
-    }
     .grid {
         padding: 10px;
+        ion-icon {
+            font-size: 2.2rem;
+            margin-right: 4px;
+            vertical-align: middle;
+            color: #545454;
+        }
     }
 }

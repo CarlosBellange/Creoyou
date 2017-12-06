@@ -1,14 +1,14 @@
 webpackJsonp([41],{
 
-/***/ 506:
+/***/ 508:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlbumviewPageModule", function() { return AlbumviewPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AudiocommentPageModule", function() { return AudiocommentPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__albumview__ = __webpack_require__(141);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__audiocomment__ = __webpack_require__(144);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AlbumviewPageModule = (function () {
-    function AlbumviewPageModule() {
+var AudiocommentPageModule = (function () {
+    function AudiocommentPageModule() {
     }
-    return AlbumviewPageModule;
+    return AudiocommentPageModule;
 }());
-AlbumviewPageModule = __decorate([
+AudiocommentPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__albumview__["a" /* AlbumviewPage */],
+            __WEBPACK_IMPORTED_MODULE_2__audiocomment__["a" /* AudiocommentPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__albumview__["a" /* AlbumviewPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__audiocomment__["a" /* AudiocommentPage */]),
         ],
     })
-], AlbumviewPageModule);
+], AudiocommentPageModule);
 
-//# sourceMappingURL=albumview.module.js.map
+//# sourceMappingURL=audiocomment.module.js.map
 
 /***/ })
 

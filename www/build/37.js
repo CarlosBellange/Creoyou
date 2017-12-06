@@ -1,14 +1,14 @@
 webpackJsonp([37],{
 
-/***/ 510:
+/***/ 514:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoriesPageModule", function() { return CategoriesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommonmodalPageModule", function() { return CommonmodalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__categories__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commonmodal__ = __webpack_require__(147);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CategoriesPageModule = (function () {
-    function CategoriesPageModule() {
+var CommonmodalPageModule = (function () {
+    function CommonmodalPageModule() {
     }
-    return CategoriesPageModule;
+    return CommonmodalPageModule;
 }());
-CategoriesPageModule = __decorate([
+CommonmodalPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__categories__["a" /* CategoriesPage */],
+            __WEBPACK_IMPORTED_MODULE_2__commonmodal__["a" /* CommonmodalPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__categories__["a" /* CategoriesPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__commonmodal__["a" /* CommonmodalPage */]),
         ],
     })
-], CategoriesPageModule);
+], CommonmodalPageModule);
 
-//# sourceMappingURL=categories.module.js.map
+//# sourceMappingURL=commonmodal.module.js.map
 
 /***/ })
 

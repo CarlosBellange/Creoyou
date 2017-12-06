@@ -87,7 +87,7 @@ export class AudiuploadPage {
         this.remotService.dismissLoader();
         if (response.success == 1) {
           this.navParams.get("parentPage").initaudio();
-          // this.events.publish('creoyou:showmenu');
+
           this.navCtrl.pop()
 
         } else {
@@ -106,12 +106,12 @@ export class AudiuploadPage {
       this.fileTransfer = this.transfer.create();
       let options: FileUploadOptions = {
         fileKey: "audiofile",
-        fileName: this.currentName + '.mp3',
+        fileName: this.currentName,
         httpMethod: "POST",
         chunkedMode: false,
         mimeType: "audio/mp3",
         headers: {},
-        params: { 'user_id': this.user_id, 'audiodescription': this.audiodesc, 'audioname': this.audiotitle, 'privacy': this.audioprvcy }
+        params: { 'token': this.token, 'user_id': this.user_id, 'audiodescription': this.audiodesc, 'audioname': this.audiotitle, 'privacy': this.audioprvcy }
       }
       this.remotService.presentLoading('wait ...');
       console.log(options);

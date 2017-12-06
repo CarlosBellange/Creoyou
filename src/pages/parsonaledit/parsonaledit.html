@@ -13,29 +13,55 @@
 <ion-content padding class="content-background">
 
   <ion-list *ngIf="editsection=='name'">
-    <ion-item class="edit_item">
-      <ion-label color="default" floating>Change Name</ion-label>
-      <ion-input [(ngModel)]="name"></ion-input>
-    </ion-item>
-    <ion-footer>
-      <ion-toolbar class="button_bottom_top">
-        <button class="sign-up button button-block button-stable" [disabled]="name==''" (click)="updateDetails()">Update User Name</button>
-      </ion-toolbar>
-    </ion-footer>
+    <form [formGroup]="FormRegistrationStepFour">
+      <ion-item class="edit_item">
+        <ion-label color="default" floating>Change Name</ion-label>
+        <ion-input [(ngModel)]="username" formControlName="username" required></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="FormRegistrationStepFour.get('username').hasError('pattern') && (FormRegistrationStepFour.get('username').touched)">
+        Only characters and numbers allowed
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepFour.get('username').hasError('required') && (FormRegistrationStepFour.get('username').touched)">
+        Username is required
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepFour.get('username').hasError('Inuse') && (FormRegistrationStepFour.get('username').touched)">
+        Username is already taken
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepFour.get('username').hasError('minlength') && (FormRegistrationStepFour.get('username').touched)">
+        Minimum of 4 characters
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepFour.get('username').hasError('maxlength') && (FormRegistrationStepFour.get('username').touched)">
+        Maximum of 50 characters
+      </span>
+      <span *ngIf="FormRegistrationStepFour.controls.username.pending">
+        <ion-spinner name="bubbles"></ion-spinner>.
+      </span>
+    </form>
   </ion-list>
 
   <ion-list *ngIf="editsection=='email'">
-    <ion-item class="edit_item">
-      <ion-label color="default" floating>Change Email</ion-label>
-      <ion-input [(ngModel)]="email"></ion-input>
-    </ion-item>
-    <ion-footer>
-      <ion-toolbar class="button_bottom_top">
-        <button class="sign-up button button-block button-stable" [disabled]="email==''" (click)="updateemail()">Update Email</button>
-      </ion-toolbar>
-    </ion-footer>
-
+    <form [formGroup]="FormRegistrationStepOne">
+      <ion-item class="edit_item">
+        <ion-label color="default" floating>Change Email</ion-label>
+        <ion-input [(ngModel)]="email" formControlName="email" required></ion-input>
+      </ion-item>
+      <span *ngIf="FormRegistrationStepOne.controls.email.pending && (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepOne.get('email').hasError('required') && (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
+        Email is required
+      </span>
+      <span class="error" *ngIf="(FormRegistrationStepOne.get('email').hasError('incorrectMailFormat') && !FormRegistrationStepOne.get('email').hasError('required'))
+   && (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
+        Email address is invalid.
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepOne.get('email').hasError('Inuse') && 
+  (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
+        Email is already in use
+      </span>
+    </form>
   </ion-list>
+
   <ion-list *ngIf="editsection=='mobile'">
     <form [formGroup]="FormRegistrationStepTwo" (ngSubmit)="changemobilenumber(FormRegistrationStepTwo.value)">
       <ion-item class="edit_item">
@@ -43,33 +69,68 @@
         <ion-select item-left formControlName="mobilecode" multiple="false" class="mobile-code">
           <ion-option value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.dial_code}}</ion-option>
         </ion-select>
-        <ion-input [(ngModel)]="mobile" formControlName="mobileno"></ion-input>
+        <ion-input [(ngModel)]="mobile" formControlName="mobileno" required></ion-input>
       </ion-item>
-      <ion-footer>
-        <ion-toolbar class="button_bottom_top">
-          <button class="sign-up button button-block button-stable">Update Mobile Number</button>
-        </ion-toolbar>
-      </ion-footer>
+      <span *ngIf="FormRegistrationStepTwo.controls.mobileno.pending">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('pattern') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+        Mobile numberr should be only numbers
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('required') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+        Mobile no is required
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepTwo.get('mobilecode').hasError('required') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+        Mobile code is required
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('Inuse') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+        Mobile no is already taken
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('minlength') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+        Minimum of 4 characters
+      </span>
+      <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('maxlength') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+        Maximum of 15 characters
+      </span>
     </form>
+
   </ion-list>
 
   <ion-list class="Change_password" *ngIf="editsection=='changepass'">
-    <ion-item class="edit_item">
-      <ion-label color="default" floating>Current Password</ion-label>
-      <ion-input type="password" [(ngModel)]="oldpass"></ion-input>
-    </ion-item>
-    <ion-item class="edit_item">
-      <ion-label color="default" floating>New Password</ion-label>
-      <ion-input type="password" [(ngModel)]="newpass"></ion-input>
-    </ion-item>
-    <ion-item class="edit_item">
-      <ion-label color="default" floating>Confirm Password</ion-label>
-      <ion-input type="password" [(ngModel)]="confirmpass"></ion-input>
-    </ion-item>
-    <ion-footer>
-      <ion-toolbar class="button_bottom_top">
-        <button class="sign-up button button-block button-stable" (click)="Changepassword()">Update Password</button>
-      </ion-toolbar>
-    </ion-footer>
+    <form [formGroup]="FormRegistrationStepThree">
+      <ion-item class="edit_item">
+        <ion-label color="default" floating>Current Password</ion-label>
+        <ion-input type="password" [(ngModel)]="oldpass" formControlName="oldpass" required></ion-input>
+      </ion-item>
+      <ion-item class="edit_item">
+        <ion-label color="default" floating>New Password</ion-label>
+        <ion-input type="password" (keyup)="setConfirmPasswordBlank()" [(ngModel)]="password" formControlName="password" required></ion-input>
+      </ion-item>
+
+      <span class="error" *ngIf="FormRegistrationStepThree.get('password').hasError('required') && (FormRegistrationStepThree.get('password').touched)">
+        Password is required
+      </span>
+
+      <span class="error" *ngIf="FormRegistrationStepThree.get('password').hasError('pattern')  && (FormRegistrationStepThree.get('password').touched)">
+        <p>Passwords must have a lowercase letter and uppercase letter and a number and between 8 to 20 char.</p>
+      </span>
+
+      <ion-item class="edit_item">
+        <ion-label color="default" floating>Confirm Password</ion-label>
+        <ion-input type="password" [(ngModel)]="confirmpassword" formControlName="confirmpassword" required></ion-input>
+      </ion-item>
+      <span class="error" *ngIf="FormRegistrationStepThree.get('confirmpassword').hasError('equalTo')
+      && (FormRegistrationStepThree.controls.confirmpassword.dirty)">
+        Please enter same password
+      </span>
+    </form>
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar class="button_bottom_top">
+    <button *ngIf="editsection=='name'" class="sign-up button button-block button-stable" [disabled]="name==''" (click)="updateDetails()">Update User Name</button>
+    <button *ngIf="editsection=='email'" class="sign-up button button-block button-stable" [disabled]="email==''" (click)="updateemail()">Update Email</button>
+    <button *ngIf="editsection=='mobile'" class="sign-up button button-block button-stable" (click)="changemobilenumber()">Update Mobile Number</button>
+    <button *ngIf="editsection=='changepass'" class="sign-up button button-block button-stable" (click)="Changepassword()">Update Password</button>
+  </ion-toolbar>
+</ion-footer>

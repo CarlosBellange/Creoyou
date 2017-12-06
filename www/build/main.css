@@ -30298,6 +30298,406 @@ page-notifications ion-label p ion-icon {
   color: #2a94ce;
 }
 
+page-notificationsettings .content-background {
+  background: url("../assets/img/background.jpg") no-repeat center fixed;
+  background-size: cover;
+  height: 100%;
+}
+
+page-notificationsettings .list-header-md {
+  padding-left: 16px;
+  margin-bottom: 0px;
+  min-height: 4.5rem;
+  border-top: 1px solid #dedede;
+  font-size: 1.6rem;
+  color: #0a2964;
+  padding-top: 20px;
+  font-weight: 600;
+}
+
+page-notificationsettings .item-radio-checked.item-md ion-label {
+  color: #000;
+}
+
+page-notificationsettings .radio-md .radio-checked {
+  border-color: #048629;
+}
+
+page-notificationsettings .radio-md .radio-inner {
+  background-color: #048629;
+}
+
+page-notificationsettings .toggle-md-secondary.toggle-checked .toggle-icon {
+  background-color: #13d049;
+}
+
+page-notificationsettings .toggle-md-secondary.toggle-checked .toggle-inner {
+  background-color: #048629;
+}
+
+page-otherprofile .prifile_image_box {
+  position: relative;
+  height: 31vw;
+  width: 31vw;
+  margin: 0 auto 10px;
+}
+
+page-otherprofile .prifile_image {
+  width: 31vw;
+  height: 31vw;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  overflow: hidden;
+  margin: 0 auto;
+  background: #fff;
+}
+
+page-otherprofile .prifile_image img {
+  max-width: 100%;
+  height: auto;
+}
+
+page-otherprofile .premimum_badge {
+  background: url(../assets/img/premium_user_badge.png) no-repeat scroll center center/contain;
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  top: 13px;
+  left: 0;
+  width: 100%;
+  background-position: bottom;
+}
+
+page-otherprofile .User_profile_wrap {
+  background-size: cover;
+  background-position: center;
+}
+
+page-otherprofile .user_title h2 {
+  color: #fff;
+  font-size: 19px;
+  margin: 25px 0px 0px 0px;
+  text-shadow: 0px 1px 3px #4d4d4d;
+}
+
+page-otherprofile .user_title p {
+  color: #fff;
+  margin: 0px;
+}
+
+page-otherprofile .button-round-md {
+  padding: 0 1.2rem;
+}
+
+page-otherprofile .button-md {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  background: #1571a5;
+  background: -webkit-gradient(linear, left top, right top, from(#1571a5), to(#334c80)) !important;
+  background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
+  border: none;
+}
+
+page-otherprofile .otherActivity {
+  background: #0a2964;
+  text-align: center;
+}
+
+page-otherprofile .otherUserDetails span {
+  color: #fff;
+  font-size: 14px;
+  padding: 0px 8px 0px 4px;
+  display: inline-block;
+  text-transform: capitalize;
+  opacity: 0.6;
+  border-right: 1px solid #000;
+  margin: 5px 0px 5px 0px;
+}
+
+page-otherprofile .otherUserDetails span:last-child {
+  border-right: none;
+  padding: 0px 0px 0px 4px;
+}
+
+page-otherprofile .otherUserDetails span.active {
+  opacity: 1;
+}
+
+page-otherprofile .post_wrap {
+  -webkit-box-shadow: 0px 0px 4px #cfcfcf;
+  box-shadow: 0px 0px 4px #cfcfcf;
+  border-radius: 2px;
+  background: #fff;
+  border-radius: 5px;
+}
+
+page-otherprofile .post_header {
+  margin-bottom: 0;
+}
+
+page-otherprofile .post_header ion-item {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+page-otherprofile .post_header ion-avatar {
+  margin: 8px 0px 8px 0 !important;
+}
+
+page-otherprofile .post_header img {
+  border: 2px solid #ccc;
+}
+
+page-otherprofile .post_header ion-label {
+  white-space: normal !important;
+  margin: 5px 8px 5px 0 !important;
+}
+
+page-otherprofile .post_header ion-label p {
+  text-align: left !important;
+  color: #2a94ce;
+  font-size: 4vw;
+}
+
+page-otherprofile .post_header ion-label p span {
+  color: #5c5c5c;
+}
+
+page-otherprofile .post_header ion-label span {
+  font-size: 12px;
+  color: #959595;
+}
+
+page-otherprofile .post_header .item {
+  border-radius: 10px 10px 10px 10px !important;
+}
+
+page-otherprofile .post_action {
+  position: absolute;
+  right: 15px;
+  top: 8px;
+  font-size: 30px;
+  color: #adadad;
+}
+
+page-otherprofile .post_body {
+  margin-bottom: 0px;
+}
+
+page-otherprofile .post_body ion-item {
+  border-radius: 10px;
+}
+
+page-otherprofile .post_body ion-label {
+  margin: 0px 8px 5px 0 !important;
+}
+
+page-otherprofile .post_body ion-label p {
+  margin-bottom: 15px !important;
+  font-size: 16px !important;
+  color: #000 !important;
+  white-space: normal;
+}
+
+page-otherprofile .post_body ion-label p span img {
+  float: right;
+  width: 30px;
+}
+
+page-otherprofile .post_activity {
+  text-align: center;
+  padding: 0px 0px 5px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+page-otherprofile .post_activity ion-icon {
+  display: inline-block;
+  font-size: 2.3em;
+  color: #818181;
+  vertical-align: middle;
+}
+
+page-otherprofile .post_activity ion-icon:active {
+  -webkit-transform: scale(1.9);
+  transform: scale(1.9);
+  -webkit-box-shadow: 0px 0px 20px #FFF;
+  -o-box-shadow: 0px 0px 20px #FFF;
+  box-shadow: 0px 0px 20px #FFF;
+}
+
+page-otherprofile .post_activity span {
+  color: #818181;
+  font-size: 1.3em;
+}
+
+page-otherprofile .post_activity .active ion-icon {
+  color: #ca1010;
+}
+
+page-otherprofile .Post_tag {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+page-otherprofile .Post_tag span {
+  color: #2a94ce;
+  font-size: 4vw;
+}
+
+page-otherprofile .audio_wrap .item-inner {
+  border-bottom: none !important;
+}
+
+page-otherprofile .audio_wrap ion-thumbnail {
+  margin: 8px 0px 8px 0 !important;
+}
+
+page-otherprofile .audio_wrap strong {
+  font-weight: normal;
+  color: #2a94ce;
+}
+
+page-otherprofile .ad_wrap {
+  border: 3px solid #001d5c;
+  padding: 2px;
+}
+
+page-otherprofile .progress_container {
+  width: 85px;
+  margin: 0 auto;
+  position: relative;
+}
+
+page-otherprofile .progress_container p {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 49px;
+}
+
+page-otherprofile .andText {
+  color: black !important;
+  font-size: 16px !important;
+}
+
+page-otherprofile .image_view {
+  background: #fff;
+  padding: 10px;
+}
+
+page-otherprofile .Image_delete {
+  position: absolute;
+  background: #fff;
+  right: 14px;
+  top: 14px;
+  color: #ac0c0c;
+  height: 30px !important;
+  width: 30px !important;
+  text-align: center;
+  border-radius: 0 !important;
+  font-size: 1.5rem !important;
+  padding: 0px !important;
+}
+
+page-otherprofile .statustags {
+  white-space: normal;
+  margin: 0px;
+}
+
+page-otherprofile .two_img img {
+  width: 50%;
+  height: 150px;
+  float: left;
+}
+
+page-otherprofile .three_img .one_img {
+  width: 50%;
+  float: left;
+  display: inline-block;
+}
+
+page-otherprofile .three_img .one_img img {
+  height: 300px;
+}
+
+page-otherprofile .three_img .other_two {
+  width: 50%;
+  display: inline-block;
+}
+
+page-otherprofile .three_img .other_two img {
+  height: 150px;
+  display: block;
+}
+
+page-otherprofile .four_img .four_left {
+  width: 50%;
+  float: left;
+  display: inline-block;
+}
+
+page-otherprofile .four_img .four_left img {
+  height: 150px;
+  display: block;
+}
+
+page-otherprofile .four_img .four_right {
+  width: 50%;
+  display: inline-block;
+}
+
+page-otherprofile .four_img .four_right img {
+  height: 150px;
+  display: block;
+  position: relative;
+}
+
+page-otherprofile .four_img .four_right .last_img {
+  display: block;
+  position: relative;
+}
+
+page-otherprofile .four_img .four_right .last_img::after {
+  background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+  top: 0;
+  color: #fff !important;
+  content: attr(value);
+  font-size: 33px;
+  left: 0;
+  padding: 0px 0;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 99;
+  height: 100%;
+  font-style: normal;
+  line-height: 155px;
+}
+
+page-otherprofile ion-thumbnail {
+  width: 70px;
+  height: 70px;
+}
+
+page-otherprofile ion-thumbnail img {
+  border: 1px solid #1a3262;
+  background: #ccc;
+  border-radius: 3px;
+  width: 70px;
+  height: 70px;
+}
+
+page-otherprofile button.dark {
+  color: #1a3262 !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1 !important;
+}
+
 page-parsonaledit .content-background {
   background: url("../assets/img/background.jpg") no-repeat center fixed;
   background-size: cover;
@@ -30370,15 +30770,15 @@ page-personal .list-md .item-block .item-inner {
   border-bottom: none;
 }
 
-page-personal ion-icon {
+page-personal .grid {
+  padding: 10px;
+}
+
+page-personal .grid ion-icon {
   font-size: 2.2rem;
   margin-right: 4px;
   vertical-align: middle;
   color: #545454;
-}
-
-page-personal .grid {
-  padding: 10px;
 }
 
 page-photos .button-round-md {

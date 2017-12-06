@@ -1,0 +1,32 @@
+page-notificationsettings {
+    .content-background {
+        background: url("../assets/img/background.jpg") no-repeat center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+    .list-header-md {
+        padding-left: 16px;
+        margin-bottom: 0px;
+        min-height: 4.5rem;
+        border-top: 1px solid #dedede;
+        font-size: 1.6rem;
+        color: #0a2964;
+        padding-top: 20px;
+        font-weight: 600;
+    }
+    .item-radio-checked.item-md ion-label {
+        color: #000;
+    }
+    .radio-md .radio-checked {
+        border-color: #048629;
+    }
+    .radio-md .radio-inner {
+        background-color: #048629;
+    }
+    .toggle-md-secondary.toggle-checked .toggle-icon {
+        background-color: #13d049;
+    }
+    .toggle-md-secondary.toggle-checked .toggle-inner {
+        background-color: #048629;
+    }
+}

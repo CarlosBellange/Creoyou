@@ -30,8 +30,8 @@ export class PrivacyPage {
     var url = 'myBlockedUser' + '/' + this.user_id + '/' + this.token;
     this.remotService.presentLoading('wait ...');
     this.remotService.getData(url).subscribe((response) => {
+      this.remotService.dismissLoader();
       if (response.success == 1) {
-        this.remotService.dismissLoader();
         this.blockuser = response.data;
       }
 
@@ -46,11 +46,14 @@ export class PrivacyPage {
     var url = 'myUnfollowUser' + '/' + this.user_id + '/' + this.token;
     this.remotService.getData(url).subscribe((response) => {
       console.log(response);
+      this.remotService.dismissLoader();
       if (response.success == 1) {
+
         this.unflowuser = response.data;
         console.log(this.unflowuser);
       }
       else {
+        this.remotService.dismissLoader();
         this.unflowmsg = response.message;
       }
 
@@ -71,6 +74,10 @@ export class PrivacyPage {
     this.remotService.presentLoading('wait ...');
     this.remotService.postData(DataToSend, 'UnblockUser').subscribe((response) => {
       if (response.success == 1) {
+        this.remotService.dismissLoader();
+        this.initblockuser();
+      }
+      else {
         this.remotService.dismissLoader();
         this.initblockuser();
       }

@@ -1,14 +1,14 @@
 webpackJsonp([33],{
 
-/***/ 514:
+/***/ 518:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventcreatePageModule", function() { return EventcreatePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventlistPageModule", function() { return EventlistPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__eventcreate__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__eventlist__ = __webpack_require__(152);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var EventcreatePageModule = (function () {
-    function EventcreatePageModule() {
+var EventlistPageModule = (function () {
+    function EventlistPageModule() {
     }
-    return EventcreatePageModule;
+    return EventlistPageModule;
 }());
-EventcreatePageModule = __decorate([
+EventlistPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__eventcreate__["a" /* EventcreatePage */],
+            __WEBPACK_IMPORTED_MODULE_2__eventlist__["a" /* EventlistPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__eventcreate__["a" /* EventcreatePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__eventlist__["a" /* EventlistPage */]),
         ],
     })
-], EventcreatePageModule);
+], EventlistPageModule);
 
-//# sourceMappingURL=eventcreate.module.js.map
+//# sourceMappingURL=eventlist.module.js.map
 
 /***/ })
 

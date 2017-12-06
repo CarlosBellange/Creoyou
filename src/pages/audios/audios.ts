@@ -7,7 +7,12 @@ import { AudiocommentPage } from '../../pages/audiocomment/audiocomment';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 
-
+/**
+ * Generated class for the AudiosPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({

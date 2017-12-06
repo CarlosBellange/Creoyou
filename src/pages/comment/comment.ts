@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Content, ViewController } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
-// this is comments page
+
 @IonicPage()
 @Component({
   selector: 'page-comment',

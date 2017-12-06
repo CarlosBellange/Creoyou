@@ -1,109 +1,115 @@
 <ion-header class="creoyou-header">
-  
+
     <ion-navbar>
-      <ion-title>Follow</ion-title>
-  
-      <ion-buttons end>
-        <button (click)="inviteFriend();" class="add_connection" ion-button clear>
-            <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
-        </button>
-      </ion-buttons>
+        <ion-title>Follow</ion-title>
+
+        <ion-buttons end>
+            <button (click)="inviteFriend();" class="add_connection" ion-button clear>
+                <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
-  
-  
+
+
     <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="followActiveTab">
         <ion-segment-button value="following">
-          Following
+            Following
         </ion-segment-button>
         <ion-segment-button value="followers">
-          Followers
+            Followers
         </ion-segment-button>
     </ion-segment>
-  
-  
-  </ion-header>
-  
-  
-  <ion-content>
-  
-  
-  
-      <div [ngSwitch]="followActiveTab" >
-  
+
+
+</ion-header>
+
+
+<ion-content>
+
+
+
+    <div [ngSwitch]="followActiveTab">
+
         <ion-list *ngSwitchCase="'following'">
-  
-                <ion-item *ngIf="following?.length<=0" class="no_result">
-                      <h3> Sorry No Following User Found... </h3> 
-                </ion-item>
-           
-                <ion-list class="individual">
-                
-                    <ion-item *ngFor="let user of following;let idx=index;" padding-horizontal class="search_user search_user_individual">
-                        <ion-avatar  item-left>
-                            <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}"
-                            alt="avatar">
-                            <img *ngIf="user.image==null || user.image==''" src="/assets/img/management.png" alt="avatar">
-    
-                        </ion-avatar>
-                        <ion-item class="searcsh_right">
-                            <p>Mrinmay biswas</p>
-                            <p class="user_deg"><ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
-                            <p class="user_deg"><ion-icon name="home"></ion-icon> Kolata, West Bengal, India</p>
-                            
-                            <div class="user_action" (click)="presentActionSheet(user,1,idx);" item-right>
-                              <ion-icon  item-right  ios="ios-settings" md="md-settings"></ion-icon>
-                            </div>
-                        </ion-item>
+
+            <ion-item *ngIf="following?.length<=0" class="no_result">
+                <h3> Sorry No Following User Found... </h3>
+            </ion-item>
+
+            <ion-list class="individual">
+
+                <ion-item *ngFor="let user of following;let idx=index;" padding-horizontal class="search_user search_user_individual">
+                    <ion-avatar item-left (click)="OtherProfile(user)">
+                        <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}" alt="avatar">
+                        <img *ngIf="user.image==null || user.image==''" src="/assets/img/management.png" alt="avatar">
+
+                    </ion-avatar>
+                    <ion-item class="searcsh_right">
+                        <div (click)="OtherProfile(user)">
+                            <p>{{user.fname}} {{user.lname}}</p>
+                            <p *ngIf="user.buisness_name">{{user.buisness_name}}</p>
+
+                            <p class="user_deg">
+                                <ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
+                            <p class="user_deg">
+                                <ion-icon name="home"></ion-icon> Kolata, West Bengal, India</p>
+                        </div>
+                        <div class="user_action" (click)="presentActionSheet(user,1,idx);" item-right>
+                            <ion-icon item-right ios="ios-settings" md="md-settings"></ion-icon>
+                        </div>
                     </ion-item>
-            
-                </ion-list>
-  
-                <ion-infinite-scroll  (ionInfinite)="fetchFollowingData($event)">
-                    <ion-infinite-scroll-content loadingSpinner="bubbles">
-                    </ion-infinite-scroll-content>
-                </ion-infinite-scroll>
-  
+                </ion-item>
+
+            </ion-list>
+
+            <ion-infinite-scroll (ionInfinite)="fetchFollowingData($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+
         </ion-list>
-  
+
         <ion-list *ngSwitchCase="'followers'">
-  
+
             <ion-item *ngIf="followers?.length<=0" class="no_result">
-                <h3> Sorry No Follower Found... </h3> 
-          </ion-item>
-     
-          <ion-list class="individual">
-          
-              <ion-item *ngFor="let user of followers;let idx=index;" padding-horizontal class="search_user search_user_individual">
-                  <ion-avatar  item-left>
-                      <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}"
-                      alt="avatar">
-                      <img *ngIf="user.image==null || user.image==''" src="/assets/img/management.png" alt="avatar">
+                <h3> Sorry No Follower Found... </h3>
+            </ion-item>
 
-                  </ion-avatar>
-                  <ion-item class="searcsh_right">
-                      <p>Mrinmay biswas</p>
-                      <p class="user_deg"><ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
-                      <p class="user_deg"><ion-icon name="home"></ion-icon> Kolata, West Bengal, India</p>
-                      
-                      <div class="user_action" (click)="presentActionSheet(user,2,idx);" item-right>
-                        <ion-icon  item-right  ios="ios-settings" md="md-settings"></ion-icon>
-                      </div>
-                  </ion-item>
-              </ion-item>
-      
-          </ion-list>
+            <ion-list class="individual">
 
-          <ion-infinite-scroll  (ionInfinite)="fetchFollowerData($event)">
-              <ion-infinite-scroll-content loadingSpinner="bubbles">
-              </ion-infinite-scroll-content>
-          </ion-infinite-scroll>
-  
-  
+                <ion-item *ngFor="let user of followers;let idx=index;" padding-horizontal class="search_user search_user_individual">
+                    <ion-avatar item-left (click)="OtherProfile(user)">
+                        <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}" alt="avatar">
+                        <img *ngIf="user.image==null || user.image==''" src="/assets/img/management.png" alt="avatar">
+
+                    </ion-avatar>
+                    <ion-item class="searcsh_right">
+                        <div (click)="OtherProfile(user)">
+                            <p>{{user.fname}} {{user.lname}}</p>
+                            <p *ngIf="user.buisness_name">{{user.buisness_name}}</p>
+                            <p class="user_deg">
+                                <ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
+                            <p class="user_deg">
+                                <ion-icon name="home"></ion-icon> Kolata, West Bengal, India</p>
+                        </div>
+                        <div class="user_action" (click)="presentActionSheet(user,2,idx);" item-right>
+                            <ion-icon item-right ios="ios-settings" md="md-settings"></ion-icon>
+                        </div>
+                    </ion-item>
+                </ion-item>
+
+            </ion-list>
+
+            <ion-infinite-scroll (ionInfinite)="fetchFollowerData($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+
+
         </ion-list>
-  
-      </div>
-  
-    
-    
-  </ion-content>
-  
+
+    </div>
+
+
+
+</ion-content>

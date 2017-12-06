@@ -1,14 +1,14 @@
 webpackJsonp([35],{
 
-/***/ 512:
+/***/ 514:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommonmodalPageModule", function() { return CommonmodalPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConnectionsPageModule", function() { return ConnectionsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commonmodal__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__connections__ = __webpack_require__(71);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var CommonmodalPageModule = (function () {
-    function CommonmodalPageModule() {
+var ConnectionsPageModule = (function () {
+    function ConnectionsPageModule() {
     }
-    return CommonmodalPageModule;
+    return ConnectionsPageModule;
 }());
-CommonmodalPageModule = __decorate([
+ConnectionsPageModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__commonmodal__["a" /* CommonmodalPage */],
+            __WEBPACK_IMPORTED_MODULE_2__connections__["a" /* ConnectionsPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__commonmodal__["a" /* CommonmodalPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__connections__["a" /* ConnectionsPage */]),
         ],
     })
-], CommonmodalPageModule);
+], ConnectionsPageModule);
 
-//# sourceMappingURL=commonmodal.module.js.map
+//# sourceMappingURL=connections.module.js.map
 
 /***/ })
 

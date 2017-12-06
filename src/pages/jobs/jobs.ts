@@ -13,6 +13,7 @@ import {
   RemoteServiceProvider
 } from '../../providers/remote-service/remote-service';
 import { JobdetailsPage } from '../../pages/jobdetails/jobdetails';
+import { OtherprofilePage } from '../otherprofile/otherprofile';
 
 @IonicPage()
 @Component({
@@ -50,17 +51,28 @@ export class JobsPage {
           let date1: string = item.updation_date;
           let date2: string = this.date;
           let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
-          //console.log(diffInHours);
-          item.time = diffInHours;
+          let diffmin: number = Math.floor(diffInMs / 1000 / 60);
+          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
+          let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
+          item.minute = diffmin;
+          item.hour = diffInHours;
+          item.days = diffIndays;
           this.jobsData.push(item);
-          console.log(diffInHours);
         })
 
         var responseaddsData = response.data.adJobs;
         responseaddsData.forEach((item, key, index) => {
-
+          let date1: string = item.updation_date;
+          let date2: string = this.date;
+          let diffInMs: number = Date.parse(date2) - Date.parse(date1);
+          let diffmin: number = Math.floor(diffInMs / 1000 / 60);
+          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
+          let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
+          item.minute = diffmin;
+          item.hour = diffInHours;
+          item.days = diffIndays;
           this.addsData.push(item);
+          // console.log(this.addsData);
         })
 
       } else {
@@ -132,6 +144,12 @@ export class JobsPage {
 
 
 
+  }
+  OtherProfile(job) {
+    var data = {
+      user_id: job.created_by
+    }
+    this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
   }
 
 }

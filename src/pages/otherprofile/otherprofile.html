@@ -2,6 +2,7 @@
 
   <ion-navbar>
     <ion-title>{{profileinfo.fname}} {{profileinfo.lname}}</ion-title>
+    <ion-title *ngIf="profileinfo.buisness_name!=null || profileinfo.buisness_name!=''">{{profileinfo.buisness_name}}</ion-title>
   </ion-navbar>
 
 </ion-header>

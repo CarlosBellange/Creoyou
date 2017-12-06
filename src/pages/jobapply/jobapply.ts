@@ -70,15 +70,16 @@ export class JobapplyPage {
     this.fileTransfer.upload(this.choseuri, url, options)
       .then((data) => {
         this.remotService.dismissLoader();
-        this.navCtrl.pop()
+        this.viewCtrl.dismiss({ 'success': 1 });
         console.log(data);
       }, (err) => {
         console.log('error');
+        this.remotService.presentToast('Error saving file.');
         this.remotService.dismissLoader();
       });
   }
   dismiss() {
-    this.viewCtrl.dismiss({ name: '', id: 0 });
+    this.viewCtrl.dismiss({ 'success': 0 });
   }
 
 }

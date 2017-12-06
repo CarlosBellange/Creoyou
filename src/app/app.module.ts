@@ -60,6 +60,7 @@ import { PersonalPage } from '../pages/personal/personal';
 import { ParsonaleditPage } from '../pages/parsonaledit/parsonaledit';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { OtherprofilePage } from '../pages/otherprofile/otherprofile';
+import { NotificationsettingsPage } from '../pages/notificationsettings/notificationsettings';
 //Providers
 
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
@@ -131,7 +132,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     PersonalPage,
     ParsonaleditPage,
     PrivacyPage,
-    OtherprofilePage
+    OtherprofilePage,
+    NotificationsettingsPage
   ],
   imports: [
     BrowserModule,
@@ -192,7 +194,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     PersonalPage,
     ParsonaleditPage,
     PrivacyPage,
-    OtherprofilePage
+    OtherprofilePage,
+    NotificationsettingsPage
   ],
   providers: [
     StatusBar,
