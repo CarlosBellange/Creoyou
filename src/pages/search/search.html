@@ -29,7 +29,7 @@
     <ion-segment-button value="business">
       Business
     </ion-segment-button>
-    <ion-segment-button value="jobs">
+    <ion-segment-button value="job">
       Jobs
     </ion-segment-button>
   </ion-segment>
@@ -38,97 +38,6 @@
 
 
 <ion-content class="has-header">
-
-
-
-
-
-  <!-- search_by advsearch-->
-  <div *ngIf="advsearch">
-    <div *ngIf="people_user!=''">
-      <h3 class="search_heading">People</h3>
-      <ion-list *ngFor="let people of people_user">
-
-        <ion-item padding-horizontal class="search_user search_user_individual">
-          <ion-avatar item-left (click)="OtherFrofileView(people)">
-            <img *ngIf="people.image" src="{{base_url}}uploads/profileImages/resizedImages/{{people.image}}" alt="Image" />
-            <img *ngIf="people.image=='' || people.image==null" src="assets/img/management.png" alt="Image" />
-          </ion-avatar>
-
-          <ion-item class="search_right">
-            <div (click)="OtherFrofileView(business)">
-              <p>{{people.users_full_name}}</p>
-              <p class="user_deg" *ngIf="people.cat_name">
-                <ion-icon name="briefcase"></ion-icon> {{people.cat_name}}</p>
-              <p class="user_deg" *ngIf="people.city">
-                <ion-icon name="home"></ion-icon> {{people.city}}, {{people.state}}, {{people.country}}</p>
-            </div>
-            <div class="user_action" item-right>
-              <button [disabled]="people.friend==1 || people.follower==1" ion-button block icon-right (click)="sendRequest(people)">
-                <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Add </button>
-              <button [disabled]="people.friend==1 || people.follower==1" ion-button block icon-right (click)="sendfollowingRequest(people)">
-                <i class="material-icons">forward</i> Follow </button>
-            </div>
-          </ion-item>
-        </ion-item>
-      </ion-list>
-    </div>
-    <!-- Business-->
-    <div *ngIf="business_user!=''">
-      <h3 class="search_heading">Business</h3>
-      <ion-list *ngFor="let business of business_user">
-
-        <ion-item padding-horizontal class="search_user search_user_individual">
-          <ion-avatar item-left (click)="OtherFrofileView(business)">
-            <img *ngIf="business.image" src="{{base_url}}uploads/profileImages/resizedImages/{{business.image}}" alt="Image" />
-            <img *ngIf="business.image=='' || business.image==null" src="assets/img/management.png" alt="Image" />
-          </ion-avatar>
-
-          <ion-item class="search_right">
-            <div (click)="OtherFrofileView(business)">
-              <p>{{business.buisness_name}}</p>
-              <p class="user_deg" *ngIf="business.cat_name">
-                <ion-icon name="briefcase"></ion-icon> {{business.cat_name}}</p>
-              <p class="user_deg" *ngIf="business.city">
-                <ion-icon name="home"></ion-icon> {{business.city}}, {{business.state}}, {{business.country}}</p>
-            </div>
-            <div class="user_action" item-right>
-              <button [disabled]="business.friend==1 || business.follower==1" ion-button block icon-right (click)="sendRequest(business)">
-                <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Add </button>
-              <button [disabled]="business.friend==1 || business.follower==1" ion-button block icon-right (click)="sendfollowingRequest(people)">
-                <i class="material-icons">forward</i> Follow </button>
-            </div>
-          </ion-item>
-        </ion-item>
-      </ion-list>
-    </div>
-    <!-- job-->
-    <div *ngIf="jobs_user!=''">
-      <h3 class="search_heading">Job</h3>
-      <ion-list *ngFor="let jobs of jobs_user">
-
-        <ion-item padding-horizontal class="search_user search_user_individual" (click)="jobdetails(jobs)">
-          <ion-avatar item-left>
-            <img *ngIf="jobs.image" src="{{base_url}}uploads/profileImages/resizedImages/{{jobs.image}}" alt="Image" />
-            <img *ngIf="jobs.image=='' || jobs.image==null" src="assets/img/management.png" alt="Image" />
-          </ion-avatar>
-
-          <ion-item class="search_right">
-            <p>{{jobs.job_title}}</p>
-            <p class="user_deg" *ngIf="jobs.cat_name"> {{jobs.cat_name}}</p>
-            <p class="user_deg" *ngIf="jobs.city">
-              <ion-icon name="home"></ion-icon> {{jobs.city}}, {{jobs.state}}, {{jobs.country}}</p>
-            <p class="user_deg">
-              {{jobs.jobtype}}</p>
-          </ion-item>
-        </ion-item>
-
-      </ion-list>
-    </div>
-  </div>
-
-
-
 
 
   <div [ngSwitch]="searchbycatagory">
@@ -143,23 +52,31 @@
 
         <ion-item padding-horizontal class="search_user search_user_individual" *ngIf="i<3">
           <ion-avatar item-left (click)="OtherFrofileView(people)">
-            <img *ngIf="people.image" src="{{base_url}}uploads/profileImages/resizedImages/{{people.image}}" alt="Image" />
-            <img *ngIf="people.image=='' || people.image==null" src="assets/img/management.png" alt="Image" />
+            <img *ngIf="people.image" img-preloader="{{base_url}}uploads/profileImages/resizedImages/{{people.image}}" alt="Image" />
+            <img *ngIf="people.image=='' || people.image==null" img-preloader="assets/img/management.png" alt="Image" />
+            <div *ngIf="people.premium_user==1" class="premimum_badge"></div>
           </ion-avatar>
 
           <ion-item class="search_right">
             <div (click)="OtherFrofileView(people)">
-              <p>{{people.users_full_name}}</p>
+              <p *ngIf="people.users_full_name">{{people.users_full_name}}</p>
+
               <p class="user_deg" *ngIf="people.cat_name">
                 <ion-icon name="briefcase"></ion-icon> {{people.cat_name}}</p>
+              <p class="user_deg" *ngIf="people.cat_name=='' || people.cat_name==null">
+                <ion-icon name="briefcase"></ion-icon> {{people.creativeField}}</p>
               <p class="user_deg" *ngIf="people.city">
-                <ion-icon name="home"></ion-icon> {{people.city}}, {{people.state}}, {{people.country}}</p>
+                <ion-icon name="home" *ngIf="people.state || people.country"></ion-icon>
+                <span *ngIf="people.country"> {{people.country}}</span>
+                <span *ngIf="people.state"> {{people.state}}</span>
+
+              </p>
             </div>
-            <div class="user_action" item-right>
-              <button [disabled]="people.friend==1 || people.follower==1" ion-button block icon-right (click)="sendRequest(people)">
-                <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Add </button>
-              <button ion-button block icon-right [disabled]="people.friend==1 || people.follower==1" (click)="sendfollowingRequest(people)">
-                <i class="material-icons">forward</i> Follow </button>
+            <div class="user_action" item-right *ngIf="user_id!=people.id">
+              <button [disabled]="people.friend==1 || people.follower==1 || people.is_friend==1" ion-button block icon-right (click)="sendRequest(people)">
+                <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Add</button>
+              <button ion-button block icon-right [disabled]="people.friend==1 || people.follower==1 || people.is_friend==1" (click)="sendfollowingRequest(people)">
+                <i class="material-icons">forward</i> Follow</button>
             </div>
           </ion-item>
         </ion-item>
@@ -173,8 +90,12 @@
 
         <ion-item padding-horizontal class="search_user search_user_individual" *ngIf="i<3">
           <ion-avatar item-left (click)="OtherFrofileView(business)">
-            <img *ngIf="business.image" src="{{base_url}}uploads/profileImages/resizedImages/{{business.image}}" alt="Image" />
-            <img *ngIf="business.image=='' || business.image==null" src="assets/img/management.png" alt="Image" />
+            <img *ngIf="business.image" img-preloader="{{base_url}}uploads/profileImages/resizedImages/{{business.image}}" alt="Image"
+            />
+            <img *ngIf="business.image=='' || business.image==null" img-preloader="assets/img/management.png" alt="Image" />
+            <div *ngIf="business.premium_user==1" class="premimum_badge"></div>
+
+
           </ion-avatar>
 
           <ion-item class="search_right">
@@ -182,13 +103,20 @@
               <p>{{business.buisness_name}}</p>
               <p class="user_deg" *ngIf="business.cat_name">
                 <ion-icon name="briefcase"></ion-icon> {{business.cat_name}}</p>
+              <p class="user_deg" *ngIf="business.creativeField">
+                <ion-icon name="briefcase"></ion-icon> {{business.creativeField}}</p>
+
               <p class="user_deg" *ngIf="business.city">
-                <ion-icon name="home"></ion-icon> {{business.city}}, {{business.state}}, {{business.country}}</p>
+                <ion-icon name="home" *ngIf="business.state || business.country"></ion-icon>
+                <span *ngIf="business.country"> {{business.country}}</span>
+                <span *ngIf="business.state"> {{business.state}}</span>
+
+              </p>
             </div>
-            <div class="user_action" item-right>
-              <button [disabled]="business.friend==1 || business.follower==1" ion-button block icon-right (click)="sendRequest(business)">
+            <div class="user_action" item-right *ngIf="user_id!=business.id">
+              <button [disabled]="business.friend==1 || business.follower==1 || business.is_friend==1" ion-button block icon-right (click)="sendRequest(business)">
                 <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Add </button>
-              <button ion-button block icon-right [disabled]="business.friend==1 || business.follower==1" (click)="sendfollowingRequest(business)">
+              <button ion-button block icon-right [disabled]="business.friend==1 || business.follower==1 || business.is_friend==1" (click)="sendfollowingRequest(business)">
                 <i class="material-icons">forward</i> Follow </button>
             </div>
           </ion-item>
@@ -202,17 +130,33 @@
 
         <ion-item padding-horizontal class="search_user search_user_individual" *ngIf="i<3" (click)="jobdetails(jobs)">
           <ion-avatar item-left>
-            <img *ngIf="jobs.image" src="{{base_url}}uploads/profileImages/resizedImages/{{jobs.image}}" alt="Image" />
-            <img *ngIf="jobs.image=='' || jobs.image==null" src="assets/img/management.png" alt="Image" />
+            <img *ngIf="jobs.image!='' && jobs.image!=null" img-preloader="{{base_url}}uploads/profileImages/resizedImages/{{jobs.image}}"
+            />
+            <img *ngIf="jobs.image=='' || jobs.image==null" img-preloader="assets/img/management.png" />
+
           </ion-avatar>
 
           <ion-item class="search_right">
-            <p>{{jobs.job_title}}</p>
-            <p class="user_deg" *ngIf="jobs.cat_name"> {{jobs.cat_name}}</p>
-            <p class="user_deg" *ngIf="jobs.city">
-              <ion-icon name="home"></ion-icon> {{jobs.city}}, {{jobs.state}}, {{jobs.country}}</p>
-            <p class="user_deg">
-              {{jobs.jobtype}}</p>
+            <p class="Company_name" *ngIf="jobs.buisness_name">{{jobs.buisness_name}}</p>
+            <p class="Company_name" *ngIf="jobs.fname">{{jobs.fname}} {{jobs.lname}}</p>
+            <p *ngIf="jobs.job_title">
+              <ion-icon name="briefcase"></ion-icon> {{jobs.job_title}}</p>
+            <p class="user_deg"> Required Experience : {{jobs.required_experience}} </p>
+            <p class="user_deg" *ngIf="jobs.cat_name">{{jobs.cat_name}}</p>
+            <p class="user_deg" *ngIf="jobs.state || jobs.country">
+              <span *ngIf="jobs.country">{{jobs.country}}</span>
+              <span *ngIf="jobs.state"> {{jobs.state}}</span>
+
+            </p>
+            <p class="user_deg" *ngIf="jobs.second<60">{{jobs.second }} Second ago | {{jobs.jobtype}}</p>
+            <p class="user_deg" *ngIf="jobs?.minute<60 && jobs.second>60">{{jobs?.minute }} Minute ago | {{jobs.jobtype}}</p>
+            <p class="user_deg" *ngIf="jobs.hour<24 && jobs.minute>60">{{jobs.hour}} hours ago | {{jobs.jobtype}}</p>
+            <p class="user_deg" *ngIf="jobs.hour>24 && jobs.weeks<2">{{jobs.days}} Days ago | {{jobs.jobtype}}</p>
+            <p class="user_deg" *ngIf="jobs.weeks>1">{{jobs.weeks}} Weeks ago | {{jobs.jobtype}}</p>
+            <div class="user_action" item-right>
+              <img *ngIf="jobs.is_ad==1" img-preloader="assets/img/ad.png" alt="Image" />
+            </div>
+
           </ion-item>
         </ion-item>
 
@@ -229,27 +173,38 @@
       <h4 class="filter" (click)="searchfilter()">
         <ion-icon md="md-funnel"></ion-icon> Filter
       </h4>
-      <h4 class="notFound" *ngIf="people_user==''"> No Result Found... </h4>
+      <h4 class="notFound">
+        <ion-spinner name="dots" *ngIf="people_user==''"></ion-spinner>
+      </h4>
       <ion-list *ngFor="let people of people_user">
 
         <ion-item padding-horizontal class="search_user search_user_individual">
           <ion-avatar item-left (click)="OtherFrofileView(people)">
-            <img *ngIf="people.image" src="{{base_url}}uploads/profileImages/resizedImages/{{people.image}}" alt="Image" />
-            <img *ngIf="people.image=='' || people.image==null" src="assets/img/management.png" alt="Image" />
+            <img *ngIf="people?.image" img-preloader="{{base_url}}uploads/profileImages/resizedImages/{{people.image}}" alt="Image" />
+            <img *ngIf="people?.image=='' || people?.image==null && people?.profile?.image==null" img-preloader="assets/img/management.png"
+              alt="Image" />
+            <div *ngIf="people.premium_user==1" class="premimum_badge"></div>
           </ion-avatar>
-
           <ion-item class="search_right">
             <div (click)="OtherFrofileView(people)">
-              <p>{{people.users_full_name}}</p>
+              <p *ngIf="people.fname">{{people.fname}} {{people.lname}}</p>
+
               <p class="user_deg" *ngIf="people.cat_name">
                 <ion-icon name="briefcase"></ion-icon> {{people.cat_name}}</p>
-              <p class="user_deg" *ngIf="people.city">
-                <ion-icon name="home"></ion-icon> {{people.city}}, {{people.state}}, {{people.country}}</p>
+              <p class="user_deg" *ngIf="people.cat_name=='' || people.cat_name==null">
+                <ion-icon name="briefcase"></ion-icon> {{people.creativeField}}</p>
+              <p class="user_deg" *ngIf="people.state || people.country">
+                <ion-icon name="home"></ion-icon>
+                <span *ngIf="people.country"> {{people.country}}</span>
+                <span *ngIf="people.state"> {{people.state}}</span>
+
+              </p>
+
             </div>
-            <div class="user_action" item-right>
-              <button [disabled]="people.friend==1 || people.follower==1" ion-button block icon-right (click)="sendRequest(people)">
+            <div class="user_action" item-right *ngIf="user_id!=people.id">
+              <button [disabled]="people.friend==1 || people.follower==1 || people.is_friend==1" ion-button block icon-right (click)="sendRequest(people)">
                 <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Add </button>
-              <button ion-button block icon-right [disabled]="people.friend==1 || people.follower==1" (click)="sendfollowingRequest(people)">
+              <button ion-button block icon-right [disabled]="people.friend==1 || people.follower==1 ||  people.is_friend==1" (click)="sendfollowingRequest(people)">
                 <i class="material-icons">forward</i> Follow </button>
             </div>
           </ion-item>
@@ -267,27 +222,41 @@
       <h4 class="filter" (click)="searchfilter()">
         <ion-icon md="md-funnel"></ion-icon> Filter
       </h4>
-      <h4 class="notFound" *ngIf="business_user==''"> No Result Found... </h4>
+      <h4 class="notFound">
+        <ion-spinner name="dots" *ngIf="business_user==''"></ion-spinner>
+      </h4>
       <ion-list *ngFor="let business of business_user">
 
         <ion-item padding-horizontal class="search_user search_user_individual">
           <ion-avatar item-left (click)="OtherFrofileView(business)">
-            <img *ngIf="business.image" src="{{base_url}}uploads/profileImages/resizedImages/{{business.image}}" alt="Image" />
-            <img *ngIf="business.image=='' || business.image==null" src="assets/img/management.png" alt="Image" />
+            <img *ngIf="business.image!='' && business.image!=null" img-preloader="{{base_url}}uploads/profileImages/resizedImages/{{business.image}}"
+              alt="Image" />
+            <img *ngIf="business.image=='' || business.image==null" img-preloader="assets/img/management.png" alt="Image" />
+            <div *ngIf="business.premium_user==1" class="premimum_badge"></div>
           </ion-avatar>
 
           <ion-item class="search_right">
             <div (click)="OtherFrofileView(business)">
-              <p>{{business.buisness_name}}</p>
+              <p *ngIf="business.buisness_name">{{business.buisness_name}}</p>
+
               <p class="user_deg" *ngIf="business.cat_name">
-                <ion-icon name="briefcase"></ion-icon> {{business.cat_name}}</p>
+                <ion-icon name="briefcase"></ion-icon> {{business?.cat_name}}</p>
+
+              <p class="user_deg" *ngIf="business.creativeField">
+                <ion-icon name="briefcase"></ion-icon> {{business?.creativeField}}</p>
+
+
               <p class="user_deg" *ngIf="business.city">
-                <ion-icon name="home"></ion-icon> {{business.city}}, {{business.state}}, {{business.country}}</p>
+                <ion-icon name="home" *ngIf="business.state || business.country"></ion-icon>
+                <span *ngIf="business.country">{{business.country}}</span>
+                <span *ngIf="business.state"> {{business.state}}</span>
+
+              </p>
             </div>
-            <div class="user_action" item-right>
-              <button [disabled]="business.friend==1 || business.follower==1" ion-button block icon-right (click)="sendRequest(business)">
+            <div class="user_action" item-right *ngIf="user_id!=business.id">
+              <button [disabled]="business.friend==1 || business.follower==1 || business.is_friend==1" ion-button block icon-right (click)="sendRequest(business)">
                 <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Add </button>
-              <button ion-button block icon-right [disabled]="business.friend==1 || business.follower==1" (click)="sendfollowingRequest(business)">
+              <button ion-button block icon-right [disabled]="business.friend==1 || business.follower==1 || business.is_friend==1" (click)="sendfollowingRequest(business)">
                 <i class="material-icons">forward</i> Follow </button>
             </div>
           </ion-item>
@@ -300,31 +269,48 @@
     <!-- search_by job-->
 
 
-    <div *ngSwitchCase="'jobs'">
+    <div *ngSwitchCase="'job'">
       <h4 class="filter" (click)="searchfilter()">
         <ion-icon md="md-funnel"></ion-icon> Filter
       </h4>
-      <h4 class="notFound" *ngIf="jobs_user==''"> No Result Found... </h4>
+      <h4 class="notFound">
+        <ion-spinner name="dots" *ngIf="business_user==''"></ion-spinner>
+      </h4>
       <ion-list *ngFor="let jobs of jobs_user">
 
-        <ion-item padding-horizontal class="search_user search_user_individual" (click)="jobdetails(jobs)">
+        <ion-item padding-horizontal class="search_user search_user_individual">
           <ion-avatar item-left>
-            <img *ngIf="jobs.image" src="{{base_url}}uploads/profileImages/resizedImages/{{jobs.image}}" alt="Image" />
-            <img *ngIf="jobs.image=='' || jobs.image==null" src="assets/img/management.png" alt="Image" />
+            <img *ngIf="jobs.image" img-preloader="{{base_url}}uploads/profileImages/resizedImages/{{jobs.image}}" alt="Image" />
+            <img *ngIf="jobs.image=='' || jobs.image==null" img-preloader="assets/img/management.png" alt="Image" />
+
+
           </ion-avatar>
           <ion-item class="search_right">
-            <p>{{jobs.job_title}}</p>
-            <p class="user_deg" *ngIf="jobs.cat_name">{{jobs.cat_name}}</p>
-            <p class="user_deg" *ngIf="jobs.city">
-              <ion-icon name="home"></ion-icon> {{jobs.city}}, {{jobs.state}}, {{jobs.country}}</p>
-            <p class="user_deg">
-              {{jobs.jobtype}}</p>
+            <p class="Company_name" (click)="OtherProfile(jobs)" *ngIf="jobs.buisness_name">{{jobs.buisness_name}}</p>
+            <p class="Company_name" (click)="OtherProfile(jobs)" *ngIf="jobs.fname">{{jobs.fname}} {{jobs.lname}}</p>
+            <div (click)="jobdetails(jobs)">
+              <p *ngIf="jobs.job_title">
+                <ion-icon name="briefcase"></ion-icon> {{jobs.job_title}}</p>
+              <p class="user_deg"> Required Experience : {{jobs.required_experience}} </p>
+              <p class="user_deg" *ngIf="jobs.cat_name">{{jobs.cat_name}}</p>
+              <p class="user_deg" *ngIf="jobs.state || jobs.country">
+                <span *ngIf="jobs.country">{{jobs.country}}</span>
+                <span *ngIf="jobs.state"> {{jobs.state}}</span>
+
+              </p>
+              <p class="user_deg" *ngIf="jobs.second<60">{{jobs.second }} Second ago | {{jobs.jobtype}}</p>
+              <p class="user_deg" *ngIf="jobs.minute<60 && jobs.second>60">{{jobs.minute }} Minute ago | {{jobs.jobtype}}</p>
+              <p class="user_deg" *ngIf="jobs.hour<24 && jobs.minute>60">{{jobs.hour}} hours ago | {{jobs.jobtype}}</p>
+              <p class="user_deg" *ngIf="jobs.hour>24 && jobs.weeks<2">{{jobs.days}} Days ago | {{jobs.jobtype}}</p>
+              <p class="user_deg" *ngIf="jobs.weeks>1">{{jobs.weeks}} Weeks ago | {{jobs.jobtype}}</p>
+            </div>
+            <div class="user_action" item-right>
+              <img *ngIf="jobs.is_ad==1" img-preloader="assets/img/ad.png" alt="Image" />
+            </div>
 
           </ion-item>
         </ion-item>
       </ion-list>
     </div>
-
   </div>
-
 </ion-content>

@@ -61,15 +61,15 @@ export class AbouteditPage {
   locnstates = 0;
   locncity = '';
   locnzipcode = 0;
-
+  locaddress = ''
   //education params
 
   eduunivercity = '';
   edudegree = '';
-  edustrtmonth = 0;
-  edustrtyear = 0;
-  eduendmonth = 0;
-  eduendyear = 0;
+  edustrtmonth = 'Jan';
+  edustrtyear = 2000;
+  eduendmonth = 'Jan';
+  eduendyear = 2007;
   eduwebsite = '';
   edudetail = '';
   eduid = 0;
@@ -78,10 +78,10 @@ export class AbouteditPage {
 
   wrkpositn = '';
   wrkcompny = '';
-  wrkstrtmonth = 0;
-  wrkstrtyear = 0;
-  wrkendmonth = 0;
-  wrkendyear = 0;
+  wrkstrtmonth = 'Jan';
+  wrkstrtyear = 2000;
+  wrkendmonth = 'Jan';
+  wrkendyear = 2007;
   wrkwebsite = '';
   wrkdetail = '';
   wrkid = 0;
@@ -100,7 +100,7 @@ export class AbouteditPage {
 
   //location params
   websiteurl = '';
-
+  companyoverview = '';
   //Custom One
   cstmonettl = '';
   cstmonedtl = '';
@@ -117,6 +117,9 @@ export class AbouteditPage {
 
   // 
   paramsTosend: any;
+  titleheader: string
+  usertype = 0;
+  urlmsg: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider, public modalCtrl: ModalController) {
@@ -124,6 +127,7 @@ export class AbouteditPage {
     this.base_url = this.remotService.site_url;
     this.editsection = navParams.get('editsection');
     this.editparam = navParams.get('editparam');
+    this.usertype = window.localStorage['usertype']
 
     var year = new Date().getFullYear();
     this.yearrages = [];
@@ -132,12 +136,15 @@ export class AbouteditPage {
       this.yearrages.push(year - i);
     }
 
+    this.titleheader = this.editsection
+
     if (this.editsection == 'location') {
 
       this.locncountry = parseInt(this.editparam.countryid);
       this.locnstates = parseInt(this.editparam.stateid);
       this.locncity = this.editparam.city;
       this.locnzipcode = this.editparam.zip_code;
+      this.locaddress = this.editparam.address;
       if (this.editparam.countryid) {
         this.initStates(this.editparam.countryid);
       }
@@ -146,8 +153,13 @@ export class AbouteditPage {
     } else if (this.editsection == 'weburl') {
 
       this.websiteurl = this.editparam.website_url;
+      this.titleheader = "Website Url"
 
-    } else if (this.editsection == 'education') {
+    }
+    else if (this.editsection == 'companyoverview') {
+      this.companyoverview = '';
+    }
+    else if (this.editsection == 'education') {
 
       if (this.editparam.hasOwnProperty('city'))
         this.locncity = this.editparam.city;
@@ -224,13 +236,13 @@ export class AbouteditPage {
       // this.websiteurl = this.editparam.website_url;
       this.initLocationForm();
     } else if (this.editsection == 'skill') {
-      if (this.editparam != null)
+      if (this.editparam != '')
         this.skills = this.editparam[0].skillS;
       //console.log("Params ",this.editparam);
 
     } else if (this.editsection == 'interest') {
 
-      if (this.editparam != null)
+      if (this.editparam != '')
         this.interest = this.editparam[0].interests;
       //console.log("Params ",this.editparam);
 
@@ -326,7 +338,7 @@ export class AbouteditPage {
       this.cstmoneid = 0;
       if (this.editparam.hasOwnProperty('id'))
         this.cstmoneid = parseInt(this.editparam.id);
-
+      this.titleheader = "Custom Information"
     } else if (this.editsection == 'language' && this.editparam != null) {
 
       if (this.editparam.hasOwnProperty('language'))
@@ -353,7 +365,7 @@ export class AbouteditPage {
     };
 
     this.countries = [];
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'countries').subscribe((response) => {
 
       this.remotService.dismissLoader();
@@ -393,13 +405,15 @@ export class AbouteditPage {
 
   saveLocation() {
 
+
     this.paramsTosend = {
       user_id: window.localStorage['userid'],
       token: window.localStorage['token'],
-      country: this.locncountry,
-      state: this.locnstates,
+      country: this.locncountry > 0 ? this.locncountry : '',
+      state: this.locnstates > 0 ? this.locnstates : '',
       city: this.locncity,
-      zip_code: this.locnzipcode
+      zip_code: this.locnzipcode,
+      address: this.locaddress
     }
 
     this.savEdata('EditLocation');
@@ -467,6 +481,11 @@ export class AbouteditPage {
   }
 
   saveLanguage() {
+
+    if (this.lngname == "") {
+      //this.navParams.get("parentPage").initviewaboutData();
+      return false;
+    }
 
     this.paramsTosend = {
       user_id: window.localStorage['userid'],
@@ -619,6 +638,21 @@ export class AbouteditPage {
 
   saveWebUrl() {
 
+    if (this.websiteurl.search(/^http[s]?\:\/\//) == -1) {
+
+      this.urlmsg = "Please provide http:// or https:// before your url";
+      return false;
+    }
+
+    var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    var urlregx = new RegExp(expression);
+    //var urlregx = new RegExp("^(http[s]?:\\/\\/){0,1}(www\\.){0,1}[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z]{2,5}[\\.]{0,1}$");
+    //var urlregx = "^(http[s]?:\\/\\/){0,1}(www\\.){0,1}[a-zA-Z0-9\\.\\-]+\\.[a-zA-Z]{2,5}[\\.]{0,1}$"
+    if (!urlregx.test(this.websiteurl)) {
+      this.remotService.presentToast("Enter a valid url.( ex. http(s)://example.com )");
+      return false;
+    }
+
     this.paramsTosend = {
       user_id: window.localStorage['userid'],
       token: window.localStorage['token'],
@@ -630,7 +664,7 @@ export class AbouteditPage {
 
   savEdata(url) {
 
-    this.remotService.presentLoading("Saving ...");
+    this.remotService.presentLoading();
     this.remotService.postData(this.paramsTosend, url).subscribe((response) => {
 
       this.remotService.dismissLoader();
@@ -650,7 +684,40 @@ export class AbouteditPage {
 
   }
 
+  /* company overview */
+  saveCompanyOverview() {
+    if (this.companyoverview == '') {
+      this.remotService.presentToast('Company overview can not be empty');
+    }
+    else {
+      var data = {
+        token: window.localStorage['token'],
+        user_id: window.localStorage['userid'],
+        overView: this.companyoverview
+      }
+      this.remotService.presentLoading();
+      this.remotService.postData(data, 'editCompanyOverView').subscribe((response) => {
 
+        this.remotService.dismissLoader();
+        if (response.success == 1) {
+
+          this.navParams.get("parentPage").initviewaboutData();
+          // this.events.publish('creoyou:showmenu');
+          this.navCtrl.pop()
+
+        } else {
+          this.remotService.presentToast(response.message);
+        }
+      }, () => {
+        this.remotService.dismissLoader();
+        this.remotService.presentToast('Error getting about details.');
+      });
+    }
+  }
+
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
+  }
 
   ionViewDidLoad() {
 

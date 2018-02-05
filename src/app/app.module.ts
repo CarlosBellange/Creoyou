@@ -13,6 +13,10 @@ import { Base64 } from '@ionic-native/base64';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { NgCalendarModule } from 'ionic2-calendar';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 // Pages
 import { CreoYouApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -61,6 +65,18 @@ import { ParsonaleditPage } from '../pages/parsonaledit/parsonaledit';
 import { PrivacyPage } from '../pages/privacy/privacy';
 import { OtherprofilePage } from '../pages/otherprofile/otherprofile';
 import { NotificationsettingsPage } from '../pages/notificationsettings/notificationsettings';
+import { OtherprofileconnectionsPage } from '../pages/otherprofileconnections/otherprofileconnections';
+import { OtherprofileeventsPage } from '../pages/otherprofileevents/otherprofileevents';
+import { NotificationsdetailsPage } from '../pages/notificationsdetails/notificationsdetails';
+import { VisitedprofilePage } from '../pages/visitedprofile/visitedprofile';
+import { ProfilecompletePage } from '../pages/profilecomplete/profilecomplete';
+import { PremiumuserPage } from '../pages/premiumuser/premiumuser';
+import { VideodetailsPage } from '../pages/videodetails/videodetails';
+import { AudiodetailsPage } from '../pages/audiodetails/audiodetails';
+import { AdvertisementdetailsPage } from '../pages/advertisementdetails/advertisementdetails';
+import { PhotodetailsPage } from '../pages/photodetails/photodetails';
+import { ChangemobilenumberPage } from '../pages/changemobilenumber/changemobilenumber';
+
 //Providers
 
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
@@ -75,7 +91,7 @@ import { TextgrowDirective } from '../directives/textgrow/textgrow';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { IonTagsInputModule } from "ionic-tags-input";
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
+import { ImgPreloadDirective } from '../directives/img-preload/img-preload';
 
 //Pipes
 import { TimeagoPipe } from '../pipes/timeago/timeago';
@@ -83,7 +99,8 @@ import { MomentModule } from 'angular2-moment';
 import { FileOpener } from '@ionic-native/file-opener';
 import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { Network } from '@ionic-native/network';
 @NgModule({
   declarations: [
     CreoYouApp,
@@ -133,7 +150,19 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     ParsonaleditPage,
     PrivacyPage,
     OtherprofilePage,
-    NotificationsettingsPage
+    NotificationsettingsPage,
+    ImgPreloadDirective,
+    OtherprofileconnectionsPage,
+    OtherprofileeventsPage,
+    NotificationsdetailsPage,
+    VisitedprofilePage,
+    ProfilecompletePage,
+    PremiumuserPage,
+    VideodetailsPage,
+    AudiodetailsPage,
+    AdvertisementdetailsPage,
+    PhotodetailsPage,
+    ChangemobilenumberPage
   ],
   imports: [
     BrowserModule,
@@ -144,7 +173,9 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     IonicStorageModule.forRoot(),
     MomentModule,
     IonTagsInputModule,
-    NgCalendarModule
+    NgCalendarModule,
+
+
 
   ],
   bootstrap: [IonicApp],
@@ -195,7 +226,18 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     ParsonaleditPage,
     PrivacyPage,
     OtherprofilePage,
-    NotificationsettingsPage
+    NotificationsettingsPage,
+    OtherprofileconnectionsPage,
+    OtherprofileeventsPage,
+    NotificationsdetailsPage,
+    VisitedprofilePage,
+    ProfilecompletePage,
+    PremiumuserPage,
+    VideodetailsPage,
+    AudiodetailsPage,
+    AdvertisementdetailsPage,
+    PhotodetailsPage,
+    ChangemobilenumberPage
   ],
   providers: [
     StatusBar,
@@ -217,9 +259,14 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     FileTransfer,
     FileOpener,
     FilePath,
+    StreamingMedia,
     File,
+    InAppBrowser,
+    PhotoViewer,
+    Diagnostic,
     AndroidPermissions,
-    InAppBrowser
+    Contacts,
+    Network
   ]
 })
 export class AppModule {

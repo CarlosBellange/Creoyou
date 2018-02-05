@@ -1,7 +1,7 @@
 <ion-header class="creoyou-header">
 
     <ion-navbar>
-        <ion-title>Select Category</ion-title>
+        <ion-title>Select Creative Field</ion-title>
         <ion-buttons end>
             <button class="dismiss" (click)="dismiss()">
                 <ion-icon name="close"></ion-icon>
@@ -9,23 +9,18 @@
         </ion-buttons>
 
     </ion-navbar>
-
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
 </ion-header>
 <ion-content class="content-background">
-
-    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
 
     <div *ngIf="searching" class="spinner-container">
         <ion-spinner></ion-spinner>
     </div>
-    <ion-row>
-        <ion-col col-12>
-            <button (click)="addCustom();" ion-button round block>
-                <ion-icon name="add-circle"></ion-icon>&nbsp;Add Custom</button>
-        </ion-col>
-    </ion-row>
+  <ion-grid>
+    <button (click)="addCustom();" ion-button round block>
+    <ion-icon name="add-circle"></ion-icon>&nbsp;Add Custom</button>
+  </ion-grid>
     <ion-list>
-
         <ion-item (click)="selectCat(item)" *ngFor="let item of categories">
             {{item.name}}
         </ion-item>

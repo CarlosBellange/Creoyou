@@ -4,7 +4,7 @@
     <ion-title>{{albumname}}</ion-title>
 
     <ion-buttons end>
-      <button (click)="editAlbum(album,$event);" class="edit" ion-button clear>
+      <button *ngIf="touserid == currentuserid" (click)="editAlbum(album,$event);" class="edit" ion-button clear>
         <ion-icon name="settings"></ion-icon>
       </button>
     </ion-buttons>
@@ -16,23 +16,34 @@
 
 <ion-content padding>
 
-  <ion-toolbar class="albumDes">
-    <span>
-      <b>Album Description : </b> {{albumdescription}} </span>
+  <ion-toolbar class="albumDes" (click)="viewdetails(albumname, albumdescription)">
+    <span *ngIf="albumname">
+      <b>Album Title : </b> {{albumname | slice:0:100}}
+      <span *ngIf="albumname.length>100">...</span>
+    </span>
+    <br>
+    <span *ngIf="albumdescription">
+      <b>Album Description : </b> {{albumdescription | slice:0:100}}
+      <span *ngIf="albumdescription.length>100">...</span>
+    </span>
   </ion-toolbar>
 
 
+
+
   <ion-row>
-    <ion-col col-6 *ngFor="let phto of albumphotos;" (click)="gotoPhotoView(album);">
+    <ion-col col-6 *ngFor="let phto of albumphotos;" (click)="gotoPhotoView(album,phto.id);">
       <div class="album_wrap">
-        <img src="{{base_url}}uploads/portfolioImages/resizedimages/{{phto.image_name}}" alt="Post Img" />
+        <img img-preloader="{{base_url}}uploads/portfolioImages/resizedimages/{{phto.image_name}}" alt="Post Img" />
       </div>
     </ion-col>
 
   </ion-row>
 
 
-  <ion-fab bottom right>
+
+
+  <ion-fab bottom right *ngIf="touserid == currentuserid">
     <button ion-fab (click)="upLoadImages()" color="primary">
       <i class="material-icons">add_a_photo</i>
     </button>

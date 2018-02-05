@@ -1,0 +1,119 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Premium User</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+
+  <ion-row class="content-background">
+    <ion-col col-12>
+      <img src="assets/img/Upgrade_logo.png" />
+      <span>Welcome to the CreoYou Premium Membership Feature Plan</span>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="profileStatus">
+    <ion-col class="preDes" padding col-12>
+      <p>Take advantage of additional features on CreoYou. These features can either by purchased separately or through Reward
+        Points.
+        <!--  can either be
+        <b>Purchased</b> or
+        <b>Accumulated</b>by being actively involved on CreoYou. -->
+      </p>
+    </ion-col>
+
+    <ion-col class="benefits_" col-12>
+      <h1>Premium members enjoy tremendous benefits including</h1>
+
+      <p *ngFor="let item of membershipPlanData">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>{{item.features}}</p>
+      <!-- <p>
+        <ion-icon name="checkmark-circle-outline"></ion-icon> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <p>
+        <ion-icon name="checkmark-circle-outline"></ion-icon> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
+
+      <span>An active CreoYou member ? Active members can earn CreoYou membership through Reward Points. Each activity on CreoYou
+        earns you reward points. Please see the chart below to see how you can accumulate reward points and get premium membership
+        for free. Alternatively, you can also purchase Premium Membership.
+      </span>
+    </ion-col>
+  </ion-row>
+
+
+
+
+  <ion-row>
+    <ion-col class="upgrade_table" col-12>
+      <div class="upgrade_table_head">
+        <h1>Upgrade for free using reward points </h1>
+        <p>Enjoy 1 month Premium Membership for 1000 reward points</p>
+      </div>
+      <span>Accumulate reward points through activity</span>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="upgrade_head">
+    <ion-col col-7>Activity Perfomed </ion-col>
+    <ion-col col-5>Reward Point</ion-col>
+  </ion-row>
+  <hr>
+  <ion-row class="upgrade_body" *ngFor="let item of pointsAccumulationData">
+    <ion-col col-7>{{item.accumulation_text}}</ion-col>
+    <ion-col col-5>{{item.accumulation_example}}</ion-col>
+  </ion-row>
+
+
+  <br/>
+
+
+  <ion-row>
+    <ion-col class="upgrade_table" col-12>
+      <div class="upgrade_table_head">
+        <h1>Purchase Premium Membership</h1>
+        <p>Enjoy one month Premium Membership for 1000 reward points</p>
+      </div>
+      <span>Select from various discounted offers</span>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="upgrade_head">
+    <ion-col col-7>Membership Team</ion-col>
+    <ion-col col-5>Cost</ion-col>
+  </ion-row>
+  <hr>
+  <ion-row class="upgrade_body">
+    <ion-col col-7>1 month</ion-col>
+    <ion-col col-5>Rs. 600/$10</ion-col>
+  </ion-row>
+  <ion-row class="upgrade_body">
+    <ion-col col-7>2 month</ion-col>
+    <ion-col col-5>Rs. 1000/$15</ion-col>
+  </ion-row>
+  <ion-row class="upgrade_body">
+    <ion-col col-7>3 month</ion-col>
+    <ion-col col-5>Rs. 1200/$20</ion-col>
+  </ion-row>
+  <ion-row class="upgrade_body">
+    <ion-col col-7>6 month</ion-col>
+    <ion-col col-5>Rs. 2000/$30</ion-col>
+  </ion-row>
+  <ion-row class="upgrade_body">
+    <ion-col col-7>12 month *Best Value*</ion-col>
+    <ion-col col-5>Rs. 3000/$50</ion-col>
+  </ion-row>
+
+
+  <ion-row class="upgrade_point" padding>
+    <h3>Please visit
+      <a href="https://creoyou.com/user/login">https://creoyou.com/</a> to purchase premium membership</h3>
+    <ion-col col-12>Your Current reward Point is
+      <b>{{usersCurrentPoints}}</b>
+    </ion-col>
+    <ion-col col-12 *ngIf="premiumuser==1">Currently you are enjoying Premium Membership till {{enddate}}</ion-col>
+  </ion-row>
+
+
+
+</ion-content>

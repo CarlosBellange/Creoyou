@@ -1,19 +1,19 @@
 {
-  "_from": "cordova-plugin-facebook4@^1.9.1",
+  "_from": "cordova-plugin-facebook4@1.9.1",
   "_id": "cordova-plugin-facebook4@1.9.1",
   "_inBundle": false,
   "_integrity": "sha512-B45qw+Z+GT2iIQWeF8M9EvmAzoi6Akems0FHq/dum9gRfl0uekgdaFTKiPZNgP1Q8BsC8xJU+VkhtRxsiT9gTw==",
   "_location": "/cordova-plugin-facebook4",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "cordova-plugin-facebook4@^1.9.1",
+    "raw": "cordova-plugin-facebook4@1.9.1",
     "name": "cordova-plugin-facebook4",
     "escapedName": "cordova-plugin-facebook4",
-    "rawSpec": "^1.9.1",
+    "rawSpec": "1.9.1",
     "saveSpec": null,
-    "fetchSpec": "^1.9.1"
+    "fetchSpec": "1.9.1"
   },
   "_requiredBy": [
     "#USER",
@@ -21,8 +21,8 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-facebook4/-/cordova-plugin-facebook4-1.9.1.tgz",
   "_shasum": "60acb3a026b5eaceb1160e97ab28be6c68192e4f",
-  "_spec": "cordova-plugin-facebook4@^1.9.1",
-  "_where": "D:\\Masud Parvej\\WGT Project\\Creoyou",
+  "_spec": "cordova-plugin-facebook4@1.9.1",
+  "_where": "D:\\Masud Parvej\\WGT Project\\Creoyougit",
   "bugs": {
     "url": "https://github.com/jeduan/cordova-plugin-facebook4/issues"
   },

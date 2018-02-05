@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, Events, Navbar, ModalController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Content, IonicPage, NavController, NavParams, ActionSheetController, Events, Navbar, ModalController, AlertController } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { RegValidatorProvider } from '../../providers/reg-validator/reg-validator';
@@ -17,6 +17,7 @@ import { RegValidatorProvider } from '../../providers/reg-validator/reg-validato
   templateUrl: 'parsonaledit.html',
 })
 export class ParsonaleditPage {
+  @ViewChild(Content) content: Content;
   base_url: any;
   editsection: string;
   username: any;
@@ -72,16 +73,20 @@ export class ParsonaleditPage {
     });
 
     this.FormRegistrationStepOne = formBuilder.group({
-      email: ['', Validators.compose([Validators.maxLength(50), Validators.required, regValidator.mailFormat()]), regValidator.checkuniquevalueoffield('email', 1).bind(regValidator)]
+      email: ['', Validators.compose([Validators.maxLength(50), regValidator.mailFormat()]), regValidator.checkuniquevalueoffield('email', 1).bind(regValidator)]
     });
 
     this.FormRegistrationStepFour = formBuilder.group({
-      username: ['', Validators.compose([Validators.minLength(4), Validators.maxLength(50), Validators.pattern('^$|^[A-Za-z0-9]+'), Validators.required]), regValidator.checkuniquevalueoffield('username', 1).bind(regValidator)]
+      username: ['', Validators.compose([Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^$|^[A-Za-z0-9]+'), Validators.required]), regValidator.checkuniquevalueoffield('username', 1).bind(regValidator)]
     });
 
     this.countryCode = regValidator.countryCodes;
   }
+  ionViewDidEnter() {
+    //console.log("Connection pages entered")
+    this.content.resize();
 
+  }
 
   setConfirmPasswordBlank() {
     this.FormRegistrationStepThree.get('confirmpassword').setValue('');
@@ -100,7 +105,7 @@ export class ParsonaleditPage {
         mobile_code: '',
         mobile: '',
       };
-      this.remotService.presentLoading("Wait ...");
+      this.remotService.presentLoading();
       this.remotService.postData(DataToSend, 'changeInfo').subscribe((response) => {
         this.remotService.dismissLoader();
         this.navParams.get("parentPage").initviewpersonaldata();
@@ -115,30 +120,31 @@ export class ParsonaleditPage {
   }
 
   updateemail() {
-    if (this.FormRegistrationStepOne.valid) {
-      var DataToSend = {
-        user_id: window.localStorage['userid'],
-        token: window.localStorage['token'],
-        type: 'email',
-        username: '',
-        email: this.email,
-        mobile_code: '',
-        mobile: '',
-      };
-      this.remotService.presentLoading("Wait ...");
-      this.remotService.postData(DataToSend, 'changeInfo').subscribe((response) => {
-        if (response.success == 1) {
-          this.remotService.dismissLoader();
-          this.navParams.get("parentPage").initviewpersonaldata();
-          this.remotService.presentToast(response.message);
-          this.navCtrl.pop();
-
-        }
-      }, () => {
+    var DataToSend = {
+      user_id: window.localStorage['userid'],
+      token: window.localStorage['token'],
+      type: 'email',
+      username: '',
+      email: this.email,
+      mobile_code: '',
+      mobile: '',
+    };
+    this.remotService.presentLoading();
+    this.remotService.postData(DataToSend, 'changeInfo').subscribe((response) => {
+      if (response.success == 1) {
         this.remotService.dismissLoader();
-        this.remotService.presentToast('Error getting about details.');
-      });
-    }
+        this.navParams.get("parentPage").initviewpersonaldata();
+        this.remotService.presentToast(response.message);
+        this.navCtrl.pop();
+      }
+      else {
+        this.remotService.dismissLoader();
+        this.remotService.presentToast(response.message);
+      }
+    }, () => {
+      this.remotService.dismissLoader();
+      this.remotService.presentToast('Error getting about details.');
+    });
   }
 
   changemobilenumber(stepTwovalue) {
@@ -155,7 +161,7 @@ export class ParsonaleditPage {
         mobile_code: mcode,
         mobile: mobileno,
       };
-      this.remotService.presentLoading("Wait ...");
+      this.remotService.presentLoading();
       this.remotService.postData(DataToSend, 'changeInfo').subscribe((response) => {
         if (response.success == 1) {
           this.remotService.dismissLoader();
@@ -183,7 +189,7 @@ export class ParsonaleditPage {
       this.confirmpassword;
       console.log(DataToSend);
 
-      this.remotService.presentLoading("Wait ...");
+      this.remotService.presentLoading();
       this.remotService.postData(DataToSend, 'changePassword').subscribe((response) => {
         console.log(response);
         if (response.success == 1) {

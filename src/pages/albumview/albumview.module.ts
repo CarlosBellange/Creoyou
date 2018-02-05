@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { AlbumviewPage } from './albumview';
 
 @NgModule({
-  declarations: [
-    AlbumviewPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(AlbumviewPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class AlbumviewPageModule {}
+export class AlbumviewPageModule { }

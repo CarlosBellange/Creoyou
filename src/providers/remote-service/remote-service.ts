@@ -23,7 +23,8 @@ export class RemoteServiceProvider {
     site_url: any;
 
     constructor(public http: Http, public loadingcntrl: LoadingController,
-        private toastcntrl: ToastController, private storage: Storage, private alertCtrl: AlertController) {
+        private toastcntrl: ToastController, private storage: Storage,
+        private alertCtrl: AlertController) {
 
         this.API_URL = 'http://dev.mojolynclife.info/public/index.php/api/';
         this.site_url = 'http://mojolynclife.info/';
@@ -53,8 +54,9 @@ export class RemoteServiceProvider {
             .map(res => <mycommonresponsedata>res.json());
     }
 
-    getCategories(term): Observable<mycommonresponsedata> {
-        const url: string = `${this.API_URL}user-category/1?term=` + term;
+    getCategories(term, usertype = 1): Observable<mycommonresponsedata> {
+
+        const url: string = `${this.API_URL}user-category/` + usertype + `?term=` + term;
         return this.http.get(url)
             .map(res => <mycommonresponsedata>res.json());
     }
@@ -77,9 +79,8 @@ export class RemoteServiceProvider {
             .map(res => <mycommonresponsedata>res.json());
     }
 
-    presentLoading(msg) {
+    presentLoading() {
         this.loader = this.loadingcntrl.create({
-            content: msg
         });
         this.loader.present();
     }

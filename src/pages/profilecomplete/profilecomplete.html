@@ -1,0 +1,74 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Profile strength</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+
+  <ion-row class="content-background">
+    <ion-col col-12>
+      <img src="assets/img/Upgrade_logo.png" />
+      <span> Your Profile Strength depends on the following activities</span>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="profileStatus">
+    <ion-col col-12>
+      <h3>Profile Photo</h3>
+      <span>10%</span>
+    </ion-col>
+    <ion-col col-12 *ngIf="usertype==1">
+      <h3>Occupation+Location(Country,State and City)</h3>
+      <span>10%</span>
+    </ion-col>
+    <ion-col col-12 *ngIf="usertype==2">
+      <h3>Location(Country,State and City)</h3>
+      <span>10%</span>
+    </ion-col>
+
+    <ion-col col-12 *ngIf="usertype==1">
+      <h3>Abotu Me - 5 Or more fields filled excluding Specialization/ Skills</h3>
+      <span>10%</span>
+    </ion-col>
+    <ion-col col-12 *ngIf="usertype==2">
+      <h3> About Me - Company Overview </h3>
+      <span>10%</span>
+    </ion-col>
+
+    <ion-col col-12 *ngIf="usertype==1">
+      <h3>About Me - Specialization/ Skills summary</h3>
+      <span>10%</span>
+    </ion-col>
+
+    <ion-col col-12 *ngIf="usertype==2">
+      <h3>About - Specialization/ Skills</h3>
+      <span>10%</span>
+    </ion-col>
+
+    <ion-col col-12>
+      <h3> Portfolio – 10 + photo, video or audio uploads </h3>
+      <span>10%</span>
+    </ion-col>
+    <ion-col col-12>
+      <h3>Connections - Invitations sent to 50 or more non-creoyou members (Via email/yahoo/Google Contacts)</h3>
+      <span>20%</span>
+    </ion-col>
+    <ion-col col-12>
+      <h3>Connections - 50 or more</h3>
+      <span>10%</span>
+    </ion-col>
+
+    <ion-col col-12>
+      <h3>Following - 10 or more</h3>
+      <span>10%</span>
+    </ion-col>
+    <ion-col col-12>
+      <h3>Events - Posting and invite</h3>
+      <span>10%</span>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ActionSheetController, Content } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
+import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
 
 /**
  * Generated class for the AudiocommentPage page.
@@ -18,15 +19,20 @@ export class AudiocommentPage {
   @ViewChild(Content) content: Content;
   comments = [];
   currentitem: any;
-  commentText: string;
+  commentText: string = '';
   base_url: any;
-
+  currentuserid = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCntrl: ViewController,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider) {
     this.base_url = this.remotService.site_url;
     this.currentitem = navParams.get('incidentitem');
-    // console.log(this.currentitem);
+    this.currentuserid = window.localStorage['userid'];
+    this.seecomment();
+  }
+
+
+  seecomment() {
     var commentsParams = {
       type: 'Audio',
       incident_id: this.currentitem.audio_id,
@@ -36,7 +42,7 @@ export class AudiocommentPage {
 
     console.log(commentsParams);
     this.comments = [];
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'seeComments').subscribe((response) => {
       this.remotService.dismissLoader();
       if (response.success == 1) {
@@ -45,7 +51,6 @@ export class AudiocommentPage {
         if (commentData != null) {
 
           commentData.forEach((item, key, index) => {
-
             this.comments.push(item);
 
           });
@@ -65,6 +70,7 @@ export class AudiocommentPage {
     });
   }
 
+
   sendMessage() {
 
     var commentsParams = {
@@ -76,18 +82,19 @@ export class AudiocommentPage {
       user_id: window.localStorage['userid'],
     };
     console.log(commentsParams);
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'newIncidentCommentAction').subscribe((response) => {
       console.log(response);
       this.remotService.dismissLoader();
       if (response.success == 1) {
-        var newcomment = {
-          comment: this.commentText,
-          users_full_name: window.localStorage['name'],
-          image: window.localStorage['userimage'],
-          id: response.data.id
-        };
-        this.comments.push(newcomment);
+        this.seecomment();
+        /*  var newcomment = {
+           comment: this.commentText,
+           users_full_name: window.localStorage['name'],
+           image: window.localStorage['userimage'],
+           id: response.data.id
+         };
+         this.comments.push(newcomment); */
         this.commentText = '';
         this.scrollToBottom();
 
@@ -121,7 +128,7 @@ export class AudiocommentPage {
               userId: window.localStorage['userid'],
             };
 
-            this.remotService.presentLoading("Wait ...");
+            this.remotService.presentLoading();
             this.remotService.postData(commentsParams, 'deleteComments').subscribe((response) => {
 
               this.remotService.dismissLoader();
@@ -141,8 +148,22 @@ export class AudiocommentPage {
     actionSheet.present();
   }
 
+  OtherFrofileView(data) {
+    if (data.user_status == 4) {
+      this.remotService.presentToast('Your are not allowed to view that profile.');
+    }
+    else if (this.currentuserid == data.user_id) {
+      //this.navCtrl.setRoot(HomePage);
+    } else {
+      console.log('other connection data', data);
+      this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
+    }
+
+  }
+
 
   dismissComment() {
+    console.log(this.comments.length);
     this.viewCntrl.dismiss({ commentlength: this.comments.length });
   }
   scrollToBottom() {
@@ -154,6 +175,9 @@ export class AudiocommentPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AudiocommentPage');
+  }
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
   }
 
 }

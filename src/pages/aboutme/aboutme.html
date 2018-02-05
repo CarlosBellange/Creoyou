@@ -36,50 +36,105 @@
                     <span *ngIf="touserid == currentuserid" (click)="editDatauser('location',personaldetails);" class="addIconWrap">
                         <ion-icon name="create"></ion-icon>
                     </span>
+                    <span *ngIf="touserid == currentuserid" (click)="removeLocation()" class="addIconWrap">
+                        <ion-icon name="trash"></ion-icon>
+                    </span>
                     <!-- <span *ngIf="touserid == currentuserid" (click)="editPrivacy('location');" class="addIconWrap">
                         <ion-icon name="lock"></ion-icon>
                 </span> -->
                 </h3>
                 <p>
-                    <span *ngIf="personaldetails?.city!=null">{{personaldetails?.city}},</span>
-                    <span *ngIf="personaldetails?.state!=null">{{personaldetails?.state}},</span>
-                    <span *ngIf="personaldetails?.country!=null">{{personaldetails?.country}}</span>
-                    <span *ngIf="personaldetails?.zip_code!=null"> &nbsp;{{personaldetails?.zip_code}}</span>
+                    <span *ngIf="personaldetails?.city!=null && personaldetails?.city!=''">{{personaldetails?.city}},</span>
+                    <span *ngIf="personaldetails?.state!=null && personaldetails?.state!=''">{{personaldetails?.state}},</span>
+                    <span *ngIf="personaldetails?.country!=null && personaldetails?.country!=''">{{personaldetails?.country}}</span>
+                    <span *ngIf="personaldetails?.zip_code > 0 && personaldetails?.zip_code!=''"> &nbsp;{{personaldetails?.zip_code}}</span>
+                    <br>
+
+                    <span *ngIf="personaldetails?.address!=null && personaldetails?.address!=''">
+                        <br>{{personaldetails?.address}}</span>
                 </p>
             </ion-col>
 
-            <ion-col *ngIf="(personaldetails?.website_url!=null && personaldetails?.website_url!='') || touserid == currentuserid" class="aobut_content"
+            <ion-col *ngIf="editprivacyparams?.website_privacy?.ispermissible==true || (touserid == currentuserid)" class="aobut_content"
                 col-12>
                 <h3>Website url
-                    <span (click)="editDatauser('weburl',personaldetails);" class="addIconWrap">
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('weburl',personaldetails);" class="addIconWrap">
                         <ion-icon name="create"></ion-icon>
                     </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('weblink');" class="addIconWrap">
+                    <!-- <span *ngIf="touserid == currentuserid" (click)="editPrivacy('weblink');" class="addIconWrap">
                         <ion-icon name="lock"></ion-icon>
-                    </span>
+                    </span> -->
                 </h3>
                 <p>{{personaldetails?.website_url}}</p>
             </ion-col>
 
+            <ion-col *ngIf="(editprivacyparams?.company_overview?.ispermissible==true || (touserid == currentuserid)) && usertype==2"
+                class="aobut_content" col-12>
+                <h3>Company Overview
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('companyoverview',personaldetails);" class="addIconWrap">
+                        <ion-icon name="create"></ion-icon>
+                    </span>
+                </h3>
+                <p>{{personaldetails?.company_overview}}</p>
+            </ion-col>
 
 
-            <ion-col *ngIf="(personaldetails?.occupation!=null && personaldetails?.occupation!='') || touserid == currentuserid" class="aobut_content"
-                col-12>
+            <ion-col class="aobut_content" col-12 *ngIf="usertype==1">
                 <h3>Occupation
                     <span *ngIf="(touserid == currentuserid)" (click)="editDatauser('occupation',personaldetails);" class="addIconWrap">
                         <ion-icon name="create" end></ion-icon>
                     </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('resume');" class="addIconWrap">
+
+                </h3>
+                <ion-row>
+                    <ion-col col-12> {{(personaldetails?.occupation!='' && personaldetails?.occupation!=null )?personaldetails?.occupation:'_
+                        _ _'}}</ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="personaldetails?.company_name!='' && personaldetails?.company_name!=null && (editprivacyparams?.company_privacy?.ispermissible==true || (touserid == currentuserid))">
+                    <ion-col col-12>
+                        <hr>
+                    </ion-col>
+                    <ion-col col-11>{{personaldetails?.company_name}}</ion-col>
+                    <ion-col col-1 end *ngIf="touserid == currentuserid" (click)="editPrivacy('company_privacy');" class="addIconWrap">
+                        <ion-icon name="lock"></ion-icon>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="personaldetails?.designation!='' && personaldetails?.designation!=null && (editprivacyparams?.designation_privacy?.ispermissible==true || (touserid == currentuserid))">
+                    <ion-col col-12>
+                        <hr>
+                    </ion-col>
+                    <ion-col col-11>{{personaldetails?.designation}}</ion-col>
+
+                    <ion-col col-1 end *ngIf="touserid == currentuserid" (click)="editPrivacy('designation_privacy');" class="addIconWrap">
+                        <ion-icon name="lock"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+
+
+            <ion-col *ngIf="(editprivacyparams?.specialization?.ispermissible==true || (touserid == currentuserid))" class="aobut_content"
+                col-12>
+                <h3 text-capitalize>Specialization / Skills
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('skill',skills);" class="addIconWrap">
+                        <ion-icon name="create"></ion-icon>
+                    </span>
+                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('specialization');" class="addIconWrap">
                         <ion-icon name="lock"></ion-icon>
                     </span>
                 </h3>
-                <p>{{(personaldetails?.occupation!='' && personaldetails?.occupation!=null )?personaldetails?.occupation:'_
-                    _ _'}}</p>
-                <p *ngIf="personaldetails?.company_name!=''">{{personaldetails?.company_name}}</p>
-                <p *ngIf="personaldetails?.designation!=''">{{personaldetails?.designation}}</p>
+                <ion-row *ngFor="let skill of skills">
+
+                    <ion-col col-12 text-justify>{{skill?.skillS}}</ion-col>
+
+                </ion-row>
+
             </ion-col>
 
-            <ion-col *ngIf="education?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
+
+            <ion-col *ngIf="(editprivacyparams?.education?.ispermissible==true || (touserid == currentuserid)) && usertype==1" class="aobut_content"
+                col-12>
                 <h3>Education
                     <span *ngIf="touserid == currentuserid" (click)="editDatauser('education',{});" class="addIconWrap">
                         <ion-icon name="add-circle" end></ion-icon>
@@ -110,8 +165,12 @@
 
                         <p *ngIf="edu.city!=''" text-capitalize>{{edu.city}},{{edu.country}}</p>
 
-                        <p text-capitalize *ngIf="edu.starting_month!=''">
-                            {{edu.starting_month}}&nbsp;{{edu.starting_year}} To {{edu.ending_month}}&nbsp;{{edu.ending_year}}
+                        <p text-capitalize *ngIf="edu.starting_month!='' && edu.starting_month !='0' ">
+                            {{edu.starting_month}}&nbsp;{{edu.starting_year}} To
+                            <span *ngIf="edu.ending_month!='' && edu.ending_month!='0'">
+                                <span *ngIf="edu.ending_year!='Present' && edu.ending_month !='0' ">{{edu.ending_month}}</span>
+                                &nbsp;{{edu.ending_year}}
+                            </span>
                         </p>
 
                         <p *ngIf="edu.school_website!=''">{{edu.school_website}}</p>
@@ -123,196 +182,12 @@
 
 
                 </ion-row>
-                <!-- <ion-col col-4 >
-              <b>{{edu.degree}}</b> 
-              Aug 2006 - Nov 2011
-            </ion-col> -->
-            </ion-col>
-
-            <ion-col *ngIf="works?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
-                <h3>
-                    Work Experience
-                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('work',{});" class="addIconWrap">
-                        <ion-icon name="add-circle" end></ion-icon>
-                    </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('experience');" class="addIconWrap">
-                        <ion-icon name="lock"></ion-icon>
-                    </span>
-
-                </h3>
-
-
-                <ion-row *ngFor="let work of works;">
-
-
-                    <ion-col col-11 text-justify>
-                        <p class="crHeading">
-                            {{(work.position!='' && work.position!=null )?work.position:'_ _ _'}}
-                        </p>
-                    </ion-col>
-                    <ion-col col-1 *ngIf="touserid == currentuserid">
-
-                        <span class="toolbaricons" (click)="presentActions('work',work);">
-                            <ion-icon name="more"></ion-icon>
-                        </span>
-
-                    </ion-col>
-
-                    <ion-col class="crbody" col-12>
-
-
-                        <p *ngIf="work.company_name!=''" text-capitalize>{{work.company_name}}</p>
-
-                        <p *ngIf="work.city!=''" text-capitalize>{{work.city}},{{work.country}}</p>
-
-                        <p text-capitalize *ngIf="work.starting_month!=''">
-                            {{work.starting_month}}&nbsp;{{work.starting_year}} To {{work.ending_month}}&nbsp;{{work.ending_year}}
-                        </p>
-
-                        <p *ngIf="work.website!=''">{{work.website}}</p>
-
-                        <p *ngIf="work.details!=''" text-justify>{{work.details}}</p>
-
-                    </ion-col>
-
-
-                </ion-row>
 
             </ion-col>
 
-            <ion-col *ngIf="statement!=null || touserid == currentuserid" class="aobut_content" col-12>
-                <h3 text-capitalize>Personal Statement
-                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('statement',statement);" class="addIconWrap">
-                        <ion-icon name="create"></ion-icon>
-                    </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('personal_statement');" class="addIconWrap">
-                        <ion-icon name="lock"></ion-icon>
-                    </span>
-                </h3>
-                <ion-row>
-
-                    <ion-col col-12 text-justify>{{(statement==null)?'_ _ _':statement}}</ion-col>
-
-                </ion-row>
-
-            </ion-col>
-
-            <ion-col *ngIf="skills?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
-                <h3 text-capitalize>Specialization / Skills
-                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('skill',skills);" class="addIconWrap">
-                        <ion-icon name="create"></ion-icon>
-                    </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('specialization');" class="addIconWrap">
-                        <ion-icon name="lock"></ion-icon>
-                    </span>
-                </h3>
-                <ion-row *ngFor="let skill of skills;">
-
-                    <ion-col col-12 text-justify>{{skill.skillS}}</ion-col>
-
-                </ion-row>
-
-            </ion-col>
-
-            <ion-col *ngIf="interests?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
-                <h3>Interests
-                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('interest',interests);" class="addIconWrap">
-                        <ion-icon name="create"></ion-icon>
-                    </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('interest');" class="addIconWrap">
-                        <ion-icon name="lock"></ion-icon>
-                    </span>
-                </h3>
-                <ion-row *ngFor="let interest of interests;">
-
-                    <ion-col col-12 class="educationRow" text-justify>
-                        <p> {{interest.interests}}</p>
-                    </ion-col>
-                    <!-- <ion-col col-1>
-                    <span (click)="addWork(edu);" class="iconwrap">
-                        <ion-icon name="create"></ion-icon><br>
-                        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
-                    </span> 
-                </ion-col> -->
-
-                </ion-row>
-
-            </ion-col>
-
-            <ion-col *ngIf="languages?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
-                <h3>Languages
-                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('language',{});" class="addIconWrap">
-                        <ion-icon name="add-circle" end></ion-icon>
-                    </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('language');" class="addIconWrap">
-                        <ion-icon name="lock"></ion-icon>
-                    </span>
-
-                </h3>
-                <ion-row *ngFor="let lang of languages;">
-                    <ion-col col-3 text-capitalize>{{lang.language}}</ion-col>
-                    <ion-col col-1 text-capitalize>:</ion-col>
-                    <ion-col col-3 text-capitalize>{{lang.proficiency_level}}</ion-col>
-                    <ion-col col-2>
-
-                        <span class="toolbaricons" (click)="presentActions('language',lang);">
-                            <ion-icon name="more"></ion-icon>
-                        </span>
-
-                    </ion-col>
-                </ion-row>
-
-            </ion-col>
-
-            <ion-col *ngIf="exibitions?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
-                <h3>
-                    ExhibitionsX / Concerts / Events
-                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('exhibition',{});" class="addIconWrap">
-                        <ion-icon name="add-circle" end></ion-icon>
-                    </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('events');" class="addIconWrap">
-                        <ion-icon name="lock"></ion-icon>
-                    </span>
-
-                </h3>
-
-
-                <ion-row *ngFor="let exb of exibitions;">
-
-
-                    <ion-col col-11 text-justify>
-                        <p class="crHeading">
-                            {{(exb.exhibition_name!='' && exb.exhibition_name!=null )?exb.exhibition_name:'_ _ _'}}
-                        </p>
-                    </ion-col>
-                    <ion-col col-1 *ngIf="touserid == currentuserid">
-
-                        <span class="toolbaricons" (click)="presentActions('exhibition',exb);">
-                            <ion-icon name="more"></ion-icon>
-                        </span>
-
-                    </ion-col>
-
-                    <ion-col class="crbody" col-12>
-
-
-                        <p *ngIf="exb.performance_type!=''" text-capitalize>{{exb.performance_type}}</p>
-
-                        <p *ngIf="exb.city!=''" text-capitalize>{{exb.city}}</p>
-
-                        <p text-capitalize *ngIf="exb.month!=''">
-                            {{exb.month}}&nbsp;{{exb.year}}
-                        </p>
-
-                    </ion-col>
-
-
-                </ion-row>
-
-            </ion-col>
-
-            <ion-col *ngIf="courses?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
-                <h3>COURSES
+            <ion-col *ngIf="(editprivacyparams?.courses?.ispermissible==true || (touserid == currentuserid)) && usertype==1" class="aobut_content"
+                col-12>
+                <h3>Courses
                     <span *ngIf="touserid == currentuserid" (click)="editDatauser('course',{});" class="addIconWrap">
                         <ion-icon name="add-circle"></ion-icon>
                     </span>
@@ -354,7 +229,9 @@
 
             </ion-col>
 
-            <ion-col *ngIf="certifications?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
+
+            <ion-col *ngIf="(editprivacyparams?.Certifications?.ispermissible==true || (touserid == currentuserid)) && usertype==1" class="aobut_content"
+                col-12>
                 <h3>Certifications
 
                     <span *ngIf="touserid == currentuserid" (click)="editDatauser('certificate',{});" class="addIconWrap">
@@ -396,11 +273,10 @@
                 </ion-row>
 
 
-
-
             </ion-col>
 
-            <ion-col *ngIf="achievements?.length>0 || touserid == currentuserid" class="aobut_content" col-12>
+            <ion-col *ngIf="(editprivacyparams?.Achievements?.ispermissible==true || (touserid == currentuserid))" class="aobut_content"
+                col-12>
                 <h3>Achievements / Awards
 
                     <span *ngIf="touserid == currentuserid" (click)="editDatauser('award',{});" class="addIconWrap">
@@ -411,7 +287,7 @@
                     </span>
                 </h3>
 
-                <ion-row *ngFor="let acv of achievements;">
+                <ion-row *ngFor="let acv of achievements">
 
                     <ion-col col-11 text-justify>
                         <p class="crHeading">
@@ -428,13 +304,13 @@
 
                     <ion-col class="crbody" col-12>
 
-                        <p *ngIf="acv.organisation_name!=''" text-justify>
-                            {{acv.organisation_name}}
+                        <p text-justify>
+                            {{acv?.organisation_name}}
                         </p>
                         <p text-capitalize *ngIf="acv.award_date!=''">
-                            {{acv.award_date}}
+                            {{acv?.award_date}}
                         </p>
-                        <p *ngIf="acv.organisation_website!=''">{{acv.organisation_website}}</p>
+                        <p>{{acv?.organisation_website}}</p>
 
 
                     </ion-col>
@@ -442,31 +318,32 @@
 
                 </ion-row>
 
-
-
-
             </ion-col>
 
-
-            <ion-col *ngIf="customone!=null || touserid == currentuserid" class="aobut_content" col-12>
-                <h3 text-capitalize>Custom Sections
-                    <span *ngIf="(touserid == currentuserid) && customone?.length<2" (click)="editDatauser('customone',{});" class="addIconWrap">
-                        <ion-icon name="add-circle"></ion-icon>
+            <ion-col *ngIf="(editprivacyparams?.events?.ispermissible==true || (touserid == currentuserid))" class="aobut_content" col-12>
+                <h3>
+                    Exhibitions / Events
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('exhibition',{});" class="addIconWrap">
+                        <ion-icon name="add-circle" end></ion-icon>
                     </span>
-                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('customone');" class="addIconWrap">
+                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('events');" class="addIconWrap">
                         <ion-icon name="lock"></ion-icon>
                     </span>
+
                 </h3>
-                <ion-row *ngFor="let cstm of customone;">
+
+
+                <ion-row *ngFor="let exb of exibitions;">
+
 
                     <ion-col col-11 text-justify>
                         <p class="crHeading">
-                            {{(cstm.title!='' && cstm.title!=null )?cstm.title:'_ _ _'}}
+                            {{(exb.exhibition_name!='' && exb.exhibition_name!=null )?exb.exhibition_name:'_ _ _'}}
                         </p>
                     </ion-col>
                     <ion-col col-1 *ngIf="touserid == currentuserid">
 
-                        <span class="toolbaricons" (click)="presentActions('customone',cstm);">
+                        <span class="toolbaricons" (click)="presentActions('exhibition',exb);">
                             <ion-icon name="more"></ion-icon>
                         </span>
 
@@ -474,13 +351,193 @@
 
                     <ion-col class="crbody" col-12>
 
-                        <p *ngIf="cstm.description!=''" text-justify>
-                            {{cstm.description}}
-                        </p>
 
+                        <p *ngIf="exb.performance_type!=''" text-capitalize>{{exb.performance_type}}</p>
+
+                        <p *ngIf="exb.city!=''" text-capitalize>{{exb.city}}</p>
+
+                        <p text-capitalize *ngIf="exb.month!=''">
+                            <span *ngIf="exb.year!='Present'">{{exb.month}}</span>&nbsp;{{exb.year}}
+                        </p>
 
                     </ion-col>
 
+
+                </ion-row>
+
+            </ion-col>
+
+            <ion-col *ngIf="(editprivacyparams?.experience?.ispermissible==true || (touserid == currentuserid)) && usertype==1" class="aobut_content"
+                col-12>
+                <h3>
+                    Work Experience
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('work',{});" class="addIconWrap">
+                        <ion-icon name="add-circle" end></ion-icon>
+                    </span>
+                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('experience');" class="addIconWrap">
+                        <ion-icon name="lock"></ion-icon>
+                    </span>
+
+                </h3>
+
+
+                <ion-row *ngFor="let work of works;">
+
+
+                    <ion-col col-11 text-justify>
+                        <p class="crHeading">
+                            {{(work.position!='' && work.position!=null )?work.position:'_ _ _'}}
+                        </p>
+                    </ion-col>
+                    <ion-col col-1 *ngIf="touserid == currentuserid">
+
+                        <span class="toolbaricons" (click)="presentActions('work',work);">
+                            <ion-icon name="more"></ion-icon>
+                        </span>
+
+                    </ion-col>
+
+                    <ion-col class="crbody" col-12>
+
+
+                        <p *ngIf="work.company_name!=''" text-capitalize>{{work.company_name}}</p>
+
+                        <p *ngIf="work.city!=''" text-capitalize>{{work.city}},{{work.country}}</p>
+
+                        <p text-capitalize *ngIf="work.starting_month!='' && work.starting_month !='0' ">
+                            {{work.starting_month}}&nbsp;{{work.starting_year}} To
+                            <span *ngIf="work.ending_year!='' && work.ending_year !='0' ">
+                                <span *ngIf="work.ending_year!='Present' && work.ending_month !='0' ">{{work.ending_month}}</span>
+                                &nbsp;{{work.ending_year}}
+                            </span>
+                        </p>
+
+                        <p *ngIf="work.website!=''">{{work.website}}</p>
+
+                        <p *ngIf="work.details!=''" text-justify>{{work.details}}</p>
+
+                    </ion-col>
+
+
+                </ion-row>
+
+            </ion-col>
+
+            <ion-col *ngIf="(editprivacyparams?.language?.ispermissible==true || (touserid == currentuserid)) && usertype==1" class="aobut_content"
+                col-12>
+                <h3>Languages
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('language',{});" class="addIconWrap">
+                        <ion-icon name="add-circle" end></ion-icon>
+                    </span>
+                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('language');" class="addIconWrap">
+                        <ion-icon name="lock"></ion-icon>
+                    </span>
+
+                </h3>
+                <ion-row *ngFor="let lang of languages;">
+                    <ion-col *ngIf='lang.language !=""'>
+                        <ion-col col-3 text-capitalize>{{lang.language}}</ion-col>
+                        <ion-col col-1 *ngIf='lang.proficiency_level !=""' text-capitalize>:</ion-col>
+                        <ion-col col-3 text-capitalize>{{lang.proficiency_level}}</ion-col>
+                        <ion-col col-2>
+
+                            <span *ngIf="touserid == currentuserid" class="toolbaricons" (click)="presentActions('language',lang);">
+                                <ion-icon name="more"></ion-icon>
+                            </span>
+
+                        </ion-col>
+                    </ion-col>
+                </ion-row>
+
+            </ion-col>
+
+
+            <ion-col *ngIf="(editprivacyparams?.interest?.ispermissible==true || (touserid == currentuserid)) && usertype==1" class="aobut_content"
+                col-12>
+                <h3>Interests
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('interest',interests);" class="addIconWrap">
+                        <ion-icon name="create"></ion-icon>
+                    </span>
+                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('interest');" class="addIconWrap">
+                        <ion-icon name="lock"></ion-icon>
+                    </span>
+                </h3>
+                <ion-row *ngFor="let interest of interests">
+
+                    <ion-col col-12 class="educationRow" text-justify>
+                        <p> {{interest?.interests}}</p>
+                    </ion-col>
+
+                </ion-row>
+
+            </ion-col>
+
+
+
+
+            <ion-col *ngIf="(editprivacyparams?.personal_statement?.ispermissible==true || (touserid == currentuserid)) && usertype==1"
+                class="aobut_content" col-12>
+                <h3 text-capitalize>Personal Statement
+                    <span *ngIf="touserid == currentuserid" (click)="editDatauser('statement',statement);" class="addIconWrap">
+                        <ion-icon name="create"></ion-icon>
+                    </span>
+                    <span *ngIf="touserid == currentuserid" (click)="editPrivacy('personal_statement');" class="addIconWrap">
+                        <ion-icon name="lock"></ion-icon>
+                    </span>
+                </h3>
+                <ion-row>
+
+                    <ion-col col-12 text-justify>{{(statement==null)?'_ _ _':statement}}</ion-col>
+
+                </ion-row>
+
+            </ion-col>
+
+            <ion-col *ngIf="(editprivacyparams?.custom_section1?.ispermissible==true) || (editprivacyparams?.custom_section2?.ispermissible==true) || (touserid == currentuserid)"
+                class="aobut_content" col-12>
+                <h3 text-capitalize>Custom Sections
+                    <span *ngIf="(touserid == currentuserid) && ((customone?.length<2 && usertype==1) || (customone?.length<3 && usertype==2))"
+                        (click)="editDatauser('customone',{});" class="addIconWrap">
+                        <ion-icon name="add-circle"></ion-icon>
+                    </span>
+
+                </h3>
+                <ion-row *ngFor="let cstm of customone;let idx=index;">
+                    <ion-col col-12 *ngIf="(editprivacyparams?.custom_section1?.ispermissible==true && idx==0) || (editprivacyparams?.custom_section2?.ispermissible==true && idx==1) || (editprivacyparams?.custom_section3?.ispermissible==true && idx==2) || (touserid == currentuserid)">
+                        <ion-col col-10 text-justify>
+                            <p class="crHeading">
+                                {{(cstm.title!='' && cstm.title!=null )?cstm.title:'_ _ _'}}
+                            </p>
+                        </ion-col>
+                        <ion-col col-2 *ngIf="touserid == currentuserid">
+
+                            <span *ngIf="touserid == currentuserid && idx==0" (click)="editPrivacy('custom_section1');" class="addIconWrap">
+                                <ion-icon name="lock"></ion-icon>
+                            </span>
+
+                            <span *ngIf="touserid == currentuserid && idx==1" (click)="editPrivacy('custom_section2');" class="addIconWrap">
+                                <ion-icon name="lock"></ion-icon>
+                            </span>
+
+                            <span *ngIf="touserid == currentuserid && idx==2" (click)="editPrivacy('custom_section3');" class="addIconWrap">
+                                <ion-icon name="lock"></ion-icon>
+                            </span>
+
+                            <span class="toolbaricons" (click)="presentActions('customone',cstm);">
+                                <ion-icon name="more"></ion-icon>
+                            </span>
+
+                        </ion-col>
+
+                        <ion-col class="crbody" col-12>
+
+                            <p *ngIf="cstm.description!=''" text-justify>
+                                {{cstm.description}}
+                            </p>
+
+
+                        </ion-col>
+                    </ion-col>
                 </ion-row>
 
             </ion-col>

@@ -1,0 +1,45 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Video Details</ion-title>
+
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="EventContainer">
+        <ion-list class="EventBody">
+          <ion-item>
+            <div class="EventDetails" *ngIf="videodetails.data_type!='ad'">
+              <b>Video Title : </b>
+              <span *ngIf="videodetails.video_title">{{videodetails.video_title}}</span>
+              <span *ngIf="videodetails.video_title==''">No title</span>
+            </div>
+
+            <div class="EventDetails" *ngIf="videodetails.data_type=='ad'">
+              <b>Video Title : </b>
+              <span *ngIf="videodetails.advertisement_text">{{videodetails.advertisement_text}}</span>
+              <span *ngIf="videodetails.advertisement_text==''">No title</span>
+            </div>
+
+
+            <div class="EventDetails" *ngIf="videodetails.data_type!='ad'">
+              <b>Description : </b>
+              <span *ngIf="videodetails.video_description">{{videodetails.video_description}}</span>
+              <span *ngIf="videodetails.video_description==''">No description</span>
+            </div>
+
+            <div class="EventDetails" *ngIf="videodetails.data_type=='ad'">
+              <b>Description : </b>
+              <span *ngIf="videodetails.advertisement_details">{{videodetails.advertisement_details}}</span>
+              <span *ngIf="videodetails.advertisement_details==''">No description</span>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

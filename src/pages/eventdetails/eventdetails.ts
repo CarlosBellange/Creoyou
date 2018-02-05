@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ActionSheetController, Events, Navbar } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 
 /**
@@ -15,15 +15,23 @@ import { RemoteServiceProvider } from '../../providers/remote-service/remote-ser
   templateUrl: 'eventdetails.html',
 })
 export class EventdetailsPage {
+  @ViewChild(Navbar) navBar: Navbar;
   eventdetails: any;
   base_url: any;
 
-  constructor(public remotService: RemoteServiceProvider, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public events: Events, public remotService: RemoteServiceProvider, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams) {
     this.eventdetails = this.navParams.get('eventdetails');
+    console.log(this.eventdetails);
     this.base_url = this.remotService.site_url;
   }
 
   ionViewDidLoad() {
+    this.events.publish('creoyou:hidemenu');
+    this.navBar.backButtonClick = () => {
+
+      this.events.publish('creoyou:showmenu');
+      this.navCtrl.pop()
+    }
     console.log('ionViewDidLoad EventdetailsPage');
   }
   editevent() {
@@ -49,6 +57,9 @@ export class EventdetailsPage {
     });
 
     actionSheet.present();
+  }
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
   }
 
 

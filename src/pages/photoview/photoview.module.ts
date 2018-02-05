@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { PhotoviewPage } from './photoview';
 
 @NgModule({
-  declarations: [
-    PhotoviewPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(PhotoviewPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class PhotoviewPageModule {}
+export class PhotoviewPageModule { }

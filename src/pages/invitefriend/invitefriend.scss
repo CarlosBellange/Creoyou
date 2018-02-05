@@ -1,11 +1,10 @@
 page-invitefriend {
-
-    .next_stape{
+    .next_stape {
         background: #1571a5;
         background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
         background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
         background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1 ) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
         border: none;
         padding: 0;
         text-align: center;
@@ -15,7 +14,6 @@ page-invitefriend {
         color: #fff;
         display: block;
         max-width: 100%;
-        font-family: 'RobotoCondensed-Regular';
         line-height: 46px;
         font-size: 17px;
     }
@@ -29,7 +27,7 @@ page-invitefriend {
         text-align: center;
         font-size: 29px;
         color: #1a3262;
-        ion-icon{
+        ion-icon {
             line-height: 35px;
         }
     }
@@ -50,13 +48,12 @@ page-invitefriend {
         border-radius: 4px;
         color: #fff;
         margin: 0px 0px 5px;
-
-        span{
+        span {
             float: right;
             font-size: 16px;
         }
     }
-
+    p.info {
+        line-height: 19px;
+    }
 }
-
-    

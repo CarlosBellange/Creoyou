@@ -1,140 +1,166 @@
-<ion-content class="content-background"  >
-    
-    <ion-row class="logo-row-step-1"  >
-        <ion-col text-center>
-            <img src="assets/img/logo.png" class="app_logo"> 
-        </ion-col>
-    </ion-row>  
+<ion-content class="content-background">
 
-        <ion-row *ngIf="regStep==1">
-    
-            <form [formGroup]="FormRegistrationStepOne" (ngSubmit)="sendRegistrationForm(FormRegistrationStepOne.value)" >
-                <ion-row class="login-box">
-                    <ion-col col-12 class="fld"> 
-                        <ion-input class="input-fld extra-pad" type="text" name="username" placeholder="Username" formControlName="username"  required></ion-input>
-                        <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('pattern') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
-                                Only characters and numbers allowed
-                        </span>
-                        <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('required') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
-                                Username  is required
-                        </span>
-                        <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('Inuse') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
-                                Username is already taken
-                        </span>
-                        <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('minlength') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
+    <ion-row class="logo-row-step-1">
+        <ion-col text-center>
+            <img src="assets/img/logo.png" class="app_logo">
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="regStep==1">
+
+        <form [formGroup]="FormRegistrationStepOne" (ngSubmit)="sendRegistrationForm(FormRegistrationStepOne.value)">
+            <ion-row class="login-box">
+                <ion-col col-12 class="fld">
+                    <ion-input class="input-fld extra-pad" type="text" name="username" placeholder="Username" formControlName="username" required></ion-input>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('pattern') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
+                        Only characters and numbers allowed
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('required') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
+                        Username is required
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('Inuse') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
+                        Username is already taken
+                    </span>
+                    <!--  <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('minlength') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
                           Minimum of 4 characters
-                        </span>
-                        <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('maxlength') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
-                          Maximum of 50 characters
-                        </span>
-                        <span *ngIf="FormRegistrationStepOne.controls.username.pending">
-                            <ion-spinner name="bubbles"></ion-spinner>.
-                        </span>
-                    </ion-col>
-    
-                        <ion-col col-3 >
-                            <ion-select formControlName="mobilecode"  multiple="false" class="mobile-code">
-                                <ion-option  value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.dial_code}}</ion-option>
-                            </ion-select> 
-                        </ion-col>
-                        <ion-col col-9 > 
-                            <ion-input placeholder="Phone Number"  type="number" formControlName="mobileno"  class="input-fld extra-pad"  ></ion-input>
-                             
-                            <span *ngIf="FormRegistrationStepOne.controls.mobileno.pending">
-                               <ion-spinner name="bubbles"></ion-spinner>
-                            </span>
-                        </ion-col>
-                    
-                        <ion-col col-12>
-                                <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('pattern') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                                    Mobile numberr should be only numbers
-                                </span>
-                                <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('required') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                                    Mobile no is required
-                                </span>
-                                <span class="error" *ngIf="FormRegistrationStepOne.get('mobilecode').hasError('required') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                                    Mobile code is required
-                                </span>
-                                <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('Inuse') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                                    Mobile no is already taken
-                                </span>
-                                <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('minlength') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                                    Minimum of 4 characters
-                                </span>
-                                <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('maxlength') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                                    Maximum of 15 characters
-                                </span>
-                        </ion-col>
-                        <ion-col col-12 class="fld">
-                            <ion-input class="input-fld" (click)="showCategoryModal()"  [readonly]=true placeholder="Select Category" type="text" formControlName="cfield"  required></ion-input>
-                            <span class="error" *ngIf="!FormRegistrationStepOne.controls.cfield.valid  &&
+                        </span> -->
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('username').hasError('maxlength') && (FormRegistrationStepOne.get('username').touched || submitAttempt)">
+                        Maximum of 50 characters
+                    </span>
+                    <span *ngIf="FormRegistrationStepOne.controls.username.pending">
+                        <ion-spinner name="bubbles"></ion-spinner>
+                    </span>
+                </ion-col>
+                <ion-col col-12>
+                    <span>
+                        Your username is unique and will be used to form your custom URL:
+                        <a>www.creoyou.com/username</a>
+                    </span>
+                </ion-col>
+
+                <!--  <ion-col col-12 class="fld">
+                    <ion-input class="input-fld extra-pad" type="text" name="businessname" placeholder="Business Name" formControlName="businessname"
+                        required></ion-input>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('businessname').hasError('pattern') && (FormRegistrationStepOne.get('businessname').touched || submitAttempt)">
+                        Only characters and numbers allowed
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('businessname').hasError('required') && (FormRegistrationStepOne.get('businessname').touched || submitAttempt)">
+                        Business Name is required
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('fullname').hasError('minlength') && (FormRegistrationStepOne.controls.fullname.dirty || submitAttempt)">
+                        Minimum of 4 characters
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('businessname').hasError('maxlength') && (FormRegistrationStepOne.get('businessname').touched || submitAttempt)">
+                        Maximum of 50 characters
+                    </span>
+
+                </ion-col> -->
+
+
+
+                <ion-col col-3>
+                    <ion-select formControlName="mobilecode" multiple="false" class="mobile-code">
+                        <ion-option value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.dial_code}}</ion-option>
+                    </ion-select>
+                </ion-col>
+                <ion-col col-9>
+                    <ion-input placeholder="Phone Number" type="number" formControlName="mobileno" class="input-fld extra-pad"></ion-input>
+
+                    <span *ngIf="FormRegistrationStepOne.controls.mobileno.pending">
+                        <ion-spinner name="bubbles"></ion-spinner>
+                    </span>
+                </ion-col>
+
+                <ion-col col-12>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('pattern') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
+                        Mobile numberr should be only numbers
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('required') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
+                        Mobile no is required
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('mobilecode').hasError('required') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
+                        Mobile code is required
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('Inuse') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
+                        Mobile no is already taken
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('minlength') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
+                        Minimum of 4 characters
+                    </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('maxlength') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
+                        Maximum of 15 characters
+                    </span>
+                </ion-col>
+                <ion-col col-12 class="fld">
+                    <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true placeholder="Select Category" type="text" formControlName="cfield"
+                        required></ion-input>
+                    <span class="error" *ngIf="!FormRegistrationStepOne.controls.cfield.valid  &&
                              (FormRegistrationStepOne.controls.cfield.dirty || submitAttempt)">
-                                 <p>Please select a valid category.</p>
-                            </span>
-                         </ion-col>
-                 
-                    <ion-col col-12  text-center > 
-                        <span class="ter_pri" >By clicking Sign Up, you agree with CreoYou's <a (click) = "termofuse()">
-                                Terms of Use</a> and <a (click)="privacypolicy()" >Privacy Policy</a>.
-    
-                        </span>
-                    </ion-col>
-                    <ion-col col-12>
-                        <button ion-button class="sign-in" [disabled]="!FormRegistrationStepOne.valid" full type="submit" >Sign Up</button>
-    
-                    </ion-col>
-    <!--                <ion-col col-6>
+                        <p>Please select a valid category.</p>
+                    </span>
+                </ion-col>
+
+                <ion-col col-12 text-center>
+                    <span class="ter_pri">By clicking Sign Up, you agree with CreoYou's
+                        <a (click)="termofuse()">
+                            Terms of Use</a> and
+                        <a (click)="privacypolicy()">Privacy Policy</a>.
+
+                    </span>
+                </ion-col>
+                <ion-col col-12>
+                    <button ion-button class="sign-in" [disabled]="!FormRegistrationStepOne.valid" full type="submit">Sign Up</button>
+
+                </ion-col>
+                <!--                <ion-col col-6>
                             <button ion-button class="sign-in" (click)="startRegistrationForm()" full type="button" >Back</button>
         
                     </ion-col>-->
-                </ion-row>
-    
-            </form>
-    
-        </ion-row>
-    
-        <ion-row *ngIf="regStep==2">
-            <form [formGroup]="FormRegistrationStepTwo"  >
-                <ion-row class="login-box">
-                    
-                    <ion-col col-12 text-center >   
-                       <span class="accepted_icon"><img src="assets/img/accepeted_icon.png" class="app_logo"></span>
-                    </ion-col>  
-                    
-                    <ion-col col-12 text-center>
-                      
-                        <span class="V_code">We Have Sent A Verification Code To <br>  {{mobileno}}</span>
-                    </ion-col>
-                    
-                    
-                     <ion-col col-12>
-                                <ion-input placeholder="Enter Confirmation Code Here"  type="number" formControlName="otpno"  class="input-fld"  ></ion-input>
-                             
-                                <span class="error" *ngIf="FormRegistrationStepTwo.get('otpno').hasError('required') && (FormRegistrationStepTwo.get('otpno').touched)">
-                                    Otp is required
-                                </span>
-                                
-                     </ion-col>
-                    <ion-col col-12 text-center>
-                          <span class="ter_pri" >Want to change the Mobile Number ?</span> 
-                    </ion-col>
-                    <ion-col col-12 text-center>
-                         <button class="next_stape" (click)="verifyOtp()" >Next</button>
-                    </ion-col>
-                     <ion-col col-12 text-center>
-                              <a class="tab-item tab-item-active" (click)="resendcode()">Resend Code</a> 
-                     </ion-col>
-                    
-                    
-                </ion-row>
-            </form>
-        </ion-row>    
-    
-    </ion-content>
- 
-    
-    
-    
-    
-    
-    
+            </ion-row>
+
+        </form>
+
+    </ion-row>
+
+    <ion-row *ngIf="regStep==2">
+        <form [formGroup]="FormRegistrationStepTwo">
+            <ion-row class="login-box">
+
+                <ion-col col-12 text-center>
+                    <span class="accepted_icon">
+                        <img src="assets/img/accepeted_icon.png" class="app_logo">
+                    </span>
+                </ion-col>
+
+                <ion-col col-12 text-center>
+
+                    <span class="V_code">We Have Sent A Verification Code To
+                        <br> {{mobileno}}</span>
+                </ion-col>
+
+
+                <ion-col col-12>
+                    <ion-input placeholder="Enter Confirmation Code Here" type="number" formControlName="otpno" class="input-fld"></ion-input>
+
+                    <span class="error" *ngIf="FormRegistrationStepTwo.get('otpno').hasError('required') && (FormRegistrationStepTwo.get('otpno').touched)">
+                        Otp is required
+                    </span>
+
+                </ion-col>
+                <ion-col col-12 text-center>
+                    <span class="ter_pri">Want to change the Mobile Number ?</span>
+                </ion-col>
+                <ion-col col-12 text-center>
+                    <button class="next_stape" (click)="verifyOtp()">Next</button>
+                </ion-col>
+                <ion-col col-12 text-center>
+                    <a class="tab-item tab-item-active" (click)="resendcode()">Resend Code</a>
+                </ion-col>
+
+
+
+            </ion-row>
+        </form>
+    </ion-row>
+
+</ion-content>

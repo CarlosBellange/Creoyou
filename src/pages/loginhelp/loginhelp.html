@@ -72,71 +72,71 @@
 
   <div class="loginhelp_stepthree" *ngIf="viewStep==3">
     <ion-grid>
-    <ion-row class="login-box">
+      <ion-row class="login-box">
 
-      <ion-col col-12 text-center>
-        <span class="accepted_icon">
-          <img src="assets/img/accepeted_icon.png" class="app_logo">
-        </span>
-      </ion-col>
+        <ion-col col-12 text-center>
+          <span class="accepted_icon">
+            <img src="assets/img/accepeted_icon.png" class="app_logo">
+          </span>
+        </ion-col>
 
-      <ion-col col-12 text-center>
+        <ion-col col-12 text-center>
 
-        <span class="V_code">We Have Sent A Verification Code To
-          <br> {{optsenttype}}
-        </span>
-      </ion-col>
-
-
-      <ion-col col-12>
-        <ion-input [(ngModel)]="inputotp" placeholder="Enter Confirmation Code Here" type="number" class="input-fld"></ion-input>
+          <span class="V_code">We Have Sent A Verification Code To
+            <br> {{optsenttype}}
+          </span>
+        </ion-col>
 
 
-      </ion-col>
-      <!--                
+        <ion-col col-12>
+          <ion-input [(ngModel)]="inputotp" placeholder="Enter Confirmation Code Here" type="number" class="input-fld"></ion-input>
+
+
+        </ion-col>
+        <!--                
                 <ion-col col-12 text-center>
                      <button class="next_stape" (click)="verifyOtp()" >Next</button>
                 </ion-col> -->
-      <ion-col col-12 text-center>
-        <a class="tab-item tab-item-active" (click)="recoverNow()">Resend Code</a>
-      </ion-col>
+        <ion-col col-12 text-center>
+          <a class="tab-item tab-item-active" (click)="recoverNow()">Resend Code</a>
+        </ion-col>
 
 
-    </ion-row>
-  </ion-grid>
+      </ion-row>
+    </ion-grid>
 
   </div>
 
 
   <div class="loginhelp_stepthree" *ngIf="viewStep==4">
-   <ion-grid>
-    <ion-row class="login-box">
+    <ion-grid>
+      <ion-row class="login-box">
 
-      <ion-col col-12 text-center>
-        <span class="accepted_icon">
-          <img src="assets/img/accepeted_icon.png" class="app_logo">
-        </span>
-      </ion-col>
+        <ion-col col-12 text-center>
+          <span class="accepted_icon">
+            <img src="assets/img/accepeted_icon.png" class="app_logo">
+          </span>
+        </ion-col>
 
-      <ion-col *ngIf="helptype=='username'" col-12 text-center>
+        <ion-col *ngIf="helptype=='username'" col-12 text-center>
 
-        <span class="V_code">Your Username is {{myusername}}
-        </span>
-      </ion-col>
+          <span class="V_code">Your Username is {{myusername}}
+          </span>
+        </ion-col>
 
 
-      <ion-col *ngIf="helptype=='password'" col-12 text-center>
-        <span class="V_code">Reset your Password</span>
-      </ion-col>
+        <ion-col *ngIf="helptype=='password'" col-12 text-center>
+          <span class="V_code">Reset your Password</span>
+        </ion-col>
 
-      <ion-col *ngIf="helptype=='password'" col-12 text-center>
-      
-        <ion-input class="input-fld" type="password" placeholder="Enter Password" [(ngModel)]="password" required></ion-input>
-        <ion-input class="input-fld" type="password" placeholder="Re-Enter Password" [(ngModel)]="confirmpassword" required></ion-input>
-        
-      </ion-col>
-    </ion-row>
-   </ion-grid>
+        <ion-col *ngIf="helptype=='password'" col-12 text-center>
+
+          <ion-input class="input-fld" type="password" placeholder="Enter Password" [(ngModel)]="password" required></ion-input>
+          <ion-input class="input-fld" type="password" placeholder="Re-Enter Password" [(ngModel)]="confirmpassword" required></ion-input>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   </div>
 
@@ -152,7 +152,10 @@
   <p *ngIf="viewStep==3" (click)="verifyOtp();" text-center class="next_stape">
     <ion-icon name="checkmark"></ion-icon> Next
   </p>
-  <p *ngIf="viewStep==4" (click)="resetPassword();" text-center class="next_stape">
-      <ion-icon name="checkmark"></ion-icon> Save
-    </p>
+  <p *ngIf="viewStep==4 && helptype=='password'" (click)="resetPassword();" text-center class="next_stape">
+    <ion-icon name="checkmark"></ion-icon> Save
+  </p>
+  <p *ngIf="viewStep==4 && helptype=='username'" (click)="gotoLoginpage();" text-center class="next_stape">
+    <ion-icon name="checkmark"></ion-icon> Next
+  </p>
 </ion-footer>

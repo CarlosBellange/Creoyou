@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { CommonmodalPage } from './commonmodal';
 
 @NgModule({
-  declarations: [
-    CommonmodalPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(CommonmodalPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class CommonmodalPageModule {}
+export class CommonmodalPageModule { }

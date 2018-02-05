@@ -1,31 +1,42 @@
 page-taguser {
-    .tag_item { 
+    .chatSearch {
+        input.searchbar-input {
+            border: 2px solid #ccc;
+            border-radius: 36px !important;
+            box-shadow: none !important;
+            padding: 6px 45px;
+        }
+        .searchbar-search-icon {
+            background-size: 26px;
+            color: #ccc;
+        }
+    }
+    .tag_item {
         border-bottom: 1px solid #ccc;
-        img{
+        img {
             border-radius: 50%;
             vertical-align: middle;
             height: 50px;
             display: inline-block;
             margin-left: 5px;
         }
-        p{
+        p {
             margin: 10px 0px 2px;
             font-size: 15px;
             color: rgb(31, 29, 182);
         }
-        ion-checkbox{
+        ion-checkbox {
             vertical-align: middle;
             margin: 0px 15px;
         }
-        
     }
     button.dismiss {
         background: no-repeat;
         color: #fff;
         font-size: 16px;
     }
-    .scroll-content{
-        margin-top: 116px;
+    .fixed-content,
+    .scroll-content {
+        margin-top: 116px !important;
     }
-    
 }

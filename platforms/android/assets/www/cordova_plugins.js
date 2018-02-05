@@ -42,14 +42,6 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
-    "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
-    "pluginId": "cordova-plugin-facebook4",
-    "clobbers": [
-      "facebookConnectPlugin"
-    ]
-  },
-  {
     "id": "cordova-plugin-googleplus.GooglePlus",
     "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
     "pluginId": "cordova-plugin-googleplus",
@@ -341,6 +333,23 @@ module.exports = [
     ]
   },
   {
+    "id": "cordova-plugin-inappbrowser.inappbrowser",
+    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+    "pluginId": "cordova-plugin-inappbrowser",
+    "clobbers": [
+      "cordova.InAppBrowser.open",
+      "window.open"
+    ]
+  },
+  {
+    "id": "cordova.plugins.diagnostic.Diagnostic",
+    "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+    "pluginId": "cordova.plugins.diagnostic",
+    "clobbers": [
+      "cordova.plugins.diagnostic"
+    ]
+  },
+  {
     "id": "cordova-plugin-android-permissions.Permissions",
     "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
     "pluginId": "cordova-plugin-android-permissions",
@@ -349,12 +358,113 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-inappbrowser.inappbrowser",
-    "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-    "pluginId": "cordova-plugin-inappbrowser",
+    "id": "cordova-plugin-contacts.contacts",
+    "file": "plugins/cordova-plugin-contacts/www/contacts.js",
+    "pluginId": "cordova-plugin-contacts",
     "clobbers": [
-      "cordova.InAppBrowser.open",
-      "window.open"
+      "navigator.contacts"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.Contact",
+    "file": "plugins/cordova-plugin-contacts/www/Contact.js",
+    "pluginId": "cordova-plugin-contacts",
+    "clobbers": [
+      "Contact"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.convertUtils",
+    "file": "plugins/cordova-plugin-contacts/www/convertUtils.js",
+    "pluginId": "cordova-plugin-contacts"
+  },
+  {
+    "id": "cordova-plugin-contacts.ContactAddress",
+    "file": "plugins/cordova-plugin-contacts/www/ContactAddress.js",
+    "pluginId": "cordova-plugin-contacts",
+    "clobbers": [
+      "ContactAddress"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.ContactError",
+    "file": "plugins/cordova-plugin-contacts/www/ContactError.js",
+    "pluginId": "cordova-plugin-contacts",
+    "clobbers": [
+      "ContactError"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.ContactField",
+    "file": "plugins/cordova-plugin-contacts/www/ContactField.js",
+    "pluginId": "cordova-plugin-contacts",
+    "clobbers": [
+      "ContactField"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.ContactFindOptions",
+    "file": "plugins/cordova-plugin-contacts/www/ContactFindOptions.js",
+    "pluginId": "cordova-plugin-contacts",
+    "clobbers": [
+      "ContactFindOptions"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.ContactName",
+    "file": "plugins/cordova-plugin-contacts/www/ContactName.js",
+    "pluginId": "cordova-plugin-contacts",
+    "clobbers": [
+      "ContactName"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.ContactOrganization",
+    "file": "plugins/cordova-plugin-contacts/www/ContactOrganization.js",
+    "pluginId": "cordova-plugin-contacts",
+    "clobbers": [
+      "ContactOrganization"
+    ]
+  },
+  {
+    "id": "cordova-plugin-contacts.ContactFieldType",
+    "file": "plugins/cordova-plugin-contacts/www/ContactFieldType.js",
+    "pluginId": "cordova-plugin-contacts",
+    "merges": [
+      ""
+    ]
+  },
+  {
+    "id": "cordova-plugin-facebook4.FacebookConnectPlugin",
+    "file": "plugins/cordova-plugin-facebook4/www/facebook-native.js",
+    "pluginId": "cordova-plugin-facebook4",
+    "clobbers": [
+      "facebookConnectPlugin"
+    ]
+  },
+  {
+    "id": "com.hutchind.cordova.plugins.streamingmedia.StreamingMedia",
+    "file": "plugins/com.hutchind.cordova.plugins.streamingmedia/www/StreamingMedia.js",
+    "pluginId": "com.hutchind.cordova.plugins.streamingmedia",
+    "clobbers": [
+      "streamingMedia"
+    ]
+  },
+  {
+    "id": "cordova-plugin-network-information.network",
+    "file": "plugins/cordova-plugin-network-information/www/network.js",
+    "pluginId": "cordova-plugin-network-information",
+    "clobbers": [
+      "navigator.connection",
+      "navigator.network.connection"
+    ]
+  },
+  {
+    "id": "cordova-plugin-network-information.Connection",
+    "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+    "pluginId": "cordova-plugin-network-information",
+    "clobbers": [
+      "Connection"
     ]
   }
 ];
@@ -368,7 +478,6 @@ module.exports.metadata =
   "cordova-plugin-ionic-webview": "1.1.16",
   "cordova-sqlite-storage": "2.1.2",
   "onesignal-cordova-plugin": "2.2.2",
-  "cordova-plugin-facebook4": "1.9.1",
   "cordova-plugin-googleplus": "5.1.1",
   "cordova-plugin-crop": "0.3.1",
   "cordova-plugin-camera": "2.4.1",
@@ -381,8 +490,13 @@ module.exports.metadata =
   "cordova-plugin-file-transfer": "1.7.0",
   "cordova-plugin-file-opener2": "2.0.19",
   "cordova-plugin-filepath": "1.0.2",
+  "cordova-plugin-inappbrowser": "1.7.2",
+  "cordova.plugins.diagnostic": "3.9.1",
   "cordova-plugin-android-permissions": "1.0.0",
-  "cordova-plugin-inappbrowser": "1.7.2"
+  "cordova-plugin-contacts": "3.0.1",
+  "cordova-plugin-facebook4": "1.9.1",
+  "com.hutchind.cordova.plugins.streamingmedia": "0.1.4",
+  "cordova-plugin-network-information": "2.0.1"
 };
 // BOTTOM OF METADATA
 });

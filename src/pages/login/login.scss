@@ -13,7 +13,7 @@ page-login {
     }
     .logo-row {
         padding: 2rem 0px;
-        margin-top: 4em;
+        margin-top: 3em;
     }
     .login-box {
         padding: .5rem;
@@ -35,7 +35,6 @@ page-login {
         color: #fff;
         display: block;
         max-width: 100%;
-        font-family: 'RobotoCondensed-Regular';
         line-height: 46px;
     }
     .login-help {
@@ -51,14 +50,14 @@ page-login {
         min-height: 0px;
     }
     .hr-text {
-            background-color: transparent;
-            position: relative;
-            outline: 0;
-            border: 0;
-            color: white;
-            text-align: center;
-            height: 2.6em;
-            opacity: 1;
+        background-color: transparent;
+        position: relative;
+        outline: 0;
+        border: 0;
+        color: white;
+        text-align: center;
+        height: 2.6em;
+        opacity: 1;
         &:before {
             content: '';
             background: #fff;
@@ -83,13 +82,12 @@ page-login {
     }
     .sign-in {
         color: #1a2c5d !important;
-        font-family: 'RobotoCondensed-Regular';
         text-transform: uppercase;
         float: left;
         top: 5px;
     }
     .login-box .sign-in {
-        background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0 !important;
+        background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0 !important;
         border-radius: 2px;
         color: #fff;
         box-shadow: none;
@@ -102,7 +100,6 @@ page-login {
         padding: 2px 0;
         line-height: 32px;
         color: #fff;
-        font-family: 'RobotoCondensed-Regular';
         /*font-size: 2vmax;*/
     }
     .face_sign span {
@@ -122,7 +119,6 @@ page-login {
         padding: 2px 0;
         line-height: 32px;
         color: #fff;
-        font-family: 'RobotoCondensed-Regular';
         /*font-size: 2vmax*/
     }
     .goog_sign span {
@@ -163,9 +159,7 @@ page-login {
         text-indent: 0;
         color: white;
     }
-    .text-input-md{
+    .text-input-md {
         color: #fff;
     }
-
-   
 }

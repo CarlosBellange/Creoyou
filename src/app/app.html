@@ -1,4 +1,4 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" id="myMenu" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
 
 
 
@@ -6,7 +6,7 @@
         <div text-center class="profile-wrap">
             <ion-avatar class="person-pic">
                 <img *ngIf="userimage!='null' && userimage!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{userimage}}" alt="avatar">
-                <img *ngIf="userimage=='null' || userimage==''" src="/assets/img/management.png" alt="avatar">
+                <img *ngIf="userimage=='null' || userimage==''" src="assets/img/management.png" alt="avatar">
             </ion-avatar>
             <h4 text-center>{{userFullname}}</h4>
         </div>
@@ -47,8 +47,9 @@
 
             <ion-col col-8 text-right class="top-bar">
                 <span (click)="gotoPage(topitem)" *ngFor="let topitem of topMenuItems;let idx = index;">
-                    <ion-icon *ngIf="topitem.icon!=''" name="{{topitem.icon}}"></ion-icon>
-                    <img *ngIf="topitem.icon==''" src="assets/img/creoyou_loop.png">
+                    <ion-icon *ngIf="topitem.icon!='' && topitem.icon!='loop' && topitem.icon!='home'" name="{{topitem.icon}}"></ion-icon>
+                    <img *ngIf="topitem.icon=='loop'" src="assets/img/creoyou_loop.png">
+                    <img *ngIf="topitem.icon=='home'" src="assets/img/homeloop.png">
                     <span class="counter" *ngIf="idx==2 && pendingfriendrequestcount>0">{{pendingfriendrequestcount}}</span>
                     <span class="counter" *ngIf="idx==3 && notificationcount>0">{{notificationcount}}</span>
                     <span class="counter" *ngIf="idx==4 && pendingmessagecount>0">{{pendingmessagecount}}</span>

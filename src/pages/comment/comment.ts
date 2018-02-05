@@ -1,6 +1,8 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Content, ViewController } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
+import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -12,41 +14,64 @@ export class CommentPage {
 
   comments = [];
   currentitem: any;
-  commentText: string;
+  commentText: string = '';
 
   base_url: any;
+  currentuserid = 0
   @ViewChild(Content) content: Content;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCntrl: ViewController,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider) {
 
+    this.currentuserid = window.localStorage['userid']
     this.currentitem = navParams.get('incidentitem');
     this.base_url = this.remotService.site_url;
-    //console.log(this.currentitem,navParams.get('incidentitem'));
+    console.log(this.currentitem, navParams.get('incidentitem'));
+    this.seecomment();
+  }
 
+  seecomment() {
     var commentsParams = {
       type: this.currentitem.incident_type,
       incident_id: this.currentitem.incident_id,
       typeId: this.currentitem.id,
       token: window.localStorage['token']
     }
+    if (this.currentitem.incident_type == 'Profile' || this.currentitem.incident_type == 'User') {
+
+      var commentsParams = {
+        type: this.currentitem.incident_type,
+        incident_id: this.currentitem.id,
+        typeId: this.currentitem.id,
+        token: window.localStorage['token']
+      }
+
+    } else if (this.currentitem.incident_type == 'You Tube' || this.currentitem.incident_type == 'Video') {
+
+      var commentsParams = {
+        type: this.currentitem.incident_type,
+        incident_id: this.currentitem.id,
+        typeId: this.currentitem.incident_id,
+        token: window.localStorage['token']
+      }
+
+    }
+
     console.log(commentsParams);
     this.comments = [];
 
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'seeComments').subscribe((response) => {
       console.log(response);
       this.remotService.dismissLoader();
       if (response.success == 1) {
-        console.log("okkkk");
+
         var commentData = response.data.comments;
         if (commentData != null) {
-
           commentData.forEach((item, key, index) => {
-
             this.comments.push(item);
-
+            console.log(this.comments);
           });
 
         }
@@ -62,6 +87,19 @@ export class CommentPage {
       this.remotService.dismissLoader();
       this.remotService.presentToast('Error loading data.');
     });
+
+  }
+
+  OtherFrofileView(data) {
+    if (data.user_status == 4) {
+      this.remotService.presentToast('Your are not allowed to view that profile.');
+    }
+    else if (this.currentuserid == data.user_id) {
+      //this.navCtrl.setRoot(HomePage);
+    } else {
+      console.log('other connection data', data);
+      this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
+    }
 
   }
 
@@ -87,7 +125,7 @@ export class CommentPage {
               userId: window.localStorage['userid'],
             };
 
-            this.remotService.presentLoading("Wait ...");
+            this.remotService.presentLoading();
             this.remotService.postData(commentsParams, 'deleteComments').subscribe((response) => {
               console.log(response);
               this.remotService.dismissLoader();
@@ -118,21 +156,21 @@ export class CommentPage {
       comment: this.commentText,
       user_id: window.localStorage['userid'],
     };
-    console.log(commentsParams);
-
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'newIncidentCommentAction').subscribe((response) => {
 
       this.remotService.dismissLoader();
       if (response.success == 1) {
-        var newcomment = {
+        /* var newcomment = {
           comment: this.commentText,
           users_full_name: window.localStorage['name'],
           image: window.localStorage['userimage'],
           id: response.data.id
-        };
-        this.comments.push(newcomment);
+        }; */
+        this.seecomment();
         this.commentText = '';
+        /*  this.comments.push(newcomment);
+         this.commentText = ''; */
         this.scrollToBottom();
 
       } else {
@@ -155,6 +193,9 @@ export class CommentPage {
 
   dismissComment() {
     this.viewCntrl.dismiss({ commentlength: this.comments.length });
+  }
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
   }
 
 }

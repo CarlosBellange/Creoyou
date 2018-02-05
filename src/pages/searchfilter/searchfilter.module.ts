@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { SearchfilterPage } from './searchfilter';
 
 @NgModule({
-  declarations: [
-    SearchfilterPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(SearchfilterPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class SearchfilterPageModule {}
+export class SearchfilterPageModule { }

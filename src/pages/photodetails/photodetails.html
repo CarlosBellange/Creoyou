@@ -1,0 +1,33 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title *ngIf="details.pagename=='' || details.pagename==null">Image Details</ion-title>
+    <ion-title *ngIf="details.pagename">{{details.pagename}}</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="EventContainer">
+        <ion-list class="EventBody">
+          <ion-item>
+            <div class="EventDetails" *ngIf="details.image_title">
+              <b>Title : </b> {{details.image_title}}
+            </div>
+            <div class="EventDetails" *ngIf="details.image_description">
+              <b>Description : </b> {{details.image_description}}
+            </div>
+            <div class="EventDetails" *ngIf="details.image_keywords">
+              <b>Keywords : </b> {{details.image_keywords}}
+            </div>
+
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

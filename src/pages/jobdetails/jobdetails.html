@@ -21,11 +21,13 @@
 
 
       <ion-col class="job_comapny_details" col-12 (click)="OtherProfile(job)">
-        <img src="{{base_url}}uploads/profileImages/resizedImages/{{job.profile_image}}" alt="Image" />
+        <img *ngIf="job.profile_image!='' && job.profile_image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{job.profile_image}}"
+          alt="Image" />
+        <img *ngIf="job.profile_image=='' || job.profile_image==null" src="assets/img/management.png">
         <h3>{{job.buisness_name}}</h3>
         <h2>{{job.job_title}}</h2>
         <p>
-          <ion-icon ios="ios-locate" md="md-locate"></ion-icon> {{job.city}}, {{job.state}},{{job.country}}</p>
+          <ion-icon ios="ios-locate" md="md-locate"></ion-icon> {{job.address}}</p>
 
       </ion-col>
       <ion-col class="job_content" col-12>
@@ -90,7 +92,7 @@
 
 <ion-footer>
   <ion-toolbar class="button_bottom_top">
-    <button *ngIf="appliedjob == 'Applied'" class="sign-up button button-block button-stable" (click)="applyjob(job)" [disabled]="appliedjob == 'Applied'">Already Apply</button>
+    <button *ngIf="appliedjob == 'Applied'" class="sign-up button button-block button-stable" (click)="applyjob(job)" [disabled]="appliedjob == 'Applied'">Already Applied</button>
     <button *ngIf="appliedjob == 'Not Applied'" class="sign-up button button-block button-stable" (click)="applyjob()">Apply</button>
   </ion-toolbar>
 </ion-footer>

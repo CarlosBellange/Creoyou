@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Navbar, ModalController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Navbar, ModalController, Platform, Content } from 'ionic-angular';
 import { ParsonaleditPage } from '../../pages/parsonaledit/parsonaledit';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
@@ -17,6 +17,7 @@ import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser'
   templateUrl: 'personal.html',
 })
 export class PersonalPage {
+  @ViewChild(Content) content: Content;
   @ViewChild(Navbar) navBar: Navbar;
   parsonaldata: any;
   options: InAppBrowserOptions = {
@@ -53,7 +54,7 @@ export class PersonalPage {
       token: window.localStorage['token']
     };
 
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'privateDataAndroid').subscribe((response) => {
       this.remotService.dismissLoader();
       if (response.success == 1) {
@@ -71,8 +72,12 @@ export class PersonalPage {
     console.log(url);
     this.theInAppBrowser.create(url, target, this.options);
   }
+  ionViewWillEnter() {
+    this.content.resize();
+  }
 
   ionViewDidLoad() {
+
     this.events.publish('creoyou:hidemenu');
 
     //over ridding back button

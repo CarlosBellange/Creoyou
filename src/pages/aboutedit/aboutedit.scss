@@ -1,32 +1,29 @@
 page-aboutedit {
-
-
-    ion-select{
+    ion-select {
         width: 100%;
         max-width: 100%;
         padding: 20px 8px 20px 0px !important;
-        color:rgb(41, 41, 41) !important;
+        color: rgb(41, 41, 41) !important;
     }
     .item-inner {
         border-bottom: 2px solid #0c4e92 !important;
         box-shadow: none !important;
     }
-    ion-label{
-        color:rgb(41, 41, 41) !important;
+    ion-label {
+        color: rgb(41, 41, 41) !important;
     }
-
-    .button_bottom_top a {
+    .button_bottom_top button {
         background: #1571a5;
         background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
         background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
         background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1 ) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
         color: #ffffff !important;
         padding: 16px 0px;
         height: 55px;
         font-size: 1.2em;
     }
-    ion-toolbar{
+    ion-toolbar {
         padding: 0px !important;
     }
     .item-md {
@@ -35,17 +32,24 @@ page-aboutedit {
     .item-inner {
         box-shadow: none !important;
     }
-
-    .about_privacy{
-        ion-icon{
+    .about_privacy {
+        ion-icon {
             font-size: 2em;
-            color:#1571a5; 
+            color: #1571a5;
         }
     }
-
-    .toolbaricons{
+    .toolbaricons {
         float: right;
     }
-
-
+    span.maxError {
+        margin-top: 5px;
+        display: inline-block;
+        color: red
+    }
+    span.errmsg {
+        font-size: 1.3rem;
+        color: red;
+        display: block;
+        margin-top: 10px;
+    }
 }

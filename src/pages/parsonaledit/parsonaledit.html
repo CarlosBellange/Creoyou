@@ -1,9 +1,9 @@
 <ion-header class="creoyou-header">
 
   <ion-navbar>
-    <ion-title *ngIf="editsection=='name'">Change Name</ion-title>
+    <ion-title *ngIf="editsection=='name'">Change username</ion-title>
     <ion-title *ngIf="editsection=='email'">Change Email</ion-title>
-    <ion-title *ngIf="editsection=='mobile'">Change Mobile No</ion-title>
+    <ion-title *ngIf="editsection=='mobile'">Change mobile number</ion-title>
     <ion-title *ngIf="editsection=='changepass'">Change Password</ion-title>
   </ion-navbar>
 
@@ -18,6 +18,10 @@
         <ion-label color="default" floating>Change Name</ion-label>
         <ion-input [(ngModel)]="username" formControlName="username" required></ion-input>
       </ion-item>
+      <span class="unique_info">
+        Your username is unique and will be used to form your custom URL:
+        <a>www.creoyou.com/username</a>
+      </span>
       <span class="error" *ngIf="FormRegistrationStepFour.get('username').hasError('pattern') && (FormRegistrationStepFour.get('username').touched)">
         Only characters and numbers allowed
       </span>
@@ -33,31 +37,27 @@
       <span class="error" *ngIf="FormRegistrationStepFour.get('username').hasError('maxlength') && (FormRegistrationStepFour.get('username').touched)">
         Maximum of 50 characters
       </span>
-      <span *ngIf="FormRegistrationStepFour.controls.username.pending">
+      <span class="personal_loader" *ngIf="FormRegistrationStepFour.controls.username.pending">
         <ion-spinner name="bubbles"></ion-spinner>.
       </span>
     </form>
+
+
   </ion-list>
+
 
   <ion-list *ngIf="editsection=='email'">
     <form [formGroup]="FormRegistrationStepOne">
       <ion-item class="edit_item">
         <ion-label color="default" floating>Change Email</ion-label>
-        <ion-input [(ngModel)]="email" formControlName="email" required></ion-input>
+        <ion-input type="email" [(ngModel)]="email" formControlName="email" (ngModelChange)="email= $event.toLocaleLowerCase()"></ion-input>
       </ion-item>
-      <span *ngIf="FormRegistrationStepOne.controls.email.pending && (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
+      <span *ngIf="FormRegistrationStepOne.controls.email.pending && (FormRegistrationStepOne.controls.email.dirty)">
         <ion-spinner name="bubbles"></ion-spinner>
       </span>
-      <span class="error" *ngIf="FormRegistrationStepOne.get('email').hasError('required') && (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
-        Email is required
-      </span>
-      <span class="error" *ngIf="(FormRegistrationStepOne.get('email').hasError('incorrectMailFormat') && !FormRegistrationStepOne.get('email').hasError('required'))
-   && (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
-        Email address is invalid.
-      </span>
       <span class="error" *ngIf="FormRegistrationStepOne.get('email').hasError('Inuse') && 
-  (FormRegistrationStepOne.controls.email.dirty || submitAttempt)">
-        Email is already in use
+  (FormRegistrationStepOne.controls.email.dirty)">
+        This email is already registered on another CreoYou account
       </span>
     </form>
   </ion-list>
@@ -75,7 +75,7 @@
         <ion-spinner name="bubbles"></ion-spinner>
       </span>
       <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('pattern') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
-        Mobile numberr should be only numbers
+        Mobile number should be only numbers
       </span>
       <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('required') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
         Mobile no is required
@@ -84,13 +84,13 @@
         Mobile code is required
       </span>
       <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('Inuse') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
-        Mobile no is already taken
+        This mobile number is already registered on another CreoYou account
       </span>
       <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('minlength') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
-        Minimum of 4 characters
+        Valid mobile number is required
       </span>
       <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('maxlength') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
-        Maximum of 15 characters
+        Valid mobile number is required
       </span>
     </form>
 
@@ -129,7 +129,7 @@
 <ion-footer>
   <ion-toolbar class="button_bottom_top">
     <button *ngIf="editsection=='name'" class="sign-up button button-block button-stable" [disabled]="name==''" (click)="updateDetails()">Update User Name</button>
-    <button *ngIf="editsection=='email'" class="sign-up button button-block button-stable" [disabled]="email==''" (click)="updateemail()">Update Email</button>
+    <button *ngIf="editsection=='email'" class="sign-up button button-block button-stable" (click)="updateemail()">Update Email</button>
     <button *ngIf="editsection=='mobile'" class="sign-up button button-block button-stable" (click)="changemobilenumber()">Update Mobile Number</button>
     <button *ngIf="editsection=='changepass'" class="sign-up button button-block button-stable" (click)="Changepassword()">Update Password</button>
   </ion-toolbar>

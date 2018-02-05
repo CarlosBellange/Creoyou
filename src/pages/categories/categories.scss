@@ -5,7 +5,6 @@ page-categories {
         text-align: center;
         padding: 10px;
     }
-    
     .dismiss{
         background: transparent;
         color: #fff;
@@ -16,5 +15,12 @@ page-categories {
         background-size: cover;
         height: 100%;
     }
+    ion-searchbar {
+        background-color: #1a3262 !important;
+    }
+    .button-md{
+        background-color: #1a3262 ;
+    }
+
 
 }

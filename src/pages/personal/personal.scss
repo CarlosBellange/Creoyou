@@ -6,6 +6,12 @@ page-personal {
     }
     .list-md .item-block .item-inner {
         border-bottom: none;
+        ion-icon {
+            font-size: 2.2rem;
+            margin-right: 8px;
+            vertical-align: middle;
+            color: #545454;
+        }
     }
     .grid {
         padding: 10px;
@@ -15,5 +21,9 @@ page-personal {
             vertical-align: middle;
             color: #545454;
         }
+    }
+    .bar-buttons-md {
+        align-items: center;
+        display: inline-flex;
     }
 }

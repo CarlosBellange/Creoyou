@@ -1,10 +1,10 @@
 <ion-header class="creoyou-header">
 
     <ion-navbar>
-        <ion-title>{{currentslideindex+1}}/{{albumphotos?.length}} </ion-title>
+        <ion-title>Photo Views</ion-title>
 
         <ion-buttons end>
-            <button (tap)="editImg()" class="edit" ion-button clear>
+            <button *ngIf="touserid == currentuserid" (tap)="editImg()" class="edit" ion-button clear>
                 <ion-icon name="settings"></ion-icon>
             </button>
         </ion-buttons>
@@ -18,14 +18,25 @@
 <ion-content>
 
 
-    <ion-slides (ionSlideDidChange)="slideChanged();">
 
-        <ion-slide *ngFor="let phto of albumphotos;">
-            <span class="ImgTitle">
-                <b>Title : {{phto.image_title!=null?phto.image_title:"No Title Found"}}</b>
-            </span>
-            <img src="{{base_url}}uploads/portfolioImages/resizedimages/{{phto.image_name}}" alt="Post Img" />
-            <!-- <span class="ImgDes"><b>Description : </b> Hello all (No description found)</span> -->
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+
+        <ion-slide *ngFor="let phto of albumphotos">
+            <img img-preloader="{{base_url}}uploads/portfolioImages/{{phto?.image_name}}" alt="Post Img" />
+            <p class="ImgTitle" *ngIf="phto.image_title">
+                <b>Title : {{phto.image_title | slice:0:20}}</b>
+                <span *ngIf="phto.image_title.length>20" (click)="viewdetails(phto)">...More</span>
+            </p>
+            <p class="ImgDes" *ngIf="phto.image_description">
+                <b>Description : </b>{{phto.image_description | slice:0:20}}
+                <span *ngIf="phto?.image_description?.length>20" (click)="viewdetails(phto)">...More</span>
+            </p>
+
+            <p class="ImgDes" *ngIf="phto.image_keywords">
+                <b>Keyword : </b>{{phto.image_keywords | slice:0:20}}
+                <span *ngIf="phto?.image_keywords?.length>20" (click)="viewdetails(phto)">...More</span>
+            </p>
+
         </ion-slide>
 
 
@@ -36,17 +47,17 @@
 
 <ion-footer>
     <ion-row class="post_activity">
-        <ion-col (click)="likeThisimage();" col-4 [class.active]="currentimage.likeActive>0">
+        <ion-col (click)="likeThisimage(currentimage);" col-4 [class.active]="currentimage?.likeActive>0">
             <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
-            <span>{{currentimage.image_like}}</span>
+            <span>{{currentimage?.image_like}}</span>
         </ion-col>
-        <ion-col col-4 (click)="showComments(phto)">
+        <ion-col col-4 (click)="showComments(currentimage)">
             <ion-icon ios="ios-text" md="md-text"></ion-icon>
-            <span>{{currentimage.count}}</span>
+            <span>{{currentimage?.count}}</span>
         </ion-col>
-        <ion-col (click)="shareThisPost();" col-4>
+        <ion-col (click)="shareThisPost(currentimage);" col-4 *ngIf="albumdetails?.privacy==1">
             <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            <span>{{currentimage.image_viewed}}</span>
+            <span>{{currentimage?.image_viewed}}</span>
         </ion-col>
     </ion-row>
 </ion-footer>

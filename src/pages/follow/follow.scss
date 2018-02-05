@@ -26,7 +26,7 @@ page-follow {
         padding-right: 10px !important;
 
         .label-md {
-            margin: 0;
+            margin: 5px 0px;
         }
         ion-item{
             padding-left: 0;
@@ -44,12 +44,14 @@ page-follow {
         }
         p.user_deg {
             color: #9f9f9f;
-            font-size: 13px !important;
             display: block;
         }
         p {
-            font-size: 1.5rem !important;
+            font-size: 1.5rem;
             margin: 0 !important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 20px;
         }
     }
 

@@ -19,9 +19,13 @@
         <ion-icon item-right name="create" (click)="editDatauser('name',parsonaldata);"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-buttons>
+        <ion-buttons *ngIf="parsonaldata?.email">
           <ion-icon name="mail"></ion-icon>{{parsonaldata?.email}}</ion-buttons>
-        <ion-icon item-right name="create" (click)="editDatauser('email',parsonaldata);"></ion-icon>
+
+        <ion-buttons *ngIf="parsonaldata?.email==''">
+          <ion-icon name="mail"></ion-icon>Enter Your Email</ion-buttons>
+
+        <ion-icon item-right name="create" (click)="editDatauser('email',parsonaldata);" *ngIf="parsonaldata?.social_login==0"></ion-icon>
       </ion-item>
       <ion-item>
         <ion-buttons>
@@ -31,7 +35,7 @@
       <ion-item>
         <ion-buttons>
           <ion-icon name="eye"></ion-icon> Change Password</ion-buttons>
-        <ion-icon item-right name="create" (click)="editDatauser('changepass',parsonaldata);"></ion-icon>
+        <ion-icon item-right name="create" (click)="editDatauser('changepass',parsonaldata);" *ngIf="parsonaldata?.social_login==0"></ion-icon>
       </ion-item>
 
       <br/>
@@ -47,6 +51,14 @@
       <ion-item (click)="launch('http://mojolynclife.info/contact-us')">
         <ion-buttons>
           <ion-icon name="list-box"></ion-icon> Contact Us</ion-buttons>
+      </ion-item>
+      <ion-item (click)="launch('http://mojolynclife.info/help')">
+        <ion-buttons>
+          <ion-icon name="help-circle"></ion-icon>Help</ion-buttons>
+      </ion-item>
+      <ion-item (click)="launch('http://mojolynclife.info/legal')">
+        <ion-buttons>
+          <ion-icon name="list-box"></ion-icon>Legal</ion-buttons>
       </ion-item>
     </ion-list>
   </ion-grid>

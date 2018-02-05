@@ -1,0 +1,59 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Change The Mobile Number</ion-title>
+    <ion-buttons end>
+      <button class="dismiss" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="FormRegistrationStepTwo" (ngSubmit)="changeMobileNumber(FormRegistrationStepTwo.value)">
+    <ion-row class="login-box">
+      <ion-col col-12>
+        <ion-select formControlName="mobilecode" multiple="false" class="mobile-code">
+          <ion-option value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.name}} {{item.dial_code}}</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col col-12>
+        <ion-input placeholder="Phone Number" type="number" [(ngModel)]="mobile_number" formControlName="mobileno" class="input-fld extra-pad"></ion-input>
+
+        <span *ngIf="FormRegistrationStepTwo.controls.mobileno.pending">
+          <ion-spinner name="bubbles"></ion-spinner>
+        </span>
+      </ion-col>
+      <ion-col col-12>
+        <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('pattern') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+          Mobile numberr should be only numbers
+        </span>
+        <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('required') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+          Please enter a valid mobile number for OTP verification
+        </span>
+        <span class="error" *ngIf="FormRegistrationStepTwo.get('mobilecode').hasError('required') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+          Mobile code is required
+        </span>
+        <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('Inuse') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+          This mobile number is already registered on another CreoYou account
+        </span>
+        <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('minlength') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+          Please enter a valid mobile number for OTP verification
+        </span>
+        <span class="error" *ngIf="FormRegistrationStepTwo.get('mobileno').hasError('maxlength') && (FormRegistrationStepTwo.get('mobileno').touched || submitAttempt)">
+          Maximum of 15 characters
+        </span>
+      </ion-col>
+
+      <ion-col col-12>
+        <button ion-button class="sign-in" [disabled]="!FormRegistrationStepTwo.valid" full type="submit">Save</button>
+
+      </ion-col>
+
+    </ion-row>
+
+  </form>
+</ion-content>

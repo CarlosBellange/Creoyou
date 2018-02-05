@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { AudiocommentPage } from './audiocomment';
 
 @NgModule({
-  declarations: [
-    AudiocommentPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(AudiocommentPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class AudiocommentPageModule {}
+export class AudiocommentPageModule { }

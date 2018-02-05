@@ -28,11 +28,6 @@
     "onesignal-cordova-plugin": {
       "PACKAGE_NAME": "com.wgt.creoyou"
     },
-    "cordova-plugin-facebook4": {
-      "APP_ID": "151118695480780",
-      "APP_NAME": "creoyou",
-      "PACKAGE_NAME": "com.wgt.creoyou"
-    },
     "cordova-plugin-googleplus": {
       "PACKAGE_NAME": "com.wgt.creoyou"
     },
@@ -66,11 +61,28 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "com.wgt.creoyou"
     },
-    "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "com.wgt.creoyou"
-    },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.wgt.creoyou"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "510967459265949",
+      "APP_NAME": "com.creoyou",
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "com.hutchind.cordova.plugins.streamingmedia": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.creoyou"
     }
   },
   "dependent_plugins": {

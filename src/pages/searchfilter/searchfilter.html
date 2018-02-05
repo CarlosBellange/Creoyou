@@ -1,7 +1,7 @@
 <ion-header class="creoyou-header">
 
   <ion-navbar>
-    <ion-title>People filter</ion-title>
+    <ion-title>{{advsearch}} filter</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,7 +18,7 @@
     <form [formGroup]="FormadvanceStepOne">
       <ion-item>
         <ion-label color="default" floating>Creative Field</ion-label>
-        <ion-input class="input-fld" (click)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
+        <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
       </ion-item>
     </form>
     <ion-item>
@@ -52,7 +52,7 @@
     <form [formGroup]="FormadvanceStepOne">
       <ion-item>
         <ion-label color="default" floating>Creative Field</ion-label>
-        <ion-input class="input-fld" (click)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
+        <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
       </ion-item>
     </form>
     <ion-item>
@@ -69,7 +69,7 @@
     </ion-item>
   </ion-list>
   <!--Jobs-->
-  <ion-list *ngIf="advsearch=='jobs'">
+  <ion-list *ngIf="advsearch=='job'">
     <ion-item>
       <ion-label color="default" floating>Job Name</ion-label>
       <ion-input [(ngModel)]="jobname"></ion-input>

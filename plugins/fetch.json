@@ -55,17 +55,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-facebook4": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-facebook4@^1.9.1"
-    },
-    "is_top_level": true,
-    "variables": {
-      "APP_ID": "151118695480780",
-      "APP_NAME": "creoyou"
-    }
-  },
   "cordova-plugin-googleplus": {
     "source": {
       "type": "registry",
@@ -73,7 +62,7 @@
     },
     "is_top_level": true,
     "variables": {
-      "REVERSED_CLIENT_ID": "990895596031-6duj98rgu8so78mn2lshb8bv68s0qco4.apps.googleusercontent.com"
+      "REVERSED_CLIENT_ID": "com.googleusercontent.apps.579773219331-vmjq7oi5dmcshfkodi7g2mnjsjj0m8kk"
     }
   },
   "cordova-plugin-crop": {
@@ -172,18 +161,61 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-android-permissions": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-android-permissions"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-inappbrowser": {
     "source": {
       "type": "registry",
       "id": "cordova-plugin-inappbrowser@^1.7.2"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "com.hutchind.cordova.plugins.streamingmedia": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-streaming-media@^1.0.2"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova.plugins.diagnostic": {
+    "source": {
+      "type": "registry",
+      "id": "cordova.plugins.diagnostic"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-android-permissions": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-android-permissions@^1.0.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-contacts": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-contacts@3.0.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-facebook4": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-facebook4@1.9.1"
+    },
+    "is_top_level": true,
+    "variables": {
+      "APP_ID": "510967459265949",
+      "APP_NAME": "com.creoyou"
+    }
+  },
+  "cordova-plugin-network-information": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-network-information"
     },
     "is_top_level": true,
     "variables": {}

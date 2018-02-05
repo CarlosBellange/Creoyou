@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, Navbar, Events, AlertController, ModalController } from 'ionic-angular';
+import { Content, IonicPage, NavController, NavParams, ActionSheetController, Navbar, Events, AlertController, ModalController } from 'ionic-angular';
 import { EventcreatePage } from '../../pages/eventcreate/eventcreate';
 import { EventdetailsPage } from '../../pages/eventdetails/eventdetails';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
@@ -20,24 +20,39 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 })
 export class EventlistPage {
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild(Content) content: Content;
   pagename: any;
   eventlist: any;
   base_url: any;
+  currentuserid: any;
   constructor(private socialSharing: SocialSharing, public modalCtrl: ModalController, private alertCtrl: AlertController, public remotService: RemoteServiceProvider, public events: Events, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams) {
     this.base_url = this.remotService.site_url;
     this.initeventlist();
+    this.currentuserid = window.localStorage['userid'];
     this.pagename = this.navParams.get('name');
+
+    /*  if (this.navParams.get('name') == 'Past') {
+       this.pagename = 'Past Events';
+     }
+     else {
+       this.pagename = 'Upcoming/Ongoing Events';
+     } */
     /* console.log(this.pagename); */
   }
 
+  ionViewDidEnter() {
+    //console.log("Connection pages entered")
+    this.content.resize();
+
+  }
 
   initeventlist() {
     var DataToSend = {
       user_id: window.localStorage['userid'],
       token: window.localStorage['token']
     }
-    this.remotService.presentLoading('wait ...');
-    this.remotService.postData(DataToSend, 'fullEvents').subscribe((response) => {
+    this.remotService.presentLoading();
+    this.remotService.postData(DataToSend, 'fullEventsOne').subscribe((response) => {
       this.remotService.dismissLoader();
       if (this.pagename == 'Past') {
         this.eventlist = response.data.past;
@@ -106,44 +121,50 @@ export class EventlistPage {
     this.navCtrl.push(EventscalenderPage, { 'eventcaldetails': this.eventlist });
   }
   eventDetails(event) {
+    console.log(event);
     this.navCtrl.push(EventdetailsPage, { 'eventdetails': event });
   }
   deleteEvent(event) {
-    let alert = this.alertCtrl.create({
-      title: 'Confirm To Delete Event',
-      message: 'Do you want to Delete this?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            /*  console.log('Cancel clicked'); */
-          }
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            var DataToSends = {
-              event_id: event.id,
-              token: window.localStorage['token']
+    if (event.is_ad == 1) {
+      this.remotService.presentToast("You can't delete this Event because you have advertised this Event");
+    }
+    else {
+      let alert = this.alertCtrl.create({
+        title: 'Confirm To Delete Event',
+        message: 'Do you want to Delete this?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              /*  console.log('Cancel clicked'); */
             }
-            this.remotService.presentLoading("Saving ...");
-            this.remotService.postData(DataToSends, 'eventDelete').subscribe((response) => {
-              this.remotService.dismissLoader();
-              if (response.success == 1) {
-                this.initeventlist();
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              var DataToSends = {
+                event_id: event.id,
+                token: window.localStorage['token']
               }
+              this.remotService.presentLoading();
+              this.remotService.postData(DataToSends, 'eventDelete').subscribe((response) => {
+                this.remotService.dismissLoader();
+                if (response.success == 1) {
+                  this.initeventlist();
+                }
 
-            }, () => {
-              this.remotService.dismissLoader();
-              this.remotService.presentToast('Error getting about details.');
-            });
+              }, () => {
+                this.remotService.dismissLoader();
+                this.remotService.presentToast('Error getting about details.');
+              });
 
+            }
           }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
+    }
   }
   likeThisitem(event) {
     var DataToSend = {
@@ -194,7 +215,7 @@ export class EventlistPage {
   shareThisPost(event) {
 
     var type = event.incident_type.toLowerCase()
-    var link = this.base_url + "user/things/share/" + type + "/" + event.id
+    var link = this.base_url + "user/things/share/" + type + "/" + event.incidentId + "/" + 1
     console.log(link)
     var img = "";
     var msg = ""
@@ -209,10 +230,9 @@ export class EventlistPage {
       token: window.localStorage['token']
     }
     console.log(DataToSends);
-    this.remotService.presentLoading("Saving ...");
+    this.remotService.presentLoading();
     this.remotService.postData(DataToSends, 'addToCalender').subscribe((response) => {
       this.remotService.dismissLoader();
-      console.log(response);
       if (response.success == 1) {
       }
 
@@ -220,5 +240,8 @@ export class EventlistPage {
       this.remotService.dismissLoader();
       this.remotService.presentToast('Error getting about details.');
     });
+  }
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
   }
 }

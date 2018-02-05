@@ -1,60 +1,58 @@
 page-welcome {
-
-    .homeslides{
-        height: 92%;
-     }
-    .ion-starter-content-background {
-        background: url("../assets/img/background.jpg") no-repeat center center fixed;
-        background-size: cover;
-        height: 100%;
+    ion-content {
+        color: #fff !important;
+        background-color: transparent !important;
+        /* Old browsers */
+        background: linear-gradient(0deg, #193c6c 0%, #1778b0 100%);
     }
-
-    .swiper-pagination-bullet{
-        background: white;
+    .footer-md::before {
+        background-image: none !important;
     }
-
-
-    .sign-up {
-
-        border-radius: 0;
-        margin-bottom: 10px;
-        font-family: 'RobotoCondensed-Regular';
-        font-size: 22px;
-        line-height: 49px;
-        min-height: 49px;
-        background: white;
-    }
-
-    .bar-positive a{
-        background: #1571a5;
-        background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
-        background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
-        background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1 ) !important;
-        border: none;
-        padding: 0;
-        text-align: center;
-    }
-    .bar-positive a {
-        width: 100%;
+    a.joinNOw {
+        display: block;
         color: #fff;
         font-size: 22px;
+        border: 1px solid #ccc;
+        width: 80%;
+        margin: 0 auto;
+        padding: 10px 0px;
+        border-radius: 3px;
+    }
+    a.SignIn {
+        text-align: center;
         display: block;
-        max-width: 100%;
-        font-family: 'RobotoCondensed-Regular';
-        line-height: 49px;
-    }
-    
-    .toolbar{
-        padding: 0px;
-    }
-    
-    .toolbar-md{
-        min-height: 0px;
+        width: 100%;
+        color: #fff;
+        font-size: 17px;
+        padding: 25px 0px 35px;
     }
     .swiper-slide img {
         width: auto;
-        max-width: 75%;
+        max-width: 270px;
     }
-
+    h3.pl_for {
+        font-size: 2.5rem;
+        margin-top: 30px;
+    }
+    .swiper-pagination-bullet {
+        width: 7px;
+        height: 7px;
+        background: #fff;
+    }
+    .swiper-pagination-bullet-active {
+        background: #ffffff;
+        opacity: 1;
+        width: 9px;
+        height: 9px;
+    }
+    ion-slide.first_slider {
+        background: #fff;
+        height: calc(100vh - 300px);
+        border-radius: 0px 0px 8px 8px;
+        h3 {
+            color: #797979;
+            font-size: 25px;
+            font-weight: 600;
+        }
+    }
 }

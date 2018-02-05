@@ -10,11 +10,38 @@
 <ion-content>
 
     <ion-list class="individual">
+        <span *ngIf="addsData=='' && jobsData==''">No job found.</span>
+
+        <ion-item *ngFor="let additem of addsData" padding-horizontal class="search_user search_user_individual job_add">
+            <ion-avatar item-left>
+                <img *ngIf="additem.image!='' && additem.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{additem.image}}">
+                <img *ngIf="additem.image=='' || additem.image==null" src="assets/img/management.png">
+            </ion-avatar>
+            <ion-item class="searcsh_right">
+                <p class="Company_name" (click)="OtherProfile(additem)"> {{additem.posted_by}} </p>
+                <div (click)="jobdetails(additem)">
+                    <p>
+                        <ion-icon name="briefcase"></ion-icon> {{additem.job_title}} </p>
+
+                    <p class="user_deg">Required Experience : {{additem.required_experience}}</p>
+                    <p class="user_deg">{{additem.address}}</p>
+                    <p class="user_deg" *ngIf="additem.second<60">{{additem.second }} Second ago | {{additem.name}}</p>
+                    <p class="user_deg" *ngIf="additem.minute<60 && additem.second>60">{{additem.minute }} Minute ago | {{additem.name}}</p>
+                    <p class="user_deg" *ngIf="additem.hour<24 && additem.minute>60">{{additem.hour}} hours ago | {{additem.name}}</p>
+                    <p class="user_deg" *ngIf="additem.hour>24 && additem.weeks<2">{{additem.days}} Days ago | {{additem.name}}</p>
+                    <p class="user_deg" *ngIf="additem.weeks>1">{{additem.weeks}} Weeks ago | {{additem.name}}</p>
+                </div>
+                <div class="user_action" item-right>
+                    <img src="assets/img/ad.png" alt="Image" />
+                </div>
+            </ion-item>
+        </ion-item>
+
 
         <ion-item *ngFor="let job of jobsData" padding-horizontal class="search_user search_user_individual">
             <ion-avatar item-left (click)="jobdetails(job)">
-                <img *ngIf="job.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{job.image}}">
-                <img *ngIf="job.image==''" src="assets/img/company.png">
+                <img *ngIf="job.image!='' && job.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{job.image}}">
+                <img *ngIf="job.image=='' || job.image==null" src="assets/img/management.png">
             </ion-avatar>
             <ion-item class="searcsh_right">
                 <p class="Company_name" (click)="OtherProfile(job)">{{job.posted_by}}</p>
@@ -22,34 +49,16 @@
                     <p>
                         <ion-icon name="briefcase"></ion-icon> {{job.job_title}} </p>
                     <p class="user_deg">Required Experience : {{job.required_experience}} </p>
-                    <p class="user_deg">{{job.city}}, {{job.state}}, {{job.country}}</p>
-                    <p class="user_deg" *ngIf="job.minute<60">{{job.minute }} Minute ago | {{job.name}}</p>
-                    <p class="user_deg" *ngIf="job.hour<24">{{job.hour}} hours ago | {{job.name}}</p>
-                    <p class="user_deg" *ngIf="job.hour>24">{{job.days}} Days ago | {{job.name}}</p>
+                    <p class="user_deg">{{job.address}}</p>
+                    <p class="user_deg" *ngIf="job.second<60">{{job.second }} Second ago | {{job.name}}</p>
+                    <p class="user_deg" *ngIf="job.minute<60 && job.second>60">{{job.minute }} Minute ago | {{job.name}}</p>
+                    <p class="user_deg" *ngIf="job.hour<24 && job.minute>60">{{job.hour}} hours ago | {{job.name}}</p>
+                    <p class="user_deg" *ngIf="job.hour>24 && job.weeks<2">{{job.days}} Days ago | {{job.name}}</p>
+                    <p class="user_deg" *ngIf="job.weeks>1">{{job.weeks}} Weeks ago | {{job.name}}</p>
                 </div>
             </ion-item>
         </ion-item>
 
-        <ion-item *ngFor="let additem of addsData" padding-horizontal class="search_user search_user_individual job_add">
-            <ion-avatar item-left>
-                <img *ngIf="additem.image!=''" src="http://creoyou.net/uploads/profileImages/{{additem.image}}">
-                <img *ngIf="additem.image==''" src="assets/img/ad.png">
-            </ion-avatar>
-            <ion-item class="searcsh_right">
-                <p>
-                    <ion-icon name="briefcase"></ion-icon> {{additem.job_title}} </p>
-                <p class="Company_name"> {{additem.posted_by}} </p>
-                <p class="user_deg">Required Experience : {{additem.required_experience}}</p>
-                <p class="user_deg">{{additem.city}}, {{additem.state}}, {{additem.country}}</p>
-                <p class="user_deg" *ngIf="additem.minute<60">{{additem.minute }} Minute ago | {{additem.name}}</p>
-                <p class="user_deg" *ngIf="additem.hour<24">{{additem.hour}} hours ago | {{additem.name}}</p>
-                <p class="user_deg" *ngIf="additem.hour>24">{{additem.days}} Days ago | {{additem.name}}</p>
-
-                <div class="user_action" item-right>
-                    <img src="assets/img/add.png" alt="Image" />
-                </div>
-            </ion-item>
-        </ion-item>
 
 
     </ion-list>
@@ -60,10 +69,10 @@
                  <h3> Sorry No Job Found... </h3> 
             </ion-item>
           </ion-list> -->
-    <ion-infinite-scroll (ionInfinite)="fetchjobsData($event)">
+    <!-- <ion-infinite-scroll (ionInfinite)="fetchjobsData($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles">
         </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    </ion-infinite-scroll> -->
 
 
 </ion-content>

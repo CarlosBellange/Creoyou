@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Navbar, ActionSheetController } from 'ionic-angular';
+import { Content, IonicPage, NavController, NavParams, Events, Navbar, ActionSheetController } from 'ionic-angular';
 
 import {
   RemoteServiceProvider
@@ -14,7 +14,7 @@ import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
 })
 
 export class FollowPage {
-
+  @ViewChild(Content) content: Content;
   base_url: any;
   @ViewChild(Navbar) navBar: Navbar;
   followActiveTab: any;
@@ -22,7 +22,8 @@ export class FollowPage {
   following: any;
   followingOffset: any;
   followerOffset: any;
-
+  followingmsg: any;
+  followermsg: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events
     , public remotService: RemoteServiceProvider, public actionSheetCtrl: ActionSheetController) {
 
@@ -30,10 +31,13 @@ export class FollowPage {
     this.followActiveTab = "following";
     this.loadFollowings();
   }
+  ionViewDidEnter() {
+    //console.log("Connection pages entered")
+    this.content.resize();
 
+  }
 
   loadFollowers() {
-
     this.followerOffset = 0;
     var followerParams = {
       user_id: window.localStorage['userid'],
@@ -43,7 +47,7 @@ export class FollowPage {
 
     this.followers = [];
 
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(followerParams, 'followers').subscribe((response) => {
 
       this.remotService.dismissLoader();
@@ -55,14 +59,16 @@ export class FollowPage {
           response.data.forEach((item, key, index) => {
 
             this.followers.push(item);
-            console.log(this.followers);
           })
-
+        }
+        else if (response.data == null) {
+          this.followermsg = 'No Followers';
         }
 
 
       } else {
-        this.remotService.presentToast(response.message);
+        this.followermsg = 'No Followers';
+        /*  this.remotService.presentToast(response.message); */
       }
     }, () => {
       this.remotService.dismissLoader();
@@ -82,26 +88,25 @@ export class FollowPage {
 
     this.following = [];
 
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(followingparams, 'following').subscribe((response) => {
-
       this.remotService.dismissLoader();
       console.log(response);
       if (response.success == 1) {
 
         if (response.data != null) {
-
           response.data.forEach((item, key, index) => {
-
             this.following.push(item);
           })
 
         }
-
-
+        else if (response.data == null) {
+          this.followingmsg = 'Not following anyone';
+        }
 
       } else {
-        this.remotService.presentToast(response.message);
+        this.followingmsg = 'Not following anyone';
+        /* this.remotService.presentToast(response.message); */
       }
     }, () => {
       this.remotService.dismissLoader();
@@ -119,9 +124,18 @@ export class FollowPage {
           role: 'destructive',
           handler: () => {
 
-            this.remotService.presentToast('wait...');
-            this.remotService.postData({ 'user_id': user.id, 'to_userid': window.localStorage['userid'] }, 'unfollowUser').subscribe((response) => {
+            var unfollowerparams = {
+              user_id: window.localStorage['userid'],
+              to_userid: user.id,
+              token: window.localStorage['token'],
 
+            };
+
+            this.remotService.presentToast(' You have unfollowed successfully');
+            this.remotService.postData(unfollowerparams, 'unfollowUser').subscribe((response) => {
+
+
+              console.log(response);
               if (response.success == 1) {
 
                 if (type == 1) {
@@ -172,9 +186,9 @@ export class FollowPage {
         }
 
 
-      } else {
+      } /* else {
         this.remotService.presentToast(response.message);
-      }
+      } */
     }, () => {
       infiniteScroll.complete();
       this.remotService.presentToast('Error loading data.');
@@ -207,9 +221,9 @@ export class FollowPage {
         }
 
 
-      } else {
+      } /* else {
         this.remotService.presentToast(response.message);
-      }
+      } */
     }, () => {
       infiniteScroll.complete();
       this.remotService.presentToast('Error loading data.');
@@ -218,6 +232,7 @@ export class FollowPage {
   }
 
   ionViewDidLoad() {
+
 
     this.events.publish('creoyou:hidemenu');
 
@@ -253,5 +268,10 @@ export class FollowPage {
     this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
     //this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data, 'friendcheck': connection.is_friend });
   }
+
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
+  }
+
 
 }

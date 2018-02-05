@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,Events} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, Content, ViewController, Platform } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { RegistrationPage } from '../registration/registration';
 /**
@@ -15,21 +15,28 @@ import { RegistrationPage } from '../registration/registration';
   templateUrl: 'welcome.html',
 })
 export class WelcomePage {
+  @ViewChild(Content) content: Content;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public events: Events) {
-      
+  constructor(platform: Platform, public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, public events: Events) {
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomePage');
+    this.viewCtrl.showBackButton(false);
+    this.events.publish('creoyou:hidemenu');
   }
-  
-    login(){
-      this.navCtrl.push(LoginPage);
-    }
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+    this.content.resize();
+  }
 
-    signup(){
-     this.navCtrl.push(RegistrationPage);
-    }
+
+  login() {
+    this.navCtrl.push(LoginPage);
+  }
+
+  signup() {
+    this.navCtrl.push(RegistrationPage);
+  }
 
 }

@@ -12,16 +12,16 @@
   <ion-list radio-group [(ngModel)]="autoManufacturers">
 
     <ion-list-header>
-      <ion-icon name="contacts"></ion-icon> Who can send me friend request
+      <ion-icon name="contacts"></ion-icon> Who can send me a connection invite?
     </ion-list-header>
 
     <ion-item>
-      <ion-label>Any One</ion-label>
+      <ion-label>Anybody</ion-label>
       <ion-radio value="1" (ionSelect)="select(item)"></ion-radio>
     </ion-item>
 
     <ion-item>
-      <ion-label>Who know my mobile no</ion-label>
+      <ion-label>Only people who have my phone number</ion-label>
       <ion-radio value="2" (ionSelect)="select2(item)"></ion-radio>
     </ion-item>
 

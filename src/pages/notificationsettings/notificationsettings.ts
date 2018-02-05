@@ -41,7 +41,7 @@ export class NotificationsettingsPage {
       user_id: window.localStorage['userid'],
       token: window.localStorage['token']
     }
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'notificationSettingDetails').subscribe((response) => {
       this.remotService.dismissLoader();
       if (response.success == 1) {
@@ -102,7 +102,7 @@ export class NotificationsettingsPage {
       can_sent_friend_request_any: 0,
       can_sent_friend_request_by_mobile: 1
     }
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(this.DataToSendFrnd, 'requestCheck').subscribe((response) => {
       this.remotService.dismissLoader();
 
@@ -120,7 +120,7 @@ export class NotificationsettingsPage {
       can_sent_friend_request_any: 1,
       can_sent_friend_request_by_mobile: 0
     }
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(this.DataToSendFrnd, 'requestCheck').subscribe((response) => {
       this.remotService.dismissLoader();
 
@@ -175,7 +175,7 @@ export class NotificationsettingsPage {
       token: window.localStorage['token']
     }
     console.log(DataToSend);
-    // this.remotService.presentLoading("Wait ...");
+    // this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'notificationSettings').subscribe((response) => {
       // this.remotService.dismissLoader();
       console.log(response);

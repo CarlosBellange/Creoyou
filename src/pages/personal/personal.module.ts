@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { PersonalPage } from './personal';
 
 @NgModule({
-  declarations: [
-    PersonalPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(PersonalPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class PersonalPageModule {}
+export class PersonalPageModule { }

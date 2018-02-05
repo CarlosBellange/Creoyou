@@ -51,4 +51,21 @@ page-parsonaledit {
     .input-has-focus .label-md[floating] {
         color: #000;
     }
+    .personal_loader {
+        display: block;
+        text-align: center;
+        padding: 10px 0px
+    }
+    .no-scroll .scroll-content {
+        overflow: hidden;
+    }
+    span.unique_info {
+        text-align: center;
+        display: block;
+        background: #fff;
+        padding: 15px 0px;
+        margin: 5px 0px;
+        border-radius: 4px;
+        line-height: 17px;
+    }
 }

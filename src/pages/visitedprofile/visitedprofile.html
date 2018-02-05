@@ -1,0 +1,37 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>People Visited</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list class="individual">
+
+    <ion-item *ngFor="let visit of visited;let idx=index;" padding-horizontal class="search_user search_user_individual" (click)="otherProfile(visit)">
+
+      <ion-avatar item-left>
+
+        <img *ngIf="visit.image!=null && visit.image!=''" img-preloader="{{base_url}}uploads/profileImages/resizedImages/{{visit.image}}"
+          alt="avatar">
+        <img *ngIf="visit.image==null || visit.image==''" img-preloader="assets/img/management.png" alt="avatar">
+      </ion-avatar>
+      <ion-item class="searcsh_right">
+
+        <p *ngIf="visit.fname || visit.lname && visit.user_type==1">{{visit.fname}} {{visit.lname}}</p>
+        <p *ngIf="visit.buisness_name && visit.user_type==2">{{visit.buisness_name}}</p>
+        <p class="user_deg" *ngIf="visit.cat_name">
+          {{visit.cat_name}}</p>
+        <p class="user_deg" *ngIf="visit.address">
+          <ion-icon name="home"></ion-icon> {{visit.address}}</p>
+
+      </ion-item>
+    </ion-item>
+
+    <ion-item *ngIf="connections?.length<=0 && shownone==1" class="no_result">
+      <h3> Sorry No visit Found... </h3>
+    </ion-item>
+  </ion-list>
+</ion-content>

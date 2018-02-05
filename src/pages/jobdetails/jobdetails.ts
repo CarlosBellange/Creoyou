@@ -40,7 +40,7 @@ export class JobdetailsPage {
       job_id: this.jobid,
       token: window.localStorage['token']
     }
-    this.remotService.presentLoading('wait ...');
+    this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'jobFullDetails').subscribe((response) => {
       this.remotService.dismissLoader();
       this.jobdetails = response.data.Details;
@@ -79,7 +79,7 @@ export class JobdetailsPage {
         job_id: this.jobid,
         token: window.localStorage['token']
       }
-      this.remotService.presentLoading('wait ...');
+      this.remotService.presentLoading();
       this.remotService.postData(DataToSend, 'applyJob').subscribe((response) => {
         this.remotService.dismissLoader();
         if (response.success == 1) {
@@ -112,5 +112,7 @@ export class JobdetailsPage {
     this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
   }
 
-
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
+  }
 }

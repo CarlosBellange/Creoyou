@@ -9,7 +9,7 @@
           <ion-item>
             <ion-avatar item-left>
               <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}" alt="avatar">
-              <img *ngIf="user.image==null || user.image==''" src="/assets/img/management.png" alt="avatar">
+              <img *ngIf="user.image==null || user.image==''" src="assets/img/management.png" alt="avatar">
 
             </ion-avatar>
             <p class="grn-text">{{user.users_full_name}}</p>
@@ -30,72 +30,13 @@
 <ion-content class="chat" no-bounce>
 
   <ion-list class="messages">
-
     <div *ngFor="let msg of messages;let msgindex = index;" [class.message-left]="msg.userId!=currentuserid" [class.message-right]="msg.userId==currentuserid">
-      <p>{{msg.content}}</p>
+      <p class="shareProfile" [innerHTML]="msg.content" #grabid (click)="OtherFrofileView($event)"></p>
       <p class="date" item-right>
         <span>{{msg.creation_date|amDateFormat:'h:mm a'}}</span>
         <span>{{msg.creation_date|amDateFormat:'MM.DD.YYYY'}}</span>
       </p>
     </div>
-
-    <!-- <div class="message-right">
-        <p>Yes I booked you for today</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
-      </div>
-  
-      <div class="message-left">
-        <p>Hi,I am your worker.</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
-      </div>
-  
-      <div class="message-right">
-        <p>Yes I booked you for today</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
-      </div>
-  
-  
-      <div class="message-left">
-        <p>Hi,I am your worker.</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
-      </div>
-  
-      <div class="message-right">
-        <p>Yes I booked you for today</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
-      </div>
-  
-      <div class="message-left">
-        <p>Hi,I am your worker.</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
-      </div>
-  
-      <div class="message-right">
-        <p>Yes I booked you for today</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
-      </div>
-  
-  
-      <div class="message-left">
-        <p>Hi,I am your worker.</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
-      </div>
-  
-      <div class="message-right">
-        <p>Yes I booked you for today</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
-      </div>
-  
-      <div class="message-left">
-        <p>Hi,I am your worker.</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span></p>
-      </div>
-  
-      <div class="message-right">
-        <p>Yes I booked you for today</p>
-        <p class="date" item-right><span>22.02.2017</span><span>03.45pm</span><i class="material-icons">done</i></p>
-      </div> -->
-
   </ion-list>
 
 </ion-content>
@@ -104,11 +45,11 @@
   <ion-toolbar class="msg" color="footer-white">
     <div class="in">
       <div class="text-box">
-        <ion-textarea [(ngModel)]="messageText" rows="1" autoresize placeholder="Type Message Here..."></ion-textarea>
+        <ion-textarea [disabled]="blockeduser == 4" [(ngModel)]="messageText" rows="1" autoresize placeholder="Type Message Here..."></ion-textarea>
       </div>
     </div>
     <!-- on keyboard open send button -->
-    <button ion-button end small (click)="sendMessage()" [disabled]="messageText === ''">
+    <button ion-button end small (click)="sendMessage()" [disabled]="messageText === '' || blockeduser == 4">
       <i class="material-icons">send</i>
     </button>
   </ion-toolbar>

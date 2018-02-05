@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { JobapplyPage } from './jobapply';
 
 @NgModule({
-  declarations: [
-    JobapplyPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(JobapplyPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class JobapplyPageModule {}
+export class JobapplyPageModule { }

@@ -42,11 +42,12 @@ page-eventcreate {
             text-align: center;
             color: red;
             border-radius: 50%;
-            line-height: 30px;
-            font-size: 2.5rem;
+            line-height: 32px;
+            font-size: 18px;
         }
         img {
             border-radius: 3px;
+            width: 100%;
         }
     }
     button.uploadImage {
@@ -76,6 +77,21 @@ page-eventcreate {
             font-size: 1.5rem;
             color: #000;
             font-weight: 600;
+        }
+    }
+    .check_class {
+        margin: 10px 0px;
+        color: #004de6;
+        font-size: 15px;
+        span {
+            display: block;
+            margin-bottom: 12px;
+            color: #004de6;
+            font-size: 15px;
+            margin-top: 15px;
+        }
+        ion-checkbox {
+            margin-right: 0px;
         }
     }
 }

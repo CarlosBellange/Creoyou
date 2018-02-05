@@ -1,0 +1,112 @@
+page-premiumuser {
+    .content-background {
+        background: url("../assets/img/background.jpg") no-repeat center;
+        text-align: center;
+        padding-bottom: 10px;
+        img {
+            width: 130px;
+            display: block;
+            margin: 10px auto;
+        }
+        span {
+            font-size: 15px;
+            color: #fff;
+            line-height: 18px;
+        }
+    }
+    .preDes {
+        text-align: center;
+        font-size: 1.5rem;
+        p {
+            margin: 0px;
+            line-height: 19px;
+        }
+        b {
+            color: #1571a5;
+        }
+    }
+    .benefits_ h1 {
+        background: #1a3262;
+        text-align: center;
+        margin: 0px;
+        border-radius: 2px;
+        color: #fff;
+        font-size: 17px;
+        padding: 11px 15px;
+    }
+    .benefits_ p {
+        margin: 15px 0px 0px 20px;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        color: #585858;
+        line-height: 19px;
+        ion-icon {
+            margin-right: 10px;
+            color: #1a3262;
+            font-size: 24px;
+        }
+    }
+    .benefits_ span {
+        text-align: center;
+        display: block;
+        font-size: 15px;
+        margin: 15px 15px;
+        line-height: 19px;
+    }
+    .upgrade_table_head {
+        text-align: center;
+        background: #1a3262;
+        color: #fff;
+        border-radius: 3px;
+        padding: 10px 15px;
+        h1 {
+            text-align: center;
+            margin: 0px 0px 7px 0px;
+            border-radius: 2px;
+            color: #fff;
+            font-size: 20px;
+        }
+        p {
+            margin: 0px;
+            line-height: 18px;
+        }
+    }
+    .upgrade_table {
+        text-align: center;
+        span {
+            display: block;
+            text-align: center;
+            margin: 11px 0px;
+            color: #505050;
+        }
+    }
+    .upgrade_head {
+        color: #1a3262;
+        font-size: 17px;
+    }
+    .upgrade_body,
+    .upgrade_head {
+        text-align: center;
+        line-height: 18px;
+    }
+    .upgrade_point h3 {
+        text-align: center;
+        font-size: 15px;
+        color: #616161;
+        padding: 10px 16px;
+    }
+    .upgrade_point ion-col.col {
+        text-align: center;
+        border: 2px solid #ccc;
+        padding: 15px 10px;
+        margin: 8px 0px;
+        border-radius: 39px;
+        font-size: 17px;
+        color: #000;
+        line-height: 21px;
+        b {
+            color: #1a3262;
+        }
+    }
+}

@@ -19,11 +19,12 @@ export class TaguserPage {
 
   public users: any;
   base_url: any;
+  pagename: string = '';
 
 
-  constructor(public navCtrl: NavController, public remotService: RemoteServiceProvider,
+  constructor(public navParams: NavParams, public navCtrl: NavController, public remotService: RemoteServiceProvider,
     public viewCtrl: ViewController) {
-
+    this.pagename = this.navParams.get('pagename');
     this.base_url = this.remotService.site_url;
     this.searchControl = new FormControl();
   }
@@ -53,7 +54,6 @@ export class TaguserPage {
       searchkeyword: this.searchTerm
     };
     this.remotService.postData(searchparams, 'getConnections').subscribe((response) => {
-
       this.searching = false;
       if (response.success == 1) {
 
@@ -73,20 +73,21 @@ export class TaguserPage {
    * on chnage checkbox 
    */
   tagThisUser(e: any, item, index) {
-
     if (e.checked)
       this.selectedTags[index] = item;
     else
       this.selectedTags.splice(index, 1);
-
     console.log("User should be tagged", e.checked, this.selectedTags)
   }
 
-
+  selectThisUser(e: any, item, index) {
+    this.selectedTags = [];
+    this.selectedTags[index] = item;
+    console.log("User should be tagged", this.selectedTags)
+  }
   dismiss() {
     this.viewCtrl.dismiss({ tags: this.selectedTags });
 
   }
-
 
 }

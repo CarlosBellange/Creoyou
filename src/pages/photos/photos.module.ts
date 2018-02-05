@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { PhotosPage } from './photos';
 
 @NgModule({
-  declarations: [
-    PhotosPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(PhotosPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class PhotosPageModule {}
+export class PhotosPageModule { }

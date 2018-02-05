@@ -1,0 +1,71 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Advertisement Details</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="EventContainer">
+        <ion-list class="eventHeader">
+          <ion-item>
+            <ion-avatar item-left>
+              <img *ngIf="adddetails.image!='' && adddetails.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{adddetails?.image}}"
+                alt="avatar">
+              <img *ngIf="adddetails.image=='' || adddetails.image==null" src="assets/img/management.png" alt="avatar">
+            </ion-avatar>
+            <p class="EventTitle">{{adddetails.advertisement_text}}</p>
+            <p class="EventTitle" *ngIf="adddetails.users_full_name"> by {{adddetails.users_full_name}}</p>
+          </ion-item>
+        </ion-list>
+
+        <ion-list class="EventBody">
+          <ion-item *ngIf="adddetails.advertisement_type=='image'">
+            <img *ngIf="adddetails.ad_media" src="{{base_url}}uploads/portfolioImages/{{adddetails?.ad_media}}" alt="Post Img" />
+            <img *ngIf="adddetails.ad_media=='' || adddetails.ad_media==null" src="assets/img/management.png">
+            <div class="EventDetails">
+              {{adddetails.creation_date | date:'mediumDate'}} | {{adddetails.creation_date | date:'shortTime'}}
+            </div>
+            <div class="EventDetails">
+              <b>Title : </b> {{adddetails.advertisement_text}}
+            </div>
+            <div class="EventDetails">
+              <b>Description : </b> {{adddetails.advertisement_details}}
+            </div>
+          </ion-item>
+
+          <ion-item *ngIf="adddetails.advertisement_type=='custom'">
+            <img *ngIf="adddetails.ad_media" src="{{base_url}}uploads/customAdMedia/{{adddetails?.ad_media}}" alt="Post Img" />
+            <img *ngIf="adddetails.ad_media=='' || adddetails.ad_media==null" src="assets/img/management.png">
+            <div class="EventDetails">
+              {{adddetails.creation_date | date:'mediumDate'}} | {{adddetails.creation_date | date:'shortTime'}}
+            </div>
+            <div class="EventDetails">
+              <b>Title : </b> {{adddetails.advertisement_text}}
+            </div>
+            <div class="EventDetails">
+              <b>Description : </b> {{adddetails.advertisement_details}}
+            </div>
+          </ion-item>
+
+          <ion-item *ngIf="adddetails.advertisement_type=='video'">
+            <div class="EventDetails">
+              <b>Title : </b> {{adddetails.advertisement_text}}
+            </div>
+            <div class="EventDetails">
+              <b>Description : </b> {{adddetails.advertisement_details}}
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

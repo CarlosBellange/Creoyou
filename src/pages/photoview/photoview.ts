@@ -5,6 +5,7 @@ import { RemoteServiceProvider } from '../../providers/remote-service/remote-ser
 import { CommentPage } from '../comment/comment';
 import { retry } from 'rxjs/operator/retry';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { PhotodetailsPage } from '../../pages/photodetails/photodetails';
 
 
 @IonicPage()
@@ -13,22 +14,27 @@ import { SocialSharing } from '@ionic-native/social-sharing';
   templateUrl: 'photoview.html',
 })
 export class PhotoviewPage {
-
+  @ViewChild(Navbar) navBar: Navbar;
   album: any;
   base_url: any;
   albumphotos = [];
   albumdetails: any;
   @ViewChild(Slides) slides: Slides;
   currentslideindex = 0;
+  touserid = 0;
+  currentuserid: any;
+  img_id: any;
   currentimage = { count: 0, id: 0, image_like: "0", image_viewed: null, likeActive: 0 };
 
   constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public events: Events,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider,
     public modalCtrl: ModalController, private socialSharing: SocialSharing) {
-
+    this.touserid = navParams.get('touserid') ? navParams.get('touserid') : window.localStorage['userid'];
     this.base_url = this.remotService.site_url;
     this.album = navParams.get('album');
-    console.log(this.album);
+    this.img_id = this.navParams.get('img_id');
+    console.log(this.img_id);
+    this.currentuserid = window.localStorage['userid'];
     this.initPhotoFromalbumData();
     this.albumphotos = [];
     this.currentslideindex = 0;
@@ -37,22 +43,42 @@ export class PhotoviewPage {
 
   initPhotoFromalbumData() {
 
-
     var DataToSend = {
-      user_id: window.localStorage['userid'],
+      user_id: this.touserid,
+      other_user_id: this.touserid,
       id: this.album.id,
       token: window.localStorage['token']
     }
     this.albumphotos = [];
-    this.remotService.presentLoading('wait ...');
+    this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'portfolioImages').subscribe((response) => {
 
       this.remotService.dismissLoader();
       if (response.success == 1) {
         this.albumphotos = response.data.Images;
+        let oldarr = this.albumphotos;
+        let finalarr = [];
+        for (let i of this.albumphotos) {
+          if (i.id == this.img_id) {
+            finalarr.push(i);
+          }
+        }
+        for (let i of this.albumphotos) {
+          if (i.id != this.img_id) {
+            finalarr.push(i);
+          }
+        }
+        this.albumphotos = finalarr;
         this.albumdetails = response.data.details;
+        if (this.albumphotos.length == 1) {
+          this.slides.lockSwipes(true);
+        } else {
+          this.slides.lockSwipes(false);
+        }
+
         this.currentslideindex = this.slides.getActiveIndex();
         this.currentimage = this.albumphotos[this.currentslideindex];
+        console.log(this.currentimage);
       } else {
         this.remotService.presentToast(response.message);
       }
@@ -71,7 +97,7 @@ export class PhotoviewPage {
    */
   shareThisPost() {
 
-    var link = this.base_url + "user/things/share/image/" + this.currentimage.id
+    var link = this.base_url + "user/things/share/pimage/" + this.currentimage.id + "/" + 1
     console.log(link)
     var img = "";
     var msg = ""
@@ -82,15 +108,16 @@ export class PhotoviewPage {
   /**
   * show comments
   */
-  showComments(item) {
-    item = {
-      incident_id: [this.currentimage.id],
+  showComments(currentimage) {
+    let arr = [this.currentimage.id];
+    var item = {
+      incident_id: JSON.stringify(arr),
       incident_type: 'Image',
       id: this.currentimage.id
     }
     let commentModal = this.modalCtrl.create(CommentPage, { incidentitem: item });
     commentModal.onDidDismiss(data => {
-      item.comments = data.commentlength;
+      currentimage.count = data.commentlength;
     });
     commentModal.present();
   }
@@ -103,8 +130,6 @@ export class PhotoviewPage {
           text: 'Edit image title',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
-            console.log(this.currentimage);
             this.editimagetitle(this.currentimage);
           }
         },
@@ -112,15 +137,21 @@ export class PhotoviewPage {
           text: 'Edit image Description',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
             this.editimagedesc(this.currentimage);
+          }
+        },
+        {
+          text: 'Add Keyword',
+          role: 'destructive',
+          handler: () => {
+            this.addkeyword(this.currentimage);
           }
         },
         {
           text: 'Delete',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            // console.log('Destructive clicked');
             this.deleteConfirm(this.currentimage);
           }
         },
@@ -139,7 +170,7 @@ export class PhotoviewPage {
     };
 
     this.remotService.postData(DataToSend, 'likeImageAction').subscribe((response) => {
-      console.log(response);
+      // console.log(response);
 
       if (response.success == 1) {
 
@@ -162,15 +193,33 @@ export class PhotoviewPage {
   }
 
   slideChanged() {
+
+    console.log(this.slides.length);
+
+    if (this.slides.isEnd()) {
+
+      this.slides.lockSwipeToNext(true);
+    }
+    else {
+      this.slides.lockSwipeToNext(false);
+    }
+    // console.log(this.slides.getActiveIndex());
     this.currentslideindex = this.slides.getActiveIndex();
     this.currentimage = this.albumphotos[this.currentslideindex];
     console.log('Current index is', this.albumphotos, this.albumphotos[this.currentslideindex]);
+
+
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PhotoviewPage');
+    this.events.publish('creoyou:hidemenu');
+    this.navBar.backButtonClick = () => {
+      this.events.publish('creoyou:hidemenu');
+      this.navCtrl.pop()
+    }
+    //  console.log('ionViewDidLoad PhotoviewPage');
   }
-
 
   editimagetitle(currentimage) {
     let prompt = this.alertCtrl.create({
@@ -187,7 +236,7 @@ export class PhotoviewPage {
         {
           text: 'Cancel',
           handler: data => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {
@@ -196,7 +245,8 @@ export class PhotoviewPage {
             var albumdata = {
               id: currentimage.id,
               token: window.localStorage['token'],
-              image_title: data.title
+              image_title: data.title,
+              type: 'image_title'
             }
             // console.log(albumdata);
             this.remotService.postData(albumdata, 'EditImageTitles').subscribe((response) => {
@@ -233,7 +283,7 @@ export class PhotoviewPage {
         {
           text: 'Cancel',
           handler: data => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {
@@ -242,11 +292,61 @@ export class PhotoviewPage {
             var albumdata = {
               id: currentimage.id,
               token: window.localStorage['token'],
-              image_description: data.desc
+              image_description: data.desc,
+              type: 'image_description'
             }
             // console.log(albumdata);
             this.remotService.postData(albumdata, 'EditImageTitles').subscribe((response) => {
-              console.log(response);
+              //  console.log(response);
+              if (response.success == 1) {
+
+                this.initPhotoFromalbumData();
+
+              } else {
+                this.remotService.presentToast(response.message);
+              }
+            }, () => {
+              this.remotService.presentToast('Error saving data.');
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
+
+
+  addkeyword(currentimage) {
+    let prompt = this.alertCtrl.create({
+      title: 'Enter Keyword',
+      message: "Enter Your Image Keywords",
+      inputs: [
+        {
+          name: 'keyword',
+          placeholder: '',
+          value: currentimage.image_keywords
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            // console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            var albumdata = {
+              id: currentimage.id,
+              token: window.localStorage['token'],
+              image_keywords: data.keyword,
+              type: 'image_keywords'
+            }
+            // console.log(albumdata);
+            this.remotService.postData(albumdata, 'EditImageTitles').subscribe((response) => {
+              //  console.log(response);
               if (response.success == 1) {
 
                 this.initPhotoFromalbumData();
@@ -265,50 +365,57 @@ export class PhotoviewPage {
   }
 
   deleteConfirm(currentimage) {
-    let alert = this.alertCtrl.create({
-      title: 'Confirm To Delete Image',
-      message: 'Do you want to Delete this?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            var albumdata = {
-              userId: window.localStorage['userid'],
-              portfolioId: currentimage.id,
-              token: window.localStorage['token'],
-              userType: window.localStorage['usertype'],
-              portfolioType: 'Image'
+    if (currentimage.is_ad == 1) {
+      this.remotService.presentToast("You can't delete this Image because you have advertised this Image");
+    }
+    else {
+      let alert = this.alertCtrl.create({
+        title: 'Confirm To Delete Image',
+        message: 'Do you want to Delete this?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              // console.log('Cancel clicked');
             }
-            console.log(albumdata);
-            this.remotService.postData(albumdata, 'deletePortfolio').subscribe((response) => {
-              console.log(response);
-              if (response.success == 1) {
-
-                this.initPhotoFromalbumData();
-
-              } else {
-                this.remotService.presentToast(response.message);
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              var albumdata = {
+                userId: window.localStorage['userid'],
+                portfolioId: currentimage.id,
+                token: window.localStorage['token'],
+                userType: window.localStorage['usertype'],
+                portfolioType: 'Image'
               }
-            }, () => {
-              this.remotService.presentToast('Error saving data.');
-            });
+              // console.log(albumdata);
+              this.remotService.postData(albumdata, 'deletePortfolio').subscribe((response) => {
+                // console.log(response);
+                if (response.success == 1) {
+
+                  this.initPhotoFromalbumData();
+
+                } else {
+                  this.remotService.presentToast(response.message);
+                }
+              }, () => {
+                this.remotService.presentToast('Error saving data.');
+              });
+            }
           }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
+    }
   }
-
-
-
-
+  viewdetails(img) {
+    this.navCtrl.push(PhotodetailsPage, { details: img });
+  }
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
+  }
 }
 
 

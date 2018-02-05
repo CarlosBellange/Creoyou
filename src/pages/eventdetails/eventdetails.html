@@ -16,18 +16,39 @@
     <ion-row>
       <ion-col class="EventContainer">
         <ion-list class="eventHeader">
-          <ion-item>
+          <ion-item *ngIf="eventdetails.data_type!='ad'">
             <ion-avatar item-left>
-              <img *ngIf="eventdetails.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{eventdetails.image}}" alt="avatar">
-              <img *ngIf="eventdetails.image==''" src="assets/img/management.png" alt="avatar">
+              <img *ngIf="eventdetails.image!='' && eventdetails.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{eventdetails.image}}"
+                alt="avatar">
+              <img *ngIf="eventdetails.image=='' || eventdetails.image==null" src="assets/img/management.png" alt="avatar">
             </ion-avatar>
-            <p class="EventTitle">{{eventdetails.name}} by {{eventdetails.fname}} {{eventdetails.lname}}</p>
+            <p class="EventTitle">{{eventdetails.name}}</p>
+            <p class="EventTitle" *ngIf="eventdetails.fname"> by {{eventdetails.fname}} {{eventdetails.lname}}</p>
+            <p class="EventTitle" *ngIf="eventdetails.buisness_name"> by {{eventdetails.buisness_name}}</p>
+            <p class="EventTitle" *ngIf="eventdetails.users_full_name"> by {{eventdetails.users_full_name}}</p>
+          </ion-item>
+
+
+          <ion-item *ngIf="eventdetails.data_type=='ad'">
+            <ion-avatar item-left>
+              <img *ngIf="eventdetails.image!='' && eventdetails.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{eventdetails.image}}"
+                alt="avatar">
+              <img *ngIf="eventdetails.image=='' || eventdetails.image==null" src="assets/img/management.png" alt="avatar">
+            </ion-avatar>
+            <p class="EventTitle">{{eventdetails.advertisement_text}}</p>
+            <p class="EventTitle" *ngIf="eventdetails.users_full_name"> by {{eventdetails.users_full_name}}</p>
+
           </ion-item>
         </ion-list>
 
+
+
+
         <ion-list class="EventBody">
-          <ion-item>
-            <img src="{{base_url}}uploads/eventsImages/{{eventdetails.media_name}}" alt="Post Img" />
+          <ion-item *ngIf="eventdetails.data_type!='ad'">
+            <img *ngIf="eventdetails.event_image" src="{{base_url}}uploads/eventsImages/{{eventdetails?.event_image}}" alt="Post Img"
+            />
+            <img *ngIf="eventdetails.event_image=='' || eventdetails.event_image==null" src="assets/img/management.png" alt="avatar">
             <div class="EventDetails">
               <b>Event Date : </b>{{eventdetails.start_date_time | date:'mediumDate'}} | {{eventdetails.start_date_time | date:'shortTime'}}
               - {{eventdetails.end_date_time | date:'mediumDate'}} | {{eventdetails.end_date_time | date:'shortTime'}}
@@ -40,6 +61,30 @@
             </div>
             <div class="EventDetails">
               <b>Description : </b> {{eventdetails.description}}
+            </div>
+
+            <div class="EventDate">
+              <span>{{eventdetails.start_date_time | date:'dd'}}</span>
+              {{eventdetails.start_date_time | date:'MMMM'}}
+            </div>
+          </ion-item>
+
+
+          <ion-item *ngIf="eventdetails.data_type=='ad'">
+            <img *ngIf="eventdetails.ad_media" src="{{base_url}}uploads/eventsImages/{{eventdetails?.ad_media}}" alt="Post Img" />
+            <img *ngIf="eventdetails.ad_media=='' || eventdetails.event_image==null" src="assets/img/management.png" alt="avatar">
+            <div class="EventDetails">
+              <b>Event Date : </b>{{eventdetails.start_date_time | date:'mediumDate'}} | {{eventdetails.start_date_time | date:'shortTime'}}
+              - {{eventdetails.end_date_time | date:'mediumDate'}} | {{eventdetails.end_date_time | date:'shortTime'}}
+            </div>
+            <div class="EventDetails">
+              <b>Event Title : </b> {{eventdetails.advertisement_text}}
+            </div>
+            <div class="EventDetails">
+              <b>Event Location : </b> {{eventdetails.location}}
+            </div>
+            <div class="EventDetails">
+              <b>Description : </b> {{eventdetails.advertisement_details}}
             </div>
 
             <div class="EventDate">

@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { VideouploadPage } from './videoupload';
 
 @NgModule({
-  declarations: [
-    VideouploadPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(VideouploadPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class VideouploadPageModule {}
+export class VideouploadPageModule { }

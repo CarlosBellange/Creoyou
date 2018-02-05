@@ -47,32 +47,29 @@
       </ion-select>
     </ion-item>
 
-
-    <a (click)="inviteConnection()">Invite Your Connections</a>
-
-    <div class="eventImage" *ngIf="eventimgshow">
-      <img src="{{base_url}}uploads/eventsImages/{{eventimg}}" alt="image" />
-      <ion-icon name="close" (click)="removeImage();"></ion-icon>
-    </div>
-    <div class="eventImage" *ngIf="!eventimgshow">
-      <img [src]="_DomSanitizer.bypassSecurityTrustUrl(eventimg)" alt="image" />
-      <ion-icon name="close" (click)="removeImage();"></ion-icon>
+    <div class="check_class">
+      <span (click)="inviteConnection()">Invite Your Connections</span>
+      <ion-checkbox [(ngModel)]="friends_can_invite"></ion-checkbox> Can friends invite guests ?
     </div>
 
 
+    <div class="eventImage" *ngIf="eventimgshow==true">
+      <img src="{{base_url}}uploads/eventsImages/{{eventimg}}" />
+      <ion-icon name="close" (click)="removeImage();"></ion-icon>
+    </div>
+    <div class="eventImage" *ngIf="eventimgshow==false && eventimg ">
+      <img [src]="_DomSanitizer.bypassSecurityTrustUrl(eventimg)" />
+      <ion-icon name="close" (click)="removeImage();"></ion-icon>
+    </div>
     <button class="uploadImage" (click)="upLoadImages()">
       Add Photo
       <i class="material-icons">add_a_photo</i>
     </button>
-
-
   </ion-list>
-
-
 </ion-content>
 
 <ion-footer>
   <ion-toolbar class="button_bottom_top">
-    <button class="sign-up button button-block button-stable" (click)="CreateEvent()">Share Your Event</button>
+    <button class="sign-up button button-block button-stable" (click)="CreateEvent()" [disabled]="eventtitle=='' || eventimg==''">Share Your Event</button>
   </ion-toolbar>
 </ion-footer>

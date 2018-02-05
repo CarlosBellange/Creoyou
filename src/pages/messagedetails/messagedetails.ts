@@ -1,10 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
+import {
+  Component, ViewChild, ViewChildren,
+  QueryList,
+  ElementRef
+} from '@angular/core';
 import { IonicPage, NavController, Content, NavParams, ActionSheetController, Events, Navbar, ModalController } from 'ionic-angular';
 
 import {
   RemoteServiceProvider
 } from '../../providers/remote-service/remote-service';
 import { MessagesPage } from '../messages/messages';
+import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
 
 @IonicPage()
 @Component({
@@ -18,11 +23,13 @@ export class MessagedetailsPage {
   messages: any;
   currentuserid: any;
   @ViewChild(Content) content: Content;
-  messageText: string;
+  messageText: string = '';
   lastmessageid = 0;
   messageCallInterval = null;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChildren('grabid') grabid: QueryList<any>;
   archived = 'Archived';
+  blockeduser: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider, public modalCtrl: ModalController) {
@@ -31,8 +38,6 @@ export class MessagedetailsPage {
     this.user = navParams.get('user');
     this.currentuserid = window.localStorage['userid'];
     this.initchatMessages();
-
-
     if (this.user && this.user.hasOwnProperty('archive')) {
       this.archived = 'Un Archived';
       this.initchatMessages();
@@ -49,7 +54,7 @@ export class MessagedetailsPage {
     };
     if (this.lastmessageid == 0)
       this.messages = [];
-    // this.remotService.presentLoading("Wait ...");
+    // this.remotService.presentLoading();
     this.remotService.postData(chatparam, 'showFullchat').subscribe((response) => {
       if (response.success == 1) {
 
@@ -58,7 +63,10 @@ export class MessagedetailsPage {
           response.data.forEach((item, key, index) => {
 
             this.messages.push(item);
+            console.log(this.messages);
             this.lastmessageid = item.id;
+            this.blockeduser = item.user_status;
+            console.log(this.blockeduser);
           })
 
         }
@@ -169,7 +177,7 @@ export class MessagedetailsPage {
     }
     this.remotService.postData(unreadData, 'deleteMessages').subscribe((response) => {
       if (response.success == 1) {
-        this.initchatMessages();
+        this.messages = [];
       }
     }, () => {
       this.remotService.presentToast('Error loading data.');
@@ -220,6 +228,24 @@ export class MessagedetailsPage {
 
     }
 
+  }
+  OtherFrofileView(event) {
+    /*  var data = {
+       user_id: item.userId
+     } */
+
+    this.grabid.forEach((i: ElementRef) => {
+      console.log(i);
+      console.log(i.nativeElement.childNodes[1].classList[1]);
+      var data = {
+        user_id: i.nativeElement.childNodes[1].classList[1]
+      }
+      this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
+    })
+
+    //console.log(data);
+
+    //  
   }
 
 }

@@ -1,39 +1,56 @@
 <ion-header class="creoyou-header">
-  
+
     <ion-navbar>
-        <ion-title>Tag A Friend</ion-title>
+        <ion-title>{{pagename}}</ion-title>
         <ion-buttons end>
             <button class="dismiss" (click)="dismiss()">
                 Done
             </button>
         </ion-buttons>
     </ion-navbar>
-    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+
+    <ion-toolbar class="chatSearch">
+        <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+    </ion-toolbar>
     <div *ngIf="searching" class="spinner-container">
-       <ion-spinner></ion-spinner>
+        <ion-spinner></ion-spinner>
     </div>
-  </ion-header>
-  
-   
-  <ion-content class="content-background">
-    
-       <ion-grid>
-           <ion-row class="tag_item"    *ngFor="let item of users;let idx = index">
-             
-                
-                  <ion-col col-4>
-                      <ion-checkbox start (ionChange)="tagThisUser($event,item,idx)"></ion-checkbox>
-                              <img *ngIf="item.image!=null && item.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{item.image}}" alt="avatar">
-                              <img *ngIf="item.image==null || item.image==''" src="/assets/img/management.png" alt="avatar"> 
-                  </ion-col>   
-                      
-                  <ion-col col-8>
-                     <p>{{item.users_full_name}}</p>
-                     <span>{{item.creativeField}}</span>
-                  </ion-col>
-              
-           </ion-row>
-       </ion-grid>
-    
-   </ion-content>
-  
+</ion-header>
+
+
+<ion-content class="content-background">
+
+    <ion-grid>
+        <ion-row class="tag_item" *ngFor="let item of users;let idx = index">
+
+
+            <ion-col col-4 *ngIf="pagename=='Invite your connections'">
+                <ion-checkbox start (ionChange)="tagThisUser($event,item,idx)"></ion-checkbox>
+                <img *ngIf="item.image!=null && item.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{item.image}}" alt="avatar">
+                <img *ngIf="item.image==null || item.image==''" src="assets/img/management.png" alt="avatar">
+            </ion-col>
+
+            <ion-col col-4 *ngIf="pagename=='Tag Your Friend'">
+                <ion-checkbox start (ionChange)="tagThisUser($event,item,idx)"></ion-checkbox>
+                <img *ngIf="item.image!=null && item.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{item.image}}" alt="avatar">
+                <img *ngIf="item.image==null || item.image==''" src="assets/img/management.png" alt="avatar">
+            </ion-col>
+
+
+
+            <ion-col col-4 *ngIf="pagename=='Search your connections'">
+
+                <ion-radio radio-group [(ngModel)]="select" (ionSelect)="selectThisUser($event,item,idx)"></ion-radio>
+                <img *ngIf="item.image!=null && item.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{item.image}}" alt="avatar">
+                <img *ngIf="item.image==null || item.image==''" src="assets/img/management.png" alt="avatar">
+            </ion-col>
+
+            <ion-col col-8>
+                <p>{{item.users_full_name}}</p>
+                <span>{{item.creativeField}}</span>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

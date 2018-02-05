@@ -1,0 +1,138 @@
+<ion-header class="creoyou-header">
+
+
+  <ion-navbar>
+    <ion-title>Events</ion-title>
+  </ion-navbar>
+
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="otherprofileeventstab">
+    <ion-segment-button value="upcoming">
+      Upcoming
+    </ion-segment-button>
+    <ion-segment-button value="past">
+      Past
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="otherprofileeventstab">
+
+    <ion-list *ngSwitchCase="'upcoming'" class="individual">
+
+      <h2 class="no_result" *ngIf="eventlist==''">You have no Upcoming Event</h2>
+      <ion-row *ngFor="let event of eventlist">
+        <ion-col class="EventContainer" *ngIf="otheruser_id==event.hosted_by">
+          <ion-list class="eventHeader" (click)="eventDetails(event)">
+            <ion-item>
+              <p class="EventTitle">{{event.name}}</p>
+              <p *ngIf="event.user_type==2"> by {{event.buisness_name}}</p>
+              <p *ngIf="event.user_type==1"> by {{event.fname}} {{event.lname}}</p>
+              <p class="EventUser"></p>
+              <p>{{event.start_date_time | date:'mediumDate'}} | {{event.start_date_time | date:'shortTime'}} - {{event.end_date_time
+                | date:'mediumDate'}} | {{event.end_date_time | date:'shortTime'}}</p>
+              <p>{{event.location}}</p>
+
+              <div class="post_action">
+                <!--   <ion-icon (tap)="eventaddtocalender(event)" ios="ios-more" md="md-more"></ion-icon> -->
+              </div>
+
+
+            </ion-item>
+
+          </ion-list>
+
+
+          <ion-list class="EventBody">
+            <ion-item>
+              <img src="{{base_url}}uploads/eventsImages/{{event.media_name}}" alt="Post Img" (click)="eventDetails(event)" />
+              <div class="EventDetails">
+                {{event.description | slice:0:110}}
+                <span *ngIf="event.description.length>110">.....</span>
+              </div>
+
+              <div class="EventDate">
+                <span>{{event.start_date_time | date:'dd'}}</span>
+                {{event.start_date_time | date:'MMMM'}}
+              </div>
+              <a (click)="addtocalendarEvent(event)">Add to calender</a>
+            </ion-item>
+
+
+          </ion-list>
+
+          <ion-row class="post_activity">
+            <ion-col col-4 [class.active]="event.likeActive>0">
+              <ion-icon ios="ios-heart" md="md-heart" (click)="likeThisitem(event)"></ion-icon>
+              <span>{{event.likes}}</span>
+            </ion-col>
+            <ion-col col-4>
+              <ion-icon ios="ios-text" md="md-text" (click)="showComments(event)"></ion-icon>
+              <span *ngIf="event.count=='count'"></span>
+              <span *ngIf="event.count!='count'">{{event.count}}</span>
+            </ion-col>
+            <ion-col col-4>
+              <ion-icon ios="ios-share" md="md-share" (click)="shareThisPost(event);"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'past'" class="individual">
+
+      <h2 class="no_result" *ngIf="eventlist==''">You have no Past Event</h2>
+      <ion-row *ngFor="let event of eventlist">
+        <ion-col class="EventContainer" *ngIf="otheruser_id==event.hosted_by">
+          <ion-list class="eventHeader" (click)="eventDetails(event)">
+            <ion-item>
+              <p class="EventTitle">{{event.name}}</p>
+              <p *ngIf="event.user_type==2"> by {{event.buisness_name}}</p>
+              <p *ngIf="event.user_type==1"> by {{event.fname}} {{event.lname}}</p>
+              <p class="EventUser"></p>
+              <p>{{event.start_date_time | date:'mediumDate'}} | {{event.start_date_time | date:'shortTime'}} - {{event.end_date_time
+                | date:'mediumDate'}} | {{event.end_date_time | date:'shortTime'}}</p>
+              <p>{{event.location}}</p>
+            </ion-item>
+          </ion-list>
+
+          <ion-list class="EventBody">
+            <ion-item (click)="eventDetails(event)">
+              <img src="{{base_url}}uploads/eventsImages/{{event.media_name}}" alt="Post Img" />
+              <div class="EventDetails">
+                {{event.description | slice:0:110}}
+                <span *ngIf="event.description.length>110">.....</span>
+              </div>
+
+              <div class="EventDate">
+                <span>{{event.start_date_time | date:'dd'}}</span>
+                {{event.start_date_time | date:'MMMM'}}
+              </div>
+              <a (click)="addtocalendarEvent(event)">Add to calender</a>
+            </ion-item>
+
+          </ion-list>
+
+          <ion-row class="post_activity">
+            <ion-col col-4 [class.active]="event.likeActive>0">
+              <ion-icon ios="ios-heart" md="md-heart" (click)="likeThisitem(event)"></ion-icon>
+              <span>{{event.likes}}</span>
+            </ion-col>
+            <ion-col col-4>
+              <ion-icon ios="ios-text" md="md-text" (click)="showComments(event)"></ion-icon>
+              <span *ngIf="event.count=='count'"></span>
+              <span *ngIf="event.count!='count'">{{event.count}}</span>
+            </ion-col>
+            <ion-col col-4>
+              <ion-icon ios="ios-share" md="md-share" (click)="shareThisPost(event);"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+
+  </div>
+</ion-content>
