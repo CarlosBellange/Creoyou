@@ -77,13 +77,13 @@ export class TaguserPage {
       this.selectedTags[index] = item;
     else
       this.selectedTags.splice(index, 1);
-    console.log("User should be tagged", e.checked, this.selectedTags)
+    //console.log("User should be tagged", e.checked, this.selectedTags)
   }
 
   selectThisUser(e: any, item, index) {
     this.selectedTags = [];
     this.selectedTags[index] = item;
-    console.log("User should be tagged", this.selectedTags)
+    //console.log("User should be tagged", this.selectedTags)
   }
   dismiss() {
     this.viewCtrl.dismiss({ tags: this.selectedTags });

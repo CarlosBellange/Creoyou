@@ -38,32 +38,14 @@
                     </span>
                 </ion-col>
 
-                <!--  <ion-col col-12 class="fld">
-                    <ion-input class="input-fld extra-pad" type="text" name="businessname" placeholder="Business Name" formControlName="businessname"
-                        required></ion-input>
-                    <span class="error" *ngIf="FormRegistrationStepOne.get('businessname').hasError('pattern') && (FormRegistrationStepOne.get('businessname').touched || submitAttempt)">
-                        Only characters and numbers allowed
-                    </span>
-                    <span class="error" *ngIf="FormRegistrationStepOne.get('businessname').hasError('required') && (FormRegistrationStepOne.get('businessname').touched || submitAttempt)">
-                        Business Name is required
-                    </span>
-                    <span class="error" *ngIf="FormRegistrationStepOne.get('fullname').hasError('minlength') && (FormRegistrationStepOne.controls.fullname.dirty || submitAttempt)">
-                        Minimum of 4 characters
-                    </span>
-                    <span class="error" *ngIf="FormRegistrationStepOne.get('businessname').hasError('maxlength') && (FormRegistrationStepOne.get('businessname').touched || submitAttempt)">
-                        Maximum of 50 characters
-                    </span>
-
-                </ion-col> -->
 
 
-
-                <ion-col col-3>
+                <ion-col col-12>
                     <ion-select formControlName="mobilecode" multiple="false" class="mobile-code">
-                        <ion-option value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.dial_code}}</ion-option>
+                        <ion-option value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.name}} {{item.dial_code}}</ion-option>
                     </ion-select>
                 </ion-col>
-                <ion-col col-9>
+                <ion-col col-12>
                     <ion-input placeholder="Phone Number" type="number" formControlName="mobileno" class="input-fld extra-pad"></ion-input>
 
                     <span *ngIf="FormRegistrationStepOne.controls.mobileno.pending">
@@ -73,7 +55,7 @@
 
                 <ion-col col-12>
                     <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('pattern') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                        Mobile numberr should be only numbers
+                        Mobile number should be only numbers
                     </span>
                     <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('required') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
                         Mobile no is required
@@ -84,11 +66,14 @@
                     <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('Inuse') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
                         Mobile no is already taken
                     </span>
+                    <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('Inuse') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
+                        This mobile number is already registered on another CreoYou account
+                    </span>
                     <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('minlength') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                        Minimum of 4 characters
+                        Valid mobile number is required for OTP verification
                     </span>
                     <span class="error" *ngIf="FormRegistrationStepOne.get('mobileno').hasError('maxlength') && (FormRegistrationStepOne.get('mobileno').touched || submitAttempt)">
-                        Maximum of 15 characters
+                        Valid mobile number is required for OTP verification
                     </span>
                 </ion-col>
                 <ion-col col-12 class="fld">

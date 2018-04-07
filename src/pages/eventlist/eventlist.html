@@ -23,7 +23,7 @@
     </h2>
 
     <ion-row *ngFor="let event of eventlist">
-      <ion-col class="EventContainer" *ngIf="event.hosted_by==currentuserid">
+      <ion-col class="EventContainer">
         <ion-list class="eventHeader" (click)="eventDetails(event)">
           <ion-item>
             <p class="EventTitle" *ngIf="event.name">{{event.name | slice:0:20}}
@@ -36,27 +36,32 @@
               | date:'mediumDate'}} | {{event.end_date_time | date:'shortTime'}}</p>
             <p>{{event.location}}</p>
 
-            <div class="post_action" (tap)="editevent(event)">
+            <div class="post_action" (tap)="editevent(event)" *ngIf="currentuserid == event.hosted_by">
               <ion-icon name="settings"></ion-icon>
             </div>
           </ion-item>
         </ion-list>
 
-        <ion-list class="EventBody" (click)="eventDetails(event)">
+        <ion-list class="EventBody">
           <ion-item>
             <img *ngIf="event.event_image!='' && event.event_image!=null" src="{{base_url}}uploads/eventsImages/{{event.event_image}}"
             />
             <img *ngIf="event.event_image=='' || event.event_image==null" src="assets/img/management.png" alt="avatar">
-            <div class="EventDetails">
+
+            <div class="check_class" *ngIf="pagename=='Upcoming'">
+              <span *ngIf="event.friends_can_invite==1" (click)="inviteConnection(event)">Invite</span>
+              <span (click)="addtocalendarEvent(event)">Add to calendar</span>
+            </div>
+            <div class="EventDetails" (click)="eventDetails(event)">
               {{event.description | slice:0:113}}
               <span *ngIf="event.description.length>110">.....</span>
             </div>
-
             <div class="EventDate">
               <span>{{event.start_date_time | date:'dd'}}</span>
               {{event.start_date_time | date:'MMMM'}}
             </div>
           </ion-item>
+
         </ion-list>
 
         <ion-row class="post_activity">

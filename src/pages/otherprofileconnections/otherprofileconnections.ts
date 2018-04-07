@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Navbar } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the OtherprofileconnectionsPage page.
  *
@@ -25,10 +26,12 @@ export class OtherprofileconnectionsPage {
   followerOffset: any;
   following: any;
   followers: any;
+  currentuserid = 0;
 
   constructor(public events: Events, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.base_url = this.remotService.site_url;
     this.touserid = navParams.get('touserid');
+    this.currentuserid = window.localStorage['userid']
     this.connectionandfollowing = 'connections';
     this.initViewwithconnectionsdata();
   }
@@ -94,7 +97,7 @@ export class OtherprofileconnectionsPage {
 
           response.data.forEach((item, key, index) => {
             this.following.push(item);
-            console.log(this.following);
+            //console.log(this.following);
           })
 
         }
@@ -132,7 +135,7 @@ export class OtherprofileconnectionsPage {
           response.data.forEach((item, key, index) => {
 
             this.followers.push(item);
-            console.log(this.followers);
+            // console.log(this.followers);
           })
 
         }
@@ -151,8 +154,13 @@ export class OtherprofileconnectionsPage {
 
 
   OtherFrofileView(connection) {
-    console.log(connection);
-    this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': connection });
+    if (this.currentuserid == connection.user_id) {
+      this.navCtrl.setRoot(HomePage);
+    }
+    else {
+      this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': connection });
+    }
+
   }
 
 
@@ -160,7 +168,8 @@ export class OtherprofileconnectionsPage {
     var data = {
       user_id: user.id
     }
-    this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
+    console.log(user);
+    //this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
     //this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data, 'friendcheck': connection.is_friend });
   }
 
@@ -179,7 +188,7 @@ export class OtherprofileconnectionsPage {
       this.navCtrl.pop()
     }
 
-    console.log('ionViewDidLoad OtherprofileconnectionsPage');
+    //console.log('ionViewDidLoad OtherprofileconnectionsPage');
   }
   ionViewWillLeave() {
     this.remotService.dismissLoader();

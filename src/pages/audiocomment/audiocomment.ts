@@ -40,13 +40,13 @@ export class AudiocommentPage {
       token: window.localStorage['token']
     }
 
-    console.log(commentsParams);
+   // console.log(commentsParams);
     this.comments = [];
     this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'seeComments').subscribe((response) => {
       this.remotService.dismissLoader();
       if (response.success == 1) {
-        console.log(response);
+       // console.log(response);
         var commentData = response.data.comments;
         if (commentData != null) {
 
@@ -81,10 +81,10 @@ export class AudiocommentPage {
       comment: this.commentText,
       user_id: window.localStorage['userid'],
     };
-    console.log(commentsParams);
+    //console.log(commentsParams);
     this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'newIncidentCommentAction').subscribe((response) => {
-      console.log(response);
+      //console.log(response);
       this.remotService.dismissLoader();
       if (response.success == 1) {
         this.seecomment();
@@ -155,7 +155,7 @@ export class AudiocommentPage {
     else if (this.currentuserid == data.user_id) {
       //this.navCtrl.setRoot(HomePage);
     } else {
-      console.log('other connection data', data);
+      //console.log('other connection data', data);
       this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
     }
 
@@ -163,7 +163,7 @@ export class AudiocommentPage {
 
 
   dismissComment() {
-    console.log(this.comments.length);
+    //console.log(this.comments.length);
     this.viewCntrl.dismiss({ commentlength: this.comments.length });
   }
   scrollToBottom() {
@@ -174,7 +174,7 @@ export class AudiocommentPage {
     this.content.scrollTo(0, dimension.scrollHeight);
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AudiocommentPage');
+   // console.log('ionViewDidLoad AudiocommentPage');
   }
   ionViewWillLeave() {
     this.remotService.dismissLoader();

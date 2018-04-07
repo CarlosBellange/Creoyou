@@ -31,7 +31,7 @@
 
   <ion-list class="messages">
     <div *ngFor="let msg of messages;let msgindex = index;" [class.message-left]="msg.userId!=currentuserid" [class.message-right]="msg.userId==currentuserid">
-      <p class="shareProfile" [innerHTML]="msg.content" #grabid (click)="OtherFrofileView($event)"></p>
+      <p class="shareProfile" [innerHTML]="msg.content" #grabid (click)="OtherFrofileView($event, msgindex)"></p>
       <p class="date" item-right>
         <span>{{msg.creation_date|amDateFormat:'h:mm a'}}</span>
         <span>{{msg.creation_date|amDateFormat:'MM.DD.YYYY'}}</span>

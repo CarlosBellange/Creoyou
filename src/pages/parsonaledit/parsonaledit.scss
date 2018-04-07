@@ -68,4 +68,19 @@ page-parsonaledit {
         border-radius: 4px;
         line-height: 17px;
     }
+    .mobile-code {
+        width: 100% !important;
+        display: flex;
+        max-width: 100%;
+        padding: 13px 8px 13px 8px !important;
+        border-bottom: 2px solid #0b60b4 !important;
+        .item-inner {
+            border-bottom: none !important;
+        }
+    }
+    .select_edit {
+        .item-inner {
+            display: none;
+        }
+    }
 }

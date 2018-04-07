@@ -47,4 +47,10 @@ page-notifications {
             }
         }
     }
+    ion-spinner * {
+        width: 28px;
+        height: 28px;
+        stroke: #444;
+        fill: #222;
+    }
 }

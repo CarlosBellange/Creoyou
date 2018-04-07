@@ -62,13 +62,16 @@
     </form>
   </ion-list>
 
-  <ion-list *ngIf="editsection=='mobile'">
+  <ion-list class="Change_password" *ngIf="editsection=='mobile'">
     <form [formGroup]="FormRegistrationStepTwo" (ngSubmit)="changemobilenumber(FormRegistrationStepTwo.value)">
-      <ion-item class="edit_item">
+
+      <ion-item class="edit_item select_edit ">
         <ion-toolbar color="default">Change Mobile Number</ion-toolbar>
         <ion-select item-left formControlName="mobilecode" multiple="false" class="mobile-code">
-          <ion-option value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.dial_code}}</ion-option>
+          <ion-option value="{{item.dial_code}}" *ngFor="let item of countryCode">{{item.name}} {{item.dial_code}}</ion-option>
         </ion-select>
+      </ion-item>
+      <ion-item class="edit_item">
         <ion-input [(ngModel)]="mobile" formControlName="mobileno" required></ion-input>
       </ion-item>
       <span *ngIf="FormRegistrationStepTwo.controls.mobileno.pending">
@@ -112,7 +115,7 @@
       </span>
 
       <span class="error" *ngIf="FormRegistrationStepThree.get('password').hasError('pattern')  && (FormRegistrationStepThree.get('password').touched)">
-        <p>Passwords must have a lowercase letter and uppercase letter and a number and between 8 to 20 char.</p>
+        <p>Passwords must have 8 characters or more with at least 1 uppercase letter and 1 number</p>
       </span>
 
       <ion-item class="edit_item">

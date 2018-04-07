@@ -17,6 +17,7 @@ import { PhotoviewPage } from '../../pages/photoview/photoview';
 import { AudiodetailsPage } from '../../pages/audiodetails/audiodetails';
 import { VideodetailsPage } from '../videodetails/videodetails';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { LoginPage } from '../login/login';
 /**
  * Generated class for the OtherprofilePage page.
  *
@@ -71,14 +72,14 @@ export class OtherprofilePage {
   currentTrack: any;
   currentTrackNumber: number = 0;
   arr: any = [];
-
+  showmenu: boolean;
   constructor(private streamingMedia: StreamingMedia, public photoViewer: PhotoViewer, public _DomSanitizer: DomSanitizer, private alertCtrl: AlertController, public modalCtrl: ModalController, private socialSharing: SocialSharing, private _audioProvider: AudioProvider, public remotService: RemoteServiceProvider, public events: Events, public navCtrl: NavController, public navParams: NavParams) {
     this.base_url = this.remotService.site_url;
     this.otherprofiledata = navParams.get('otheruserfrofiledata');
     this.loggedInUserID = window.localStorage['userid'],
       this.tabtype = navParams.get('tabname');
     this.friendcheck = navParams.get('friendcheck');
-    console.log('otherprofile data', this.otherprofiledata);
+    //console.log('otherprofile data', this.otherprofiledata);
     this.initOtherprofiledata();
   }
   gotoPhotoView(albumview) {
@@ -86,7 +87,7 @@ export class OtherprofilePage {
       id: albumview.album_id
     }
 
-    console.log(albumview);
+    // console.log(albumview);
     this.navCtrl.push(PhotoviewPage, { "album": album, "img_id": albumview.id, 'touserid': this.otherprofiledata.user_id, "parentPage": this });
 
   }
@@ -98,12 +99,12 @@ export class OtherprofilePage {
    } */
   zoomProfileImage(imageData) {
     const imagezoom = this.base_url + 'uploads/profileImages/' + imageData.incident_details;
-    console.log('zoom image', imageData);
+    //console.log('zoom image', imageData);
     this.photoViewer.show(imagezoom, '', { share: false });
   }
   zoomStatusImage(imageData) {
     const imagezoom = this.base_url + 'uploads/statusMedia/' + imageData.media_name;
-    console.log('zoom image', imageData);
+    //console.log('zoom image', imageData);
     this.photoViewer.show(imagezoom, '', { share: false });
   }
 
@@ -130,8 +131,12 @@ export class OtherprofilePage {
 
       if (response.success == 1) {
         this.profileinfo = response.data.detailsOfuser[0];
-        console.log('Profile Data', this.profileinfo);
-      } else {
+        //console.log('Profile Data', this.profileinfo);
+      } else if (response.success == 2) {
+        this.remotService.dismissLoader();
+        this.navCtrl.push(LoginPage, { closeapp: true });
+        window.localStorage.clear();
+        this.showmenu = false;
         this.remotService.presentToast(response.message);
       }
     }, () => {
@@ -159,7 +164,7 @@ export class OtherprofilePage {
 
             this.modiFyitemasnecessary(item);
             this.homeData.push(item);
-            console.log(this.homeData);
+            // console.log(this.homeData);
           });
 
         }
@@ -261,23 +266,7 @@ export class OtherprofilePage {
 
   }
 
-  /*   playvideo(g) {
-      let url = this.base_url + 'uploads/portfolioVideos/' + g;
-      //console.log(this.videoPlayer);
-      this.videoPlayer.forEach((i: ElementRef) => {
-        if (url == i.nativeElement.currentSrc) {
-          i.nativeElement.play();
-          i.nativeElement.controls = true;
-          if (i.nativeElement.play()) {
-            this._audioProvider.pause(this.currentTrackNumber);
-            i.nativeElement.pause();
-          }
-          // console.log(i.nativeElement.currentSrc);
-        } else {
-          i.nativeElement.pause();
-        }
-      });
-    } */
+
 
   playvideo(g) {
     this._audioProvider.stop();
@@ -292,8 +281,10 @@ export class OtherprofilePage {
     let url = this.base_url + 'uploads/portfolioVideos/' + g;
 
     let options: StreamingVideoOptions = {
-      successCallback: () => { console.log('Video played') },
-      errorCallback: (e) => { console.log('Error streaming') },
+      successCallback: () => { //console.log('Video played') 
+      },
+      errorCallback: (e) => { //console.log('Error streaming')
+      },
       orientation: 'landscape'
     };
 
@@ -315,7 +306,7 @@ export class OtherprofilePage {
       type = item.incident_type.toLowerCase();
     }
     var link = this.base_url + "user/things/share/" + type + "/" + item.id + "/" + 1
-    console.log(link)
+    // console.log(link)
     /*  var img = ""; */
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -385,13 +376,11 @@ export class OtherprofilePage {
       image: profileinfo.image,
       users_full_name: users_full_name
     }
-    console.log(profileinfo);
+    //console.log(profileinfo);
     this.navCtrl.push(MessagedetailsPage, { user: connection, "parentPage": this });
   }
 
-  GotoHome() {
-    this.navCtrl.setRoot(HomePage);
-  }
+
   otherUserEvents(profileinfo) {
     var events = {
       user_id: profileinfo.userid,
@@ -464,7 +453,7 @@ export class OtherprofilePage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad OtherprofilePage');
+    //console.log('ionViewDidLoad OtherprofilePage');
   }
 
   /**
@@ -495,7 +484,7 @@ export class OtherprofilePage {
       inputs: [
         {
           name: 'mobileno',
-          placeholder: 'Enter Mobile No'
+          placeholder: 'Enter mobile number'
         },
       ],
       buttons: [
@@ -570,11 +559,11 @@ export class OtherprofilePage {
     this.navCtrl.push(EventdetailsPage, { 'eventdetails': event });
   }
   audiodetails(track) {
-    console.log(track);
+    //console.log(track);
     this.navCtrl.push(AudiodetailsPage, { audiodetails: track });
   }
   videodetails(track) {
-    console.log(track);
+    // console.log(track);
     this.navCtrl.push(VideodetailsPage, { videodetails: track });
   }
 

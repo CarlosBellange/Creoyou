@@ -12,7 +12,7 @@ import { VideocommentPage } from '../../pages/videocomment/videocomment';
 import { VideodetailsPage } from '../../pages/videodetails/videodetails';
 import { ElementDef } from '@angular/core/src/view';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
-
+import { LoginPage } from '../login/login';
 declare var window;
 declare var cordova;
 /**
@@ -37,6 +37,7 @@ export class VideosPage {
   storageDirectory: string = '';
   fileTransfer: FileTransferObject;
   uponlinemsg: any;
+  showmenu: boolean;
   /* currentindex = 0;
   vdo = { count: 0, id: 0, video_like: "0", video_viewed: null, likeActive: 0 }; */
   constructor(private streamingMedia: StreamingMedia, public modalCtrl: ModalController, private socialSharing: SocialSharing, public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider, private transfer: FileTransfer, public platform: Platform, public file: File, public fileOpener: FileOpener,
@@ -48,7 +49,7 @@ export class VideosPage {
   }
 
   uploadyourvideo() {
-    console.log(this);
+    //console.log(this);
     this.navCtrl.push(VideouploadPage, { "parentPage": this });
 
   }
@@ -64,7 +65,7 @@ export class VideosPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad VideosPage');
+    //console.log('ionViewDidLoad VideosPage');
 
   }
 
@@ -84,8 +85,11 @@ export class VideosPage {
       if (response.success == 1) {
         this.remotService.dismissLoader();
         this.videos = response.data;
-      } else {
+      } else if (response.success == 2) {
         this.remotService.dismissLoader();
+        this.navCtrl.push(LoginPage, { closeapp: true });
+        window.localStorage.clear();
+        this.showmenu = false;
         this.remotService.presentToast(response.message);
       }
     }, () => {
@@ -148,7 +152,7 @@ export class VideosPage {
                 {
                   text: 'Cancel',
                   handler: () => {
-                    console.log('Agree clicked');
+                    //console.log('Agree clicked');
                   }
                 }
               ]
@@ -216,7 +220,7 @@ export class VideosPage {
     else {
       link = this.base_url + "user/things/share/video/" + vdo.IncidentId + "/" + 1
     }
-    console.log(link)
+    //console.log(link)
     var vddo = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -230,7 +234,7 @@ export class VideosPage {
     let commentModal = this.modalCtrl.create(VideocommentPage, { incidentitem: vdo });
     commentModal.onDidDismiss(data => {
       vdo.comment = data.commentlength;
-      console.log(vdo.comment);
+      //console.log(vdo.comment);
     });
     commentModal.present();
   }
@@ -252,14 +256,14 @@ export class VideosPage {
     //   }
     // });
     let options: StreamingVideoOptions = {
-      successCallback: () => { console.log('Video played') },
-      errorCallback: (e) => { console.log('Error streaming') },
+      successCallback: () => { //console.log('Video played')
+      },
+      errorCallback: (e) => { //console.log('Error streaming')
+      },
       orientation: 'landscape'
     };
 
     this.streamingMedia.playVideo(url, options);
-
-
   }
   ionViewWillLeave() {
     this.remotService.dismissLoader();

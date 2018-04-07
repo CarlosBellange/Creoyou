@@ -47,13 +47,9 @@ export class PhotouploadPage {
       this.pagetitle = 'Edit Your Album';
       this.initalbumData();
     }
-
-
-
   }
 
   initalbumData() {
-
     var DataToSend = {
       user_id: window.localStorage['userid'],
       id: this.albumid,
@@ -103,7 +99,7 @@ export class PhotouploadPage {
       // this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad PhotouploadPage');
+    // console.log('ionViewDidLoad PhotouploadPage');
   }
 
 
@@ -144,7 +140,7 @@ export class PhotouploadPage {
         this.saveImageToArrayBypath(item);
 
       }, function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -174,9 +170,9 @@ export class PhotouploadPage {
           this.remotService.dismissLoader();
         }
       },
-      (err) => {
-        console.log(err)
-      });
+        (err) => {
+          //console.log(err)
+        });
   }
 
   saveImageToArrayBypath(filePath) {
@@ -219,7 +215,7 @@ export class PhotouploadPage {
         Album_id: this.albumid
       }
     }
-    console.log(this.albumParam);
+    //console.log(this.albumParam);
     this.remotService.presentLoading();
     this.remotService.postData(this.albumParam, url).subscribe((response) => {
       this.remotService.dismissLoader();
@@ -288,7 +284,7 @@ export class PhotouploadPage {
         {
           text: 'Cancel',
           handler: () => {
-            console.log('Agree clicked');
+            // console.log('Agree clicked');
           }
         }
       ]

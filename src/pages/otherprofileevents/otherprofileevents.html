@@ -20,9 +20,9 @@
 
     <ion-list *ngSwitchCase="'upcoming'" class="individual">
 
-      <h2 class="no_result" *ngIf="eventlist==''">You have no Upcoming Event</h2>
+      <h2 class="no_result" *ngIf="eventlist==''">No Upcoming Events</h2>
       <ion-row *ngFor="let event of eventlist">
-        <ion-col class="EventContainer" *ngIf="otheruser_id==event.hosted_by">
+        <ion-col class="EventContainer">
           <ion-list class="eventHeader" (click)="eventDetails(event)">
             <ion-item>
               <p class="EventTitle">{{event.name}}</p>
@@ -83,9 +83,9 @@
 
     <ion-list *ngSwitchCase="'past'" class="individual">
 
-      <h2 class="no_result" *ngIf="eventlist==''">You have no Past Event</h2>
+      <h2 class="no_result" *ngIf="eventlist==''">No Past Events</h2>
       <ion-row *ngFor="let event of eventlist">
-        <ion-col class="EventContainer" *ngIf="otheruser_id==event.hosted_by">
+        <ion-col class="EventContainer">
           <ion-list class="eventHeader" (click)="eventDetails(event)">
             <ion-item>
               <p class="EventTitle">{{event.name}}</p>

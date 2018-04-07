@@ -86,7 +86,7 @@ export class NotificationsettingsPage {
         else {
           this.messages = 0;
         }
-        console.log(response.data);
+        //console.log(response.data);
       }
 
     }, () => {
@@ -106,7 +106,7 @@ export class NotificationsettingsPage {
     this.remotService.postData(this.DataToSendFrnd, 'requestCheck').subscribe((response) => {
       this.remotService.dismissLoader();
 
-      console.log(response);
+     // console.log(response);
     }, () => {
       this.remotService.dismissLoader();
       this.remotService.presentToast('Error getting data');
@@ -124,7 +124,7 @@ export class NotificationsettingsPage {
     this.remotService.postData(this.DataToSendFrnd, 'requestCheck').subscribe((response) => {
       this.remotService.dismissLoader();
 
-      console.log(response);
+     // console.log(response);
     }, () => {
       this.remotService.dismissLoader();
       this.remotService.presentToast('Error getting data');
@@ -174,11 +174,11 @@ export class NotificationsettingsPage {
       messages: this.messages,
       token: window.localStorage['token']
     }
-    console.log(DataToSend);
+    //console.log(DataToSend);
     // this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'notificationSettings').subscribe((response) => {
       // this.remotService.dismissLoader();
-      console.log(response);
+      //console.log(response);
     }, () => {
       // this.remotService.dismissLoader();
       this.remotService.presentToast('Error getting data');
@@ -195,7 +195,7 @@ export class NotificationsettingsPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad NotificationsettingsPage');
+   // console.log('ionViewDidLoad NotificationsettingsPage');
   }
 
 }

@@ -39,7 +39,7 @@ export class VisitedprofilePage {
       this.remotService.dismissLoader();
       if (response.success == 1) {
         this.visited = response.data.details;
-        console.log(this.visited);
+        //console.log(this.visited);
       } else {
         this.remotService.presentToast(response.message);
       }
@@ -57,7 +57,7 @@ export class VisitedprofilePage {
   }
 
   otherProfile(visit) {
-    console.log(visit);
+    //console.log(visit);
     var data = {
       user_id: visit.id,
       user_type: visit.user_type
@@ -76,7 +76,7 @@ export class VisitedprofilePage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad VisitedprofilePage');
+    //console.log('ionViewDidLoad VisitedprofilePage');
   }
 
 }

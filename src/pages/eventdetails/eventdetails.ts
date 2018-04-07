@@ -21,7 +21,7 @@ export class EventdetailsPage {
 
   constructor(public events: Events, public remotService: RemoteServiceProvider, public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams) {
     this.eventdetails = this.navParams.get('eventdetails');
-    console.log(this.eventdetails);
+    //console.log(this.eventdetails);
     this.base_url = this.remotService.site_url;
   }
 
@@ -29,10 +29,10 @@ export class EventdetailsPage {
     this.events.publish('creoyou:hidemenu');
     this.navBar.backButtonClick = () => {
 
-      this.events.publish('creoyou:showmenu');
+      this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad EventdetailsPage');
+    // console.log('ionViewDidLoad EventdetailsPage');
   }
   editevent() {
     const actionSheet = this.actionSheetCtrl.create({
@@ -42,14 +42,14 @@ export class EventdetailsPage {
           text: 'Edit Event',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            //console.log('Destructive clicked');
           }
         },
         {
           text: 'Delete Event',
           role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            // console.log('Destructive clicked');
           }
         },
 

@@ -11,7 +11,7 @@ import { AbouteditPage } from '../../pages/aboutedit/aboutedit';
 import {
   CategoriesPage
 } from '../../pages/categories/categories';
-
+import { LoginPage } from '../login/login';
 @IonicPage()
 @Component({
   selector: 'page-aboutme',
@@ -28,7 +28,7 @@ export class AboutmePage {
   currentuserid: any;
   languages = [];
   achievements = [];
-  interests = [];
+  interests: any;
   works = [];
   exibitions = [];
   skills: any;
@@ -42,7 +42,7 @@ export class AboutmePage {
   editprivacyparams = {}
   @ViewChild(Content) content: Content;
   usertype = 0
-
+  showmenu: boolean;
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public events: Events,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider,
     public modalCtrl: ModalController, public http: Http) {
@@ -54,7 +54,24 @@ export class AboutmePage {
     this.initviewaboutData();
   }
 
+  ionViewDidLoad() {
 
+    this.events.publish('creoyou:hidemenu');
+
+    //over ridding back button
+    this.navBar.backButtonClick = () => {
+      if (this.navParams.get('touserid')) {
+        this.events.publish('creoyou:hidemenu');
+      }
+      else {
+        this.events.publish('creoyou:showmenu');
+      }
+
+      this.navCtrl.pop()
+    }
+
+    // console.log('ionViewDidLoad AboutmePage');
+  }
 
   initviewaboutData() {
     var DataToSend = {
@@ -63,14 +80,14 @@ export class AboutmePage {
       token: window.localStorage['token']
 
     };
-    console.log(DataToSend);
+    //console.log(DataToSend);
     this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'AboutmeDetails').subscribe((response) => {
 
       this.remotService.postData(DataToSend, 'getPrivacy').subscribe((responsePrivacy) => {
 
         this.editprivacyparams = responsePrivacy.data != null ? responsePrivacy.data : {};
-        console.log("editprivacyparams", this.editprivacyparams)
+        /*  console.log("editprivacyparams", this.editprivacyparams) */
         this.remotService.dismissLoader();
         if (response.success == 1) {
           if (response.data.hasOwnProperty('education')) {
@@ -92,7 +109,6 @@ export class AboutmePage {
 
           if (response.data.hasOwnProperty('interest'))
             this.interests = response.data.interest;
-
 
           if (response.data.hasOwnProperty('work'))
             this.works = response.data.work;
@@ -119,20 +135,23 @@ export class AboutmePage {
 
           //   console.log(this.statement);
 
-        } else {
+        } else if (response.success == 2) {
+          this.navCtrl.push(LoginPage, { closeapp: true });
+          window.localStorage.clear();
+          this.showmenu = false;
           this.remotService.presentToast(response.message);
         }
 
 
       }, () => {
         this.remotService.dismissLoader();
-        this.remotService.presentToast('Error getting about details.');
+        //this.remotService.presentToast('Error getting about details.');
       });
 
 
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error getting about details.');
+      // this.remotService.presentToast('Error getting about details.');
     });
 
   }
@@ -150,7 +169,7 @@ export class AboutmePage {
     categoryModal.onDidDismiss(data => {
       // Do things with data coming from modal, for instance :
       if (data.hasOwnProperty("id")) {
-        console.log("GOt from modal", data);
+        // console.log("GOt from modal", data);
 
         var catId = data.id > 0 ? data.id : data.name;
         this.paramsObj = {
@@ -191,7 +210,7 @@ export class AboutmePage {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            //console.log('Cancel clicked');
           }
         }
       ]
@@ -215,7 +234,7 @@ export class AboutmePage {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {
@@ -237,7 +256,7 @@ export class AboutmePage {
               }
             }, () => {
               this.remotService.dismissLoader();
-              this.remotService.presentToast('Error getting about details.');
+              // this.remotService.presentToast('Error getting about details.');
             });
 
           }
@@ -251,7 +270,7 @@ export class AboutmePage {
 
   editDatauser(edittype, editparam) {
 
-    console.log(editparam);
+    // console.log(editparam);
 
     this.navCtrl.push(AbouteditPage, { 'editsection': edittype, 'editparam': editparam, "parentPage": this });
 
@@ -267,7 +286,7 @@ export class AboutmePage {
         {
           text: 'Cancel',
           handler: () => {
-            console.log('Disagree clicked');
+            //console.log('Disagree clicked');
           }
         },
         {
@@ -353,7 +372,7 @@ export class AboutmePage {
 
     if (this.editprivacyparams.hasOwnProperty(edittype)) {
       var privacyValue = this.editprivacyparams[edittype].value;
-      console.log('ssssss', privacyValue);
+      // console.log('ssssss', privacyValue);
       if (privacyValue == 1) {
 
         publicCss = 'privacyactive';
@@ -380,8 +399,8 @@ export class AboutmePage {
 
 
 
-      console.log("privacy is", this.editprivacyparams[edittype])
-      console.log("privacy is", privacyValue)
+      // console.log("privacy is", this.editprivacyparams[edittype])
+      // console.log("privacy is", privacyValue)
     }
 
     const actionSheet = this.actionSheetCtrl.create({
@@ -448,7 +467,7 @@ export class AboutmePage {
       }
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error getting about details.');
+      // this.remotService.presentToast('Error getting about details.');
     });
 
 
@@ -470,29 +489,30 @@ export class AboutmePage {
       }
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error getting about details.');
+      // this.remotService.presentToast('Error getting about details.');
     });
 
   }
-
-
-  ionViewDidLoad() {
-
-    this.events.publish('creoyou:hidemenu');
-
-    //over ridding back button
-    this.navBar.backButtonClick = () => {
-      if (this.navParams.get('touserid')) {
-        this.events.publish('creoyou:hidemenu');
-      }
-      else {
-        this.events.publish('creoyou:showmenu');
-      }
-
-      this.navCtrl.pop()
+  deleteurl() {
+    var param = {
+      user_id: window.localStorage['userid'],
+      token: window.localStorage['token']
     }
 
-    console.log('ionViewDidLoad AboutmePage');
+    this.remotService.presentLoading();
+    this.remotService.postData(param, 'DeleteWebsiteUrl').subscribe((response) => {
+      this.remotService.dismissLoader();
+      if (response.success == 1) {
+
+        this.initviewaboutData();
+
+      } else {
+        this.remotService.presentToast(response.message);
+      }
+    }, () => {
+      this.remotService.dismissLoader();
+      // this.remotService.presentToast('Error getting about details.');
+    });
   }
 
 }

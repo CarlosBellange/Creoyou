@@ -20,7 +20,7 @@ export class AudiodetailsPage {
 
   constructor(public remotService: RemoteServiceProvider, public events: Events, public navCtrl: NavController, public navParams: NavParams) {
     this.audiodetails = navParams.get('audiodetails');
-    console.log(this.audiodetails);
+    //console.log(this.audiodetails);
   }
 
   ionViewDidLoad() {
@@ -30,7 +30,7 @@ export class AudiodetailsPage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad AudiodetailsPage');
+   // console.log('ionViewDidLoad AudiodetailsPage');
   }
   ionViewWillLeave() {
     this.remotService.dismissLoader();

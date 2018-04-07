@@ -1,5 +1,14 @@
 <ion-content>
+  <span class="nofeed" *ngIf="nofeeds==''">Creoloop page shows feeds from your Connections and Followings. Connect or Follow other users to see their posts on this
+    page
+  </span>
+
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher> -->
   <ion-row *ngFor="let item of loopData">
+
     <ion-col col-12>
       <div class="post_wrap">
         <ion-list class="post_header">
@@ -71,7 +80,7 @@
               <span *ngIf="item.description.length>110">.....</span>
             </div>
           </ion-item>
-          <a *ngIf="item.incident_type==='Event'" (click)="addtocalendarEvent(item)">Add to calender</a>
+          <a *ngIf="item.incident_type==='Event'" (click)="addtocalendarEvent(item)">Add to calendar</a>
 
 
           <ion-item *ngIf="item.incident_type==='Profile' && item.data_type=='loop'">
@@ -93,6 +102,7 @@
                 <img img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage.image_name}}" (click)="gotoPhotoView(albumimage, item)"
                 />
 
+
               </ion-col>
             </ion-row>
 
@@ -103,13 +113,13 @@
                 />
               </ion-col>
               <ion-col col-12 [class.remove]="i==0 || i==1" [class.threeimage]="i==2" *ngFor="let albumimage of item.image_details; let i=index">
-                <img *ngIf="i==2" img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage.image_name}}" (click)="gotoPhotoView(albumimage, item)"
+                <img *ngIf="i==2" src="{{base_url}}uploads/portfolioImages/{{albumimage.image_name}}" (click)="gotoPhotoView(albumimage, item)"
                 />
               </ion-col>
             </ion-row>
 
             <ion-row *ngIf="item.image_count==1">
-              <ion-col col-12 *ngFor="let albumimage of item.image_details; let i=index" (click)="gotoPhotoView(albumimage, item)">
+              <ion-col class="album_singel" col-12 *ngFor="let albumimage of item.image_details; let i=index" (click)="gotoPhotoView(albumimage, item)">
                 <img img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage.image_name}}" />
               </ion-col>
             </ion-row>

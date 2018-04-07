@@ -62,8 +62,10 @@
                       <span *ngIf="vdo.video_title.length>20">.....</span>
                     </p>
 
+
                     <span *ngIf="vdo.video_description">{{vdo.video_description | slice:0:100}}</span>
                     <span *ngIf="vdo.video_description.length>100">.....</span>
+                    {{vdo.creation_date | date:'fullDate'}} {{vdo.creation_date | date:'shortTime'}}
                   </ion-item>
 
                 </ion-item>

@@ -19,7 +19,7 @@
 
 
 
-    <ion-slides (ionSlideDidChange)="slideChanged()">
+    <ion-slides (ionSlideDidChange)="slideChanged()" class="Image_view">
 
         <ion-slide *ngFor="let phto of albumphotos">
             <img img-preloader="{{base_url}}uploads/portfolioImages/{{phto?.image_name}}" alt="Post Img" />
@@ -57,7 +57,6 @@
         </ion-col>
         <ion-col (click)="shareThisPost(currentimage);" col-4 *ngIf="albumdetails?.privacy==1">
             <ion-icon ios="ios-share" md="md-share"></ion-icon>
-            <span>{{currentimage?.image_viewed}}</span>
         </ion-col>
     </ion-row>
 </ion-footer>

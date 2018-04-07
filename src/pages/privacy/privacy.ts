@@ -165,7 +165,7 @@ export class PrivacyPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad PrivacyPage');
+    //console.log('ionViewDidLoad PrivacyPage');
     /* this.initblockuser();
     this.initunflowuser(); */
   }

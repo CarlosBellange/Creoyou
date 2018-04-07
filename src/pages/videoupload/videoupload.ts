@@ -61,12 +61,12 @@ export class VideouploadPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VideouploadPage');
+    //console.log('ionViewDidLoad VideouploadPage');
   }
   chooseVideo() {
     this.fileChooser.open().then((uri) => {
       this.filePath.resolveNativePath(uri).then((dt) => {
-        console.log(dt);
+        //console.log(dt);
         this.choseuri = dt;
         this.fileSizeValidate(this.choseuri);
         this.currentName = this.choseuri.substr(this.choseuri.lastIndexOf('/') + 1).replace(/ /g, '_');
@@ -75,10 +75,10 @@ export class VideouploadPage {
         this.currentName = this.currentName.replace(/[^a-zA-Z1-9.]/g, '');
         /*  let exten = this.currentName.substr(this.currentName.lastIndexOf(".") + 1);
          this.currentName = 'video' + Date.now() + '.' + exten; */
-        console.log(this.currentName);
+        //console.log(this.currentName);
       })
     }, () => {
-      console.log('error');
+      //console.log('error');
     });
   }
 
@@ -99,7 +99,7 @@ export class VideouploadPage {
     this.maxSize = '51200';
     window.resolveLocalFileSystemURL(fdata, (fileEntry) => {
       fileEntry.getMetadata((metadata) => {
-        console.log("image size : " + metadata.size);
+        //console.log("image size : " + metadata.size);
         var fsize = metadata.size / 1024;
         if (fsize > this.maxSize) {
           this.currentName = '';
@@ -125,7 +125,7 @@ export class VideouploadPage {
         editMediaType: 'Video',
         editMediaId: this.videoid
       }
-      console.log(DataToSend);
+      //console.log(DataToSend);
       this.remotService.presentLoading();
       this.remotService.postData(DataToSend, url).subscribe((response) => {
         this.remotService.dismissLoader();
@@ -158,19 +158,19 @@ export class VideouploadPage {
           params: { 'token': window.localStorage['token'], 'user_id': this.user_id, 'description': this.videodesc, 'title': this.videotitle, 'privacy': this.videoprvcy }
         }
         this.remotService.presentLoading();
-        console.log('file upload paramiter', options);
+        //console.log('file upload paramiter', options);
         //console.log(this.videotitle, this.videoprvcy, this.videodesc);
         const url: string = `${this.API_URL}/videoUpload`;
-        console.log('File uri to upload', this.choseuri);
+        //console.log('File uri to upload', this.choseuri);
         this.fileTransfer.upload(this.choseuri, url, options)
           .then((data) => {
             this.remotService.dismissLoader();
             this.navParams.get("parentPage").initvideo();
             this.navCtrl.pop()
 
-            console.log(data);
+            //console.log(data);
           }, (err) => {
-            console.log('error');
+           // console.log('error');
             this.remotService.dismissLoader();
           });
       }

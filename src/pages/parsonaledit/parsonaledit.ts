@@ -60,8 +60,6 @@ export class ParsonaleditPage {
         regValidator.checkuniquevalueoffield('mobile_no', 1)
       ],
       mobilecode: ['+91', Validators.compose([Validators.required])],
-
-
     });
     this.FormRegistrationStepThree = formBuilder.group({
       oldpass: ['', Validators.compose([Validators.required])],
@@ -187,11 +185,11 @@ export class ParsonaleditPage {
       this.oldpass;
       this.password;
       this.confirmpassword;
-      console.log(DataToSend);
+      //console.log(DataToSend);
 
       this.remotService.presentLoading();
       this.remotService.postData(DataToSend, 'changePassword').subscribe((response) => {
-        console.log(response);
+        //console.log(response);
         if (response.success == 1) {
           this.remotService.dismissLoader();
           this.remotService.presentToast(response.message);
@@ -212,7 +210,7 @@ export class ParsonaleditPage {
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ParsonaleditPage');
+    // console.log('ionViewDidLoad ParsonaleditPage');
   }
 
 }

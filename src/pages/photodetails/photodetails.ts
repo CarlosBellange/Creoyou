@@ -19,7 +19,7 @@ export class PhotodetailsPage {
 
   constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
     this.details = this.navParams.get('details');
-    console.log(this.details);
+    //console.log(this.details);
   }
 
   ionViewDidLoad() {
@@ -29,7 +29,7 @@ export class PhotodetailsPage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad PhotodetailsPage');
+    //console.log('ionViewDidLoad PhotodetailsPage');
   }
 
 }

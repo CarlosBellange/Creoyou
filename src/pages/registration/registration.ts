@@ -47,7 +47,7 @@ import { ChangemobilenumberPage } from '../../pages/changemobilenumber/changemob
 })
 export class RegistrationPage {
     @ViewChild(Content) content: Content;
-    userType: number = 0;
+    userType: number = 1;
     regStep: number = 0;
     catid: number = 0;
     otpnumber: number = 0;
@@ -163,7 +163,7 @@ export class RegistrationPage {
         let categoryModal = this.modalCtrl.create(CategoriesPage, { usertype: this.userType });
         categoryModal.onDidDismiss(data => {
             if (data.hasOwnProperty("id")) {
-                console.log("GOt from modal", data);
+                //console.log("GOt from modal", data);
                 this.FormRegistrationStepOne.get('cfield').setValue(data.name);
                 this.catid = data.id;
             }
@@ -226,7 +226,7 @@ export class RegistrationPage {
                 user_mobile: stepTwoform.mobileno,
             }
         }
-        console.log(this.otpParams);
+        //console.log(this.otpParams);
         this.remotService.presentLoading();
         this.remotService.postData(this.otpParams, 'userOtpcheck').subscribe((response) => {
             this.remotService.dismissLoader();
@@ -279,7 +279,7 @@ export class RegistrationPage {
                 this.googlePlus.disconnect().then(() => {
 
                 });
-                console.log("google login", res);
+                //console.log("google login", res);
 
                 var googleparams = {
                     google_id: res.userId,
@@ -310,7 +310,7 @@ export class RegistrationPage {
                             type: 'google',
                             user_type: this.userType
                         }
-                        console.log(params);
+                        //console.log(params);
                         this.navCtrl.push(SocialregPage, params);
 
                         //window.localStorage['fbprofileinfo'] = JSON.stringify(res);
@@ -342,7 +342,7 @@ export class RegistrationPage {
     getFbUserDetail(userid) {
         this.fb.api("/" + userid + "/?fields=id,email,name,picture,token_for_business", ["public_profile"])
             .then(res => {
-                console.log(res);
+                //console.log(res);
 
                 var facemail = res.hasOwnProperty("email") ? res.email : null;
                 var fbParams = {
@@ -355,7 +355,7 @@ export class RegistrationPage {
                     if (response.success == 1) {
 
                         var dataRes = response.data;
-                        console.log(dataRes);
+                        // console.log(dataRes);
                         window.localStorage['usertype'] = dataRes.user_type;
                         window.localStorage['userid'] = dataRes.user_id;
                         window.localStorage['token'] = dataRes.token;
@@ -371,7 +371,8 @@ export class RegistrationPage {
                     } else {
                         var params = {
                             data: res,
-                            type: 'facebook'
+                            type: 'facebook',
+                            user_type: this.userType
                         }
                         this.navCtrl.push(SocialregPage, params);
                         //window.localStorage['fbprofileinfo'] = JSON.stringify(res);
@@ -384,7 +385,7 @@ export class RegistrationPage {
             })
             .catch(e => {
                 this.remotService.presentToast("Error logging in using facebook.");
-                console.log(e);
+                //console.log(e);
             });
     }
     changeMobilenumber() {
@@ -402,10 +403,10 @@ export class RegistrationPage {
             }
         }
 
-        console.log(data);
+        // console.log(data);
         let myModal = this.modalCtrl.create(ChangemobilenumberPage, { changedata: data });
         myModal.onDidDismiss(data => {
-            console.log("GOt from modal", data);
+            //console.log("GOt from modal", data);
             // console.log(data);
             this.FormRegistrationStepTwo.get('mobileno').setValue(data.mobileno);
             this.mobilenumber = data.mobileno;

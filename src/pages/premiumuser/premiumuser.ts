@@ -61,7 +61,7 @@ export class PremiumuserPage {
       this.navCtrl.pop()
 
     }
-    console.log('ionViewDidLoad PremiumuserPage');
+    //console.log('ionViewDidLoad PremiumuserPage');
   }
 
 }

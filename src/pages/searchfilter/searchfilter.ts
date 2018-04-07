@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController,  Events, Navbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Events, Navbar } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { SearchPage } from '../search/search';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,18 +37,24 @@ export class SearchfilterPage {
   business: boolean;
   advsdata: any;
   userType = 1;
+  categoriesData: any;
 
   constructor(public events: Events, public modalCtrl: ModalController, public formBuilder: FormBuilder, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
-    this.FormadvanceStepOne = formBuilder.group({
+    /* this.FormadvanceStepOne = formBuilder.group({
       cfield: ['', Validators.compose([Validators.required])]
 
-    });
+    }); */
     this.initLocationForm();
+
     this.advsearch = navParams.get('adsdata');
     if (this.advsearch == 'business') {
       this.userType = 2;
+      this.setFilteredItems();
     }
-    console.log('adv search', this.advsearch);
+    else {
+      this.setFilteredItems();
+    }
+    // console.log('adv search', this.advsearch);
 
   }
 
@@ -59,7 +65,7 @@ export class SearchfilterPage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad SearchfilterPage');
+    //console.log('ionViewDidLoad SearchfilterPage');
   }
   initLocationForm() {
 
@@ -88,7 +94,7 @@ export class SearchfilterPage {
   }
 
   initStates(country_id) {
-    console.log(country_id);
+    //console.log(country_id);
 
     this.states = [];
     this.remotService.postData({ 'country_id': country_id }, 'states').subscribe((response) => {
@@ -140,8 +146,23 @@ export class SearchfilterPage {
         advancesearch: this.advsearch
       }
     }
-    console.log(this.advsdata);
+    //console.log(this.advsdata);
     this.navCtrl.push(SearchPage, { adsearch: this.advsdata });
+  }
+
+  setFilteredItems() {
+    var data = {
+      user_type: this.userType,
+      term: ''
+    }
+    /*  this.remotService.getCategories(this.searchTerm, this.usertype).subscribe((response) => { */
+    this.remotService.postData(data, 'user-category').subscribe((response) => {
+      if (response.success == 1) {
+        this.categoriesData = response.data;
+      }
+
+    }, () => { })
+
   }
 
   showCategoryModal() {
@@ -149,7 +170,7 @@ export class SearchfilterPage {
     categoryModal.onDidDismiss(data => {
       // Do things with data coming from modal, for instance :
       if (data.hasOwnProperty("id")) {
-        console.log("GOt from modal", data);
+        //console.log("GOt from modal", data);
         this.FormadvanceStepOne.get('cfield').setValue(data.name);
         this.catid = data.id;
       }

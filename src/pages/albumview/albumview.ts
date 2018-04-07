@@ -76,7 +76,7 @@ export class AlbumviewPage {
         this.albumdetails = response.data.details;
         this.albumname = this.albumdetails.name;
         this.albumdescription = this.albumdetails.description;
-        console.log('view other album data', response.data);
+       // console.log('view other album data', response.data);
         //this.currentslideindex = this.slides.getActiveIndex();
         //this.currentimage = this.albumphotos[this.currentslideindex];
       } else {
@@ -95,7 +95,7 @@ export class AlbumviewPage {
     this.content.resize();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AlbumviewPage');
+   // console.log('ionViewDidLoad AlbumviewPage');
   }
 
   gotoPhotoView(album, id) {
@@ -153,7 +153,7 @@ export class AlbumviewPage {
                 {
                   text: 'Cancel',
                   handler: () => {
-                    console.log('Agree clicked');
+                   // console.log('Agree clicked');
                   }
                 }
               ]
@@ -211,7 +211,7 @@ export class AlbumviewPage {
         this.saveImageToArrayBypath(item);
 
       }, function (error) {
-        console.log(error);
+       // console.log(error);
       });
   }
   saveImageToArrayBypath(item) {
@@ -308,7 +308,7 @@ export class AlbumviewPage {
         });
 
       }, (err) => {
-        console.log(err)
+       // console.log(err)
       });
   }
 

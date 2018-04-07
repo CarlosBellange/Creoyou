@@ -33,7 +33,7 @@ export class PhotoviewPage {
     this.base_url = this.remotService.site_url;
     this.album = navParams.get('album');
     this.img_id = this.navParams.get('img_id');
-    console.log(this.img_id);
+    //console.log(this.img_id);
     this.currentuserid = window.localStorage['userid'];
     this.initPhotoFromalbumData();
     this.albumphotos = [];
@@ -78,7 +78,7 @@ export class PhotoviewPage {
 
         this.currentslideindex = this.slides.getActiveIndex();
         this.currentimage = this.albumphotos[this.currentslideindex];
-        console.log(this.currentimage);
+        //console.log(this.currentimage);
       } else {
         this.remotService.presentToast(response.message);
       }
@@ -98,7 +98,7 @@ export class PhotoviewPage {
   shareThisPost() {
 
     var link = this.base_url + "user/things/share/pimage/" + this.currentimage.id + "/" + 1
-    console.log(link)
+    //console.log(link)
     var img = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -194,7 +194,7 @@ export class PhotoviewPage {
 
   slideChanged() {
 
-    console.log(this.slides.length);
+    //console.log(this.slides.length);
 
     if (this.slides.isEnd()) {
 
@@ -206,7 +206,7 @@ export class PhotoviewPage {
     // console.log(this.slides.getActiveIndex());
     this.currentslideindex = this.slides.getActiveIndex();
     this.currentimage = this.albumphotos[this.currentslideindex];
-    console.log('Current index is', this.albumphotos, this.albumphotos[this.currentslideindex]);
+    //console.log('Current index is', this.albumphotos, this.albumphotos[this.currentslideindex]);
 
 
 
@@ -250,7 +250,7 @@ export class PhotoviewPage {
             }
             // console.log(albumdata);
             this.remotService.postData(albumdata, 'EditImageTitles').subscribe((response) => {
-              console.log(response);
+             // console.log(response);
               if (response.success == 1) {
 
                 this.initPhotoFromalbumData();

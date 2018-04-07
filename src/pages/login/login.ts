@@ -43,7 +43,7 @@ export class LoginPage {
         if (platform.is('cordova')) {
 
             this.oneSignal.getIds().then((ids) => {
-                console.log("One signal ids" + ids.userId);
+                // console.log("One signal ids" + ids.userId);
                 this.onesignalplayerid = ids.userId;
                 this.onesignaltoken = ids.pushToken;
 
@@ -65,7 +65,7 @@ export class LoginPage {
                 this.googlePlus.disconnect().then(() => {
 
                 });
-                console.log("google login", res);
+                // console.log("google login", res);
 
                 var googleparams = {
                     google_id: res.userId,
@@ -90,7 +90,7 @@ export class LoginPage {
 
 
                     } else {
-                        var params = { data: res, type: 'google' }
+                        var params = { data: res, type: 'google', user_type: 1 }
                         this.navCtrl.push(SocialregPage, params);
                         //window.localStorage['fbprofileinfo'] = JSON.stringify(res);
                     }
@@ -124,7 +124,7 @@ export class LoginPage {
     getFbUserDetail(userid) {
         this.fb.api("/" + userid + "/?fields=id,email,name,picture,token_for_business", ["public_profile"])
             .then(res => {
-                console.log(res);
+                // console.log(res);
 
                 var facemail = res.hasOwnProperty("email") ? res.email : null;
                 var fbParams = {
@@ -137,7 +137,7 @@ export class LoginPage {
                     if (response.success == 1) {
 
                         var dataRes = response.data;
-                        console.log(dataRes);
+                        //console.log(dataRes);
                         window.localStorage['usertype'] = dataRes.user_type;
                         window.localStorage['userid'] = dataRes.user_id;
                         window.localStorage['token'] = dataRes.token;
@@ -151,7 +151,7 @@ export class LoginPage {
 
 
                     } else {
-                        var params = { data: res, type: 'facebook' }
+                        var params = { data: res, type: 'facebook', user_type: 1 }
                         this.navCtrl.push(SocialregPage, params);
                         //window.localStorage['fbprofileinfo'] = JSON.stringify(res);
                     }
@@ -163,7 +163,7 @@ export class LoginPage {
             })
             .catch(e => {
                 this.remotService.presentToast("Error logging in using facebook.");
-                console.log(e);
+                //console.log(e);
             });
     }
 
@@ -178,7 +178,7 @@ export class LoginPage {
             device_tocken: this.onesignaltoken,
             player_id: this.onesignalplayerid
         }
-        console.log("Login params", loginParams)
+        // console.log("Login params", loginParams)
         this.remotService.presentLoading();
         this.remotService.postData(loginParams, 'userLogin').subscribe((response) => {
 
@@ -224,7 +224,7 @@ export class LoginPage {
     ionViewDidLoad() {
         this.events.publish('creoyou:hidemenu');
         this.menu.swipeEnable(false);
-        console.log('ionViewDidLoad LoginPage');
+        //console.log('ionViewDidLoad LoginPage');
     }
 
 

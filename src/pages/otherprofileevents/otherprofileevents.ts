@@ -56,7 +56,7 @@ export class OtherprofileeventsPage {
       else if (this.otherprofileeventstab == 'upcoming') {
         this.eventlist = response.data.upcoming;
       }
-      console.log(this.eventlist);
+      //console.log(this.eventlist);
     }, () => {
 
       this.remotService.dismissLoader();
@@ -101,7 +101,7 @@ export class OtherprofileeventsPage {
   * show comments
   */
   showComments(event) {
-    console.log(event);
+    //console.log(event);
     var data = {
       incident_type: event.incident_type,
       id: event.incidentId,
@@ -119,7 +119,7 @@ export class OtherprofileeventsPage {
 
     var type = event.incident_type.toLowerCase()
     var link = this.base_url + "user/things/share/" + type + "/" + event.incidentId + "/" + 1
-    console.log(link)
+    //console.log(link)
     var img = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -150,11 +150,11 @@ export class OtherprofileeventsPage {
       eventId: event.id,
       token: window.localStorage['token']
     }
-    console.log(DataToSends);
+    //console.log(DataToSends);
     this.remotService.presentLoading();
     this.remotService.postData(DataToSends, 'addToCalender').subscribe((response) => {
       this.remotService.dismissLoader();
-      console.log(response);
+      //console.log(response);
       if (response.success == 1) {
 
       }
@@ -174,7 +174,7 @@ export class OtherprofileeventsPage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad OtherprofileeventsPage');
+    //console.log('ionViewDidLoad OtherprofileeventsPage');
   }
   ionViewWillLeave() {
     this.remotService.dismissLoader();

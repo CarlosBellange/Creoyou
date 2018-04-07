@@ -40,7 +40,7 @@ export class JobsPage {
     };
     this.remotService.presentLoading();
     this.remotService.postData(jobsFetchparams, 'allJobs').subscribe((response) => {
-      console.log(response);
+      //console.log(response);
 
       this.remotService.dismissLoader();
       if (response.success == 1) {
@@ -49,11 +49,11 @@ export class JobsPage {
           let date1: string = item.updation_date;
           let date2: string = this.date;
           let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-          let difinsec: number = Math.floor(diffInMs / 1000);
-          let diffmin: number = Math.floor(diffInMs / 1000 / 60);
-          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
-          let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
-          let weekindiff: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7);
+          let difinsec: number = Math.round(diffInMs / 1000);
+          let diffmin: number = Math.round(diffInMs / 1000 / 60);
+          let diffInHours: number = Math.round(diffInMs / 1000 / 60 / 60);
+          let diffIndays: number = Math.round(diffInMs / 1000 / 60 / 60 / 24);
+          let weekindiff: number = Math.round(diffInMs / 1000 / 60 / 60 / 24 / 7);
           item.second = difinsec;
           item.minute = diffmin;
           item.hour = diffInHours;
@@ -67,11 +67,11 @@ export class JobsPage {
           let date1: string = item.updation_date;
           let date2: string = this.date;
           let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-          let difinsec: number = Math.floor(diffInMs / 1000);
-          let diffmin: number = Math.floor(diffInMs / 1000 / 60);
-          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
-          let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
-          let weekindiff: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7);
+          let difinsec: number = Math.round(diffInMs / 1000);
+          let diffmin: number = Math.round(diffInMs / 1000 / 60);
+          let diffInHours: number = Math.round(diffInMs / 1000 / 60 / 60);
+          let diffIndays: number = Math.round(diffInMs / 1000 / 60 / 60 / 24);
+          let weekindiff: number = Math.round(diffInMs / 1000 / 60 / 60 / 24 / 7);
           item.second = difinsec;
           item.minute = diffmin;
           item.hour = diffInHours;
@@ -104,7 +104,7 @@ export class JobsPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad JobsPage');
+    // console.log('ionViewDidLoad JobsPage');
   }
 
 

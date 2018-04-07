@@ -101,6 +101,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { File } from '@ionic-native/file';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { Network } from '@ionic-native/network';
+import { Device } from '@ionic-native/device';
 @NgModule({
   declarations: [
     CreoYouApp,
@@ -266,7 +267,8 @@ import { Network } from '@ionic-native/network';
     Diagnostic,
     AndroidPermissions,
     Contacts,
-    Network
+    Network,
+    Device
   ]
 })
 export class AppModule {

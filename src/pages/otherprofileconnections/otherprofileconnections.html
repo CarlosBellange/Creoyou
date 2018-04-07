@@ -37,7 +37,7 @@
             <p class="user_deg">
               {{connection.creativeField}}</p>
             <p class="user_deg">
-              <ion-icon name="home"></ion-icon> {{connection.address}}</p>
+              <ion-icon name="home" *ngIf="connection.address"></ion-icon> {{connection.address}}</p>
           </div>
           <div class="user_action" item-right>
             <!-- <ion-icon (click)="presentActionSheet(connection,idx)" item-right ios="ios-settings" md="md-settings"></ion-icon>
@@ -49,7 +49,7 @@
       </ion-item>
 
       <ion-item *ngIf="connections?.length<=0 && shownone==1" class="no_result">
-        <h3> Sorry No Connection Found... </h3>
+        <h3>No Connection</h3>
       </ion-item>
     </ion-list>
 
@@ -58,7 +58,7 @@
     <ion-list *ngSwitchCase="'followings'">
 
       <ion-item *ngIf="following?.length<=0" class="no_result">
-        <h3> Sorry No Following User Found... </h3>
+        <h3> Not following anyone </h3>
       </ion-item>
 
       <ion-list class="individual">
@@ -77,7 +77,7 @@
               <p class="user_deg">
                 <ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
               <p class="user_deg">
-                <ion-icon name="home"></ion-icon> {{user.address}}</p>
+                <ion-icon name="home" *ngIf="user.address"></ion-icon> {{user.address}}</p>
             </div>
             <!--  <div class="user_action" (click)="presentActionSheet(user,1,idx);" item-right>
               <ion-icon item-right ios="ios-settings" md="md-settings"></ion-icon>
@@ -87,17 +87,17 @@
 
       </ion-list>
 
-      <ion-infinite-scroll (ionInfinite)="fetchFollowingData($event)">
+      <!-- <ion-infinite-scroll (ionInfinite)="fetchFollowingData($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
-
+ -->
     </ion-list>
 
     <ion-list *ngSwitchCase="'followers'">
 
       <ion-item *ngIf="followers?.length<=0" class="no_result">
-        <h3> Sorry No Follower Found... </h3>
+        <h3>No followers</h3>
       </ion-item>
 
       <ion-list class="individual">
@@ -115,7 +115,7 @@
               <p class="user_deg">
                 <ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
               <p class="user_deg">
-                <ion-icon name="home"></ion-icon> {{user.address}}</p>
+                <ion-icon name="home" *ngIf="user.address"></ion-icon> {{user.address}}</p>
             </div>
             <!--  <div class="user_action" (click)="presentActionSheet(user,2,idx);" item-right>
               <ion-icon item-right ios="ios-settings" md="md-settings"></ion-icon>
@@ -125,10 +125,10 @@
 
       </ion-list>
 
-      <ion-infinite-scroll (ionInfinite)="fetchFollowerData($event)">
+      <!-- <ion-infinite-scroll (ionInfinite)="fetchFollowerData($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles">
         </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
+      </ion-infinite-scroll> -->
 
 
     </ion-list>

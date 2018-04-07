@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Navbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Navbar, Content } from 'ionic-angular';
 import { TimeagoPipe } from '../../pipes/timeago/timeago';
 import { NotificationsdetailsPage } from '../../pages/notificationsdetails/notificationsdetails';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -15,8 +16,11 @@ export class NotificationsPage {
 
   base_url: any;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChild(Content) content: Content;
   notiPageOffset = 0;
   notiData = [];
+  showbubble: boolean = true;
+  responsedata: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events
     , public remotService: RemoteServiceProvider) {
@@ -25,7 +29,9 @@ export class NotificationsPage {
     this.initDataLoad();
     this.readnotification();
   }
-
+  ionViewWillEnter() {
+    this.content.resize();
+  }
 
   readnotification() {
     var reddata = {
@@ -51,8 +57,9 @@ export class NotificationsPage {
 
       this.remotService.dismissLoader();
       if (response.success == 1) {
-
+        this.showbubble = false;
         var resData = response.data.userNotification;
+        this.responsedata = response.data.userNotification;
         if (resData != null) {
 
           resData.forEach((item, key, index) => {
@@ -80,10 +87,10 @@ export class NotificationsPage {
     this.navBar.backButtonClick = () => {
 
       this.events.publish('creoyou:showmenu');
-      this.navCtrl.pop()
+      this.navCtrl.setRoot(HomePage)
     }
 
-    console.log('ionViewDidLoad NotificationsPage');
+    //console.log('ionViewDidLoad NotificationsPage');
   }
 
   fetchNotificationdata(infiniteScroll) {

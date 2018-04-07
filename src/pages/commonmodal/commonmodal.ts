@@ -16,11 +16,11 @@ export class CommonmodalPage {
 
     this.items = navParams.get('items');
     this.title = navParams.get('title');
-    console.log("common modal items", this.items)
+   // console.log("common modal items", this.items)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommonmodalPage');
+   // console.log('ionViewDidLoad CommonmodalPage');
   }
 
 

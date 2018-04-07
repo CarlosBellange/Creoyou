@@ -42,6 +42,7 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 import { Network } from '@ionic-native/network';
+import { Device } from '@ionic-native/device';
 
 @Component({
   templateUrl: 'app.html'
@@ -70,11 +71,12 @@ export class CreoYouApp {
   pendingmessagecount = 0;
   notificCallInterval: any;
 
-  constructor(private network: Network, private contacts: Contacts, private androidPermissions: AndroidPermissions, private diagnostic: Diagnostic, public menu: MenuController, public alertCtrl: AlertController, public app: App, public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+  constructor(private device: Device, private network: Network, private contacts: Contacts, private androidPermissions: AndroidPermissions, private diagnostic: Diagnostic, public menu: MenuController, public alertCtrl: AlertController, public app: App, public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     private oneSignal: OneSignal, public events: Events, public remoteService: RemoteServiceProvider) {
 
     var uId = window.localStorage['userid'];
     this.menu.swipeEnable(false);
+
 
 
     if (uId > 0) {
@@ -88,18 +90,26 @@ export class CreoYouApp {
 
     platform.ready().then(() => {
       splashScreen.hide();
+      statusBar.styleDefault();
       this.checkonlineofline();
-      let contact: Contact = this.contacts.create();
-      contact.name = new ContactName();
-      contact.phoneNumbers = [new ContactField()];
-      contact.save().then(
-        () => console.log('Contact saved!', contact),
-        (error: any) => console.error('Error saving contact.', error)
-      );
-
+      /* console.log('device information', this.device.platform); */
+      var string = this.device.version,
+        substring = "8.";
+      if (string.includes(substring)) {
+        let contact: Contact = this.contacts.create();
+      }
+      else {
+        let contact: Contact = this.contacts.create();
+        contact.name = new ContactName();
+        contact.phoneNumbers = [new ContactField()];
+        contact.save().then(
+          () => console.log('Contact saved!', contact),
+          (error: any) => console.error('Error saving contact.', error)
+        );
+      }
       events.subscribe('creoyou:shownotifications', () => {
 
-        console.log('show notific');
+        //console.log('show notific');
         remoteService.postData({ token: window.localStorage['token'] }, 'getCountOfNotifications').subscribe((response) => {
 
           if (response.success == 1) {
@@ -172,15 +182,11 @@ export class CreoYouApp {
         , { 'icon': 'notifications', 'link': NotificationsPage }
         , { 'icon': 'md-chatbubbles', 'link': MessagesPage }];
 
-
       //this.username = window.localStorage['username'];
 
       if (platform.is('cordova')) {
 
-        this.oneSignal.startInit('585c399a-329c-47ff-a8d2-cd000f6c32be', '990895596031');
-
-
-
+        this.oneSignal.startInit('7d221876-1bdf-4171-a878-29006dc6152c', '855303232010');
         this.oneSignal.handleNotificationReceived().subscribe(() => {
           // do something when notification is received
           //update notifications
@@ -221,7 +227,7 @@ export class CreoYouApp {
             }
 
           }
-          console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+          //console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
         });
 
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
@@ -231,8 +237,7 @@ export class CreoYouApp {
 
       }
 
-      statusBar.styleDefault();
-      splashScreen.hide();
+
     });
   }
   ionViewDidLoad() {
@@ -257,23 +262,21 @@ export class CreoYouApp {
   }
 
   gotoPage(item) {
-
     /*  if (item.icon == 'home') { */
-
     this.topMenuItems = [{ 'icon': 'md-search', 'link': SearchPage }
       , { 'icon': 'loop', 'link': FeedsPage }
       , { 'icon': 'md-person-add', 'link': ConnectionsPage }
       , { 'icon': 'notifications', 'link': NotificationsPage }
       , { 'icon': 'md-chatbubbles', 'link': MessagesPage }];
 
-    /*  } */
-    /* else {
-      this.topMenuItems = [{ 'icon': 'md-search', 'link': SearchPage }
-        , { 'icon': 'loop', 'link': FeedsPage }
-        , { 'icon': 'md-person-add', 'link': ConnectionsPage }
-        , { 'icon': 'notifications', 'link': NotificationsPage }
-        , { 'icon': 'md-chatbubbles', 'link': MessagesPage }];
-    } */
+    /*   } */
+    /*  else {
+       this.topMenuItems = [{ 'icon': 'md-search', 'link': SearchPage }
+         , { 'icon': 'loop', 'link': FeedsPage }
+         , { 'icon': 'md-person-add', 'link': ConnectionsPage }
+         , { 'icon': 'notifications', 'link': NotificationsPage }
+         , { 'icon': 'md-chatbubbles', 'link': MessagesPage }];
+     } */
     this.nav.push(item.link, { 'name': item.name });
 
   }
@@ -283,8 +286,12 @@ export class CreoYouApp {
   }
 
   menuOpened() {
-    //this.content.scrollToTop();
     this.events.publish('menu:opened', '');
+    this.navsegments = [{ 'name': '', items: this.firstNavItems },
+    { 'name': 'Portfolio', items: this.secondNavItems },
+    { 'name': 'Connections', items: this.thirdNavItems },
+    { 'name': 'Events', items: this.frthNavItems },
+    { 'name': 'Settings', items: this.fifthNavItems }];
   }
 
 

@@ -21,7 +21,8 @@ import {
 } from '../../pages/invitefriend/invitefriend';
 import { MessagedetailsPage } from '../../pages/messagedetails/messagedetails';
 import { NewmessagePage } from '../../pages/newmessage/newmessage';
-
+import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -45,6 +46,7 @@ export class MessagesPage {
   term: string = '';
   text: string;
   username: any;
+  showmenu: boolean;
   /* unreadmsg: boolean = false;
   usrmsg: boolean = true; */
 
@@ -60,7 +62,7 @@ export class MessagesPage {
 
   ionViewWillEnter() {
     this.content.resize();
-    console.log('reload page');
+    // console.log('reload page');
     this.ShowmessageDetails();
     this.unreadAllMessage();
   }
@@ -112,16 +114,19 @@ export class MessagesPage {
             }
 
           })
-          console.log(this.usermessage);
+          // console.log(this.usermessage);
           response.data.unseenMessagesofuser.forEach((item, key, index) => {
 
             this.unreadmessage.push(item);
 
-            console.log('ummm', this.unreadmessage);
+            // console.log('ummm', this.unreadmessage);
           })
         }
-      } else {
+      } else if (response.success == 2) {
         this.remotService.dismissLoader();
+        this.navCtrl.push(LoginPage, { closeapp: true });
+        window.localStorage.clear();
+        this.showmenu = false;
         this.remotService.presentToast(response.message);
       }
     }, () => {
@@ -171,9 +176,9 @@ export class MessagesPage {
 
       //   this.navParams.get("parentPage").initViewwithconnectionsdata();
       this.events.publish('creoyou:showmenu');
-      this.navCtrl.pop()
+      this.navCtrl.setRoot(HomePage)
     }
-    console.log('ionViewDidLoad MessagesPage');
+    //console.log('ionViewDidLoad MessagesPage');
   }
 
   messageDetails(usermsg) {
@@ -311,7 +316,7 @@ export class MessagesPage {
   }
 
   otherProfile() {
-    console.log('hiiiii');
+    // console.log('hiiiii');
   }
 
 

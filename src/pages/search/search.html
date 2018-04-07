@@ -65,10 +65,13 @@
                 <ion-icon name="briefcase"></ion-icon> {{people.cat_name}}</p>
               <p class="user_deg" *ngIf="people.cat_name=='' || people.cat_name==null">
                 <ion-icon name="briefcase"></ion-icon> {{people.creativeField}}</p>
-              <p class="user_deg" *ngIf="people.city">
-                <ion-icon name="home" *ngIf="people.state || people.country"></ion-icon>
-                <span *ngIf="people.country"> {{people.country}}</span>
+              <p class="user_deg">
+                <ion-icon name="home" *ngIf="people.state || people.country || people.city"></ion-icon>
+                <span *ngIf="people.city"> {{people.city}}</span>
+                <span class="coma" *ngIf="people.state && people.city">,</span>
                 <span *ngIf="people.state"> {{people.state}}</span>
+                <span class="coma" *ngIf="people.state && people.country || people.city && people.country">,</span>
+                <span *ngIf="people.country"> {{people.country}}</span>
 
               </p>
             </div>
@@ -106,10 +109,13 @@
               <p class="user_deg" *ngIf="business.creativeField">
                 <ion-icon name="briefcase"></ion-icon> {{business.creativeField}}</p>
 
-              <p class="user_deg" *ngIf="business.city">
-                <ion-icon name="home" *ngIf="business.state || business.country"></ion-icon>
-                <span *ngIf="business.country"> {{business.country}}</span>
+              <p class="user_deg">
+                <ion-icon name="home" *ngIf="business.state || business.country || business.city"></ion-icon>
+                <span *ngIf="business.city"> {{business.city}}</span>
+                <span class="coma" *ngIf="business.city && business.state">,</span>
                 <span *ngIf="business.state"> {{business.state}}</span>
+                <span class="coma" *ngIf="business.city && business.country || business.state && business.country">,</span>
+                <span *ngIf="business.country"> {{business.country}}</span>
 
               </p>
             </div>
@@ -143,9 +149,12 @@
               <ion-icon name="briefcase"></ion-icon> {{jobs.job_title}}</p>
             <p class="user_deg"> Required Experience : {{jobs.required_experience}} </p>
             <p class="user_deg" *ngIf="jobs.cat_name">{{jobs.cat_name}}</p>
-            <p class="user_deg" *ngIf="jobs.state || jobs.country">
-              <span *ngIf="jobs.country">{{jobs.country}}</span>
+            <p class="user_deg">
+              <span *ngIf="jobs.city">{{jobs.city}}</span>
+              <span class="coma" *ngIf="jobs.city && jobs.state">,</span>
               <span *ngIf="jobs.state"> {{jobs.state}}</span>
+              <span class="coma" *ngIf="jobs.state && jobs.country || jobs.city && jobs.country">,</span>
+              <span *ngIf="jobs.country"> {{jobs.country}}</span>
 
             </p>
             <p class="user_deg" *ngIf="jobs.second<60">{{jobs.second }} Second ago | {{jobs.jobtype}}</p>
@@ -174,7 +183,7 @@
         <ion-icon md="md-funnel"></ion-icon> Filter
       </h4>
       <h4 class="notFound">
-        <ion-spinner name="dots" *ngIf="people_user==''"></ion-spinner>
+        <ion-spinner name="bubbles" *ngIf="people_user==''"></ion-spinner>
       </h4>
       <ion-list *ngFor="let people of people_user">
 
@@ -193,10 +202,13 @@
                 <ion-icon name="briefcase"></ion-icon> {{people.cat_name}}</p>
               <p class="user_deg" *ngIf="people.cat_name=='' || people.cat_name==null">
                 <ion-icon name="briefcase"></ion-icon> {{people.creativeField}}</p>
-              <p class="user_deg" *ngIf="people.state || people.country">
-                <ion-icon name="home"></ion-icon>
-                <span *ngIf="people.country"> {{people.country}}</span>
+              <p class="user_deg">
+                <ion-icon name="home" *ngIf="people.state || people.country || people.city"></ion-icon>
+                <span *ngIf="people.city"> {{people.city}}</span>
+                <span class="coma" *ngIf="people.city && people.state">,</span>
                 <span *ngIf="people.state"> {{people.state}}</span>
+                <span class="coma" *ngIf="people.city && people.country || people.state && people.country">,</span>
+                <span *ngIf="people.country"> {{people.country}}</span>
 
               </p>
 
@@ -223,7 +235,8 @@
         <ion-icon md="md-funnel"></ion-icon> Filter
       </h4>
       <h4 class="notFound">
-        <ion-spinner name="dots" *ngIf="business_user==''"></ion-spinner>
+
+        <ion-spinner name="bubbles" *ngIf="business_user==''"></ion-spinner>
       </h4>
       <ion-list *ngFor="let business of business_user">
 
@@ -246,10 +259,13 @@
                 <ion-icon name="briefcase"></ion-icon> {{business?.creativeField}}</p>
 
 
-              <p class="user_deg" *ngIf="business.city">
-                <ion-icon name="home" *ngIf="business.state || business.country"></ion-icon>
-                <span *ngIf="business.country">{{business.country}}</span>
+              <p class="user_deg">
+                <ion-icon name="home" *ngIf="business.state || business.country || business.city"></ion-icon>
+                <span *ngIf="business.city">{{business.city}}</span>
+                <span class="coma" *ngIf="business.city && business.state">,</span>
                 <span *ngIf="business.state"> {{business.state}}</span>
+                <span class="coma" *ngIf="business.city && business.country || business.state && business.country">,</span>
+                <span *ngIf="business.country"> {{business.country}}</span>
 
               </p>
             </div>
@@ -274,7 +290,8 @@
         <ion-icon md="md-funnel"></ion-icon> Filter
       </h4>
       <h4 class="notFound">
-        <ion-spinner name="dots" *ngIf="business_user==''"></ion-spinner>
+
+        <ion-spinner name="bubbles" *ngIf="jobs_user==''"></ion-spinner>
       </h4>
       <ion-list *ngFor="let jobs of jobs_user">
 
@@ -293,10 +310,12 @@
                 <ion-icon name="briefcase"></ion-icon> {{jobs.job_title}}</p>
               <p class="user_deg"> Required Experience : {{jobs.required_experience}} </p>
               <p class="user_deg" *ngIf="jobs.cat_name">{{jobs.cat_name}}</p>
-              <p class="user_deg" *ngIf="jobs.state || jobs.country">
-                <span *ngIf="jobs.country">{{jobs.country}}</span>
+              <p class="user_deg" *ngIf="jobs.state || jobs.country || jobs.city">
+                <span *ngIf="jobs.city"> {{jobs.city}}</span>
+                <span class="coma" *ngIf="jobs.city && jobs.state">,</span>
                 <span *ngIf="jobs.state"> {{jobs.state}}</span>
-
+                <span class="coma" *ngIf="jobs.city && jobs.country || jobs.country && jobs.state">,</span>
+                <span *ngIf="jobs.country">{{jobs.country}}</span>
               </p>
               <p class="user_deg" *ngIf="jobs.second<60">{{jobs.second }} Second ago | {{jobs.jobtype}}</p>
               <p class="user_deg" *ngIf="jobs.minute<60 && jobs.second>60">{{jobs.minute }} Minute ago | {{jobs.jobtype}}</p>

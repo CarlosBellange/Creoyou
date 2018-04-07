@@ -179,7 +179,7 @@
                     </span>
 
                     <span class="error" *ngIf="FormRegistrationStepTwo.get('password').hasError('pattern')  && (FormRegistrationStepTwo.get('password').touched || submitAttempt)">
-                        <p>Passwords must have a lowercase letter and uppercase letter and a number and between 8 to 20 char.</p>
+                        <p>Passwords must have 8 characters or more with at least 1 uppercase letter and 1 number</p>
                     </span>
                 </ion-col>
                 <ion-col col-12 class="fld">

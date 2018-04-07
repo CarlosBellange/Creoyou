@@ -81,6 +81,7 @@ export class RemoteServiceProvider {
 
     presentLoading() {
         this.loader = this.loadingcntrl.create({
+            spinner: 'bubbles',
         });
         this.loader.present();
     }

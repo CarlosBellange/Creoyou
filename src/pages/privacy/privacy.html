@@ -72,7 +72,7 @@
       <ion-list class="individual" *ngFor="let unuser of unflowuser">
         <ion-item padding-horizontal class="search_user search_user_individual">
           <ion-avatar item-left>
-            <img *ngIf="unuser.image=='' && unuser.image==null" src="{{base_url}}uploads/profileImages/resizedImages/{{unuser.image}}"
+            <img *ngIf="unuser.image!='' && unuser.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{unuser.image}}"
               alt="Image" />
             <img *ngIf="unuser.image=='' || unuser.image==null" src="assets/img/management.png" alt="avatar">
           </ion-avatar>
@@ -104,7 +104,7 @@
       <ion-list class="individual" *ngFor="let rejuser of rejectuser">
         <ion-item padding-horizontal class="search_user search_user_individual">
           <ion-avatar item-left>
-            <img *ngIf="rejuser.image=='' && rejuser.image==null" src="{{base_url}}uploads/profileImages/resizedImages/{{rejuser.image}}"
+            <img *ngIf="rejuser.image!='' && rejuser.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{rejuser.image}}"
               alt="Image" />
             <img *ngIf="rejuser.image=='' || rejuser.image==null" src="assets/img/management.png" alt="avatar">
           </ion-avatar>

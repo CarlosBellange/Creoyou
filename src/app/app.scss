@@ -420,8 +420,33 @@ audio-track-progress-bar input[type=range] {
     background-image: none;
 }
 
-.swiper-slide img {
-    background: #fff;
+.audio_wrap strong {
+    margin: 8px 0px;
+    margin-left: 0px !important;
+    font-weight: 600 !important;
+}
+
+audio-track-progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ion-spinner * {
+    width: 28px;
+    height: 28px;
+    stroke: rgb(170, 170, 170) !important;
+    fill: rgb(170, 170, 170) !important;
+}
+
+.post_body div>img {
+    margin: 0 auto;
+    display: block;
+}
+
+.album_singel img {
+    margin: 0 auto;
+    display: block;
 }
 
 /* side bar */

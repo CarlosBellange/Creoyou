@@ -73,7 +73,7 @@ export class NewmessagePage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad NewmessagePage');
+   // console.log('ionViewDidLoad NewmessagePage');
   }
 
 }

@@ -6,22 +6,22 @@ import { Directive, HostListener, ElementRef } from '@angular/core';
 })
 export class TextgrowDirective {
   @HostListener("input", ["$event.target"])
-	onInput(textArea: HTMLTextAreaElement): void {
-		this.adjust();
-	}
+  onInput(textArea: HTMLTextAreaElement): void {
+    this.adjust();
+  }
   constructor(public element: ElementRef) {
-    console.log('Hello TextgrowDirective Directive');
+    // console.log('Hello TextgrowDirective Directive');
   }
   ngOnInit(): void {
-		this.adjust();
-	}
-	adjust(): void {
+    this.adjust();
+  }
+  adjust(): void {
     var ta = this.element.nativeElement.querySelector("textarea");
     if (ta) {
       ta.style.overflow = "hidden";
       ta.style.height = "auto";
       ta.style.height = ta.scrollHeight + "px";
     }
-	
-	}
+
+  }
 }

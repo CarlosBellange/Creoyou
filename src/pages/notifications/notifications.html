@@ -11,7 +11,12 @@
 
   <ion-list>
     <ion-item *ngIf="notiData==''" class="no_result">
-      <h3>No notifications</h3>
+      <h3>
+        <ion-spinner name="bubbles" *ngIf="showbubble"></ion-spinner>
+      </h3>
+      <h3 *ngIf="responsedata==''">
+        No notifications
+      </h3>
     </ion-item>
 
     <ion-item *ngFor="let notifications of notiData;" class="" (click)="notificationDetails(notifications)">

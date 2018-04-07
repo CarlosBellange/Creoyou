@@ -30,7 +30,7 @@ export class ProfilecompletePage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad ProfilecompletePage');
+   // console.log('ionViewDidLoad ProfilecompletePage');
   }
 
 }

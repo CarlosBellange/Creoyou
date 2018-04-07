@@ -56,8 +56,6 @@
 
           </ion-item>
           <ion-item *ngIf="item.incident_type==='Image'">
-
-
             <span *ngFor="let albumimage of item.image_details">
               <img img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage.image_name}}" alt="Post Img" />
             </span>
@@ -65,7 +63,7 @@
           </ion-item>
           <ion-item *ngIf="item.incident_type==='Audio';">
 
-            <audio-track #audio *ngFor="let track of item.myTracks" [track]="track" (onFinish)="onTrackFinished($event)">
+            <!--  <audio-track #audio *ngFor="let track of item.myTracks" [track]="track" (onFinish)="onTrackFinished($event)">
               <ion-item>
                 <ion-thumbnail item-left>
                   <img src="assets/img/audio_new.png">
@@ -75,14 +73,33 @@
                 </ion-thumbnail>
                 <div item-content style="width:100%">
                   <p>
-                    <strong>{{audio.title}}</strong> ⚬
-                    <em>{{audio.artist}}</em>
+                    <strong>{{audio.title}}</strong>
                   </p>
-                  <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'hidden'}"></audio-track-progress-bar>
+                  <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'show'}"></audio-track-progress-bar>
+                </div>
+              </ion-item>
+            </audio-track> -->
+            <!-- {{item.test}}        -->
+
+
+
+            <audio-track #audio *ngFor="let track of item.myTracks" [track]="track" (click)=playThisTrack($event,track)>
+              <ion-item>
+                <ion-thumbnail item-left class="audio_action">
+                  <img img-preloader="assets/img/audio_new.png">
+                  <ion-icon name="play" *ngIf="track.select"></ion-icon>
+                  <ion-icon name="pause" *ngIf="!track.select"></ion-icon>
+                </ion-thumbnail>
+                <div item-content style="width:100%">
+                  <p>
+                    <strong (click)="audiodetails(item)">{{audio.title | slice:0:15}}
+                      <span *ngIf="audio?.title?.length>15">.....</span>
+                    </strong>
+                  </p>
+                  <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'show'}"></audio-track-progress-bar>
                 </div>
               </ion-item>
             </audio-track>
-            <!-- {{item.test}}        -->
           </ion-item>
 
           <ion-item *ngIf="item.incident_type==='You Tube';">
@@ -93,12 +110,19 @@
 
           <ion-item *ngIf="item.incident_type==='Video'">
 
-            <video poster="{{base_url}}uploads/portfolioVideoSnapshots/{{item.snapshot_name}}" controls="controls" preload="metadata"
+
+            <div (tap)="playvideo(item.video_name)">
+              <img src="{{base_url}}uploads/portfolioVideoSnapshots/{{item.snapshot_name}}" />
+            </div>
+            <img (tap)="playvideo(item.video_name)" class="play_img" src="assets/img/play.svg" width="50px">
+
+            <!-- <video poster="{{base_url}}uploads/portfolioVideoSnapshots/{{item.snapshot_name}}" controls="controls" preload="metadata"
               webkit-playsinline="webkit-playsinline" class="videoPlayer">
               <source src="{{base_url}}uploads/portfolioVideos/{{item.video_name}}" type="video/mp4" />
-            </video>
+            </video> -->
 
           </ion-item>
+
           <ion-item *ngIf="item.tagged_to?.length > 0">
             <p class="Post_tag">
               With

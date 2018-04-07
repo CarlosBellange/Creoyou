@@ -45,13 +45,8 @@ export class JobdetailsPage {
       this.remotService.dismissLoader();
       this.jobdetails = response.data.Details;
       this.appliedjob = response.data.Status.flag;
-      console.log(this.jobdetails);
-      /*  if (this.appliedjob == 'Applied') {
-         this.apply = true;
-       }
-       else {
-         this.apply = false;
-       } */
+     // console.log(this.jobdetails);
+      
     }, () => {
       this.remotService.dismissLoader();
       this.remotService.presentToast('Error!');
@@ -66,7 +61,7 @@ export class JobdetailsPage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad JobdetailsPage');
+    //console.log('ionViewDidLoad JobdetailsPage');
     this.getjobdetails();
   }
   applyjob() {
@@ -83,10 +78,10 @@ export class JobdetailsPage {
       this.remotService.postData(DataToSend, 'applyJob').subscribe((response) => {
         this.remotService.dismissLoader();
         if (response.success == 1) {
-          console.log(response);
+         // console.log(response);
           this.appliedjob = 'Applied';
 
-          console.log(this.appliedjob);
+         // console.log(this.appliedjob);
           //this.jobdetails = response.data.Details;
         }
       }, () => {

@@ -97,7 +97,7 @@ export class InvitefriendPage {
 
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InvitefriendPage');
+   // console.log('ionViewDidLoad InvitefriendPage');
   }
 
 }

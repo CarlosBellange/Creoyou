@@ -59,7 +59,7 @@ export class PersonalPage {
       this.remotService.dismissLoader();
       if (response.success == 1) {
         this.parsonaldata = response.data;
-        console.log(response);
+       // console.log(response);
       }
     }, () => {
       this.remotService.dismissLoader();
@@ -69,7 +69,7 @@ export class PersonalPage {
   }
   launch(url: string) {
     let target = "_system";
-    console.log(url);
+    //console.log(url);
     this.theInAppBrowser.create(url, target, this.options);
   }
   ionViewWillEnter() {
@@ -86,7 +86,7 @@ export class PersonalPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad PersonalPage');
+    //console.log('ionViewDidLoad PersonalPage');
   }
 
 }

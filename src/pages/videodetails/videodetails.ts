@@ -19,7 +19,7 @@ export class VideodetailsPage {
 
   constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
     this.videodetails = navParams.get('videodetails');
-    console.log(this.videodetails);
+    //console.log(this.videodetails);
   }
 
   ionViewDidLoad() {
@@ -29,7 +29,7 @@ export class VideodetailsPage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad VideodetailsPage');
+    //console.log('ionViewDidLoad VideodetailsPage');
   }
 
 }

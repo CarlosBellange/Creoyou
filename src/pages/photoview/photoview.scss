@@ -56,4 +56,7 @@ page-photoview {
     .swiper-slide img {
         max-height: calc(100vh - 300px);
     }
+    .Image_view .swiper-slide img {
+        background: #fff;
+    }
 }

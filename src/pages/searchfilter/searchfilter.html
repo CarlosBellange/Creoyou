@@ -15,12 +15,13 @@
       <ion-label color="default" floating>Full Name</ion-label>
       <ion-input [(ngModel)]="adname"></ion-input>
     </ion-item>
-    <form [formGroup]="FormadvanceStepOne">
-      <ion-item>
-        <ion-label color="default" floating>Creative Field</ion-label>
-        <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
-      </ion-item>
-    </form>
+    <ion-item>
+      <ion-label color="default" floating>Creative Field</ion-label>
+      <!--  <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input> -->
+      <ion-select [(ngModel)]="catid">
+        <ion-option *ngFor="let category of categoriesData" value="{{category.id}}">{{category.cat_name}}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item>
       <ion-label color="default" floating>Company Name</ion-label>
       <ion-input [(ngModel)]="company"></ion-input>
@@ -49,12 +50,15 @@
       <ion-label color="default" floating>Business Name</ion-label>
       <ion-input [(ngModel)]="businessname"></ion-input>
     </ion-item>
-    <form [formGroup]="FormadvanceStepOne">
-      <ion-item>
-        <ion-label color="default" floating>Creative Field</ion-label>
-        <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
-      </ion-item>
-    </form>
+
+    <ion-item>
+      <ion-label color="default" floating>Creative Field</ion-label>
+      <!--  <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input> -->
+      <ion-select [(ngModel)]="cfield">
+        <ion-option *ngFor="let category of categoriesData">{{category.cat_name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
     <ion-item>
       <ion-label color="default" floating>Country</ion-label>
       <ion-select #country (ngModelChange)='initStates(country.value)' [(ngModel)]="locncountry">

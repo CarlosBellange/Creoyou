@@ -33,14 +33,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"GooglePlus\"><param name=\"android-package\" value=\"nl.xservices.plugins.GooglePlus\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
-              "xml": "<access origin=\"https://accounts.google.com/*\" />",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"CropPlugin\"><param name=\"android-package\" value=\"com.jeduan.crop.CropPlugin\" /></feature>",
               "count": 1
             },
@@ -127,6 +119,14 @@
             {
               "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"GooglePlus\"><param name=\"android-package\" value=\"nl.xservices.plugins.GooglePlus\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<access origin=\"https://accounts.google.com/*\" />",
+              "count": 1
             }
           ],
           "/widget": [
@@ -153,19 +153,19 @@
               "count": 1
             },
             {
-              "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.USE_CREDENTIALS\" />",
-              "count": 1
-            },
-            {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
               "count": 2
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.USE_CREDENTIALS\" />",
               "count": 1
             }
           ],
@@ -309,9 +309,6 @@
     "onesignal-cordova-plugin": {
       "PACKAGE_NAME": "com.wgt.creoyou"
     },
-    "cordova-plugin-googleplus": {
-      "PACKAGE_NAME": "com.wgt.creoyou"
-    },
     "cordova-plugin-crop": {
       "PACKAGE_NAME": "com.wgt.creoyou"
     },
@@ -367,6 +364,9 @@
     },
     "cordova-plugin-network-information": {
       "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-googleplus": {
+      "PACKAGE_NAME": "com.creoyou"
     }
   },
   "dependent_plugins": {},
@@ -410,14 +410,6 @@
       "pluginId": "onesignal-cordova-plugin",
       "clobbers": [
         "OneSignal"
-      ]
-    },
-    {
-      "id": "cordova-plugin-googleplus.GooglePlus",
-      "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
-      "pluginId": "cordova-plugin-googleplus",
-      "clobbers": [
-        "window.plugins.googleplus"
       ]
     },
     {
@@ -837,6 +829,14 @@
       "clobbers": [
         "Connection"
       ]
+    },
+    {
+      "id": "cordova-plugin-googleplus.GooglePlus",
+      "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
+      "pluginId": "cordova-plugin-googleplus",
+      "clobbers": [
+        "window.plugins.googleplus"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -847,7 +847,6 @@
     "cordova-plugin-ionic-webview": "1.1.16",
     "cordova-sqlite-storage": "2.1.2",
     "onesignal-cordova-plugin": "2.2.2",
-    "cordova-plugin-googleplus": "5.1.1",
     "cordova-plugin-crop": "0.3.1",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-image-picker": "1.1.1",
@@ -865,6 +864,7 @@
     "cordova-plugin-contacts": "3.0.1",
     "cordova-plugin-facebook4": "1.9.1",
     "com.hutchind.cordova.plugins.streamingmedia": "0.1.4",
-    "cordova-plugin-network-information": "2.0.1"
+    "cordova-plugin-network-information": "2.0.1",
+    "cordova-plugin-googleplus": "5.2.1"
   }
 }

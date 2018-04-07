@@ -141,6 +141,7 @@ export class SearchPage {
         this.remotService.dismissLoader();
         if (data.searchBy == 'job') {
           data.allJobs.forEach(item => {
+            item.users_full_name = item.fname + ' ' + item.lname;
             item.job_title = item.jobTitle;
             item.posted_by = item.createdBy.buisnessName;
             item.jobtype = item.jobType.name;
@@ -151,11 +152,11 @@ export class SearchPage {
             let date1: any = new Date(item.jobPostStartDate.timestamp * 1000);
             let date2: any = this.date;
             let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-            let difinsec: number = Math.floor(diffInMs / 1000);
-            let diffmin: number = Math.floor(diffInMs / 1000 / 60);
-            let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
-            let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
-            let weekindiff: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7);
+            let difinsec: number = Math.round(diffInMs / 1000);
+            let diffmin: number = Math.round(diffInMs / 1000 / 60);
+            let diffInHours: number = Math.round(diffInMs / 1000 / 60 / 60);
+            let diffIndays: number = Math.round(diffInMs / 1000 / 60 / 60 / 24);
+            let weekindiff: number = Math.round(diffInMs / 1000 / 60 / 60 / 24 / 7);
             item.second = difinsec;
             item.minute = diffmin;
             item.hour = diffInHours;
@@ -178,6 +179,7 @@ export class SearchPage {
             data.allPeoples[i].can_sent_friend_request_by_mobile = data.peopleSettings[i].friendRequestMob;
             data.allPeoples[i].can_sent_friend_request_any = data.peopleSettings[i].friendRequestAny;
             data.allPeoples[i].premium_user = data.allPeoples[i].premiumUser;
+            data.allPeoples[i].users_full_name = data.allPeoples[i].fname + ' ' + data.allPeoples[i].lname;
             if (data.allPeoples[i].profile != null && data.allPeoples[i].profile != '') {
               data.allPeoples[i].image = data.allPeoples[i].profile.image;
               data.allPeoples[i].state = data.allPeoples[i].profile.state != null ? data.allPeoples[i].profile.state.name : null;
@@ -187,7 +189,7 @@ export class SearchPage {
             }
             this.people_user.push(data.allPeoples[i])
           }
-          console.log(this.people_user);
+          // console.log(this.people_user);
         }
         if (data.searchBy == 'businessName') {
 
@@ -199,6 +201,7 @@ export class SearchPage {
             data.allBusiness[j].can_sent_friend_request_by_mobile = data.businessSettings[j].friendRequestMob;
             data.allBusiness[j].can_sent_friend_request_any = data.businessSettings[j].friendRequestAny;
             data.allBusiness[j].premium_user = data.allBusiness[j].premiumUser;
+            data.allBusiness[j].users_full_name = data.allBusiness[j].fname + ' ' + data.allBusiness[j].lname;
             if (data.allBusiness[j].profile != null && data.allBusiness[j].profile != '') {
               data.allBusiness[j].image = data.allBusiness[j].profile.image;
               data.allBusiness[j].city = data.allBusiness[j].profile.city;
@@ -208,8 +211,9 @@ export class SearchPage {
             }
             this.business_user.push(data.allBusiness[j])
           }
-          console.log(this.business_user);
+          //console.log(this.business_user);
         }
+
       });
 
     } else {
@@ -227,16 +231,16 @@ export class SearchPage {
           this.people_user = response.data.userInfo;
           this.jobs_user = response.data.JobSearch;
           this.jobs_user = [];
-          console.log(this.business_user);
+          //console.log(this.business_user);
           response.data.JobSearch.forEach((item, key, index) => {
             let date1: string = item.creation_date;
             let date2: string = this.date;
             let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-            let difinsec: number = Math.floor(diffInMs / 1000);
-            let diffmin: number = Math.floor(diffInMs / 1000 / 60);
-            let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
-            let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
-            let weekindiff: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7);
+            let difinsec: number = Math.round(diffInMs / 1000);
+            let diffmin: number = Math.round(diffInMs / 1000 / 60);
+            let diffInHours: number = Math.round(diffInMs / 1000 / 60 / 60);
+            let diffIndays: number = Math.round(diffInMs / 1000 / 60 / 60 / 24);
+            let weekindiff: number = Math.round(diffInMs / 1000 / 60 / 60 / 24 / 7);
             item.second = difinsec;
             item.minute = diffmin;
             item.hour = diffInHours;
@@ -292,7 +296,7 @@ export class SearchPage {
       token: window.localStorage['token'],
       user_type: window.localStorage['usertype']
     };
-    console.log('following', DataToSend);
+    //console.log('following', DataToSend);
     this.remotService.presentToast('wait...');
     this.remotService.postData(DataToSend, 'followUser').subscribe((response) => {
       if (response.success == 1) {
@@ -355,7 +359,7 @@ export class SearchPage {
       inputs: [
         {
           name: 'mobileno',
-          placeholder: 'Enter Mobile No'
+          placeholder: 'Enter mobile number'
         },
       ],
       buttons: [

@@ -61,6 +61,8 @@ import { EventdetailsPage } from '../../pages/eventdetails/eventdetails';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { AdvertisementdetailsPage } from '../../pages/advertisementdetails/advertisementdetails';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -81,6 +83,8 @@ export class FeedsPage {
   currentTrackNumber: number = 0;
   arr: any = [];
   select: boolean;
+  showmenu: boolean;
+  nofeeds: any;
   constructor(public ngZone: NgZone, private streamingMedia: StreamingMedia, public cd: ChangeDetectorRef, public photoViewer: PhotoViewer, public navCtrl: NavController, public actionSheetCtrl: ActionSheetController,
     private _audioProvider: AudioProvider, public remotService: RemoteServiceProvider, public modalCtrl: ModalController, public events: Events,
     public imagepick: ImagePicker, public cropService: Crop, public cameraservice: Camera,
@@ -92,6 +96,14 @@ export class FeedsPage {
 
   }
 
+  /* doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.initloopData()
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  } */
 
   playThisTrack(event, track) {
     this.ngZone.run(() => {
@@ -165,8 +177,10 @@ export class FeedsPage {
       //   }
       // });
       let options: StreamingVideoOptions = {
-        successCallback: () => { console.log('Video played') },
-        errorCallback: (e) => { console.log('Error streaming') },
+        successCallback: () => { //console.log('Video played')
+        },
+        errorCallback: (e) => { //console.log('Error streaming')
+        },
         orientation: 'landscape'
       };
 
@@ -193,17 +207,21 @@ export class FeedsPage {
       if (response.success == 1) {
 
         var responseLoopData = response.data.loopData;
+        this.nofeeds = response.data.loopData;
         if (responseLoopData != null) {
 
           responseLoopData.forEach((item, key, index) => {
             this.modiFyitemasnecessary(item)
             this.loopData.push(item);
-            console.log(this.loopData);
+            //console.log(this.loopData);
           })
 
         }
+        else {
 
-        console.log('loop data ', this.loopData);
+        }
+
+        //console.log('loop data ', this.loopData);
 
         var responseaddsData = response.data.adData;
         if (responseaddsData != null) {
@@ -215,8 +233,10 @@ export class FeedsPage {
           /* console.log("adds data", this.addsData) */
         }
 
-      } else {
-        this.remotService.presentToast(response.message);
+      } else if (response.success == 2) {
+        this.navCtrl.push(LoginPage, { closeapp: true });
+        window.localStorage.clear();
+        this.showmenu = false;
       }
     }, () => {
       this.remotService.dismissLoader();
@@ -353,7 +373,7 @@ export class FeedsPage {
       type = item.incident_type.toLowerCase();
     }
     var link = this.base_url + "user/things/share/" + type + "/" + item.id + "/" + 1
-    console.log(link)
+    // console.log(link)
     //var img = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -485,7 +505,27 @@ export class FeedsPage {
         {
           text: "Report",
           handler: data => {
-            console.log("Report clicked", data);
+            var reportdata = {
+              token: window.localStorage['token'],
+              user_id: window.localStorage['userid'],
+              incident_id: item.id,
+              report_id: data
+            }
+            this.remotService.presentLoading();
+            this.remotService.postData(reportdata, 'post-report-action').subscribe((response) => {
+              this.remotService.dismissLoader();
+              if (response.success == 1) {
+                this.remotService.presentToast('You have Reported this Post Successfully');
+              }
+              else {
+                this.remotService.presentToast(response.message);
+              }
+
+            }, () => {
+              this.remotService.dismissLoader();
+              // this.remotService.presentToast('Error getting about details.');
+            });
+
           }
         },
         {
@@ -546,8 +586,13 @@ export class FeedsPage {
   }
 
   OtherFrofileView(item) {
+    if (item.user_id == window.localStorage['userid']) {
+      this.navCtrl.setRoot(HomePage);
+    }
+    else {
+      this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': item });
+    }
 
-    this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': item });
   }
 
   addtocalendarEvent(item) {
@@ -579,12 +624,12 @@ export class FeedsPage {
   } */
   zoomProfileImage(imageData) {
     const imagezoom = this.base_url + 'uploads/profileImages/' + imageData.incident_details;
-    console.log('zoom image', imageData);
+    //console.log('zoom image', imageData);
     this.photoViewer.show(imagezoom, '', { share: false });
   }
   zoomStatusImage(imageData) {
     const imagezoom = this.base_url + 'uploads/statusMedia/' + imageData.media_name;
-    console.log('zoom image', imageData);
+    //console.log('zoom image', imageData);
     this.photoViewer.show(imagezoom, '', { share: false });
   }
 
@@ -593,14 +638,14 @@ export class FeedsPage {
 
     this.events.publish('creoyou:loopmenu');
 
-    console.log('ionViewDidLoad FeedsPage');
+    // console.log('ionViewDidLoad FeedsPage');
   }
 
   gotoPhotoView(albumview, item) {
     var album = {
       id: albumview.album_id
     }
-    console.log(albumview);
+    //console.log(albumview);
     this.navCtrl.push(PhotoviewPage, { "album": album, "img_id": albumview.id, 'touserid': item.user_id, "parentPage": this });
 
   }

@@ -91,7 +91,7 @@ export class FollowPage {
     this.remotService.presentLoading();
     this.remotService.postData(followingparams, 'following').subscribe((response) => {
       this.remotService.dismissLoader();
-      console.log(response);
+      //console.log(response);
       if (response.success == 1) {
 
         if (response.data != null) {
@@ -135,7 +135,7 @@ export class FollowPage {
             this.remotService.postData(unfollowerparams, 'unfollowUser').subscribe((response) => {
 
 
-              console.log(response);
+             // console.log(response);
               if (response.success == 1) {
 
                 if (type == 1) {
@@ -243,7 +243,7 @@ export class FollowPage {
       this.navCtrl.pop()
     }
 
-    console.log('ionViewDidLoad NotificationsPage');
+   // console.log('ionViewDidLoad NotificationsPage');
   }
 
   segmentChanged(event) {

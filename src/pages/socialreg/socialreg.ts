@@ -58,7 +58,7 @@ export class SocialregPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad SocialregPage');
+        //console.log('ionViewDidLoad SocialregPage');
     }
 
     showCategoryModal() {
@@ -66,7 +66,7 @@ export class SocialregPage {
         categoryModal.onDidDismiss(data => {
             // Do things with data coming from modal, for instance :
             if (data.hasOwnProperty("id")) {
-                console.log("GOt from modal", data);
+                //console.log("GOt from modal", data);
                 this.FormRegistrationStepOne.get('cfield').setValue(data.name);
                 this.catid = data.id;
             }
@@ -144,7 +144,7 @@ export class SocialregPage {
             }
         }, () => {
             this.remotService.dismissLoader();
-            this.remotService.presentToast('Error!');
+            /* this.remotService.presentToast('Error!'); */
         })
 
     }
@@ -194,7 +194,7 @@ export class SocialregPage {
             }
         }, () => {
             this.remotService.dismissLoader();
-            this.remotService.presentToast('Error Sending Otp.');
+            /*  this.remotService.presentToast('Error Sending Otp.'); */
         })
 
     }

@@ -53,7 +53,7 @@ export class PortfolioPage {
     this.base_url = this.remotService.site_url;
     this.touserid = navParams.get('touserid');
 
-    console.log(this.touserid);
+    // console.log(this.touserid);
 
     this.initPhotoalbumData();
 
@@ -94,7 +94,7 @@ export class PortfolioPage {
       this.remotService.dismissLoader();
       if (response.success == 1) {
         this.albums = response.data.AlbumDetails;
-        console.log(this.albums);
+        //console.log(this.albums);
       } else {
         this.remotService.presentToast(response.message);
       }
@@ -164,8 +164,10 @@ export class PortfolioPage {
     //   }
     // });
     let options: StreamingVideoOptions = {
-      successCallback: () => { console.log('Video played') },
-      errorCallback: (e) => { console.log('Error streaming') },
+      successCallback: () => { //console.log('Video played')
+      },
+      errorCallback: (e) => { //console.log('Error streaming')
+      },
       orientation: 'landscape'
     };
 
@@ -175,7 +177,7 @@ export class PortfolioPage {
   }
 
   audiodetails(track) {
-    console.log(track);
+    // console.log(track);
     this.navCtrl.push(AudiodetailsPage, { audiodetails: track });
   }
 
@@ -196,7 +198,7 @@ export class PortfolioPage {
     this.remotService.postData(DataToSend, 'mediaListing').subscribe((response) => {
       this.remotService.dismissLoader();
       this.videos = response.data;
-      console.log(this.videos);
+      // console.log(this.videos);
     }, () => {
 
       this.remotService.dismissLoader();
@@ -251,7 +253,7 @@ export class PortfolioPage {
     else {
       link = this.base_url + "user/things/share/video/" + vdo.IncidentId + "/1"
     }
-    console.log(link)
+    //console.log(link)
     var vddo = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -289,7 +291,7 @@ export class PortfolioPage {
     this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'mediaListing').subscribe((response) => {
       this.remotService.dismissLoader();
-      console.log(response);
+      // console.log(response);
       response.data.forEach((item, key, index) => {
 
         var audiosource = (item.audio_source != null && item.audio_source != '') ? item.audio_name : this.base_url + item.audio_name;
@@ -362,7 +364,7 @@ export class PortfolioPage {
        */
   shareThisudio(track) {
     var link = this.base_url + "user/things/share/audio/" + track.IncidentId + "/1"
-    console.log(link)
+    //console.log(link)
     var vddo = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -381,7 +383,7 @@ export class PortfolioPage {
       this.navCtrl.pop()
     }
 
-    console.log('ionViewDidLoad PortfolioPage');
+    // console.log('ionViewDidLoad PortfolioPage');
   }
 
   ionViewDidEnter() {

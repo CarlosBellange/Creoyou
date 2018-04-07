@@ -308,8 +308,14 @@ page-socialreg {
         padding: 1.2rem;
     }
     .mobile-code>.select-text {
-        float: right;
+        float: left;
         color: #fff;
+    }
+    .select-icon {
+        position: relative;
+        width: 12px;
+        height: 19px;
+        float: right;
     }
     ion-spinner {
         display: inline-block;

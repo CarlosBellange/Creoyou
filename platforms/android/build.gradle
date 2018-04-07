@@ -255,8 +255,6 @@ dependencies {
     debugCompile(project(path: "CordovaLib", configuration: "debug"))
     releaseCompile(project(path: "CordovaLib", configuration: "release"))
     compile "com.onesignal:OneSignal:3.6.3"
-    compile "com.google.android.gms:play-services-auth:+"
-    compile "com.google.android.gms:play-services-identity:+"
     compile "com.soundcloud.android:android-crop:1.0.0@aar"
     compile "com.android.support:support-v4:24.1.1+"
     compile "com.android.support:support-v4:+"
@@ -265,6 +263,8 @@ dependencies {
     compile "com.android.support:support-v4:26.+"
     compile "com.android.support:appcompat-v7:26.+"
     compile "com.facebook.android:facebook-android-sdk:4.+"
+    compile "com.google.android.gms:play-services-auth:+"
+    compile "com.google.android.gms:play-services-identity:+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

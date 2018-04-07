@@ -28,9 +28,6 @@
     "onesignal-cordova-plugin": {
       "PACKAGE_NAME": "com.wgt.creoyou"
     },
-    "cordova-plugin-googleplus": {
-      "PACKAGE_NAME": "com.wgt.creoyou"
-    },
     "cordova-plugin-crop": {
       "PACKAGE_NAME": "com.wgt.creoyou"
     },
@@ -82,6 +79,9 @@
       "PACKAGE_NAME": "com.creoyou"
     },
     "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-googleplus": {
       "PACKAGE_NAME": "com.creoyou"
     }
   },

@@ -157,7 +157,7 @@ export class AbouteditPage {
 
     }
     else if (this.editsection == 'companyoverview') {
-      this.companyoverview = '';
+      this.companyoverview = this.editparam.company_overview;
     }
     else if (this.editsection == 'education') {
 
@@ -236,15 +236,12 @@ export class AbouteditPage {
       // this.websiteurl = this.editparam.website_url;
       this.initLocationForm();
     } else if (this.editsection == 'skill') {
-      if (this.editparam != '')
-        this.skills = this.editparam[0].skillS;
-      //console.log("Params ",this.editparam);
+      this.skills = this.editparam;
+      console.log("Params ", this.editparam);
 
     } else if (this.editsection == 'interest') {
-
-      if (this.editparam != '')
-        this.interest = this.editparam[0].interests;
-      //console.log("Params ",this.editparam);
+      this.interest = this.editparam;
+      //console.log("Params ", this.interest);
 
     } else if (this.editsection == 'award') {
 
@@ -429,8 +426,12 @@ export class AbouteditPage {
       description: this.cstmonedtl,
       id: this.cstmoneid
     }
+    if (this.cstmonedtl == '' && this.cstmonettl == '') {
+      this.remotService.presentToast('All the fields can not be empty in custom section');
+    } else {
+      this.savEdata('Editcustoms');
+    }
 
-    this.savEdata('Editcustoms');
 
   }
 
@@ -572,8 +573,13 @@ export class AbouteditPage {
       skillS: this.skills,
 
     };
-
+    /* if (this.skills == '') {
+      this.remotService.presentToast('Enter your Specialization or Skills');
+    } else { */
     this.savEdata('Editskill');
+    /*  } */
+
+
   }
 
   saveCourse() {
@@ -686,33 +692,33 @@ export class AbouteditPage {
 
   /* company overview */
   saveCompanyOverview() {
-    if (this.companyoverview == '') {
-      this.remotService.presentToast('Company overview can not be empty');
+    /*  if (this.companyoverview == '') {
+       this.remotService.presentToast('Company overview can not be empty');
+     } */
+    /*  else { */
+    var data = {
+      token: window.localStorage['token'],
+      user_id: window.localStorage['userid'],
+      overView: this.companyoverview
     }
-    else {
-      var data = {
-        token: window.localStorage['token'],
-        user_id: window.localStorage['userid'],
-        overView: this.companyoverview
+    this.remotService.presentLoading();
+    this.remotService.postData(data, 'editCompanyOverView').subscribe((response) => {
+
+      this.remotService.dismissLoader();
+      if (response.success == 1) {
+
+        this.navParams.get("parentPage").initviewaboutData();
+        // this.events.publish('creoyou:showmenu');
+        this.navCtrl.pop()
+
+      } else {
+        this.remotService.presentToast(response.message);
       }
-      this.remotService.presentLoading();
-      this.remotService.postData(data, 'editCompanyOverView').subscribe((response) => {
-
-        this.remotService.dismissLoader();
-        if (response.success == 1) {
-
-          this.navParams.get("parentPage").initviewaboutData();
-          // this.events.publish('creoyou:showmenu');
-          this.navCtrl.pop()
-
-        } else {
-          this.remotService.presentToast(response.message);
-        }
-      }, () => {
-        this.remotService.dismissLoader();
-        this.remotService.presentToast('Error getting about details.');
-      });
-    }
+    }, () => {
+      this.remotService.dismissLoader();
+      this.remotService.presentToast('Error getting about details.');
+    });
+    /*  } */
   }
 
   ionViewWillLeave() {
@@ -731,7 +737,7 @@ export class AbouteditPage {
       this.navCtrl.pop()
     }
 
-    console.log('ionViewDidLoad AbouteditPage');
+    // console.log('ionViewDidLoad AbouteditPage');
   }
 
 }

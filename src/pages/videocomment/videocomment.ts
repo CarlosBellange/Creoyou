@@ -64,7 +64,7 @@ export class VideocommentPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VideocommentPage testpage');
+    //console.log('ionViewDidLoad VideocommentPage testpage');
 
   }
 
@@ -78,10 +78,10 @@ export class VideocommentPage {
       comment: this.commentText,
       user_id: window.localStorage['userid'],
     };
-    console.log(commentsParams);
+    //console.log(commentsParams);
     this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'newIncidentCommentAction').subscribe((response) => {
-      console.log(response);
+     // console.log(response);
       this.remotService.dismissLoader();
       if (response.success == 1) {
         this.seecomment();
@@ -145,7 +145,7 @@ export class VideocommentPage {
     else if (this.currentuserid == data.user_id) {
       //this.navCtrl.setRoot(HomePage);
     } else {
-      console.log('other connection data', data);
+      //console.log('other connection data', data);
       this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
     }
 

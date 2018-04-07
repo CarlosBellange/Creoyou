@@ -101,7 +101,7 @@ export class AudiosPage {
     this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'mediaListing').subscribe((response) => {
       this.remotService.dismissLoader();
-      console.log(response);
+      //console.log(response);
       response.data.forEach((item, key, index) => {
 
 
@@ -179,7 +179,7 @@ export class AudiosPage {
                 {
                   text: 'Cancel',
                   handler: () => {
-                    console.log('Agree clicked');
+                    //console.log('Agree clicked');
                   }
                 }
               ]
@@ -206,7 +206,7 @@ export class AudiosPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad AudiosPage');
+    //console.log('ionViewDidLoad AudiosPage');
   }
 
   likeThisaudio(track) {
@@ -259,7 +259,7 @@ export class AudiosPage {
      */
   shareThisPost(track) {
     var link = this.base_url + "user/things/share/audio/" + track.IncidentId + "/1"
-    console.log(link)
+    //console.log(link)
     var vddo = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);

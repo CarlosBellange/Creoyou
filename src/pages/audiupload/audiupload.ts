@@ -61,12 +61,12 @@ export class AudiuploadPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AudiuploadPage');
+   // console.log('ionViewDidLoad AudiuploadPage');
   }
   chooseAudio() {
     this.fileChooser.open().then((uri) => {
       this.filePath.resolveNativePath(uri).then((dt) => {
-        console.log(dt);
+       // console.log(dt);
         this.choseuri = dt;
         this.fileSizeValidate(this.choseuri);
         this.currentName = this.choseuri.substr(this.choseuri.lastIndexOf('/') + 1).replace(/ /g, '_');
@@ -75,7 +75,7 @@ export class AudiuploadPage {
         this.currentName = this.currentName.replace(/[^a-zA-Z1-9.]/g, '');
         /*  let exten = this.currentName.substr(this.currentName.lastIndexOf(".") + 1);
          this.currentName = 'Audio' + Date.now() + '.' + exten; */
-        console.log(this.currentName);
+       // console.log(this.currentName);
       })
 
 
@@ -85,7 +85,7 @@ export class AudiuploadPage {
       this.fileSizeValidate(this.choseuri);
       this.fileExtValidate(this.choseuri); */
     }, () => {
-      console.log('error');
+     // console.log('error');
     });
   }
 
@@ -122,8 +122,8 @@ export class AudiuploadPage {
   uploadAudio() {
 
     if (this.audioid > 0) {
-      console.log('update video');
-      console.log(this.audioid);
+      //console.log('update video');
+     // console.log(this.audioid);
       var url = 'editMediaDetails';
       var DataToSend = {
         userId: window.localStorage['userid'],
@@ -134,10 +134,10 @@ export class AudiuploadPage {
         editMediaType: 'Audio',
         editMediaId: this.audioid
       }
-      console.log(DataToSend);
+      //console.log(DataToSend);
       this.remotService.presentLoading();
       this.remotService.postData(DataToSend, url).subscribe((response) => {
-        console.log(response);
+      //  console.log(response);
         this.remotService.dismissLoader();
         if (response.success == 1) {
           this.navParams.get("parentPage").initaudio();
@@ -175,17 +175,17 @@ export class AudiuploadPage {
           }
         }
         this.remotService.presentLoading();
-        console.log(options);
+       // console.log(options);
         const url: string = `${this.API_URL}/audioUpload`;
-        console.log(this.choseuri);
+       // console.log(this.choseuri);
         this.fileTransfer.upload(this.choseuri, url, options)
           .then((data) => {
             this.remotService.dismissLoader();
             this.navParams.get("parentPage").initaudio();
             this.navCtrl.pop()
-            console.log(data);
+           // console.log(data);
           }, (err) => {
-            console.log(err);
+          //  console.log(err);
             this.remotService.dismissLoader();
           });
 

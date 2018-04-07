@@ -15,7 +15,7 @@ export class RegValidatorProvider {
 
     debouncer: any;
     constructor(public remotService: RemoteServiceProvider) {
-        console.log('Hello RegValidatorProvider Provider');
+        //console.log('Hello RegValidatorProvider Provider');
     }
 
     countryCodes = [{

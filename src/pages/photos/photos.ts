@@ -5,6 +5,7 @@ import { RemoteServiceProvider } from '../../providers/remote-service/remote-ser
 import { PhotouploadPage } from '../../pages/photoupload/photoupload';
 import { PhotoviewPage } from '../../pages/photoview/photoview';
 import { AlbumviewPage } from '../../pages/albumview/albumview';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class PhotosPage {
   @ViewChild(Navbar) navBar: Navbar;
   photoUploadpage = PhotouploadPage;
   albums = [];
+  showmenu: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider,
@@ -41,8 +43,11 @@ export class PhotosPage {
       if (response.success == 1) {
         this.remotService.dismissLoader();
         this.albums = response.data.AlbumDetails;
-      } else {
+      } else if (response.success == 2) {
         this.remotService.dismissLoader();
+        this.navCtrl.push(LoginPage, { closeapp: true });
+        window.localStorage.clear();
+        this.showmenu = false;
         this.remotService.presentToast(response.message);
       }
     }, () => {
@@ -83,7 +88,7 @@ export class PhotosPage {
       this.navCtrl.pop()
     }
 
-    console.log('ionViewDidLoad PhotosPage');
+    //console.log('ionViewDidLoad PhotosPage');
   }
   ionViewWillLeave() {
     this.remotService.dismissLoader();

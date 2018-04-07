@@ -50,7 +50,7 @@ export class LoginhelpPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginhelpPage');
+    //console.log('ionViewDidLoad LoginhelpPage');
   }
   recoverNow() {
 
@@ -125,7 +125,7 @@ export class LoginhelpPage {
 
     if (this.password == '' || !this.password.match(regxpass)) {
 
-      this.remotService.presentToast('Passwords must have a lowercase letter and uppercase letter and a number and between 8 to 20 char.');
+      this.remotService.presentToast('Passwords must have 8 characters or more with at least 1 uppercase letter and 1 number');
       return false;
     }
 

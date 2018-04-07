@@ -20,23 +20,24 @@ export class EventcreatePage {
   @ViewChild(Content) content: Content;
   @ViewChild(Navbar) navBar: Navbar;
   eventtitle = '';
-  eventlocation: any;
-  eventstartdate: string;
-  eventstarttime: string;
-  eventenddate: string;
-  eventendtime: string;
-  eventdesc: any;
+  eventlocation: any = '';
+  eventstartdate: string = '';
+  eventstarttime: string = '';
+  eventenddate: string = '';
+  eventendtime: string = '';
+  eventdesc: any = '';
   eventprivacy = 1;
   eventimg: string = '';
   base_url: any;
   photos: any;
   chnagedimagename: any;
   eventimgshow: boolean = false;
-  eventid: any;
+  eventid: any = '';
   statustags = [];
   eventimageupload: any;
   friends_can_invite: any;
   maxSize: any;
+  DataToSend: any;
 
   constructor(public events: Events, public modalCtrl: ModalController, public _DomSanitizer: DomSanitizer, public imagepick: ImagePicker, public cameraservice: Camera, public basesxfrservice: Base64, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController) {
 
@@ -77,74 +78,75 @@ export class EventcreatePage {
       this.friends_can_invite = 0;
     }
 
-    if (this.eventid > 0) {
-      var DataToSends = {
-        token: window.localStorage['token'],
-        userId: window.localStorage['userid'],
-        eventId: this.eventid,
-        eventName: this.eventtitle,
-        location: this.eventlocation,
-        description: this.eventdesc,
-        startDate: this.eventstartdate,
-        startTime: this.eventstarttime,
-        endDate: this.eventenddate,
-        endTime: this.eventendtime,
-        invitedFriendsId: this.statustags,
-        imageData: this.eventimageupload,
-        eventStatus: this.eventprivacy,
-        friends_can_invite: this.friends_can_invite
-      }
-      //console.log('event envite previous', DataToSends);
-      this.remotService.presentLoading();
-      this.remotService.postData(DataToSends, 'eventCreateUpdate').subscribe((response) => {
-        console.log(response);
-        if (response.success == 1) {
-          this.remotService.dismissLoader();
-          this.navParams.get("parentPage").initeventlist();
-          this.navCtrl.pop()
-        } else {
-          this.remotService.presentToast(response.message);
-        }
-      }, () => {
-        this.remotService.dismissLoader();
-        this.remotService.presentToast('Error getting about details.');
-      });
+    /*  if (this.eventid > 0) { */
+    this.DataToSend = {
+      token: window.localStorage['token'],
+      userId: window.localStorage['userid'],
+      eventId: this.eventid,
+      eventName: this.eventtitle,
+      location: this.eventlocation,
+      description: this.eventdesc,
+      startDate: this.eventstartdate,
+      startTime: this.eventstarttime,
+      endDate: this.eventenddate,
+      endTime: this.eventendtime,
+      invitedFriendsId: this.statustags,
+      imageData: this.eventimageupload,
+      eventStatus: this.eventprivacy,
+      friends_can_invite: this.friends_can_invite
     }
-    else {
-      var DataToSend = {
-        token: window.localStorage['token'],
-        userId: window.localStorage['userid'],
-        eventId: '',
-        eventName: this.eventtitle,
-        location: this.eventlocation,
-        description: this.eventdesc,
-        startDate: this.eventstartdate,
-        startTime: this.eventstarttime,
-        endDate: this.eventenddate,
-        endTime: this.eventendtime,
-        invitedFriendsId: this.statustags,
-        imageData: this.eventimageupload,
-        eventStatus: this.eventprivacy,
-        friends_can_invite: this.friends_can_invite
-      }
-      // console.log('envite event', DataToSend);
-      this.remotService.presentLoading();
-      this.remotService.postData(DataToSend, 'eventCreateUpdate').subscribe((response) => {
-        if (response.success == 1) {
-          this.remotService.dismissLoader();
-          this.navParams.get("parentPage").initeventlist();
-          this.navCtrl.pop()
-        } else {
-          this.remotService.presentToast(response.message);
-        }
+    //console.log('event envite previous', DataToSends);
+    /* this.remotService.presentLoading();
+    this.remotService.postData(DataToSends, 'eventCreateUpdate').subscribe((response) => {
+      //console.log(response);
+      if (response.success == 1) {
         this.remotService.dismissLoader();
-        console.log(response);
+        this.navParams.get("parentPage").initeventlist();
+        this.navCtrl.pop()
+      } else {
+        this.remotService.presentToast(response.message);
+      }
+    }, () => {
+      this.remotService.dismissLoader();
+      this.remotService.presentToast('Error getting about details.');
+    }); */
+    /*    } */
+    /*  else {
+       this.DataToSend = {
+         token: window.localStorage['token'],
+         userId: window.localStorage['userid'],
+         eventId: '',
+         eventName: this.eventtitle,
+         location: this.eventlocation,
+         description: this.eventdesc,
+         startDate: this.eventstartdate,
+         startTime: this.eventstarttime,
+         endDate: this.eventenddate,
+         endTime: this.eventendtime,
+         invitedFriendsId: this.statustags,
+         imageData: this.eventimageupload,
+         eventStatus: this.eventprivacy,
+         friends_can_invite: this.friends_can_invite
+       }
+     } */
+    console.log('envite event', this.DataToSend);
+    this.remotService.presentLoading();
+    this.remotService.postData(this.DataToSend, 'eventCreateUpdate').subscribe((response) => {
+      if (response.success == 1) {
+        this.remotService.dismissLoader();
+        this.navParams.get("parentPage").initeventlist();
+        this.navCtrl.pop()
+      } else {
+        this.remotService.presentToast(response.message);
+      }
+      this.remotService.dismissLoader();
+      //console.log(response);
 
-      }, () => {
-        this.remotService.dismissLoader();
-        this.remotService.presentToast('Error getting about details.');
-      });
-    }
+    }, () => {
+      this.remotService.dismissLoader();
+      this.remotService.presentToast('Error getting about details.');
+    });
+    /* } */
 
   }
 
@@ -163,7 +165,7 @@ export class EventcreatePage {
         })
 
       }
-      // console.log(this.statustags);
+      console.log(this.statustags);
     });
     connectionModal.present();
   }
@@ -175,7 +177,7 @@ export class EventcreatePage {
       this.events.publish('creoyou:hidemenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad EventcreatePage');
+    // console.log('ionViewDidLoad EventcreatePage');
   }
   /*Image upload for event */
   upLoadImages() {
@@ -219,16 +221,16 @@ export class EventcreatePage {
               this.eventimg = '';
               this.remotService.presentToast(' Please upload a file with size less than: ' + 20 + "MB");
               this.remotService.dismissLoader();
-              console.log(this.maxSize);
+              //console.log(this.maxSize);
             } else {
               this.remotService.dismissLoader();
               this.saveImageToArrayBypath(item);
-              console.log(item);
+              // console.log(item);
             }
           });
         });
       }, function (error) {
-        console.log(error);
+        //console.log(error);
       });
   }
   /* get image path */
@@ -262,11 +264,11 @@ export class EventcreatePage {
                 this.eventimg = '';
                 this.remotService.presentToast(' Please upload a file with size less than: ' + 20 + "MB");
                 this.remotService.dismissLoader();
-                console.log(this.maxSize);
+                // console.log(this.maxSize);
               } else {
                 this.remotService.dismissLoader();
                 this.saveImageToArrayBypath(item);
-                console.log(item);
+                //console.log(item);
               }
             });
           });
@@ -275,7 +277,7 @@ export class EventcreatePage {
           this.remotService.dismissLoader();
         }
       }, (err) => {
-        console.log(err)
+        //console.log(err)
       });
   }
   /*Remove image */

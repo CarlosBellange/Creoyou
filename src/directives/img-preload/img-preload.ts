@@ -30,11 +30,10 @@ export class ImgPreloadDirective implements OnInit {
 
     this.downloadingImage = new Image();  // create image object
     this.downloadingImage.onload = () => { //Once image is completed, console.log confirmation and switch our host attribute
-      console.log('image downloaded');
+      // console.log('image downloaded');
 
-      /*  this.events.subscribe('creoyou:showloader', () => {
-         this.showloader = false;
-       }); */
+      /*   this.events.publish('creoyou:showloader')
+   */
 
       this.finalImage = this.targetSource;  //do the switch 😀
     }

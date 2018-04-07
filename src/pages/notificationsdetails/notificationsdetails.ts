@@ -6,6 +6,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { CommentPage } from '../comment/comment';
 import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
 import { HomePage } from '../home/home';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 
 
 
@@ -21,11 +22,13 @@ export class NotificationsdetailsPage {
   myTracks: any[];
   allTracks: any[];
   selectedTrack: any;
+  currentTrack: any;
+  currentTrackNumber: number = 0;
 
-  constructor(public modalCtrl: ModalController, private socialSharing: SocialSharing, private _audioProvider: AudioProvider, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private streamingMedia: StreamingMedia, public modalCtrl: ModalController, private socialSharing: SocialSharing, private _audioProvider: AudioProvider, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.notification = navParams.get('notificationDetails');
     this.base_url = this.remotService.site_url;
-    console.log('get notification details', this.notification);
+    //console.log('get notification details', this.notification);
     this.initgetNotificationDetails();
   }
   initgetNotificationDetails() {
@@ -35,18 +38,20 @@ export class NotificationsdetailsPage {
       userId: window.localStorage['userid']
     }
     console.log(data);
+
     this.remotService.presentLoading();
     this.remotService.postData(data, 'seenotificationDetails').subscribe((response) => {
       this.remotService.dismissLoader();
       //this.modiFyitemasnecessary(this.notdetails);
-      // this.notdetails = response.data;
+      this.notdetails = response.data;
+      console.log(this.notdetails);
       response.data.forEach((item, key, index) => {
         this.modiFyitemasnecessary(item);
-        this.notdetails.push(item);
-        console.log(this.notdetails);
+        //this.notdetails.push(item);
+        // console.log(this.notdetails);
       });
 
-      console.log(this.notdetails);
+      //console.log(this.notdetails);
 
     }, () => {
       this.remotService.dismissLoader();
@@ -63,13 +68,14 @@ export class NotificationsdetailsPage {
 
     if (item.incident_type === 'Audio') {
 
-      var audiosource = (item.audio_name != null && item.audio_name != '') ? this.base_url + item.audio_name : item.audio_source;
-
+      /*  var audiosource = (item.audio_name != null && item.audio_name != '') ? this.base_url + item.audio_name : item.audio_source; */
+      var audiosource = (item.audio_source != null && item.audio_source != '') ? item.audio_name : this.base_url + item.audio_name;
       item.myTracks = [{
         src: audiosource,
         artist: 'No Artist',
         title: item.audio_title,
         art: 'img/johnmayer.jpg',
+        select: true,
         preload: 'metadata' // tell the plugin to preload metadata such as duration for this track, set to 'none' to turn off
       }];
 
@@ -95,7 +101,7 @@ export class NotificationsdetailsPage {
   }
 
   onTrackFinished(track: any) {
-    console.log('Track finished', track)
+    //console.log('Track finished', track)
   }
 
   /**
@@ -105,8 +111,8 @@ export class NotificationsdetailsPage {
   shareThisPost(item) {
 
     var type = item.incident_type.toLowerCase()
-    var link = this.base_url + "user/things/share/" + type + "/" + item.id
-    console.log(link)
+    var link = this.base_url + "user/things/share/" + type + "/" + item.id + "/" + 1
+    //console.log(link)
     //var img = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -152,11 +158,39 @@ export class NotificationsdetailsPage {
 
   }
 
+  playThisTrack(event, track) {
+    if (track.select) {
+      track.select = false;
+
+    }
+    else {
+      track.select = true;
+    }
+    this.currentTrack = track // This should change the track no?
+    this.currentTrackNumber = (track.id);
+    this._audioProvider.play(this.currentTrackNumber);
+    if (this.currentTrackNumber == (track.id)) {
+      this._audioProvider.pause(this.currentTrackNumber);
+    }
+  }
+
+  playvideo(g) {
+    let url = this.base_url + 'uploads/portfolioVideos/' + g;
+    let options: StreamingVideoOptions = {
+      successCallback: () => { //console.log('Video played')
+      },
+      errorCallback: (e) => { //console.log('Error streaming')
+      },
+      orientation: 'landscape'
+    };
+    this.streamingMedia.playVideo(url, options);
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NotificationsdetailsPage');
+    //console.log('ionViewDidLoad NotificationsdetailsPage');
   }
   OtherFrofileView(item) {
-    console.log(item);
+    // console.log(item);
     if (window.localStorage['userid'] == item.user_id) {
       this.navCtrl.setRoot(HomePage);
     }
@@ -167,6 +201,7 @@ export class NotificationsdetailsPage {
 
   }
   ionViewWillLeave() {
+    this._audioProvider.pause();
     this.remotService.dismissLoader();
   }
 

@@ -116,6 +116,7 @@ export class HomePage {
   maxSize: any;
   showmenu: boolean;
   extraoudio: any;
+  showloader: any;
 
   constructor(private streamingMedia: StreamingMedia, public photoViewer: PhotoViewer, public app: App, public platform: Platform, private viewCtrl: ViewController, public alertCtrl: AlertController, public navCtrl: NavController, public actionSheetCtrl: ActionSheetController,
     private _audioProvider: AudioProvider, public remotService: RemoteServiceProvider, public modalCtrl: ModalController, public events: Events,
@@ -125,27 +126,31 @@ export class HomePage {
     this.base_url = this.remotService.site_url;
 
     this.initdatLoad();
+
   }
 
-  /* zoomImage(imageData) {
-    const imagezoom = this.base_url + 'uploads/portfolioImages/' + imageData.image_name;
-    console.log('zoom image', imageData);
-    this.photoViewer.show(imagezoom, '', { share: false });
-  } */
+  ionViewWillEnter() {
+    this.viewCtrl.showBackButton(false);
+    this.events.publish('creoyou:showmenu');
+    this.events.subscribe('creoyou:showloader', () => {
+
+      this.showloader = false;
+
+    });
+  }
   zoomProfileImage(imageData) {
     const imagezoom = this.base_url + 'uploads/profileImages/' + imageData.incident_details;
-    console.log('zoom image', imageData);
+    //console.log('zoom image', imageData);
     this.photoViewer.show(imagezoom, '', { share: false });
   }
   zoomStatusImage(imageData) {
     const imagezoom = this.base_url + 'uploads/statusMedia/' + imageData.media_name;
-    console.log('zoom image', imageData);
+    //console.log('zoom image', imageData);
     this.photoViewer.show(imagezoom, '', { share: false });
   }
 
 
   initdatLoad() {
-
     this.statusprivacytext = ''
     this.events.publish('creoyou:shownotifications');
 
@@ -171,8 +176,6 @@ export class HomePage {
       this.remotService.dismissLoader();
       if (response.success == 1) {
         this.progileinfo = response.data.detailsOfuser[0];
-        console.log('image downloaded', this.progileinfo);
-
         var targetbgimage = this.base_url + "uploads/backgroundImages/" + this.progileinfo.background_image
         var downloadingbgImage = new Image();  // create image object
         downloadingbgImage.onload = () => { //Once image is completed, console.log confirmation and switch our host attribute
@@ -192,7 +195,7 @@ export class HomePage {
       }
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error loading data.');
+      //this.remotService.presentToast('Error loading data.');
     });
 
     this.homePageOffset = 0;
@@ -214,7 +217,7 @@ export class HomePage {
           homeresponseData.forEach((item, key, index) => {
             this.modiFyitemasnecessary(item);
             this.homeData.push(item);
-            console.log(this.homeData);
+            // console.log(this.homeData);
           });
 
         }
@@ -231,7 +234,7 @@ export class HomePage {
       }
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error loading data.');
+      // this.remotService.presentToast('Error loading data.');
     });
 
   }
@@ -289,19 +292,12 @@ export class HomePage {
       }
     }
     let url = this.base_url + 'uploads/portfolioVideos/' + g;
-    //console.log(this.videoPlayer);
-    // this.videoPlayer.forEach((i: ElementRef) => {
-    //   if (url == i.nativeElement.currentSrc) {
-    //     i.nativeElement.play();
-    //     i.nativeElement.controls = true;
-    //     // this._audioProvider.pause();
-    //   } else {
-    //     i.nativeElement.pause();
-    //   }
-    // });
+
     let options: StreamingVideoOptions = {
-      successCallback: () => { console.log('Video played') },
-      errorCallback: (e) => { console.log('Error streaming') },
+      successCallback: () => {// console.log('Video played') 
+      },
+      errorCallback: (e) => { //console.log('Error streaming')
+      },
       orientation: 'landscape'
     };
 
@@ -323,7 +319,7 @@ export class HomePage {
       type = item.incident_type.toLowerCase();
     }
     var link = this.base_url + "user/things/share/" + type + "/" + item.id + "/" + 1
-    console.log(link)
+    //console.log(link)
     //var img = "";
     var msg = ""
     this.socialSharing.share(msg, null, null, link);
@@ -331,7 +327,7 @@ export class HomePage {
   }
 
   presentActionSheet(item) {
-    console.log('remove post type', item);
+    // console.log('remove post type', item);
     const actionSheet = this.actionSheetCtrl.create({
       buttons: [{
         text: 'Delete this Post',
@@ -353,7 +349,7 @@ export class HomePage {
                     incidenttypeId: item.id
 
                   };
-                  console.log(DataToSend);
+                  // console.log(DataToSend);
 
                   this.remotService.presentLoading();
                   this.remotService.postData(DataToSend, 'deleteAction').subscribe((response) => {
@@ -373,7 +369,7 @@ export class HomePage {
               {
                 text: 'Cancel',
                 handler: () => {
-                  console.log('Agree clicked');
+                  // console.log('Agree clicked');
                 }
               }
             ]
@@ -430,7 +426,7 @@ export class HomePage {
    * show comments
    */
   showComments(item) {
-    console.log(item);
+    //console.log(item);
     let commentModal = this.modalCtrl.create(CommentPage, { incidentitem: item });
     commentModal.onDidDismiss(data => {
       item.comments = data.commentlength;
@@ -494,7 +490,7 @@ export class HomePage {
       }
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error saving data.');
+      this.remotService.presentToast('Network Problem');
     });
 
 
@@ -523,7 +519,7 @@ export class HomePage {
             this.modiFyitemasnecessary(item);
             item.ddd =
               this.homeData.push(item);
-            console.log(this.homeData);
+            // console.log(this.homeData);
           });
 
         }
@@ -534,7 +530,7 @@ export class HomePage {
       }
     }, () => {
       infiniteScroll.complete();
-      this.remotService.presentToast('Error loading data.');
+      this.remotService.presentToast('Network Problem');
     });
 
   }
@@ -584,7 +580,7 @@ export class HomePage {
       }
     }, () => {
 
-      this.remotService.presentToast('Error!');
+      this.remotService.presentToast('Network Problem');
     });
 
   }
@@ -631,7 +627,7 @@ export class HomePage {
       }
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error loading data.');
+      this.remotService.presentToast('Network Problem');
     });
 
 
@@ -659,7 +655,7 @@ export class HomePage {
       }
 
 
-      console.log(this.statustags);
+      // console.log(this.statustags);
     });
     connectionModal.present();
 
@@ -689,7 +685,7 @@ export class HomePage {
         text: 'Cancel',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
+          // console.log('Cancel clicked');
         }
       }
       ]
@@ -722,7 +718,7 @@ export class HomePage {
 
           }, error => console.error("Error cropping image", error));
       }, function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -742,7 +738,7 @@ export class HomePage {
           });
         }
       }, (err) => {
-        console.log(err)
+        //console.log(err)
       });
   }
 
@@ -768,7 +764,7 @@ export class HomePage {
       this.statusimage = base64File;
     }, (err) => {
       this.statusimage = '';
-      console.log('Base 64 service', err);
+      // console.log('Base 64 service', err);
     });
   }
 
@@ -795,31 +791,14 @@ export class HomePage {
         }
       }, () => {
         this.remotService.dismissLoader();
-        this.remotService.presentToast('Error saving image.');
+        this.remotService.presentToast('Network Problem');
       });
 
     }, (err) => {
-      console.log('Base 64 service', err);
+      // console.log('Base 64 service', err);
     });
 
   }
-
-
-  /*  this.maxSize = '20480';
-   window.resolveLocalFileSystemURL(filePath, (fileEntry) => {
-     fileEntry.getMetadata((metadata) => {
-       var fsize = metadata.size / 1024;
-       if (fsize > this.maxSize) {
-         this.remotService.presentToast(' Please upload a file with size less than: ' + 20 + "MB");
- 
-       } else {
-        
-       }
-     });
-   }); */
-
-
-
 
   /**
    * modify home-data as necessary
@@ -858,7 +837,7 @@ export class HomePage {
     var album = {
       id: albumview.album_id
     }
-    console.log(albumview);
+    // console.log(albumview);
     this.navCtrl.push(PhotoviewPage, { "album": album, "img_id": albumview.id, 'touserid': window.localStorage['userid'], "parentPage": this });
 
   }
@@ -888,26 +867,20 @@ export class HomePage {
 
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error getting about details.');
+      // this.remotService.presentToast('Error getting about details.');
     });
   }
 
-  ionViewWillEnter() {
-    this.viewCtrl.showBackButton(false);
-    this.events.publish('creoyou:showmenu');
-  }
-
-
   eventDetails(event) {
-    console.log(event);
+    // console.log(event);
     this.navCtrl.push(EventdetailsPage, { 'eventdetails': event });
   }
   audiodetails(track) {
-    console.log(track);
+    // console.log(track);
     this.navCtrl.push(AudiodetailsPage, { audiodetails: track });
   }
   videodetails(track) {
-    console.log(track);
+    //console.log(track);
     this.navCtrl.push(VideodetailsPage, { videodetails: track });
   }
   ionViewWillLeave() {

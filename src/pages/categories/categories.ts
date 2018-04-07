@@ -27,33 +27,37 @@ export class CategoriesPage {
   }
 
   ionViewDidLoad() {
-
-    this.setFilteredItems();
-
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-
+      this.categories = [];
       this.setFilteredItems();
 
     });
+  }
 
-
+  ionViewWillEnter() {
+    this.setFilteredItems();
   }
 
   setFilteredItems() {
 
     this.categories = [];
     this.searching = true;
+    var data = {
+      user_type: this.usertype,
+      term: this.searchTerm
+    }
+    /*  this.remotService.getCategories(this.searchTerm, this.usertype).subscribe((response) => { */
+    this.remotService.postData(data, 'user-category').subscribe((response) => {
+      if (response.success == 1) {
+        var categoriesData = response.data;
+        console.log(categoriesData);
+        categoriesData.forEach((item, key, index) => {
 
-    // if(this.searchTerm!='')
-    //  this.categories.push({id:0,name:this.searchTerm,checked:false});
+          this.categories.push({ id: item.id, name: item.cat_name, checked: false });
+        })
+        this.searching = false;
+      }
 
-    this.remotService.getCategories(this.searchTerm, this.usertype).subscribe((response) => {
-      var categoriesData = response.data;
-      categoriesData.forEach((item, key, index) => {
-
-        this.categories.push({ id: item.id, name: item.cat_name, checked: false });
-      })
-      this.searching = false;
     }, () => { })
 
   }
@@ -79,7 +83,7 @@ export class CategoriesPage {
           text: 'Cancel',
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
+            //console.log('Cancel clicked');
           }
         },
         {

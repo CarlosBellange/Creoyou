@@ -42,14 +42,6 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-googleplus.GooglePlus",
-    "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
-    "pluginId": "cordova-plugin-googleplus",
-    "clobbers": [
-      "window.plugins.googleplus"
-    ]
-  },
-  {
     "id": "cordova-plugin-crop.CropPlugin",
     "file": "plugins/cordova-plugin-crop/www/crop.js",
     "pluginId": "cordova-plugin-crop",
@@ -466,6 +458,14 @@ module.exports = [
     "clobbers": [
       "Connection"
     ]
+  },
+  {
+    "id": "cordova-plugin-googleplus.GooglePlus",
+    "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
+    "pluginId": "cordova-plugin-googleplus",
+    "clobbers": [
+      "window.plugins.googleplus"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -478,7 +478,6 @@ module.exports.metadata =
   "cordova-plugin-ionic-webview": "1.1.16",
   "cordova-sqlite-storage": "2.1.2",
   "onesignal-cordova-plugin": "2.2.2",
-  "cordova-plugin-googleplus": "5.1.1",
   "cordova-plugin-crop": "0.3.1",
   "cordova-plugin-camera": "2.4.1",
   "cordova-plugin-image-picker": "1.1.1",
@@ -496,7 +495,8 @@ module.exports.metadata =
   "cordova-plugin-contacts": "3.0.1",
   "cordova-plugin-facebook4": "1.9.1",
   "com.hutchind.cordova.plugins.streamingmedia": "0.1.4",
-  "cordova-plugin-network-information": "2.0.1"
+  "cordova-plugin-network-information": "2.0.1",
+  "cordova-plugin-googleplus": "5.2.1"
 };
 // BOTTOM OF METADATA
 });

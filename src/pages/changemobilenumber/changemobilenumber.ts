@@ -79,7 +79,7 @@ export class ChangemobilenumberPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ChangemobilenumberPage');
+   // console.log('ionViewDidLoad ChangemobilenumberPage');
   }
   dismiss() {
     this.viewCtrl.dismiss({ mobileno: '' });

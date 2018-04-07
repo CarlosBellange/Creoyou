@@ -8,6 +8,8 @@ import {
 import { InvitefriendPage } from '../../pages/invitefriend/invitefriend';
 import { MessagedetailsPage } from '../../pages/messagedetails/messagedetails';
 import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
+import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -24,12 +26,13 @@ export class ConnectionsPage {
   shownone: number = 0
   @ViewChild(Navbar) navBar: Navbar;
   connectiontab: string;
+  showmenu: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider,
     public modalCtrl: ModalController, public alertCtrl: AlertController) {
     var path = this.navParams.get('location');
-    console.log('notification path', path);
+    //console.log('notification path', path);
     this.base_url = this.remotService.site_url;
     this.connectiontab = 'connections';
 
@@ -65,8 +68,11 @@ export class ConnectionsPage {
       if (response.success == 1) {
 
         this.connections = response.data;
-        console.log(this.connections);
-      } else {
+        //console.log(this.connections);
+      } else if (response.success == 2) {
+        this.navCtrl.push(LoginPage, { closeapp: true });
+        window.localStorage.clear();
+        this.showmenu = false;
         this.remotService.presentToast(response.message);
       }
     }, () => {
@@ -115,13 +121,13 @@ export class ConnectionsPage {
       if (response.success == 1) {
 
         this.suggestions = response.data;
-        console.log(this.suggestions);
-      } else {
+        //console.log(this.suggestions);
+      } /* else {
         this.remotService.presentToast(response.message);
-      }
+      } */
     }, () => {
       this.remotService.dismissLoader();
-      this.remotService.presentToast('Error loading data.');
+      // this.remotService.presentToast('Error loading data.');
       this.shownone = 1
     });
 
@@ -169,15 +175,15 @@ export class ConnectionsPage {
     this.navBar.backButtonClick = () => {
 
       this.events.publish('creoyou:showmenu');
-      this.navCtrl.pop()
+      this.navCtrl.setRoot(HomePage)
     }
 
-    console.log('ionViewDidLoad ConnectionsPage');
+    //console.log('ionViewDidLoad ConnectionsPage');
   }
 
 
   presentActionSheet(connection, index) {
-    console.log(connection, index);
+    // console.log(connection, index);
     var DataToSend = {
       user_id: window.localStorage['userid'],
       to_userid: connection.user_id,
@@ -265,7 +271,7 @@ export class ConnectionsPage {
    * start messaging with user connection
    */
   startMessage(connection, idx) {
-    console.log('Connection Page content', connection);
+    //console.log('Connection Page content', connection);
     this.navCtrl.push(MessagedetailsPage, { user: connection, "parentPage": this });
 
   }
@@ -405,7 +411,7 @@ export class ConnectionsPage {
 
 
   OtherFrofileView(connection) {
-    console.log('other connection data', connection, this.connectiontab);
+    // console.log('other connection data', connection, this.connectiontab);
     this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': connection, 'tabname': this.connectiontab });
   }
 
@@ -442,7 +448,7 @@ export class ConnectionsPage {
       inputs: [
         {
           name: 'mobileno',
-          placeholder: 'Enter Mobile No'
+          placeholder: 'Enter mobile number'
         },
       ],
       buttons: [

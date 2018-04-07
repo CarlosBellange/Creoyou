@@ -27,7 +27,7 @@ export class CommentPage {
     this.currentuserid = window.localStorage['userid']
     this.currentitem = navParams.get('incidentitem');
     this.base_url = this.remotService.site_url;
-    console.log(this.currentitem, navParams.get('incidentitem'));
+    //console.log(this.currentitem, navParams.get('incidentitem'));
     this.seecomment();
   }
 
@@ -58,12 +58,12 @@ export class CommentPage {
 
     }
 
-    console.log(commentsParams);
+   // console.log(commentsParams);
     this.comments = [];
 
     this.remotService.presentLoading();
     this.remotService.postData(commentsParams, 'seeComments').subscribe((response) => {
-      console.log(response);
+     // console.log(response);
       this.remotService.dismissLoader();
       if (response.success == 1) {
 
@@ -71,7 +71,7 @@ export class CommentPage {
         if (commentData != null) {
           commentData.forEach((item, key, index) => {
             this.comments.push(item);
-            console.log(this.comments);
+           // console.log(this.comments);
           });
 
         }
@@ -97,14 +97,14 @@ export class CommentPage {
     else if (this.currentuserid == data.user_id) {
       //this.navCtrl.setRoot(HomePage);
     } else {
-      console.log('other connection data', data);
+     // console.log('other connection data', data);
       this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
     }
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommentPage');
+    //console.log('ionViewDidLoad CommentPage');
   }
 
   presentActionSheet(comment, idx) {
@@ -127,14 +127,14 @@ export class CommentPage {
 
             this.remotService.presentLoading();
             this.remotService.postData(commentsParams, 'deleteComments').subscribe((response) => {
-              console.log(response);
+             // console.log(response);
               this.remotService.dismissLoader();
               //console.log(idx);
               this.comments.splice(idx, 1);
             }, () => {
               this.remotService.dismissLoader();
               this.remotService.presentToast('Error .');
-              console.log('error');
+             // console.log('error');
             });
             // console.log('Destructive clicked',comment,idx);
           }

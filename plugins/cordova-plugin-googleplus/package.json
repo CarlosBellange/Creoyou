@@ -1,8 +1,8 @@
 {
   "_from": "cordova-plugin-googleplus@^5.1.1",
-  "_id": "cordova-plugin-googleplus@5.1.1",
+  "_id": "cordova-plugin-googleplus@5.2.1",
   "_inBundle": false,
-  "_integrity": "sha1-1sKszvSGGbqdWrzJeDzzGmrxSh0=",
+  "_integrity": "sha1-jcR9uebl6fTt4FXkXYFxu+zTIGA=",
   "_location": "/cordova-plugin-googleplus",
   "_phantomChildren": {},
   "_requested": {
@@ -19,10 +19,10 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-googleplus/-/cordova-plugin-googleplus-5.1.1.tgz",
-  "_shasum": "d6c2accef48619ba9d5abcc9783cf31a6af14a1d",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-googleplus/-/cordova-plugin-googleplus-5.2.1.tgz",
+  "_shasum": "8dc47db9e6e5e9f4ede055e45d8171bbecd32060",
   "_spec": "cordova-plugin-googleplus@^5.1.1",
-  "_where": "D:\\Masud Parvej\\WGT Project\\Creoyou",
+  "_where": "D:\\Masud Parvej\\WGT Project\\Creoyougit",
   "bundleDependencies": false,
   "cordova_name": "Google SignIn",
   "deprecated": false,
@@ -56,5 +56,5 @@
     "ios"
   ],
   "repo": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-  "version": "5.1.1"
+  "version": "5.2.1"
 }

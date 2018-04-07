@@ -33,7 +33,7 @@ export class AdvertisementdetailsPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad AdvertisementdetailsPage');
+    // console.log('ionViewDidLoad AdvertisementdetailsPage');
   }
   ionViewWillLeave() {
     this.remotService.dismissLoader();
