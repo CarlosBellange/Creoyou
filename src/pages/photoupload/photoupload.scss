@@ -1,14 +1,13 @@
 page-photoupload {
-
     .item-inner {
         border-bottom: 2px solid #0b60b4 !important;
         box-shadow: none !important;
     }
-    ion-label{
-        color:rgb(141, 141, 141) !important;
+    ion-label {
+        color: rgb(141, 141, 141) !important;
         margin: 10px 0px 0px 0px !important;
     }
-    ion-toolbar{
+    ion-toolbar {
         padding: 0px !important;
     }
     .item-md {
@@ -22,29 +21,31 @@ page-photoupload {
         background: -moz-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
         background: -webkit-linear-gradient(left, #1571a5 0%, #334c80 100%) !important;
         background: linear-gradient(to right, #1571a5 0%, #334c80 100%) !important;
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1 ) !important;
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1571a5', endColorstr='#334c80', GradientType=1) !important;
         color: #ffffff !important;
         padding: 16px 0px;
         height: 55px;
         font-size: 1.2em;
+        margin: 0px;
+        border-radius: 0;
     }
-    .eventImage{
+    .eventImage {
         position: relative;
-        margin: 15px auto;
-        ion-icon{
+        margin: 2px auto 0px;
+        ion-icon {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 7px;
+            right: 7px;
             background: #fff;
-            height: 30px;
-            width: 30px;
+            height: 22px;
+            width: 22px;
             -webkit-box-shadow: 0px 0px 10px #ccc;
             box-shadow: 0px 0px 10px #151515;
             text-align: center;
             color: red;
             border-radius: 50%;
-            line-height: 30px;
-            font-size: 2.5rem;
+            line-height: 24px;
+            font-size: 1.5rem;
         }
         img {
             border-radius: 3px;
@@ -65,15 +66,15 @@ page-photoupload {
         border: 1px solid #e0e0e0;
         padding: 40px 0px;
         font-weight: 600;
+        margin-top: 10px;
         i {
             vertical-align: middle;
             font-size: 5rem;
             margin-top: -13px;
         }
     }
-
-    .albumUser{
-        p{
+    .albumUser {
+        p {
             font-weight: 600;
             font-size: 1.5rem;
             color: #000;
@@ -81,9 +82,17 @@ page-photoupload {
         .item-inner {
             border-bottom: 2px solid transparent !important;
         }
-        ion-avatar{
+        ion-avatar {
             margin: 0px 16px 0px 0 !important;
         }
     }
-
+    ion-toolbar {
+        padding: 0px;
+        margin: 0px;
+    }
+    span.maxError {
+        margin-top: 5px;
+        display: inline-block;
+        color: red
+    }
 }

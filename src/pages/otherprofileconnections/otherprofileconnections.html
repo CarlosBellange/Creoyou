@@ -1,0 +1,137 @@
+<ion-header class="creoyou-header">
+
+
+  <ion-navbar>
+    <ion-title>Connection</ion-title>
+  </ion-navbar>
+
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="connectionandfollowing">
+    <ion-segment-button value="connections">
+      Connections
+    </ion-segment-button>
+    <ion-segment-button value="followings">
+      Following
+    </ion-segment-button>
+    <ion-segment-button value="followers">
+      Followers
+    </ion-segment-button>
+  </ion-segment>
+
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="connectionandfollowing">
+    <ion-list *ngSwitchCase="'connections'" class="individual">
+
+      <ion-item *ngFor="let connection of connections;let idx=index;" padding-horizontal class="search_user search_user_individual">
+
+        <ion-avatar item-left (click)="OtherFrofileView(connection)">
+
+          <img *ngIf="connection.image!=null && connection.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{connection.image}}"
+            alt="avatar">
+          <img *ngIf="connection.image==null || connection.image==''" src="assets/img/management.png" alt="avatar">
+
+        </ion-avatar>
+        <ion-item class="searcsh_right">
+          <div (click)="OtherFrofileView(connection)">
+            <p>{{connection.users_full_name}}</p>
+            <p class="user_deg">
+              {{connection.creativeField}}</p>
+            <p class="user_deg">
+              <ion-icon name="home" *ngIf="connection.address"></ion-icon> {{connection.address}}</p>
+          </div>
+          <div class="user_action" item-right>
+            <!-- <ion-icon (click)="presentActionSheet(connection,idx)" item-right ios="ios-settings" md="md-settings"></ion-icon>
+            <button (click)="startMessage(connection,idx)" ion-button block icon-right>
+              <ion-icon name="mail"></ion-icon>Message
+            </button> -->
+          </div>
+        </ion-item>
+      </ion-item>
+
+      <ion-item *ngIf="connections?.length<=0 && shownone==1" class="no_result">
+        <h3>No Connection</h3>
+      </ion-item>
+    </ion-list>
+
+
+
+    <ion-list *ngSwitchCase="'followings'">
+
+      <ion-item *ngIf="following?.length<=0" class="no_result">
+        <h3> Not following anyone </h3>
+      </ion-item>
+
+      <ion-list class="individual">
+
+        <ion-item *ngFor="let user of following;let idx=index;" padding-horizontal class="search_user search_user_individual">
+          <ion-avatar item-left (click)="OtherFrofileView(user)">
+            <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}" alt="avatar">
+            <img *ngIf="user.image==null || user.image==''" src="assets/img/management.png" alt="avatar">
+
+          </ion-avatar>
+          <ion-item class="searcsh_right">
+            <div (click)="OtherFrofileView(user)">
+              <p>{{user.fname}} {{user.lname}}</p>
+              <p *ngIf="user.buisness_name">{{user.buisness_name}}</p>
+
+              <p class="user_deg">
+                <ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
+              <p class="user_deg">
+                <ion-icon name="home" *ngIf="user.address"></ion-icon> {{user.address}}</p>
+            </div>
+            <!--  <div class="user_action" (click)="presentActionSheet(user,1,idx);" item-right>
+              <ion-icon item-right ios="ios-settings" md="md-settings"></ion-icon>
+            </div> -->
+          </ion-item>
+        </ion-item>
+
+      </ion-list>
+
+      <!-- <ion-infinite-scroll (ionInfinite)="fetchFollowingData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+ -->
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'followers'">
+
+      <ion-item *ngIf="followers?.length<=0" class="no_result">
+        <h3>No followers</h3>
+      </ion-item>
+
+      <ion-list class="individual">
+
+        <ion-item *ngFor="let user of followers;let idx=index;" padding-horizontal class="search_user search_user_individual">
+          <ion-avatar item-left (click)="OtherFrofileView(user)">
+            <img *ngIf="user.image!=null && user.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{user.image}}" alt="avatar">
+            <img *ngIf="user.image==null || user.image==''" src="assets/img/management.png" alt="avatar">
+
+          </ion-avatar>
+          <ion-item class="searcsh_right">
+            <div (click)="OtherFrofileView(user)">
+              <p>{{user.fname}} {{user.lname}}</p>
+              <p *ngIf="user.buisness_name">{{user.buisness_name}}</p>
+              <p class="user_deg">
+                <ion-icon name="briefcase"></ion-icon> {{user.creativeField}}</p>
+              <p class="user_deg">
+                <ion-icon name="home" *ngIf="user.address"></ion-icon> {{user.address}}</p>
+            </div>
+            <!--  <div class="user_action" (click)="presentActionSheet(user,2,idx);" item-right>
+              <ion-icon item-right ios="ios-settings" md="md-settings"></ion-icon>
+            </div> -->
+          </ion-item>
+        </ion-item>
+
+      </ion-list>
+
+      <!-- <ion-infinite-scroll (ionInfinite)="fetchFollowerData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
+
+
+    </ion-list>
+
+  </div>
+</ion-content>

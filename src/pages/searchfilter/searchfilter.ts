@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController, Events, Navbar } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { SearchPage } from '../search/search';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriesPage } from '../../pages/categories/categories';
 
 /**
@@ -18,6 +18,7 @@ import { CategoriesPage } from '../../pages/categories/categories';
   templateUrl: 'searchfilter.html',
 })
 export class SearchfilterPage {
+  @ViewChild(Navbar) navBar: Navbar;
   countries: any;
   states: any;
   FormadvanceStepOne: FormGroup;
@@ -28,29 +29,43 @@ export class SearchfilterPage {
   jobkeyword = '';
   locncountry = '';
   locnstates = '';
-  businessname = '';
+  businessname: any;
   jobname = '';
   advsearch: any;
   jobs: boolean;
   people: boolean;
   business: boolean;
   advsdata: any;
+  userType = 1;
+  categoriesData: any;
 
-  constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
-    this.FormadvanceStepOne = formBuilder.group({
+  constructor(public events: Events, public modalCtrl: ModalController, public formBuilder: FormBuilder, public remotService: RemoteServiceProvider, public navCtrl: NavController, public navParams: NavParams) {
+    /* this.FormadvanceStepOne = formBuilder.group({
       cfield: ['', Validators.compose([Validators.required])]
 
-    });
+    }); */
     this.initLocationForm();
+
     this.advsearch = navParams.get('adsdata');
-    this.jobs = this.advsearch.jobs;
-    this.people = this.advsearch.people;
-    this.business = this.advsearch.business;
+    if (this.advsearch == 'business') {
+      this.userType = 2;
+      this.setFilteredItems();
+    }
+    else {
+      this.setFilteredItems();
+    }
+    // console.log('adv search', this.advsearch);
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchfilterPage');
+    this.events.publish('creoyou:hidemenu');
+    this.navBar.backButtonClick = () => {
+
+      this.events.publish('creoyou:hidemenu');
+      this.navCtrl.pop()
+    }
+    //console.log('ionViewDidLoad SearchfilterPage');
   }
   initLocationForm() {
 
@@ -60,7 +75,7 @@ export class SearchfilterPage {
 
     };
     this.countries = [];
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(DataToSend, 'countries').subscribe((response) => {
 
       this.remotService.dismissLoader();
@@ -79,7 +94,7 @@ export class SearchfilterPage {
   }
 
   initStates(country_id) {
-    console.log(country_id);
+    //console.log(country_id);
 
     this.states = [];
     this.remotService.postData({ 'country_id': country_id }, 'states').subscribe((response) => {
@@ -98,7 +113,7 @@ export class SearchfilterPage {
 
   }
   advanceSearch() {
-    if (this.jobs == true) {
+    if (this.advsearch == 'job') {
       this.advsdata = {
         jobname: this.jobname,
         company: this.company,
@@ -106,10 +121,11 @@ export class SearchfilterPage {
         locncountry: this.locncountry,
         locnstates: this.locnstates,
         id: this.catid,
-        advancesearch: true
+        advancesearch: this.advsearch
       }
     }
-    if (this.people == true) {
+
+    if (this.advsearch == 'people') {
       this.advsdata = {
         adname: this.adname,
         locncountry: this.locncountry,
@@ -117,32 +133,51 @@ export class SearchfilterPage {
         id: this.catid,
         company: this.company,
         specializations: this.specializations,
-        advancesearch: true
+        advancesearch: this.advsearch
       }
+
     }
-    if (this.business == true) {
+    if (this.advsearch == 'business') {
       this.advsdata = {
         businessname: this.businessname,
         locncountry: this.locncountry,
         locnstates: this.locnstates,
         id: this.catid,
-        advancesearch: true
+        advancesearch: this.advsearch
       }
     }
-    console.log(this.advsdata);
+    //console.log(this.advsdata);
     this.navCtrl.push(SearchPage, { adsearch: this.advsdata });
   }
+
+  setFilteredItems() {
+    var data = {
+      user_type: this.userType,
+      term: ''
+    }
+    /*  this.remotService.getCategories(this.searchTerm, this.usertype).subscribe((response) => { */
+    this.remotService.postData(data, 'user-category').subscribe((response) => {
+      if (response.success == 1) {
+        this.categoriesData = response.data;
+      }
+
+    }, () => { })
+
+  }
+
   showCategoryModal() {
-    let categoryModal = this.modalCtrl.create(CategoriesPage);
+    let categoryModal = this.modalCtrl.create(CategoriesPage, { usertype: this.userType });
     categoryModal.onDidDismiss(data => {
       // Do things with data coming from modal, for instance :
       if (data.hasOwnProperty("id")) {
-        console.log("GOt from modal", data);
+        //console.log("GOt from modal", data);
         this.FormadvanceStepOne.get('cfield').setValue(data.name);
-        this.catid = data.name;
+        this.catid = data.id;
       }
     });
     categoryModal.present();
   }
-
+  ionViewWillLeave() {
+    // this.remotService.dismissLoader();
+  }
 }

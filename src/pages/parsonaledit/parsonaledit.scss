@@ -51,4 +51,36 @@ page-parsonaledit {
     .input-has-focus .label-md[floating] {
         color: #000;
     }
+    .personal_loader {
+        display: block;
+        text-align: center;
+        padding: 10px 0px
+    }
+    .no-scroll .scroll-content {
+        overflow: hidden;
+    }
+    span.unique_info {
+        text-align: center;
+        display: block;
+        background: #fff;
+        padding: 15px 0px;
+        margin: 5px 0px;
+        border-radius: 4px;
+        line-height: 17px;
+    }
+    .mobile-code {
+        width: 100% !important;
+        display: flex;
+        max-width: 100%;
+        padding: 13px 8px 13px 8px !important;
+        border-bottom: 2px solid #0b60b4 !important;
+        .item-inner {
+            border-bottom: none !important;
+        }
+    }
+    .select_edit {
+        .item-inner {
+            display: none;
+        }
+    }
 }

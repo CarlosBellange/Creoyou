@@ -10,7 +10,7 @@
     </ion-navbar>
 
     <ion-toolbar class="chatSearch">
-        <ion-searchbar placeholder="Search chat..."></ion-searchbar>
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
     </ion-toolbar>
 
 </ion-header>
@@ -23,10 +23,14 @@
 
         <ion-item *ngFor="let arcmsg of archivemessage" (click)="messageDetailsArchive(arcmsg);" padding-horizontal class="Chat_list_user">
             <ion-avatar item-left>
-                <img src="{{base_url}}uploads/profileImages/resizedImages/{{arcmsg.image}}" alt="Image" />
+                <img *ngIf="arcmsg.image!=null && arcmsg.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{arcmsg.image}}"
+                />
+                <img *ngIf="arcmsg.image==null || arcmsg.image==''" src="assets/img/management.png" />
             </ion-avatar>
             <ion-item class="Chat_list_right">
-                <h3>{{arcmsg.fname}} {{arcmsg.lname}}</h3>
+                <h3 *ngIf="arcmsg.fname">{{arcmsg.fname}} {{arcmsg.lname}}</h3>
+                <h3 *ngIf="arcmsg.buisness_name">{{arcmsg.buisness_name}}</h3>
+
                 <p class="Chat_text">{{arcmsg.content}}</p>
                 <p class="Chat_time">
                     <ion-icon name="time"></ion-icon> {{arcmsg.creation_date | date:'fullDate'}} {{arcmsg.creation_date | date:'shortTime'}}</p>
@@ -37,10 +41,13 @@
     <ion-list class="Chat_list unRead" *ngIf="inbox">
         <ion-item *ngFor="let usermsg of usermessage" (click)="messageDetails(usermsg);" padding-horizontal class="Chat_list_user">
             <ion-avatar item-left>
-                <img src="{{base_url}}uploads/profileImages/resizedImages/{{usermsg.image}}" alt="Image" />
+                <img *ngIf="usermsg.image!=null && usermsg.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{usermsg.image}}"
+                />
+                <img *ngIf="usermsg.image==null || usermsg.image==''" src="assets/img/management.png" />
             </ion-avatar>
             <ion-item class="Chat_list_right">
-                <h3>{{usermsg.fname}} {{usermsg.lname}}</h3>
+                <h3 *ngIf="usermsg.fname">{{usermsg.fname}} {{usermsg.lname}}</h3>
+                <h3 *ngIf="usermsg.buisness_name">{{usermsg.buisness_name}}</h3>
                 <p class="Chat_text">{{usermsg.content}}</p>
                 <p class="Chat_time">
                     <ion-icon name="time"></ion-icon> {{usermsg.creation_date | date:'fullDate'}} {{usermsg.creation_date | date:'shortTime'}}</p>

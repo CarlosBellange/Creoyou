@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { MessagedetailsPage } from './messagedetails';
 
 @NgModule({
-  declarations: [
-    MessagedetailsPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(MessagedetailsPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class MessagedetailsPageModule {}
+export class MessagedetailsPageModule { }

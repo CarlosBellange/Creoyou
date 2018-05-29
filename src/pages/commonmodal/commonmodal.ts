@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,ViewController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 
 @IonicPage()
@@ -10,20 +10,21 @@ import { IonicPage, NavController, NavParams ,ViewController} from 'ionic-angula
 export class CommonmodalPage {
 
   items = [];
-  title : String;
+  title: String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
 
     this.items = navParams.get('items');
     this.title = navParams.get('title');
+   // console.log("common modal items", this.items)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommonmodalPage');
+   // console.log('ionViewDidLoad CommonmodalPage');
   }
 
 
-  dismissModal(){
+  dismissModal() {
     //alert("okkk");
     this.viewCtrl.dismiss();
   }

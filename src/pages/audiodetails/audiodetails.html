@@ -1,0 +1,32 @@
+<ion-header class="creoyou-header">
+
+  <ion-navbar>
+    <ion-title>Audio Details</ion-title>
+
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col class="EventContainer">
+        <ion-list class="EventBody">
+          <ion-item>
+            <div class="EventDetails">
+              <b>Audio Title : </b>
+              <span *ngIf="audiodetails?.audio_title">{{audiodetails?.audio_title}}</span>
+
+              <span *ngIf="audiodetails?.audio_title==''">No title</span>
+            </div>
+            <div class="EventDetails">
+              <b>Description : </b>
+              <span *ngIf="audiodetails?.audio_description">{{audiodetails?.audio_description}}</span>
+              <span *ngIf="audiodetails?.audio_description==''">No description</span>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

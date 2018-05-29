@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 export class AuthServiceProvider {
 
   constructor(public http: Http) {
-    console.log('Hello AuthServiceProvider Provider');
+    //console.log('Hello AuthServiceProvider Provider');
   }
 
 }

@@ -1,20 +1,32 @@
 page-commonmodal {
 
-    .spinner-container {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
+    .tag_item { 
+        border-bottom: 1px solid #ccc;
+        img{
+            border-radius: 50%;
+            vertical-align: middle;
+            height: 50px;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        p{
+            margin: 10px 0px 2px;
+            font-size: 15px;
+            color: rgb(31, 29, 182);
+        }
+        ion-checkbox{
+            vertical-align: middle;
+            margin: 0px 15px;
+        }
+        
     }
-    
-    .dismiss{
-        background: transparent;
+    button.dismiss {
+        background: no-repeat;
         color: #fff;
         font-size: 16px;
     }
-    .content-background{
-        background:url("../assets/img/background.jpg") no-repeat center fixed;
-        background-size: cover;
-        height: 100%;
+    .scroll-content{
+        margin-top: 116px;
     }
 
 }

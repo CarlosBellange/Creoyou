@@ -3,23 +3,27 @@
   <ion-navbar>
     <ion-title>Photo Album</ion-title>
   </ion-navbar>
-  <ion-toolbar text-center>
-    <button color="light" (click)="sendTonewalbum();" icon-start ion-button round>
-      <ion-icon name="add-circle"></ion-icon> Create New Album</button>
-  </ion-toolbar>
+
 </ion-header>
 
 
 <ion-content>
+  <ion-toolbar text-center>
+    <button color="light" (click)="sendTonewalbum()" icon-start ion-button round>
+      <ion-icon name="add-circle"></ion-icon> Create New Album</button>
+  </ion-toolbar>
+  <img *ngIf="albums=='' || albums==null" img-preloader="assets/img/blankalbum.png" alt="Post Img" />
   <ion-grid>
     <ion-row>
 
       <ion-col col-6 (click)="gotoPhotoView(albm);" *ngFor="let albm of albums;">
         <div class="album_wrap">
-          <img src="{{base_url}}uploads/portfolioImages/resizedimages/{{albm.image_name}}" alt="Post Img" />
+          <img img-preloader="{{base_url}}uploads/portfolioImages/resizedimages/{{albm.image_name}}" alt="Post Img" />
           <div class="album_list">
             <p>
-              <ion-icon name="albums"></ion-icon> &nbsp; {{albm.name}}
+
+              <ion-icon name="albums"></ion-icon> &nbsp; {{albm.name | slice:0:10}}
+              <span *ngIf="albm.name.length>10">...</span>
               <span>({{albm.imgCount}})</span>
             </p>
           </div>
@@ -35,4 +39,10 @@
   </ion-grid>
 
 
+
+  <ion-fab bottom right>
+    <button ion-fab (click)="sendTonewalbum()" color="primary">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

@@ -1,0 +1,32 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com-badrit-base64": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "510967459265949",
+      "APP_NAME": "com.creoyou",
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "com.hutchind.cordova.plugins.streamingmedia": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.creoyou"
+    },
+    "cordova-plugin-googleplus": {
+      "PACKAGE_NAME": "com.creoyou"
+    }
+  },
+  "dependent_plugins": {}
+}

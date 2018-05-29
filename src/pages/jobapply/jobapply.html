@@ -21,7 +21,7 @@
 
   <div class="Cv_title">
     <h2>Upload your Resume</h2>
-    <p>Uploading a resume while applying for a job usually have an edeg over the other applicants </p>
+    <p>Have an edge over other applicants by uploading your resume</p>
   </div>
   <button class="uploadImage" (click)="chooseCV()">
     Upload CV
@@ -33,6 +33,6 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar class="button_bottom_top">
-    <a class="sign-up button button-block button-stable" (click)="applypremiumjob()">Apply</a>
+    <button class="sign-up button button-block button-stable" (click)="applypremiumjob()" [disabled]="currentName=='' || currentName==null">Apply</button>
   </ion-toolbar>
 </ion-footer>

@@ -1,18 +1,182 @@
-<!--
-  Generated template for the PortfolioPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+<ion-header class="creoyou-header">
 
   <ion-navbar>
     <ion-title>portfolio</ion-title>
   </ion-navbar>
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="Otherprofileview">
+    <ion-segment-button value="album">
+      Album
+    </ion-segment-button>
+    <ion-segment-button value="video">
+      Video
+    </ion-segment-button>
+    <ion-segment-button value="audio">
+      Audio
 
+
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 
-<ion-content padding>
+
+
+<ion-content>
+  <div [ngSwitch]="Otherprofileview">
+
+    <ion-list *ngSwitchCase="'album'" class="individual">
+      <img *ngIf="albums=='' || albums==null" img-preloader="assets/img/blankalbum.png" alt="Post Img" />
+      <ion-grid>
+        <ion-row>
+
+          <ion-col col-6 (click)="gotoPhotoView(albm);" *ngFor="let albm of albums;">
+            <div class="album_wrap">
+              <img *ngIf="albm.image_name" src="{{base_url}}uploads/portfolioImages/resizedimages/{{albm.image_name}}" alt="Post Img" />
+              <div class="album_list">
+                <p>
+                  <ion-icon name="albums"></ion-icon> &nbsp; {{albm.name | slice:0:10}}
+                  <span *ngIf="albm.name.length>10">...</span>
+                  <span>({{albm.imgCount}})</span>
+                </p>
+              </div>
+            </div>
+          </ion-col>
+
+
+
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'video'" class="individual">
+      <img *ngIf="videos=='' || videos==null" img-preloader="assets/img/video-png.png" alt="Post Img" />
+      <ion-grid>
+        <!-- Home post by Video -->
+        <ion-row *ngFor="let vdo of videos">
+          <ion-col>
+            <div class="post_wrap">
+              <ion-list class="post_header">
+                <ion-item class="" padding-horizontal>
+                  <ion-item (click)="videodetails(vdo)">
+                    <p *ngIf="vdo.video_title">{{vdo.video_title | slice:0:20}}
+                      <span *ngIf="vdo.video_title.length>20">.....</span>
+                    </p>
+
+
+                    <span *ngIf="vdo.video_description">{{vdo.video_description | slice:0:100}}</span>
+                    <span *ngIf="vdo.video_description.length>100">.....</span>
+                    {{vdo.creation_date | date:'fullDate'}} {{vdo.creation_date | date:'shortTime'}}
+                  </ion-item>
+
+                </ion-item>
+              </ion-list>
+
+              <ion-list class="post_body">
+
+                <ion-item *ngIf="vdo.video_source==='You Tube'">
+                  <iframe width="100%" [src]="_DomSanitizer.bypassSecurityTrustResourceUrl(vdo?.video_name)" frameborder="0 " donotallowfullscreen></iframe>
+                </ion-item>
+
+
+                <ion-item *ngIf="vdo.video_source==='Local Machine'">
+
+                  <!--  <video #videoPlayer (click)="playvideo(vdo.video_name)" controls="controls" poster="{{base_url}}uploads/portfolioVideoSnapshots/{{vdo.snapshot_name}}"
+                    preload="metadata" webkit-playsinline="webkit-playsinline" class="videoPlayer">
+                    <source src="{{base_url}}uploads/portfolioVideos/{{vdo.video_name}}" type="video/mp4" />
+                  </video> -->
+                  <div (tap)="playvideo(vdo.video_name)">
+                    <img (tap)="playvideo(vdo.video_name)" src="{{base_url}}uploads/portfolioVideoSnapshots/{{vdo.snapshot_name}}" />
+                  </div>
+                  <img (tap)="playvideo(vdo.video_name)" class="play_img" src="assets/img/play.svg" width="50px">
+
+                </ion-item>
+
+              </ion-list>
+
+              <ion-row class="post_activity">
+                <ion-col (click)="likeThisvideo(vdo)" col-4 [class.active]="vdo.likeActive>0">
+                  <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
+                  <span>{{vdo.video_like}}</span>
+                </ion-col>
+                <ion-col col-4 (click)="showComments(vdo)">
+                  <ion-icon ios="ios-text" md="md-text"></ion-icon>
+                  <span>{{vdo.comment}}</span>
+                </ion-col>
+                <ion-col col-4 (click)="shareThisPost(vdo)" *ngIf="vdo.privacy==1">
+                  <ion-icon ios="ios-share" md="md-share"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'audio'" class="individual">
+      <img *ngIf="allmyaudios=='' || allmyaudios==null" img-preloader="assets/img/audio-blank.png" />
+      <ion-grid>
+        <ion-row *ngFor="let track of allmyaudios">
+
+          <ion-col>
+            <div class="post_wrap">
+              <ion-list class="post_header">
+                <ion-item class="" padding-horizontal>
+                  <ion-item (click)="audiodetails(track)">
+                    <p text-center>{{track.audio_title | slice:0:10}}
+                      <span *ngIf="track.audio_title.length>20">.....</span>
+                    </p>
+                    <span>{{track.audio_description | slice:0:100}}
+                      <span *ngIf="track.audio_description.length>99">.....</span>
+                      <br/> {{track.creation_date | date:'fullDate'}} {{track.creation_date | date:'shortTime'}}</span>
+                  </ion-item>
+
+                </ion-item>
+              </ion-list>
+
+              <ion-list class="post_body audio_wrap">
+
+
+                <audio-track #audio *ngFor="let track of track.myTracks" [track]="track">
+                  <ion-item>
+                    <ion-thumbnail item-left (click)=playThisTrack($event,track) class="audio_action">
+                      <img img-preloader="assets/img/audio_new.png">
+                      <ion-icon name="play" *ngIf="track.select"></ion-icon>
+                      <ion-icon name="pause" *ngIf="!track.select"></ion-icon>
+                    </ion-thumbnail>
+                    <div item-content style="width:100%">
+                      <p>
+                        <strong>{{audio?.title | slice:0:10}}
+                          <span *ngIf="audio?.title?.length>10">.....</span>
+                        </strong>
+
+                      </p>
+                      <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'show'}"></audio-track-progress-bar>
+                    </div>
+                  </ion-item>
+                </audio-track>
+
+
+              </ion-list>
+
+              <ion-row class="post_activity">
+                <ion-col (click)="likeThisaudio(track)" col-4 [class.active]="track.likeActive>0">
+                  <ion-icon ios="ios-heart" md="md-heart"></ion-icon>
+                  <span>{{track.likes}}</span>
+                </ion-col>
+                <ion-col col-4 (click)="showCommentsaudio(track)">
+                  <ion-icon ios="ios-text" md="md-text"></ion-icon>
+                  <span>{{track.comment}}</span>
+                </ion-col>
+                <ion-col col-4 (click)="shareThisudio(track)" *ngIf="track.privacy==1">
+                  <ion-icon ios="ios-share" md="md-share"></ion-icon>
+
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </div>
 
 </ion-content>

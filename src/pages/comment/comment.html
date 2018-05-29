@@ -1,49 +1,51 @@
 <ion-header class="creoyou-header">
-    
-      <ion-navbar>
-        <ion-title>Comment</ion-title>
-        <ion-buttons end>
-               
-                <button class="dismiss" (click)="dismissComment();">
-                        <ion-icon  name="close-circle"></ion-icon>
-                </button>
-         </ion-buttons>
-      </ion-navbar>
-    
-    </ion-header>
-    
-    
-    <ion-content>
-    
-      <ion-list *ngFor="let comment of comments;let idx = index;">
-        <ion-item  class="comment_wrap">
-            <ion-avatar  item-left>
 
-                    <img *ngIf="comment.image!=null && comment.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{comment.image}}" alt="avatar">
-                    <img *ngIf="comment.image==null || comment.image==''" src="/assets/img/management.png" alt="avatar"> 
-                
-            </ion-avatar>
-            <ion-item class="searcsh_right">
-                <p>{{comment.users_full_name}} <span>{{comment.creation_date | amTimeAgo:true}}</span></p>
-                <p class="user_deg">{{comment.comment}}</p>
-                <div class="comment_action">
-                    <ion-icon (click)="presentActionSheet(comment,idx)" ios="ios-more" md="md-more"></ion-icon>
-                </div>
-            </ion-item>
-        </ion-item>
-      </ion-list>
-    
-    
-    </ion-content>
-    
-    
-    <ion-footer>
-    
-          <ion-toolbar class="msg" color="footer-white">
-                <ion-textarea [(ngModel)]="commentText" rows="1" autoresize placeholder="Type Message Here..."></ion-textarea>
-            <!-- on keyboard open send button -->
-           <button ion-button end small  (click)="sendMessage()" [disabled]="msg === ''" *ngIf="!cambutton">
-             <i class="material-icons" >send</i>
-           </button>
-          </ion-toolbar>
-    </ion-footer>
+  <ion-navbar>
+    <ion-title>Comment</ion-title>
+    <ion-buttons end>
+
+      <button class="dismiss" (click)="dismissComment();">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list *ngFor="let comment of comments;let idx = index;">
+    <ion-item class="comment_wrap">
+      <ion-avatar item-left (click)="OtherFrofileView(comment)">
+
+        <img *ngIf="comment.image!=null && comment.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{comment.image}}"
+          alt="avatar">
+        <img *ngIf="comment.image==null || comment.image==''" src="assets/img/management.png" alt="avatar">
+
+      </ion-avatar>
+      <ion-item class="searcsh_right">
+        <p (click)="OtherFrofileView(comment)">{{comment.users_full_name}}
+          <span>{{comment.creation_date | amTimeAgo:true}}</span>
+        </p>
+        <p class="user_deg">{{comment.comment}}</p>
+        <div *ngIf="comment.user_id==currentuserid" class="comment_action">
+          <ion-icon (click)="presentActionSheet(comment,idx)" ios="ios-more" md="md-more"></ion-icon>
+        </div>
+      </ion-item>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar class="msg" color="footer-white">
+    <ion-input [(ngModel)]="commentText" placeholder="Type Message Here..."></ion-input>
+    <!-- on keyboard open send button -->
+    <button ion-button end small (click)="sendMessage()" [disabled]="commentText == ''" *ngIf="!cambutton">
+      <i class="material-icons">send</i>
+    </button>
+  </ion-toolbar>
+</ion-footer>

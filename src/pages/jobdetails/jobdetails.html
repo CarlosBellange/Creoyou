@@ -20,18 +20,26 @@
     <ion-row *ngFor="let job of jobdetails">
 
 
-      <ion-col class="job_comapny_details" col-12>
-        <img src="{{base_url}}uploads/profileImages/resizedImages/{{job.profile_image}}" alt="Image" />
+      <ion-col class="job_comapny_details" col-12 (click)="OtherProfile(job)">
+        <img *ngIf="job.profile_image!='' && job.profile_image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{job.profile_image}}"
+          alt="Image" />
+        <img *ngIf="job.profile_image=='' || job.profile_image==null" src="assets/img/management.png">
         <h3>{{job.buisness_name}}</h3>
         <h2>{{job.job_title}}</h2>
         <p>
-          <ion-icon ios="ios-locate" md="md-locate"></ion-icon> {{job.city}}, {{job.state}} and {{job.country}}</p>
+          <ion-icon ios="ios-locate" md="md-locate"></ion-icon> {{job.address}}</p>
+
+      </ion-col>
+      <ion-col class="job_content" col-12>
+        <h3>Posted On</h3>
+        <p> {{job.updation_date | date:'fullDate'}}</p>
+
       </ion-col>
 
-
       <ion-col class="job_content" col-12>
-        <h3>{{job.description}}</h3>
-        <p>{{job.job_title}}</p>
+        <h3>Description</h3>
+        <p>{{job.description}}</p>
+
       </ion-col>
 
       <ion-col class="job_content" col-12>
@@ -41,7 +49,7 @@
 
       <ion-col class="job_content" col-12>
         <h3>Required skill</h3>
-        <p>{{job.required_skills}}</p>
+        <p [innerHTML]="job.required_skills"></p>
       </ion-col>
 
       <ion-col class="job_content" col-12>
@@ -56,7 +64,24 @@
 
       <ion-col class="job_content" col-12>
         <h3>Last Date to Apply </h3>
-        <p>{{job.deadline_for_application | date:'fullDate'}} | {{job.deadline_for_application | date:'shortTime'}}</p>
+        <p>{{job.deadline_for_application | date:'fullDate'}}</p>
+      </ion-col>
+      <ion-col class="job_content" col-12>
+        <h3>Country</h3>
+        <p>{{job.country}}</p>
+      </ion-col>
+      <ion-col class="job_content" col-12>
+        <h3>State</h3>
+        <p>{{job.state}}</p>
+      </ion-col>
+      <ion-col class="job_content" col-12>
+        <h3>City</h3>
+        <p>{{job.city}}</p>
+      </ion-col>
+
+      <ion-col class="job_content" col-12>
+        <h3>Keywords</h3>
+        <p>{{job.jkey}}</p>
       </ion-col>
 
     </ion-row>
@@ -67,7 +92,7 @@
 
 <ion-footer>
   <ion-toolbar class="button_bottom_top">
-    <button *ngIf="apply" class="sign-up button button-block button-stable" (click)="applyjob(job)" [disabled]="apply">Already Apply</button>
-    <button *ngIf="!apply" class="sign-up button button-block button-stable" (click)="applyjob()">Apply</button>
+    <button *ngIf="appliedjob == 'Applied'" class="sign-up button button-block button-stable" (click)="applyjob(job)" [disabled]="appliedjob == 'Applied'">Already Applied</button>
+    <button *ngIf="appliedjob == 'Not Applied'" class="sign-up button button-block button-stable" (click)="applyjob()">Apply</button>
   </ion-toolbar>
 </ion-footer>

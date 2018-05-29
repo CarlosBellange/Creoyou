@@ -3,6 +3,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {
+  Content,
   IonicPage,
   NavController,
   NavParams,
@@ -20,7 +21,8 @@ import {
 } from '../../pages/invitefriend/invitefriend';
 import { MessagedetailsPage } from '../../pages/messagedetails/messagedetails';
 import { NewmessagePage } from '../../pages/newmessage/newmessage';
-
+import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -28,7 +30,7 @@ import { NewmessagePage } from '../../pages/newmessage/newmessage';
   templateUrl: 'messages.html',
 })
 export class MessagesPage {
-
+  @ViewChild(Content) content: Content;
   base_url: any;
   connections = [];
   suggestions = [];
@@ -41,6 +43,10 @@ export class MessagesPage {
   archivemessage: any;
   archive: boolean = false;
   inbox: boolean = true;
+  term: string = '';
+  text: string;
+  username: any;
+  showmenu: boolean;
   /* unreadmsg: boolean = false;
   usrmsg: boolean = true; */
 
@@ -51,9 +57,17 @@ export class MessagesPage {
     this.connectiontab = 'connections';
 
     // this.initViewwithData();
+
+  }
+
+  ionViewWillEnter() {
+    this.content.resize();
+    // console.log('reload page');
     this.ShowmessageDetails();
     this.unreadAllMessage();
   }
+
+
 
   ShowmessageDetails() {
     this.messagePageOffset = 0;
@@ -64,22 +78,55 @@ export class MessagesPage {
     };
     this.usermessage = [];
     this.unreadmessage = [];
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(chatparam, 'messageDetails').subscribe((response) => {
       this.remotService.dismissLoader();
       if (response.success == 1) {
+        this.remotService.dismissLoader();
         this.inbox = true;
         if (response.data != null) {
           response.data.userMessages.forEach((item, key, index) => {
-            this.usermessage.push(item);
-            //console.log(response);
+            let g = item.content.toLowerCase();
+            let sub = 'shared profile :';
+
+            if (g.includes(sub)) {
+              let otherpart = g.replace(sub, '');
+              let obj = {
+                'image': item.image,
+                'buisness_name': item.buisness_name,
+                'connection': item.connection,
+                'content': sub,
+                'count': item.count,
+                'creation_date': item.creation_date,
+                'fname': item.fname,
+                'from_userid': item.from_userid,
+                'id': item.id,
+                'lname': item.lname,
+                'status': item.status,
+                'to_userid': item.to_userid,
+                'user_type': item.user_type,
+                'userid': item.userid
+              }
+              this.usermessage.push(obj);
+            }
+            else {
+              this.usermessage.push(item);
+            }
+
           })
+          // console.log(this.usermessage);
           response.data.unseenMessagesofuser.forEach((item, key, index) => {
+
             this.unreadmessage.push(item);
-            //console.log(this.unreadmessage);
+
+            // console.log('ummm', this.unreadmessage);
           })
         }
-      } else {
+      } else if (response.success == 2) {
+        this.remotService.dismissLoader();
+        this.navCtrl.push(LoginPage, { closeapp: true });
+        window.localStorage.clear();
+        this.showmenu = false;
         this.remotService.presentToast(response.message);
       }
     }, () => {
@@ -97,22 +144,16 @@ export class MessagesPage {
       limit: this.messagePageOffset,
       token: window.localStorage['token'],
     };
-    // console.log(chatparam);
     this.remotService.postData(chatparam, 'messageDetails').subscribe((response) => {
 
       infiniteScroll.complete();
-      // console.log(response);
       if (response.success == 1) {
 
         if (response.data != null) {
           response.data.userMessages.forEach((item, key, index) => {
             this.usermessage.push(item);
-            // console.log(this.usermessage);
+
           })
-          /*  response.data.unseenMessagesofuser.forEach((item, key, index) => {
-             this.unreadmessage.push(item);
-             console.log(this.unreadmessage);
-           }) */
         }
 
       } else {
@@ -133,13 +174,18 @@ export class MessagesPage {
     //over ridding back button
     this.navBar.backButtonClick = () => {
 
+      //   this.navParams.get("parentPage").initViewwithconnectionsdata();
       this.events.publish('creoyou:showmenu');
-      this.navCtrl.pop()
+      this.navCtrl.setRoot(HomePage)
     }
-    console.log('ionViewDidLoad MessagesPage');
+    //console.log('ionViewDidLoad MessagesPage');
   }
 
   messageDetails(usermsg) {
+    this.username = usermsg.fname + ' ' + usermsg.lname;
+    if (usermsg.buisness_name) {
+      this.username = usermsg.buisness_name;
+    }
     var msgdata = {
       creativeField: '',
       fname: usermsg.fname,
@@ -148,10 +194,9 @@ export class MessagesPage {
       occupation: '',
       user_id: usermsg.userid,
       user_type: usermsg.user_type,
-      users_full_name: usermsg.fname + usermsg.lname
+      users_full_name: this.username
     }
     this.unreadMessage(usermsg);
-    // console.log(msgdata);
     this.navCtrl.push(MessagedetailsPage, { user: msgdata });
   }
 
@@ -195,16 +240,26 @@ export class MessagesPage {
   }
 
   unreadArchriveMsg(event) {
+    if (this.archive == true) {
+      this.text = "Inbox";
+    }
+    else {
+      this.text = "Archived";
+    }
     const actionSheet = this.actionSheetCtrl.create({
       // title: 'Edit your Event',
       buttons: [
         {
-          text: 'Archived',
+          text: this.text,
           role: 'destructive',
           handler: () => {
-            this.archiveMessage();
-            //this.deleteEvent(event);
-            /*  console.log('Destructive clicked'); */
+            if (this.text == 'Archived') {
+              this.archiveMessage();
+            }
+            else {
+              this.inbox = true;
+              this.archive = false;
+            }
           }
         },
       ]
@@ -240,5 +295,29 @@ export class MessagesPage {
       this.remotService.presentToast('Error loading data.');
     });
   }
+
+
+  getItems(ev) {
+    var val = ev.target.value;
+    if (val && val.trim() != '') {
+      this.usermessage = this.usermessage.filter((usermsg) => {
+        if (usermsg.fname) {
+          return (usermsg.fname.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        }
+        else {
+          return (usermsg.buisness_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        }
+
+      })
+    }
+    else {
+      this.ShowmessageDetails();
+    }
+  }
+
+  otherProfile() {
+    // console.log('hiiiii');
+  }
+
 
 }

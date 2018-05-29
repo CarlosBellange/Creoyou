@@ -1,7 +1,7 @@
 <ion-header class="creoyou-header">
 
   <ion-navbar>
-    <ion-title>People filter</ion-title>
+    <ion-title>{{advsearch}} filter</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,17 +10,18 @@
 
 <ion-content class="has-header" padding>
   <!--People -->
-  <ion-list *ngIf="people">
+  <ion-list *ngIf="advsearch=='people'">
     <ion-item>
       <ion-label color="default" floating>Full Name</ion-label>
       <ion-input [(ngModel)]="adname"></ion-input>
     </ion-item>
-    <form [formGroup]="FormadvanceStepOne">
-      <ion-item>
-        <ion-label color="default" floating>Creative Field</ion-label>
-        <ion-input class="input-fld" (click)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
-      </ion-item>
-    </form>
+    <ion-item>
+      <ion-label color="default" floating>Creative Field</ion-label>
+      <!--  <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input> -->
+      <ion-select [(ngModel)]="catid">
+        <ion-option *ngFor="let category of categoriesData" value="{{category.id}}">{{category.cat_name}}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item>
       <ion-label color="default" floating>Company Name</ion-label>
       <ion-input [(ngModel)]="company"></ion-input>
@@ -44,17 +45,20 @@
   </ion-list>
 
   <!--Business-->
-  <ion-list *ngIf="business">
+  <ion-list *ngIf="advsearch=='business'">
     <ion-item>
       <ion-label color="default" floating>Business Name</ion-label>
       <ion-input [(ngModel)]="businessname"></ion-input>
     </ion-item>
-    <form [formGroup]="FormadvanceStepOne">
-      <ion-item>
-        <ion-label color="default" floating>Creative Field</ion-label>
-        <ion-input class="input-fld" (click)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input>
-      </ion-item>
-    </form>
+
+    <ion-item>
+      <ion-label color="default" floating>Creative Field</ion-label>
+      <!--  <ion-input class="input-fld" (tap)="showCategoryModal()" [readonly]=true type="text" formControlName="cfield"></ion-input> -->
+      <ion-select [(ngModel)]="catid">
+        <ion-option *ngFor="let category of categoriesData" value="{{category.id}}">{{category.cat_name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
     <ion-item>
       <ion-label color="default" floating>Country</ion-label>
       <ion-select #country (ngModelChange)='initStates(country.value)' [(ngModel)]="locncountry">
@@ -69,7 +73,7 @@
     </ion-item>
   </ion-list>
   <!--Jobs-->
-  <ion-list *ngIf="jobs">
+  <ion-list *ngIf="advsearch=='job'">
     <ion-item>
       <ion-label color="default" floating>Job Name</ion-label>
       <ion-input [(ngModel)]="jobname"></ion-input>

@@ -1,23 +1,21 @@
 page-aboutme {
-
-
-    .content-background{
-        background:url("../assets/img/background.jpg") no-repeat center fixed;
+    .content-background {
+        background: url("../assets/img/background.jpg") no-repeat center fixed;
         background-size: cover;
         height: 100%;
     }
-    .about_button{
-        button{
-                color: #539eff;
-                box-shadow: 0px 0px 5px #cacaca;
-                padding: 22px 0px;
-            ion-icon{
+    .about_button {
+        button {
+            color: #539eff;
+            box-shadow: 0px 0px 5px #cacaca;
+            padding: 22px 0px;
+            ion-icon {
                 margin-right: 5px;
             }
         }
     }
     ion-col.aobut_content.col {
-        background: rgba(255,255,255,0.8);
+        background: rgba(255, 255, 255, 0.8);
         border-radius: 3px;
         margin-bottom: 5px;
         padding: 10px !important;
@@ -38,8 +36,7 @@ page-aboutme {
             }
         }
     }
-
-    .iconwrap{
+    .iconwrap {
         float: right;
         font-size: 13px;
         background: #1a3262;
@@ -58,7 +55,7 @@ page-aboutme {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-    .toolbaricons{
+    .toolbaricons {
         float: right;
     }
     span.addIconWrap {
@@ -79,5 +76,7 @@ page-aboutme {
         font-weight: 600;
         font-size: 1.7rem !important;
     }
-
+    .coma {
+        margin-left: -4px;
+    }
 }

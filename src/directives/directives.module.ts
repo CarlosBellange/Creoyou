@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { TextgrowDirective } from './textgrow/textgrow';
+import { ImgPreloadDirective } from './img-preload/img-preload';
 @NgModule({
-	declarations: [TextgrowDirective],
+	declarations: [],
 	imports: [],
-	exports: [TextgrowDirective]
+	exports: []
 })
-export class DirectivesModule {}
+export class DirectivesModule { }

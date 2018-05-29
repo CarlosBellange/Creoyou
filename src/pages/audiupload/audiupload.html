@@ -1,7 +1,7 @@
 <ion-header class="creoyou-header">
 
   <ion-navbar>
-    <ion-title>Audio Add</ion-title>
+    <ion-title>{{pagetitle}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -14,7 +14,7 @@
     <ion-item class="albumUser">
       <ion-avatar item-left>
         <img *ngIf="userimage!='null' && userimage!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{userimage}}" alt="avatar">
-        <img *ngIf="userimage=='null' || userimage==''" src="/assets/img/management.png" alt="avatar">
+        <img *ngIf="userimage=='null' || userimage==''" src="assets/img/management.png" alt="avatar">
       </ion-avatar>
       <p class="EventUser">{{userFullname}}</p>
     </ion-item>
@@ -51,6 +51,6 @@
 
 <ion-footer>
   <ion-toolbar class="button_bottom_top">
-    <button class="sign-up button button-block button-stable" (click)="uploadAudio()" [disabled]="audiotitle==''">Save</button>
+    <button class="sign-up button button-block button-stable" (click)="uploadAudio()">Save</button>
   </ion-toolbar>
 </ion-footer>

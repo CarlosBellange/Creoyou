@@ -1,12 +1,13 @@
 <ion-content>
-  <ion-row class="User_profile_wrap" [style.backgroundImage]="'url('+base_url+'uploads/backgroundImages/'+progileinfo.background_image+')'">
+
+  <ion-row class="User_profile_wrap" [style.backgroundImage]="'url('+bgimage+')'">
+
+
     <ion-col col-5>
       <div class="prifile_image_box ">
         <div class="prifile_image">
-          <img *ngIf="progileinfo.image!=null && progileinfo.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{progileinfo.image}}"
-            alt="avatar">
-          <img *ngIf="progileinfo.image==null || progileinfo.image==''" src="/assets/img/management.png" alt="avatar">
-
+          <img *ngIf="progileinfo.image!=null && progileinfo.image!=''" src="{{base_url}}uploads/profileImages/resizedImages/{{progileinfo.image}}">
+          <img *ngIf="progileinfo.image==null || progileinfo.image==''" src="assets/img/management.png">
         </div>
         <div *ngIf="progileinfo.premium_user==1" class="premimum_badge"></div>
         <button class="attach_photo" (click)="addImage()">
@@ -15,32 +16,71 @@
       </div>
     </ion-col>
     <ion-col col-7 class="user_title">
-      <h2>
-        {{progileinfo.fname}} {{progileinfo.lname}}
-      </h2>
-      <p *ngIf="progileinfo.cat_name !== ''">{{progileinfo.cat_name}}</p>
-      <p *ngIf="progileinfo.country !== '' && progileinfo.country !== null ">
-        {{progileinfo.country}}, {{progileinfo.state}}
-      </p>
+      <div *ngIf="progileinfo.user_type==1">
+        <h2>
+          {{progileinfo.fname}} {{progileinfo.lname}}
+        </h2>
+        <p *ngIf="progileinfo.cat_name !== ''">{{progileinfo.cat_name}}</p>
+        <p>
+          <span *ngIf="progileinfo.city">{{progileinfo.city}}</span>
+          <span class="coma" *ngIf="progileinfo.city && progileinfo.state">,</span>
+          <span *ngIf="progileinfo.state">{{progileinfo.state}}</span>
+          <span class="coma" *ngIf="progileinfo.country && progileinfo.state || progileinfo.country && progileinfo.city">,</span>
+          <span *ngIf="progileinfo.country">{{progileinfo.country}}</span>
+
+        </p>
+        <p *ngIf="progileinfo.premium_user==1">
+          {{progileinfo.website_url | slice:0:20}}
+          <span *ngIf="progileinfo.website_url.length>20">...</span>
+        </p>
+      </div>
+
+      <div *ngIf="progileinfo.user_type==2">
+        <h2>
+          {{progileinfo.buisness_name}}
+        </h2>
+        <p *ngIf="progileinfo.cat_name !== ''">{{progileinfo.cat_name}}</p>
+        <p>
+          <span *ngIf="progileinfo.city">{{progileinfo.city}}</span>
+          <span class="coma" *ngIf="progileinfo.city && progileinfo.state">,</span>
+          <span *ngIf="progileinfo.state">{{progileinfo.state}}</span>
+          <span class="coma" *ngIf="progileinfo.country && progileinfo.state || progileinfo.country && progileinfo.city">,</span>
+          <span *ngIf="progileinfo.country">{{progileinfo.country}}</span>
+
+
+
+        </p>
+        <p *ngIf="progileinfo.user_address  && progileinfo.premium_user==1">
+          {{progileinfo.user_address | slice: 0: 20}}
+          <span *ngIf="progileinfo.user_address.length>20">...</span>
+        </p>
+
+        <p *ngIf="progileinfo.premium_user==1">
+          {{progileinfo.website_url | slice: 0: 20}}
+          <span *ngIf="progileinfo.website_url.length>20">...</span>
+        </p>
+      </div>
     </ion-col>
+
+
 
     <ion-col col-6>
       <div class="Progress">
-        <h2>Profile Status</h2>
+        <h2>Profile Strength</h2>
         <div class="progress_container">
           <p>{{progileinfo.completenessPercentage}}%</p>
           <round-progress [current]="progileinfo.completenessPercentage" [max]="maxprogress" [color]="'#006400'" [background]="'#ffffff'"
             [radius]="20" [stroke]="5" [semicircle]="false" [rounded]="true" [clockwise]="true" [responsive]="true" [duration]="800"
-            [animation]="'easeInOutQuart'" [animationDelay]="0"></round-progress>
+            [animation]="'easeInOutQuart'" [animationDelay]="0" (click)="profilecomplite()"></round-progress>
         </div>
-        <button class="">Complete Profile</button>
+        <button class="" (click)="profilecomplite()">Complete Profile</button>
       </div>
     </ion-col>
     <ion-col col-6>
       <div class="Upgrade">
         <h2>Upgrade</h2>
-        <img src="assets/img/Upgrade_logo.png" class="update_logo">
-        <button class="">People Visited Your Profile</button>
+        <img img-preloader="assets/img/Upgrade_logo.png" class="update_logo" (click)="getPremiumDetails()">
+        <button class="" (click)="VisitedProfile(progileinfo)">{{progileinfo.countViews}} People Visited Your Profile</button>
       </div>
     </ion-col>
 
@@ -70,7 +110,19 @@
     </ion-item>
   </ion-list>
 
-  <ion-row *ngIf="statusimage!='' || statustags?.length > 0" class="HomePost">
+
+
+  <ion-row *ngIf="statusimage!='' || statustags?.length > 0 || statusprivacytext!=''" class="HomePost">
+
+    <ion-col *ngIf="statusprivacytext!=''" col-12 text-center>
+      <div class="image_view ">
+        <div>
+          {{statusprivacytext}}
+        </div>
+      </div>
+    </ion-col>
+
+
     <ion-col *ngIf="statusimage!=''" col-12 text-center>
       <div class="image_view ">
         <div>
@@ -81,6 +133,7 @@
         </button>
       </div>
     </ion-col>
+
     <ion-col *ngIf="statustags?.length > 0" col-12 text-center>
       <ion-item *ngIf="statustags?.length > 0">
         <p class="Post_tag statustags">
@@ -125,22 +178,25 @@
 
   </ion-row>
 
-  <ion-row *ngFor="let item of homeData">
+  <ion-row *ngFor="let item of homeData; let i=index">
+
+
     <ion-col>
       <div class="post_wrap">
         <ion-list class="post_header">
           <ion-item class="" padding-horizontal>
             <ion-avatar class="person-pic" item-left>
-              <img src="{{base_url}}uploads/profileImages/resizedImages/{{item.image}}" alt="avatar">
+              <img *ngIf="item.image" src="{{base_url}}uploads/profileImages/thumbnailImages/{{item.image}}">
+              <img *ngIf="item.image==null || item.image==''" src="assets/img/management.png">
             </ion-avatar>
 
             <ion-item class="status-check2">
               <p class="Completed" text-center>
                 <span>{{item.users_full_name}}</span>
                 {{item.incident_name}}</p>
-              <span>06 October 2017 at 5:53pm</span>
+              <span>{{item.creation_date | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}</span>
             </ion-item>
-            <div class="post_action">
+            <div class="post_action" *ngIf="item.incident_type==='Status' || item.incident_type==='Profile'">
               <ion-icon (click)="presentActionSheet(item)" ios="ios-more" md="md-more"></ion-icon>
             </div>
           </ion-item>
@@ -149,70 +205,118 @@
         <ion-list class="post_body">
           <ion-item *ngIf="item.incident_type==='Status'">
             <p>{{item.user_status}}</p>
-
-            <img *ngIf="item.media_name!=''" src="{{base_url}}uploads/statusMedia/{{item.media_name}}?t={{milliseconds}}" alt="Post Img"
+            <img *ngIf="item.media_name!=''" (click)="zoomStatusImage(item)" img-preloader="{{base_url}}uploads/statusMedia/{{item?.media_name}}?t={{milliseconds}}"
             />
-
           </ion-item>
-          <ion-item *ngIf="item.incident_type==='Event'">
+          <ion-item class="event_info" *ngIf="item.name" (click)="eventDetails(item)">
+            <span class="title" *ngIf="item.name">{{item.name | slice:0:20}}
+              <span *ngIf="item.name.length>20">...</span>
+            </span>from
+            <span *ngIf="item.start_date_time">{{item.start_date_time | amDateFormat:'MMMM Do YYYY, h:mm a'}} to</span>
+            <span *ngIf="item.end_date_time">{{item.end_date_time | amDateFormat:'MMMM Do YYYY, h:mm a'}} at</span>
+            <span *ngIf="item.location">{{item.location}}</span>
+          </ion-item>
+          <ion-item *ngIf="item.incident_type==='Event'" (click)="eventDetails(item)">
             <p>{{item.user_status}}</p>
-
-            <img *ngIf="item.event_image!=''" src="{{base_url}}uploads/eventsImages/{{item.event_image}}" alt="Post Img" />
-
+            <img *ngIf="item.event_image!=''" img-preloader="{{base_url}}uploads/eventsImages/{{item?.event_image}}" />
+            <img *ngIf="item.event_image=='' || item.event_image==null" src="assets/img/management.png" alt="avatar">
+            <div class="EventDetails">
+              {{item?.description | slice:0:113}}
+              <span *ngIf="item.description.length>110">.....</span>
+            </div>
           </ion-item>
+          <a *ngIf="item.incident_type==='Event'" (click)="addtocalendarEvent(item)">Add to calendar</a>
 
           <ion-item *ngIf="item.incident_type==='Profile'">
-            <img src="{{base_url}}uploads/profileImages/{{item.incident_details}}" alt="Post Img" />
+            <img img-preloader="{{base_url}}uploads/profileImages/{{item.incident_details}}" (click)="zoomProfileImage(item)" />
+
 
           </ion-item>
           <ion-item *ngIf="item.incident_type==='Image'">
 
-            <span *ngFor="let albumimage of item.image_details">
-              <img src="{{base_url}}uploads/portfolioImages/{{albumimage.image_name}}" alt="Post Img" />
-            </span>
+            <ion-row *ngIf="item.image_count>3">
+              <ion-col col-6 class="four_img" *ngFor="let albumimage of item.image_details; let i=index">
+                <img *ngIf="i<4" img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage?.image_name}}" (click)="gotoPhotoView(albumimage)"
+                />
+                <i *ngIf="i==3 && item.image_count>4" class="last_img"> + {{item.image_count-4}} </i>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="item.image_count==2">
+              <ion-col col-6 class="four_img" *ngFor="let albumimage of item.image_details; let i=index">
+                <img img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage?.image_name}}" (click)="gotoPhotoView(albumimage)" />
+
+              </ion-col>
+            </ion-row>
+
+
+            <ion-row *ngIf="item.image_count==3">
+              <ion-col col-6 class="four_img" [class.remove]="i==2" *ngFor="let albumimage of item.image_details; let i=index">
+                <img *ngIf="i<2" img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage?.image_name}}" (click)="gotoPhotoView(albumimage)"
+                />
+              </ion-col>
+              <ion-col col-12 [class.remove]="i==0 || i==1" [class.threeimage]="i==2" [ngClass]="(albumimage?.image_name) ? 'img_loaded' : 'img_loader'"
+                *ngFor="let albumimage of item.image_details; let i=index">
+                <img *ngIf="i==2" src="{{base_url}}uploads/portfolioImages/{{albumimage?.image_name}}" (click)="gotoPhotoView(albumimage)"
+                />
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="item.image_count==1">
+              <ion-col class="album_singel" col-12 *ngFor="let albumimage of item.image_details; let i=index" (click)="gotoPhotoView(albumimage)">
+                <img img-preloader="{{base_url}}uploads/portfolioImages/{{albumimage?.image_name}}" />
+              </ion-col>
+            </ion-row>
 
           </ion-item>
           <ion-item *ngIf="item.incident_type==='Audio';">
 
-            <audio-track #audio *ngFor="let track of item.myTracks" [track]="track" (onFinish)="onTrackFinished($event)">
+            <audio-track #audio *ngFor="let track of item.myTracks" [track]="track" (click)=playThisTrack($event,track)>
               <ion-item>
-                <ion-thumbnail item-left>
-                  <img src="assets/img/audio_new.png">
-                  <audio-track-play dark [audioTrack]="audio">
-                    <ion-spinner></ion-spinner>
-                  </audio-track-play>
+                <ion-thumbnail item-left class="audio_action">
+                  <img img-preloader="assets/img/audio_new.png">
+                  <ion-icon name="play" *ngIf="track.select"></ion-icon>
+                  <ion-icon name="pause" *ngIf="!track.select"></ion-icon>
                 </ion-thumbnail>
                 <div item-content style="width:100%">
                   <p>
-                    <strong>{{audio.title}}</strong> ⚬
-                    <em>{{audio.artist}}</em>
+                    <strong (click)="audiodetails(item)">{{audio.title | slice:0:15}}
+                      <span *ngIf="audio?.title?.length>15">.....</span>
+                    </strong>
                   </p>
-                  <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'hidden'}"></audio-track-progress-bar>
+                  <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'show'}"></audio-track-progress-bar>
                 </div>
               </ion-item>
             </audio-track>
-            <!-- {{item.test}}        -->
           </ion-item>
 
-          <ion-item *ngIf="item.incident_type==='You Tube';">
+          <ion-item *ngIf="item.incident_type==='You Tube'">
 
-            <iframe width="100%" src="{{item.video_name}}" frameborder="0 " allowfullscreen></iframe>
+            <iframe width="100%" [src]="_DomSanitizer.bypassSecurityTrustResourceUrl(item?.video_name)" frameborder="0 " donotallowfullscreen></iframe>
+
 
           </ion-item>
 
           <ion-item *ngIf="item.incident_type==='Video'">
+            <p text-center (click)="videodetails(item)">{{item.video_title | slice:0:20}}
+              <span *ngIf="item?.video_title?.length>20">.....</span>
+            </p>
 
-            <video poster="{{base_url}}uploads/portfolioVideoSnapshots/{{item.snapshot_name}}" controls="controls" preload="metadata"
-              webkit-playsinline="webkit-playsinline" class="videoPlayer">
-              <source src="{{base_url}}uploads/portfolioVideos/{{item.video_name}}" type="video/mp4" />
-            </video>
+            <div (tap)="playvideo(item.video_name)">
+              <img src="{{base_url}}uploads/portfolioVideoSnapshots/{{item.snapshot_name}}" />
+            </div>
+            <img (tap)="playvideo(item.video_name)" class="play_img" src="assets/img/play.svg" width="50px">
+            <!-- <video #videoPlayer (click)="playvideo(item.video_name)" controls="controls" poster="{{base_url}}uploads/portfolioVideoSnapshots/{{item?.snapshot_name}}"
+              preload="metadata" webkit-playsinline="webkit-playsinline" class="videoPlayer">
+              <source src="{{base_url}}uploads/portfolioVideos/{{item?.video_name}}" type="video/mp4" />
+            </video> -->
 
           </ion-item>
           <ion-item *ngIf="item.tagged_to?.length > 0">
             <p class="Post_tag">
               With
               <span *ngFor="let tagitem of item.tagged_to;let idx = index">
-                <span *ngIf="idx<2">{{tagitem.name}}
+                <span *ngIf="idx<2">{{tagitem?.name}}
                   <span *ngIf="idx<(item.tagged_to?.length-1)">,</span>
                 </span>
               </span>
@@ -223,6 +327,7 @@
 
             </p>
           </ion-item>
+
 
         </ion-list>
 
@@ -235,7 +340,7 @@
             <ion-icon ios="ios-text" md="md-text"></ion-icon>
             <span>{{item.comments}}</span>
           </ion-col>
-          <ion-col (click)="shareThisPost(item);" col-4>
+          <ion-col (click)="shareThisPost(item);" col-4 *ngIf="item.privacy==1">
             <ion-icon ios="ios-share" md="md-share"></ion-icon>
           </ion-col>
         </ion-row>

@@ -57,7 +57,23 @@ page-home {
     }
     .User_profile_wrap {
         background-size: cover;
-        background-position: center
+        background-position: center;
+        padding: 10px 0px;
+        position: relative;
+        ion-col {
+            position: relative;
+            z-index: 1;
+        }
+    }
+    ion-row.User_profile_wrap::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background: rgba(0, 0, 0, 0.5);
     }
     .user_title {
         h2 {
@@ -69,6 +85,9 @@ page-home {
         p {
             color: #fff;
             margin: 0px;
+            font-size: 15px;
+            text-shadow: 0px 1px 3px #4d4d4d;
+            line-height: 18px;
         }
     }
     .Progress {
@@ -89,7 +108,7 @@ page-home {
             display: block;
             border: 2px solid #fff;
             width: 100%;
-            min-height: 40px;
+            min-height: 45px;
             margin-top: 5px;
         }
     }
@@ -111,8 +130,9 @@ page-home {
             display: block;
             border: 2px solid #fff;
             width: 100%;
-            min-height: 40px;
+            min-height: 45px;
             margin-top: 5px;
+            line-height: 16px;
         }
         .update_logo {
             margin: 0 auto;
@@ -159,6 +179,7 @@ page-home {
         margin: -50px auto 0px;
         border: none !important;
         transition: none !important;
+        font-size: 15px;
     }
     .what_your_mind ion-textarea {
         resize: none;
@@ -175,14 +196,16 @@ page-home {
             padding: 10px 0px;
             font-weight: 500;
             border-radius: 3px;
-            margin-top: 0px;
             font-size: 13px;
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         button i {
-            vertical-align: middle;
             font-size: 15px;
             color: #05074A;
+            margin-right: 3px;
         }
     }
     ion-content {
@@ -214,15 +237,17 @@ page-home {
             margin: 5px 8px 5px 0 !important;
             p {
                 text-align: left !important;
-                color: #2a94ce;
-                font-size: 4vw;
+                color: #5c5c5c;
+                font-size: 1.4rem;
+                line-height: 17px;
                 span {
-                    color: #5c5c5c;
+                    color: #2a94ce;
+                    font-size: 1.4rem;
                 }
             }
             span {
-                font-size: 12px;
                 color: #959595;
+                font-size: 12px;
             }
         }
         .item {
@@ -431,5 +456,167 @@ page-home {
         color: #1a3262 !important;
         background: rgba(255, 255, 255, 0.5) !important;
         opacity: 1 !important;
+    }
+    .two_img {
+        img {
+            width: 50%;
+            height: 150px;
+            float: left;
+        }
+    }
+    .three_img {
+        .one_img {
+            width: 50%;
+            float: left;
+            display: inline-block;
+            img {
+                height: 300px;
+            }
+        }
+        .other_two {
+            width: 50%;
+            display: inline-block;
+            img {
+                height: 150px;
+                display: block;
+            }
+        }
+    }
+    .four_img {
+        padding: 0px;
+        img {
+            width: 100%;
+            display: inline-block;
+            height: 150px;
+            display: block;
+        }
+        .last_img {
+            background: rgba(8, 8, 8, 0.01) none repeat scroll 0 0;
+            color: #fff !important;
+            font-size: 33px;
+            left: 0;
+            padding: 0px 0;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            z-index: 99;
+            height: 100%;
+            font-style: normal;
+            line-height: 155px;
+            top: 0;
+        }
+        .last_img::after {
+            background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+            top: 0;
+            color: #fff !important;
+            content: attr(value);
+            font-size: 33px;
+            left: 0;
+            padding: 0px 0;
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            font-style: normal;
+            line-height: 155px;
+            z-index: -1;
+        }
+    }
+    .remove.col {
+        display: none;
+    }
+    .threeimage {
+        padding: 0px;
+        img {
+            height: 150px;
+            width: 100%;
+        }
+    }
+    video.videoPlayer {
+        width: 100%;
+        height: 300px;
+    }
+    .post_body>a {
+        display: block;
+        margin: 8px 16px;
+        font-size: 16px;
+    }
+    .item-inner {
+        border-bottom: none !important;
+    }
+    .event_info ion-label {
+        white-space: normal;
+        color: #676767;
+        font-size: 1.4rem;
+        line-height: 18px;
+        .title {
+            color: #1a3262;
+            font-weight: 600;
+            font-size: 1.6rem;
+        }
+    }
+    .audio_action {
+        position: relative;
+        ion-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 21px;
+            color: #f9f9f9;
+            background: rgba(26, 50, 98, .9);
+            height: 38px;
+            width: 38px;
+            text-align: center;
+            border-radius: 50%;
+            margin-left: -19px;
+            margin-top: -19px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        audio-track-progress-bar {
+            display: flex;
+            justify-content: space-around;
+            margin: 10px 0px;
+            align-items: center;
+        }
+    }
+    .label-md>img {
+        margin: 0 auto;
+        display: block;
+    }
+    .singel_img img {
+        margin: 0 auto;
+        display: block;
+        width: auto;
+        height: auto;
+    }
+    .img_loader img {
+        margin: 0 auto;
+        display: block;
+        width: auto;
+        height: auto;
+    }
+    ion-spinner * {
+        width: 28px;
+        height: 28px;
+        stroke: #444;
+        fill: #222;
+    }
+    .EventDetails {
+        margin-top: 10px;
+    }
+    img.play_img {
+        width: 50px !important;
+        position: absolute;
+        z-index: 9;
+        top: 50%;
+        left: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        height: auto
+    }
+    .coma {
+        margin-left: -3px;
     }
 }

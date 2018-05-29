@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { AbouteditPage } from './aboutedit';
 
 @NgModule({
-  declarations: [
-    AbouteditPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(AbouteditPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class AbouteditPageModule {}
+export class AbouteditPageModule { }

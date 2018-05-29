@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { AudiuploadPage } from './audiupload';
 
 @NgModule({
-  declarations: [
-    AudiuploadPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(AudiuploadPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class AudiuploadPageModule {}
+export class AudiuploadPageModule { }

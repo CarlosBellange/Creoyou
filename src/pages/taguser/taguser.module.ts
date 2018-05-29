@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { TaguserPage } from './taguser';
 
 @NgModule({
-  declarations: [
-    TaguserPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(TaguserPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class TaguserPageModule {}
+export class TaguserPageModule { }

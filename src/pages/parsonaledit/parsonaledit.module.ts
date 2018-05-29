@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { ParsonaleditPage } from './parsonaledit';
 
 @NgModule({
-  declarations: [
-    ParsonaleditPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(ParsonaleditPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class ParsonaleditPageModule {}
+export class ParsonaleditPageModule { }

@@ -5,4 +5,4 @@ import { TimeagoPipe } from './timeago/timeago';
 	imports: [],
 	exports: [TimeagoPipe]
 })
-export class PipesModule {}
+export class PipesModule { }

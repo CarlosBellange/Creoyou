@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { EventcreatePage } from './eventcreate';
 
 @NgModule({
-  declarations: [
-    EventcreatePage,
-  ],
-  imports: [
-    IonicPageModule.forChild(EventcreatePage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class EventcreatePageModule {}
+export class EventcreatePageModule { }

@@ -1,38 +1,36 @@
+<ion-header class="creoyou-header">
 
-<ion-header>
-    
-      <ion-navbar>
+    <ion-navbar>
         <ion-title>Compose</ion-title>
-      </ion-navbar>
-      
-        <ion-toolbar class="chatSearch" >
-          <ion-searchbar placeholder="Search for people ..." ></ion-searchbar>
-        </ion-toolbar>
-    
-    </ion-header>
-    
-    
-    <ion-content padding>
-    
-    
-        <ion-list>
-            
-              <ion-item>
-                <ion-input placeholder="To" type="text" value=""></ion-input>
-              </ion-item>
-    
-              <ion-item>
-                  <ion-textarea rows="5" placeholder="Type you Messages here ..."></ion-textarea>
-              </ion-item>
-    
-    
-        </ion-list>
-       
-    
-    </ion-content>
-    <ion-footer>
-        <ion-toolbar class="button_bottom_top">
-            <a class="sign-up button button-block button-stable" ui-sref="common.login">SEND</a>
-        </ion-toolbar>
-    </ion-footer>
-    
+    </ion-navbar>
+
+    <ion-toolbar class="chatSearch">
+        <ion-searchbar placeholder="Search for people ..." (click)="searchConnection()"></ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+    <ion-list>
+
+        <ion-item>
+            <ion-input placeholder="To" type="text" [(ngModel)]="username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-textarea rows="5" placeholder="Type you Messages here ..." [(ngModel)]="messageText"></ion-textarea>
+        </ion-item>
+
+
+    </ion-list>
+
+
+</ion-content>
+<ion-footer>
+    <ion-toolbar class="button_bottom_top">
+        <a class="sign-up button button-block button-stable" ui-sref="common.login" (click)="sendMessage()">SEND</a>
+    </ion-toolbar>
+</ion-footer>

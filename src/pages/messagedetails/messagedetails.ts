@@ -1,10 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, ActionSheetController, Events, Navbar, ModalController } from 'ionic-angular';
+import {
+  Component, ViewChild, ViewChildren,
+  QueryList,
+  ElementRef
+} from '@angular/core';
+import { IonicPage, NavController, Content, NavParams, ActionSheetController, Events, Navbar, ModalController, App } from 'ionic-angular';
 
 import {
   RemoteServiceProvider
 } from '../../providers/remote-service/remote-service';
 import { MessagesPage } from '../messages/messages';
+import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -18,21 +24,22 @@ export class MessagedetailsPage {
   messages: any;
   currentuserid: any;
   @ViewChild(Content) content: Content;
-  messageText: string;
+  messageText: string = '';
   lastmessageid = 0;
   messageCallInterval = null;
   @ViewChild(Navbar) navBar: Navbar;
+  @ViewChildren('grabid') grabid: QueryList<any>;
   archived = 'Archived';
+  blockeduser: any;
+  data: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events, public apex: App,
     public actionSheetCtrl: ActionSheetController, public remotService: RemoteServiceProvider, public modalCtrl: ModalController) {
 
     this.base_url = this.remotService.site_url;
     this.user = navParams.get('user');
     this.currentuserid = window.localStorage['userid'];
     this.initchatMessages();
-
-
     if (this.user && this.user.hasOwnProperty('archive')) {
       this.archived = 'Un Archived';
       this.initchatMessages();
@@ -49,20 +56,21 @@ export class MessagedetailsPage {
     };
     if (this.lastmessageid == 0)
       this.messages = [];
-    // this.remotService.presentLoading("Wait ...");
+    // this.remotService.presentLoading();
     this.remotService.postData(chatparam, 'showFullchat').subscribe((response) => {
       if (response.success == 1) {
 
         if (response.data != null) {
-
           response.data.forEach((item, key, index) => {
 
             this.messages.push(item);
+            //console.log(this.messages);
             this.lastmessageid = item.id;
+            this.blockeduser = item.user_status;
+            //console.log(this.blockeduser);
           })
 
         }
-        this.scrollToBottom();
 
       } else {
         this.remotService.presentToast(response.message);
@@ -76,7 +84,7 @@ export class MessagedetailsPage {
 
   ionViewDidLoad() {
     this.messageCallInterval = setInterval(() => {
-      console.log('time int');
+      // console.log('time int');
       this.initchatMessages();
     }, 4000);
 
@@ -84,7 +92,8 @@ export class MessagedetailsPage {
       clearInterval(this.messageCallInterval);
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad MessagedetailsPage');
+    this.scrollToBottom();
+    // console.log('ionViewDidLoad MessagedetailsPage');
   }
 
   sendMessage() {
@@ -169,7 +178,7 @@ export class MessagedetailsPage {
     }
     this.remotService.postData(unreadData, 'deleteMessages').subscribe((response) => {
       if (response.success == 1) {
-        this.initchatMessages();
+        this.messages = [];
       }
     }, () => {
       this.remotService.presentToast('Error loading data.');
@@ -183,7 +192,7 @@ export class MessagedetailsPage {
       to_userid: this.user.user_id
     }
     this.remotService.postData(unreadData, 'ArchieveMessages').subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.success == 1) {
         this.navCtrl.push(MessagesPage);
       }
@@ -199,7 +208,7 @@ export class MessagedetailsPage {
       to_userid: this.user.user_id
     }
     this.remotService.postData(unreadData, 'unarchieveMessages').subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.success == 1) {
         this.navCtrl.push(MessagesPage);
       }
@@ -209,17 +218,34 @@ export class MessagedetailsPage {
   }
 
   scrollToBottom() {
-    // use the content's dimension to obtain the current height of the scroll
-    let dimension = this.content.getContentDimensions();
-    if (this.content != null) {
-
+    if (this.content) {
+      // use the content's dimension to obtain the current height of the scroll
+      let dimension = this.content.getContentDimensions();
       // scroll to it (you can also set the duration in ms by passing a third parameter to the scrollTo(x,y,duration) method.
       this.content.scrollTo(0, dimension.scrollHeight);
-
     } else {
 
     }
 
+  }
+  OtherFrofileView(event, msgindex) {
+
+    this.grabid.forEach((i: ElementRef, index) => {
+      if (msgindex == index) {
+        this.data = {
+          user_id: i.nativeElement.childNodes[1].classList[1]
+        }
+        if (this.currentuserid == this.data.user_id) {
+          this.apex.getRootNav().setRoot(HomePage);
+        }
+        else {
+          this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': this.data });
+        }
+      }
+    })
+  }
+  ionViewWillLeave() {
+    clearInterval(this.messageCallInterval);
   }
 
 }

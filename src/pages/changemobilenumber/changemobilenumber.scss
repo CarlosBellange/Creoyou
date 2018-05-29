@@ -1,0 +1,92 @@
+page-changemobilenumber {
+    .content-background {
+        background: url("../assets/img/background.jpg") no-repeat center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+    .input-fld {
+        background: rgba(22, 31, 80, 0.74) none repeat scroll 0 0;
+        border: medium none !important;
+        border-radius: 3px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+        display: block;
+        margin-bottom: 5px;
+        padding: 0 0.6em;
+    }
+    .mobile-code {
+        max-width: 100%;
+        background: rgba(22, 31, 80, 0.74) none repeat scroll 0 0;
+        border: medium none !important;
+        border-radius: 3px !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+        display: block;
+        margin-bottom: 0px;
+        padding: 1.2rem;
+        .select-icon {
+            float: right;
+        }
+    }
+    .mobile-code>.select-text {
+        float: left;
+        color: #fff;
+    }
+    ion-spinner {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        position: absolute;
+        top: 13px;
+        right: 13px;
+        fill: #fff;
+    }
+    .accepted_icon {
+        background: #193665;
+        width: 95px;
+        height: 95px;
+        border-radius: 50px;
+        margin: 0px auto 15px;
+        box-shadow: 0 0 16px rgba(17, 50, 95, 0.75);
+        display: block;
+    }
+    .accepted_icon img {
+        display: block;
+        float: left;
+        height: auto;
+        margin: 24px;
+        width: 7vmax;
+    }
+    .text-input::-moz-placeholder {
+        color: white;
+    }
+    .text-input:-ms-input-placeholder {
+        color: white;
+    }
+    .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        color: white;
+    }
+    .text-input-md {
+        color: #fff;
+    }
+    .spinner-container {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+    .dismiss {
+        background: transparent;
+        color: #fff;
+        font-size: 16px;
+    }
+    .content-background {
+        background: url("../assets/img/background.jpg") no-repeat center fixed;
+        background-size: cover;
+        height: 100%;
+    }
+    ion-searchbar {
+        background-color: #1a3262 !important;
+    }
+    .button-md {
+        background-color: #1a3262;
+    }
+}

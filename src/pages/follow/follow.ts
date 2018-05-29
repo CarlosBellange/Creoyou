@@ -1,113 +1,121 @@
-import { Component,ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams,Events ,Navbar,ActionSheetController} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Content, IonicPage, NavController, NavParams, Events, Navbar, ActionSheetController } from 'ionic-angular';
 
 import {
   RemoteServiceProvider
 } from '../../providers/remote-service/remote-service';
 import { InvitefriendPage } from '../../pages/invitefriend/invitefriend';
+import { OtherprofilePage } from '../../pages/otherprofile/otherprofile';
 
 @IonicPage()
 @Component({
   selector: 'page-follow',
   templateUrl: 'follow.html',
 })
+
 export class FollowPage {
-
-  base_url : any;
+  @ViewChild(Content) content: Content;
+  base_url: any;
   @ViewChild(Navbar) navBar: Navbar;
-  followActiveTab:any;
-  followers:any;
-  following:any;
-  followingOffset : any;
-  followerOffset : any;
+  followActiveTab: any;
+  followers: any;
+  following: any;
+  followingOffset: any;
+  followerOffset: any;
+  followingmsg: any;
+  followermsg: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events
+    , public remotService: RemoteServiceProvider, public actionSheetCtrl: ActionSheetController) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public events: Events
-    ,public remotService: RemoteServiceProvider,public actionSheetCtrl: ActionSheetController) {
+    this.base_url = this.remotService.site_url;
+    this.followActiveTab = "following";
+    this.loadFollowings();
+  }
+  ionViewDidEnter() {
+    //console.log("Connection pages entered")
+    this.content.resize();
 
-      this.base_url = this.remotService.site_url;
-      this.followActiveTab   = "following";
-      this.loadFollowings();
   }
 
-
-  loadFollowers(){
-
+  loadFollowers() {
     this.followerOffset = 0;
     var followerParams = {
-      user_id : window.localStorage['userid'],
-      token   : window.localStorage['token'],
-      limit   : this.followerOffset
+      user_id: window.localStorage['userid'],
+      token: window.localStorage['token'],
+      limit: this.followerOffset
     };
 
     this.followers = [];
-   
-    this.remotService.presentLoading("Wait ...");
+
+    this.remotService.presentLoading();
     this.remotService.postData(followerParams, 'followers').subscribe((response) => {
-      
-            this.remotService.dismissLoader();
 
-            if (response.success == 1) {
-      
-              if(response.data!=null){
-                
-                    response.data.forEach((item, key, index) => {
-                      
-                              this.followers.push(item);
-                    })
-                
-              }
-             
+      this.remotService.dismissLoader();
 
-            } else {
-              this.remotService.presentToast(response.message);
-            }
-          }, () => {
-            this.remotService.dismissLoader();
-            this.remotService.presentToast('Error loading data.');
+      if (response.success == 1) {
+
+        if (response.data != null) {
+
+          response.data.forEach((item, key, index) => {
+
+            this.followers.push(item);
+          })
+        }
+        else if (response.data == null) {
+          this.followermsg = 'No Followers';
+        }
+
+
+      } else {
+        this.followermsg = 'No Followers';
+        /*  this.remotService.presentToast(response.message); */
+      }
+    }, () => {
+      this.remotService.dismissLoader();
+      this.remotService.presentToast('Error loading data.');
     });
 
   }
 
-  loadFollowings(){
-    
+  loadFollowings() {
+
     this.followingOffset = 0;
     var followingparams = {
-      user_id : window.localStorage['userid'],
-      token   : window.localStorage['token'],
-      limit   : this.followingOffset
+      user_id: window.localStorage['userid'],
+      token: window.localStorage['token'],
+      limit: this.followingOffset
     };
 
     this.following = [];
-   
-    this.remotService.presentLoading("Wait ...");
+
+    this.remotService.presentLoading();
     this.remotService.postData(followingparams, 'following').subscribe((response) => {
-      
-            this.remotService.dismissLoader();
-            console.log(response);
-            if (response.success == 1) {
-      
-              if(response.data!=null){
+      this.remotService.dismissLoader();
+      //console.log(response);
+      if (response.success == 1) {
 
-                response.data.forEach((item, key, index) => {
-                  
-                         this.following.push(item);
-                })
+        if (response.data != null) {
+          response.data.forEach((item, key, index) => {
+            this.following.push(item);
+          })
 
-              }
-             
-             
+        }
+        else if (response.data == null) {
+          this.followingmsg = 'Not following anyone';
+        }
 
-            } else {
-              this.remotService.presentToast(response.message);
-            }
-          }, () => {
-            this.remotService.dismissLoader();
-            this.remotService.presentToast('Error loading data.');
+      } else {
+        this.followingmsg = 'Not following anyone';
+        /* this.remotService.presentToast(response.message); */
+      }
+    }, () => {
+      this.remotService.dismissLoader();
+      this.remotService.presentToast('Error loading data.');
     });
 
   }
 
-  presentActionSheet(user,type,index) {
+  presentActionSheet(user, type, index) {
     const actionSheet = this.actionSheetCtrl.create({
       //title: 'Edit your post',
       buttons: [
@@ -115,132 +123,155 @@ export class FollowPage {
           text: 'Unfollow',
           role: 'destructive',
           handler: () => {
-            
-            this.remotService.presentToast('wait...');
-            this.remotService.postData({'user_id':user.id,'to_userid':window.localStorage['userid']}, 'unfollowUser').subscribe((response) => {
-              
-                    if (response.success == 1) {
 
-                      if(type==1){
-                        this.following.splice(index, 1); 
-                      }else{
-                        this.followers.splice(index, 1); 
-                      }
+            var unfollowerparams = {
+              user_id: window.localStorage['userid'],
+              to_userid: user.id,
+              token: window.localStorage['token'],
 
-                    
-                    } else {
-                      this.remotService.presentToast(response.message);
-                    }
-                  }, () => {
-                    
-                    this.remotService.presentToast('Error loading data.');
+            };
+
+            this.remotService.presentToast(' You have unfollowed successfully');
+            this.remotService.postData(unfollowerparams, 'unfollowUser').subscribe((response) => {
+
+
+             // console.log(response);
+              if (response.success == 1) {
+
+                if (type == 1) {
+                  this.following.splice(index, 1);
+                } else {
+                  this.followers.splice(index, 1);
+                }
+
+
+              } else {
+                this.remotService.presentToast(response.message);
+              }
+            }, () => {
+
+              this.remotService.presentToast('Error loading data.');
             });
 
           }
         },
-    
+
       ]
     });
 
     actionSheet.present();
   }
 
-  fetchFollowerData(infiniteScroll){
+  fetchFollowerData(infiniteScroll) {
 
-    this.followerOffset = this.followerOffset+15;
+    this.followerOffset = this.followerOffset + 15;
     var followerparams = {
-      user_id : window.localStorage['userid'],
-      token   : window.localStorage['token'],
-      limit   : this.followerOffset
+      user_id: window.localStorage['userid'],
+      token: window.localStorage['token'],
+      limit: this.followerOffset
     };
 
     this.remotService.postData(followerparams, 'followers').subscribe((response) => {
-      
-            infiniteScroll.complete();
-            if (response.success == 1) {
-      
-              if(response.data!=null){
 
-                response.data.forEach((item, key, index) => {
-                  
-                         this.followers.push(item);
-                })
+      infiniteScroll.complete();
+      if (response.success == 1) {
 
-              }
-             
+        if (response.data != null) {
 
-            } else {
-              this.remotService.presentToast(response.message);
-            }
-          }, () => {
-            infiniteScroll.complete();
-            this.remotService.presentToast('Error loading data.');
+          response.data.forEach((item, key, index) => {
+
+            this.followers.push(item);
+          })
+
+        }
+
+
+      } /* else {
+        this.remotService.presentToast(response.message);
+      } */
+    }, () => {
+      infiniteScroll.complete();
+      this.remotService.presentToast('Error loading data.');
     });
 
   }
 
-  fetchFollowingData(infiniteScroll){
+  fetchFollowingData(infiniteScroll) {
 
 
-    this.followingOffset = this.followingOffset+15;
+    this.followingOffset = this.followingOffset + 15;
     var followingparams = {
-      user_id : window.localStorage['userid'],
-      token   : window.localStorage['token'],
-      limit   : this.followingOffset
+      user_id: window.localStorage['userid'],
+      token: window.localStorage['token'],
+      limit: this.followingOffset
     };
 
     this.remotService.postData(followingparams, 'following').subscribe((response) => {
-      
-            infiniteScroll.complete();
-            if (response.success == 1) {
-      
-              if(response.data!=null){
 
-                response.data.forEach((item, key, index) => {
-                  
-                         this.following.push(item);
-                })
+      infiniteScroll.complete();
+      if (response.success == 1) {
 
-              }
-              
+        if (response.data != null) {
 
-            } else {
-              this.remotService.presentToast(response.message);
-            }
-          }, () => {
-            infiniteScroll.complete();
-            this.remotService.presentToast('Error loading data.');
+          response.data.forEach((item, key, index) => {
+
+            this.following.push(item);
+          })
+
+        }
+
+
+      } /* else {
+        this.remotService.presentToast(response.message);
+      } */
+    }, () => {
+      infiniteScroll.complete();
+      this.remotService.presentToast('Error loading data.');
     });
 
   }
 
   ionViewDidLoad() {
 
+
     this.events.publish('creoyou:hidemenu');
-    
-        //over ridding back button
+
+    //over ridding back button
     this.navBar.backButtonClick = () => {
 
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
 
-    console.log('ionViewDidLoad NotificationsPage');
+   // console.log('ionViewDidLoad NotificationsPage');
   }
 
-  segmentChanged(event){
-    
-    if(this.followActiveTab == 'following')
+  segmentChanged(event) {
+
+    if (this.followActiveTab == 'following')
       this.loadFollowings();
-    else 
-      this.loadFollowers();       
+    else
+      this.loadFollowers();
 
   }
 
-  inviteFriend(){
-    
-        this.navCtrl.push(InvitefriendPage);
-       
-      }
+  inviteFriend() {
+
+    this.navCtrl.push(InvitefriendPage);
+
+  }
+
+  OtherProfile(user) {
+    var data = {
+      user_id: user.id
+    }
+    this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
+    //this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data, 'friendcheck': connection.is_friend });
+  }
+
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
+  }
+
 
 }

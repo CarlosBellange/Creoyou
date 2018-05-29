@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { LoginhelpPage } from './loginhelp';
 
 @NgModule({
-  declarations: [
-    LoginhelpPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(LoginhelpPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class LoginhelpPageModule {}
+export class LoginhelpPageModule { }

@@ -13,6 +13,7 @@ import {
   RemoteServiceProvider
 } from '../../providers/remote-service/remote-service';
 import { JobdetailsPage } from '../../pages/jobdetails/jobdetails';
+import { OtherprofilePage } from '../otherprofile/otherprofile';
 
 @IonicPage()
 @Component({
@@ -37,29 +38,45 @@ export class JobsPage {
       adJobStartingLimit: this.addPageOffset,
       token: window.localStorage['token']
     };
-    this.remotService.presentLoading("Wait ...");
+    this.remotService.presentLoading();
     this.remotService.postData(jobsFetchparams, 'allJobs').subscribe((response) => {
-      console.log(response);
+      //console.log(response);
 
       this.remotService.dismissLoader();
       if (response.success == 1) {
-
         var responsejobsData = response.data.allJobs;
         responsejobsData.forEach((item, key, index) => {
-
           let date1: string = item.updation_date;
           let date2: string = this.date;
           let diffInMs: number = Date.parse(date2) - Date.parse(date1);
-          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
-          //console.log(diffInHours);
-          item.time = diffInHours;
+          let difinsec: number = Math.floor(diffInMs / 1000);
+          let diffmin: number = Math.floor(diffInMs / 1000 / 60);
+          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
+          let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
+          let weekindiff: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7);
+          item.second = difinsec;
+          item.minute = diffmin;
+          item.hour = diffInHours;
+          item.days = diffIndays;
+          item.weeks = weekindiff;
           this.jobsData.push(item);
-          console.log(diffInHours);
         })
 
         var responseaddsData = response.data.adJobs;
         responseaddsData.forEach((item, key, index) => {
-
+          let date1: string = item.updation_date;
+          let date2: string = this.date;
+          let diffInMs: number = Date.parse(date2) - Date.parse(date1);
+          let difinsec: number = Math.floor(diffInMs / 1000);
+          let diffmin: number = Math.floor(diffInMs / 1000 / 60);
+          let diffInHours: number = Math.floor(diffInMs / 1000 / 60 / 60);
+          let diffIndays: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24);
+          let weekindiff: number = Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7);
+          item.second = difinsec;
+          item.minute = diffmin;
+          item.hour = diffInHours;
+          item.days = diffIndays;
+          item.weeks = weekindiff;
           this.addsData.push(item);
         })
 
@@ -75,7 +92,6 @@ export class JobsPage {
 
   jobdetails(job) {
     this.navCtrl.push(JobdetailsPage, { jobsparam: job });
-
   }
 
   ionViewDidLoad() {
@@ -88,50 +104,18 @@ export class JobsPage {
       this.events.publish('creoyou:showmenu');
       this.navCtrl.pop()
     }
-    console.log('ionViewDidLoad JobsPage');
+   // console.log('ionViewDidLoad JobsPage');
   }
 
-  fetchjobsData(infiniteScroll) {
 
-    this.jobPageOffset = this.jobPageOffset + 4;
-    this.addPageOffset = this.addPageOffset + 1;
-
-
-    var jobsFetchparams = {
-      user_id: window.localStorage['userid'],
-      jobStartingLimit: this.jobPageOffset,
-      adJobStartingLimit: this.addPageOffset,
-      token: window.localStorage['token']
-    };
-
-    this.remotService.postData(jobsFetchparams, 'allJobs').subscribe((response) => {
-
-      infiniteScroll.complete();
-      if (response.success == 1) {
-
-        var responsejobsData = response.data.allJobs;
-        responsejobsData.forEach((item, key, index) => {
-
-          this.jobsData.push(item);
-        })
-
-        var responseaddsData = response.data.adJobs;
-        responseaddsData.forEach((item, key, index) => {
-
-          this.addsData.push(item);
-        })
-
-      } else {
-        this.remotService.presentToast('Error loading data.');
-      }
-    }, () => {
-      infiniteScroll.complete();
-      this.remotService.presentToast('Error loading data.');
-    });
-
-
-
-
+  OtherProfile(job) {
+    var data = {
+      user_id: job.created_by
+    }
+    this.navCtrl.push(OtherprofilePage, { 'otheruserfrofiledata': data });
+  }
+  ionViewWillLeave() {
+    this.remotService.dismissLoader();
   }
 
 }

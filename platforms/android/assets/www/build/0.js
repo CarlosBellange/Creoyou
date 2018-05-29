@@ -74,7 +74,7 @@ var PopoverpagesPage = (function () {
 }());
 PopoverpagesPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-popoverpages',template:/*ion-inline-start:"D:\Masud Parvej\WGT Project\Creoyou\src\pages\popoverpages\popoverpages.html"*/'<!--\n  Generated template for the PopoverpagesPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>popoverpages</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"D:\Masud Parvej\WGT Project\Creoyou\src\pages\popoverpages\popoverpages.html"*/,
+        selector: 'page-popoverpages',template:/*ion-inline-start:"D:\Masud Parvej\WGT Project\Creoyougit\src\pages\popoverpages\popoverpages.html"*/'<!--\n\n  Generated template for the PopoverpagesPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>popoverpages</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"D:\Masud Parvej\WGT Project\Creoyougit\src\pages\popoverpages\popoverpages.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* NavParams */]])
 ], PopoverpagesPage);

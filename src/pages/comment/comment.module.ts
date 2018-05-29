@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { CommentPage } from './comment';
 
 @NgModule({
-  declarations: [
-    CommentPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(CommentPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class CommentPageModule {}
+export class CommentPageModule { }

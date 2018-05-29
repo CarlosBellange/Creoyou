@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { FeedsPage } from './feeds';
 
 @NgModule({
-  declarations: [
-    FeedsPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(FeedsPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class FeedsPageModule {}
+export class FeedsPageModule { }

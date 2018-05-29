@@ -3,11 +3,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { VideocommentPage } from './videocomment';
 
 @NgModule({
-  declarations: [
-    VideocommentPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(VideocommentPage),
-  ],
+  declarations: [],
+  imports: [],
 })
-export class VideocommentPageModule {}
+export class VideocommentPageModule { }

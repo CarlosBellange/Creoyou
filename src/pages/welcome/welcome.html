@@ -2,7 +2,7 @@
 
     <ion-row class="homeslides">
         <ion-slides pager autoplay="3000" centeredSlides="true">
-            <ion-slide>
+            <ion-slide class="first_slider">
                 <div class="col col-center slider-col">
                     <img src="assets/img/logo.png" class="app_logo">
                     <h3 class="pl_for">A Creative Platform for<br>Creative People</h3>
@@ -11,43 +11,39 @@
 
             <ion-slide>
                 <div class="col col-center slider-col">      	
-                    <h3 class="pl_for">Video page including the website.</h3>
-                    <img src="assets/img/slider-2.png" class="slider_fraim">
+                    <h3 class="pl_for">Your Creative Profile</h3>
+                    <img src="assets/img/welcome2.png" class="slider_fraim">
                 </div>
             </ion-slide>
 
             <ion-slide>
                 <div class="col col-center slider-col">      	
-                    <h3 class="pl_for">Create Your Profile</h3>
-                    <img src="assets/img/slider-3.png" class="slider_fraim">
+                    <h3 class="pl_for">Your creative portfolio</h3>
+                    <img src="assets/img/welcome3.png" class="slider_fraim">
                 </div>
             </ion-slide>
             <ion-slide>
                 <div class="col col-center slider-col">      	
-                    <h3 class="pl_for">Find Opportunities</h3>
-                    <img src="assets/img/slider-4.png" class="slider_fraim">
+                    <h3 class="pl_for">Stay in touch with your  network </h3>
+                    <img src="assets/img/welcome4.png" class="slider_fraim">
                 </div>
             </ion-slide>    
             <ion-slide>
                 <div class="col col-center slider-col">      	
-                    <h3 class="pl_for">Keep in touch with Your Connections</h3>
-                    <img src="assets/img/slider-5.png" class="slider_fraim">
+                    <h3 class="pl_for">Find opportunities in your creative field</h3>
+                    <img src="assets/img/welcome5.png" class="slider_fraim">
                 </div>
             </ion-slide>       
-        </ion-slides>
+        </ion-slides> 
     </ion-row>
-    <ion-row text-center>
-
-            <a class="sign-up button button-block button-stable" (click)="signup()">JOIN NOW</a>
     
-    </ion-row>
 
 </ion-content>
 
 <ion-footer>
-
-    <ion-toolbar class="bar-positive">
-        <a class="tab-item tab-item-active" (click)="login()">SIGN IN</a>
-    </ion-toolbar>
+    <ion-row text-center class="welcome_accton">
+        <a class="joinNOw" (click)="signup()">JOIN NOW</a>
+        <a class="SignIn" (click)="login()">SIGN IN</a>
+    </ion-row>
 </ion-footer>
 

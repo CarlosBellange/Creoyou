@@ -4,7 +4,7 @@
     <ion-title>Privacy</ion-title>
   </ion-navbar>
 
-  <ion-segment [(ngModel)]="privacy">
+  <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="privacy">
     <ion-segment-button value="blocked">
       Blocked
     </ion-segment-button>
@@ -12,7 +12,13 @@
       Hidden Posts
     </ion-segment-button>
 
+    <ion-segment-button value="rejectedlist">
+      Rejected List
+    </ion-segment-button>
+
   </ion-segment>
+
+
 
 </ion-header>
 
@@ -24,23 +30,26 @@
 
     <ion-list *ngSwitchCase="'blocked'">
 
-      <ion-list *ngIf="blockuser==''">
+      <ion-list *ngIf="unblocked">
         <ion-item class="no_result">
-          <h3> You have No blocked user Found... </h3>
+          <h3>No blocked users</h3>
         </ion-item>
       </ion-list>
 
       <ion-list class="individual" *ngFor="let bluser of blockuser">
 
 
-        <ion-item padding-horizontal class="search_user search_user_individual">
+        <ion-item padding-horizontal class="search_user search_user_individual" *ngIf="!unblocked">
           <ion-avatar item-left>
-            <img src="{{base_url}}uploads/profileImages/resizedImages/{{bluser.image}}" alt="Image" />
+            <img *ngIf="bluser.image!='' && bluser.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{bluser.image}}"
+              alt="Image" />
+            <img *ngIf="bluser.image=='' || bluser.image==null" src="assets/img/management.png" alt="avatar">
           </ion-avatar>
           <ion-item class="searcsh_right">
-            <p>{{bluser.fname}} {{bluser.lname}}</p>
+            <p *ngIf="bluser.user_type==1">{{bluser.fname}} {{bluser.lname}}</p>
+            <p *ngIf="bluser.user_type==2">{{bluser.buisness_name}}</p>
             <p class="user_deg">
-              <ion-icon name="briefcase"></ion-icon>{{bluser.creativeField}}</p>
+              <ion-icon name="briefcase"></ion-icon> {{bluser.creativeField}}</p>
             <div class="user_action" item-right>
               <button ion-button block icon-right (click)="unblockUser(bluser)">Unblock</button>
             </div>
@@ -56,21 +65,58 @@
 
       <ion-list *ngIf="unflowmsg">
         <ion-item class="no_result">
-          <h3> You have No Hidden Posts Found... </h3>
+          <h3> {{unflowmsg}} </h3>
         </ion-item>
       </ion-list>
 
       <ion-list class="individual" *ngFor="let unuser of unflowuser">
         <ion-item padding-horizontal class="search_user search_user_individual">
           <ion-avatar item-left>
-            <img src="{{base_url}}uploads/profileImages/resizedImages/{{unuser.image}}" alt="Image" />
+            <img *ngIf="unuser.image!='' && unuser.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{unuser.image}}"
+              alt="Image" />
+            <img *ngIf="unuser.image=='' || unuser.image==null" src="assets/img/management.png" alt="avatar">
           </ion-avatar>
           <ion-item class="searcsh_right">
-            <p>{{unuser.fname}} {{unuser.lname}}</p>
+            <p *ngIf="unuser.user_full_name">{{unuser.user_full_name}}</p>
+
             <p class="user_deg">
-              <ion-icon name="briefcase"></ion-icon>{{unuser.creativeField}}</p>
+              <ion-icon name="briefcase"></ion-icon> {{unuser.creativeField}}</p>
             <div class="user_action" item-right>
-              <button ion-button block icon-right (click)="unblockUser(bluser)">Unblock</button>
+              <button ion-button block icon-right (click)="Seepost(unuser)">See Post</button>
+            </div>
+          </ion-item>
+        </ion-item>
+
+
+      </ion-list>
+
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'rejectedlist'">
+
+      <ion-list *ngIf="rejectuser==''">
+        <ion-item class="no_result">
+          <h3> No denied requests </h3>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="individual" *ngFor="let rejuser of rejectuser">
+        <ion-item padding-horizontal class="search_user search_user_individual">
+          <ion-avatar item-left>
+            <img *ngIf="rejuser.image!='' && rejuser.image!=null" src="{{base_url}}uploads/profileImages/resizedImages/{{rejuser.image}}"
+              alt="Image" />
+            <img *ngIf="rejuser.image=='' || rejuser.image==null" src="assets/img/management.png" alt="avatar">
+          </ion-avatar>
+          <ion-item class="searcsh_right">
+            <p *ngIf="rejuser.users_full_name">{{rejuser.users_full_name}}</p>
+
+            <p class="user_deg">
+              <ion-icon name="briefcase"></ion-icon> {{rejuser.creativeField}}</p>
+            <div class="user_action" item-right>
+              <button (click)="acceptRequest(rejuser)" ion-button block icon-right>
+                <ion-icon name="person-add"></ion-icon> Accept
+              </button>
             </div>
           </ion-item>
         </ion-item>
